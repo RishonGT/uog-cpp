@@ -1,0 +1,97 @@
+---
+title: "C++ Basics"
+subtitle: "Gentle introduction to compiled language"
+author: |
+    Khiem Nguyen 
+    <br>Lecturer in Multiscale Materials
+    <br><khiem.nguyen@glasgow.ac.uk>
+author-meta: "Lecturer in Multiscale Materials"
+format: 
+    revealjs:
+        theme: simple   # other themes: beige, blood, dark, dracula, league, moon, night, serif, simple, sky, solarized
+        highlight-style: github
+        slide-number: true
+        title-slide-style: pandoc
+        echo: true
+        code-overflow: wrap
+        code-line-numbers: true
+        code-block-bg: false          # <-- remove white background in code blocks
+        # code-block-border-left: false # optional: remove left border
+        # highlight-style: monokai      # good for dark images
+        toc: true
+        toc-depth: 1
+        toc-title: Presentation Outline
+        css: simple.css
+---
+
+## Introduction to C/C++
+
+### Before C++, there was C:
+
+- The C language was developed in 1972 by Dennis Ritchie at Bell Telephone lab, primarily as a systems programming language (to write operating systems).
+- C was designed to give the programmer a lot of control, while allowing developers to write a program that could be run on different platforms.
+- C ended up being so efficient and flexible that in 1973, Ritchie and Ken Thompson rewrote most of the Unix operating system using C. 
+
+### Then C was born:
+- C++ (pronounced "see plus plus") was developed by Bjarne Stroustrup at Bell Labs as an extension to C, starting in 1979.
+- C++ adds many new features to the C language, and is perhaps best thought of as a superset of C.
+- C++'s most notable innovation over C is that it supports object-oriented programming.
+
+## Introduction to C and C++'s philosophy
+
+- The underlying design philosophy of C and C++ can be summed up as “trust the programmer” -- which is both wonderful and dangerous.
+
+- C++ is designed to allow the programmer a high degree of freedom to do what they want.
+
+- this also means the language often won't stop you from doing things that don’t make sense.
+
+- C++ is a compiled language.
+
+## Compiled vs Scripting Language (C++ vs Python)
+
+::: {.columns}
+
+::: {.column width="50%"}
+### [C++]{style="color: #00599C;"} (Compiled)
+* **Performance:** Native machine code (Fast).
+* **Errors:** Found at *Compile-time*.
+* **Deployment:** Ship the binary (`a.out`).
+* **Types:** Static (Strict).
+:::
+
+::: {.column .fragment width="50%"}
+### [Python]{style="color: #3776ab;"} (Scripting)
+* **Performance:** Interpreted (Slower).
+* **Errors:** Found at *Runtime*.
+* **Deployment:** Ship the source code (`.py`).
+* **Types:** Dynamic (Flexible).
+:::
+
+:::
+
+
+## What is C++ good at?
+- Video games
+- Real-time systems
+- High-performance financial applications (e.g. high frequency trading)
+- Graphical applications and simulations
+- Productivity / office applications
+- Embedded software
+- Audio and video processing
+- Artificial intelligence and neural networks
+
+C++ also has a large number of high-quality 3rd party libraries available, which can shorten development times significantly.
+
+## Hello world in C++
+```{.cpp #lst-hello lst-cap="Hello ENG3091"}
+{{< include ./cpp/hello.cpp >}}
+```
+
+- We need to compile this program to see the output. Watch me!
+
+## Another program example
+```{.cpp #lst-math lst-cap="Do some maths"}
+{{< include ./cpp/addition.cpp >}}
+```
+- We need to compile this program to see the output. Watch me!
+
