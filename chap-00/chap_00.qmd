@@ -95,3 +95,33 @@ C++ also has a large number of high-quality 3rd party libraries available, which
 ```
 - We need to compile this program to see the output. Watch me!
 
+# Curriculum & Assessment
+
+## Curriculum
+- $5$ Study Sections
+    1. Basic C++: Seriously basic
+    2. Basic C++: Real business
+    3. Object-oriented Programming
+    4. Some standard libraries
+    5. Unified Modelling Language
+
+## Assessment
+- $2$ Continuous Assessments: $25\%$ + $25\%$
+    - For each assessment: A pair of students will work on the same assignment and get the same grade.
+    - From my own experience, you tend to get better grades working in pair/group than working individually.
+- $1$ Paper Exam: $50\%$
+
+## How to learn this course
+- As with any programming language, you need to:
+    1. **practice**
+    2. **practice**
+    3. **practice**
+- Can you use **AI Chatbot** to **learn** this course? 
+    - Hell, yes!
+    - But you really need to "**learn**"
+    - There is a difference between **"you understand"** and **"you think you understand"**.
+- It is **foolish** to think that 
+    1. "I only need to worry about the big picture, AI Chatbot will do programming in the future."
+    2. "AI Chatbot will replace software developers."
+    3. "Why do we need to study programming in the era of AI Boom!"
+
