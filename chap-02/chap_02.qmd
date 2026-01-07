@@ -143,7 +143,61 @@ To tell the compiler that a function does not return a value, a return type of `
 - A void function will automatically return to the caller at the end of the function. No return statement is required.
 - A return statement (with no return value) can be used in a void function -- such a statement will cause the function to return to the caller at the point where the return statement is executed.
 - Consequently, putting an empty return statement at the end of a void function is redundant.
-```{.cpp #lst-void-return lst-cap="`return` in a void function will cause the function to return to the caller"}
+
+```{.cpp #lst-void-return lst-cap="**return** in a void function will cause the function to return to the caller"}
 {{< include ./cpp/void_return.cpp >}}
 ```
 
+## Returning a value from a void function is a compile error
+
+- Obviously, trying to return a value from a non-value returning function will result in a compilation error. 
+- This needs no explanation, just common sense.
+
+```{.cpp #lst-return-value-in-void lst-cap="Returning a value from a void function will result in a compilation error"}
+void say_hi() // This function is non-value returning
+{
+    std::cout << "In say_hi()" << '\n';
+
+    return 5; // compile error: we're trying to return a value
+}
+```
+
+# Introduction to function parameters and arguments
+
+## Function parameters and arguments
+
+### Function parameter
+- A **function parameter** is a variable used in the header of a function.
+- Function parameters work almost identically to variables defined inside the function, but with one difference.
+- Function parameters are initialized with a value provided by the caller of the function.
+
+### Argument
+An argument is a value that is passed from the caller to the function when a function call is made.
+```{.cpp}
+say_hello();            // this call has no arguments
+print_value(6);         // 6 is the argument passed to function printValue()
+add(2.0, 3.0);          // 2.0 and 3.0 are the arguments passed to function add()
+```
+
+## Function parameters: Examples
+
+```{.cpp #lst-function-parameters lst-cap="Different functions with different number of parameters"}
+{{< include ./cpp/function_parameters.cpp >}}
+```
+
+## How parameters and arguments work toghether
+
+- When a function is called, all of the parameters of the function are created as variables.
+- The value of each of the arguments is copied into the matching parameter (using copy initialization). 
+- This process is called **pass by value**. 
+- Function parameters that utilize _pass by value_ are called **value parameters**.
+
+## Call a function with the process of pass-by-value
+```{.cpp #lst-pass-by-value lst-cap="Call a function by using the process **pass by value**"}
+{{< include ./cpp/pass_by_value.cpp >}}
+```
+
+## Call a function with the process of pass-by-value
+```{.cpp #lst-double-number lst-cap="Combine what we have learned so far to write a stupid program"}
+{{< include ./cpp/double_a_number.cpp >}}
+```
