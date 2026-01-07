@@ -175,3 +175,80 @@ int e {};      // value-initialization (empty braces)
 {{< include ./cpp/unused_variable.cpp >}}
 ```
 
+# Introduction to iostream: `cout`, `cin`, and `endl`
+## The input/output library
+
+- The input/output library (io library) is part of the C++ standard library that deals with basic input and output.
+- The _io_ part of _iostream_ stands for input/output.
+- To use the functionality defined within the iostream library, we need to include the iostream header at the top of any code file.
+
+## Using `std::cout` to output to console
+- The `iostream` library contains a few predefined variables for us to use. 
+- `std::cout` allows us to send data to the console to be printed as text. 
+- `cout` stands for “character output”.
+
+```{.cpp #lst-use-stdcout lst-cap="Use of `std::cout`"}
+{{< include ./cpp/use_stdcout.cpp >}}
+```
+
+## Using `std::endl` to output a newline
+- One way to output a newline is to output `std::endl` (which stands for “end line”)
+```{.cpp #lst-newline lst-cap="Use `std::newline` to enter a new line"}
+{{< include ./cpp/use_stdnewline.cpp >}}
+```
+
+## Using `std::cin` to input from console
+- `std::cin` is another predefined variable in the iostream library.
+- `std::cin` (which stands for “character input”) reads input from keyboard.
+
+```{.cpp #lst-use-stdcin lst-cap="Use `std::cin` to input from keyboard"}
+{{< include ./cpp/use_stdcin.cpp >}}
+```
+
+
+## `std::cin` is buffered
+We'll demonstrate this using the following program and run it two times -- See compilation process.
+
+```{.cpp #lst-stdin-buffered lst-cap="`std::cin` is buffered"}
+{{< include ./cpp/stdcin_buffered.cpp >}}
+```
+
+## Operator `<<` and Operator `>>`
+
+New programmers often mix up `std::cin`, `std::cout`, the insertion operator `<<` and the extraction operator `>>`. Here's an easy way to remember:
+
+- `std::cout` is used to output a value (`cout` = character output).
+- `std::cin` is used to get an input value (`cin` = character input).
+
+- `<<` is used with `std::cout`, and *shows the direction that data is moving*.  
+`std::cout << 4` moves the value `4` to the `std::cout` and thus to the console.
+- `>>` is used with std::cin, and *shows the direction that data is moving*.  
+`std::cin >> x` moves the value the user entered from the keyboard into variable x.
+
+## Uninitialized variables
+- C/C++ does not automatically initialize most variables to a given value (such as zero).
+- When a variable that is not initialized is given a memory address to use to store data, the default value of that variable is whatever (garbage) value happens to already be in that memory address!
+- A variable that has not been given a known value (through initialization or assignment) is called an uninitialized variable.
+
+The terms "_initialized_" and "_uninitialized_" are not strict opposites: 
+
+- "_initialized_" means the object was provided with an initial value at the point of definition. 
+- "_unitialized_" means the object has not been given a known value yet (through any means, including assignment)
+
+To Recap:
+
+- Initialized = The object is given a known value at the point of definition.
+- Assignement = The object is given a known value beyond the point of definition.
+- Uninitialized = The object has not been given a known value yet.
+
+## Unitialized variables
+
+```{.cpp #lst-uninitialized-variable lst-cap="Uninitialized variables"}
+{{< include ./cpp/uninitialized_variable_01.cpp >}}
+```
+
+## Unitialized variables
+
+```{.cpp #lst-uninitialized-variable lst-cap="Uninitialized variables"}
+{{< include ./cpp/uninitialized_variable_02.cpp >}}
+```

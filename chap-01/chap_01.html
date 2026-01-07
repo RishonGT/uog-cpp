@@ -205,6 +205,7 @@
 <li><a href="#/comments" id="/toc-comments">Comments</a></li>
 <li><a href="#/objects-and-variables" id="/toc-objects-and-variables">Objects and variables</a></li>
 <li><a href="#/variable-assignment-and-initialization" id="/toc-variable-assignment-and-initialization">Variable assignment and initialization</a></li>
+<li><a href="#/introduction-to-iostream-cout-cin-and-endl" id="/toc-introduction-to-iostream-cout-cin-and-endl">Introduction to iostream: <code>cout</code>, <code>cin</code>, and <code>endl</code></a></li>
 </ul>
 </nav>
 </section>
@@ -540,7 +541,237 @@ Listing&nbsp;13: Unused variable
 <span id="cb13-5"><a href=""></a>    <span class="co">// but not used anywhere</span></span>
 <span id="cb13-6"><a href=""></a></span>
 <span id="cb13-7"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb13-8"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-8"><a href=""></a><span class="op">}</span></span>
+<span id="cb13-9"><a href=""></a><span class="co">// Use the compiling command to see the warning</span></span>
+<span id="cb13-10"><a href=""></a><span class="co">// g++ -Wall unused_variable.cpp</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section></section>
+<section>
+<section id="introduction-to-iostream-cout-cin-and-endl" class="title-slide slide level1 center">
+<h1>Introduction to iostream: <code>cout</code>, <code>cin</code>, and <code>endl</code></h1>
+
+</section>
+<section id="the-inputoutput-library" class="slide level2">
+<h2>The input/output library</h2>
+<ul>
+<li>The input/output library (io library) is part of the C++ standard library that deals with basic input and output.</li>
+<li>The <em>io</em> part of <em>iostream</em> stands for input/output.</li>
+<li>To use the functionality defined within the iostream library, we need to include the iostream header at the top of any code file.</li>
+</ul>
+</section>
+<section id="using-stdcout-to-output-to-console" class="slide level2">
+<h2>Using <code>std::cout</code> to output to console</h2>
+<ul>
+<li>The <code>iostream</code> library contains a few predefined variables for us to use.</li>
+<li><code>std::cout</code> allows us to send data to the console to be printed as text.</li>
+<li><code>cout</code> stands for “character output”.</li>
+</ul>
+<div id="lst-use-stdcout" class="cpp listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-use-stdcout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;14: Use of <code>std::cout</code>
+</figcaption>
+<div aria-describedby="lst-use-stdcout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb14-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span><span class="pp"> </span><span class="co">// for std::cout</span></span>
+<span id="cb14-2"><a href=""></a></span>
+<span id="cb14-3"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb14-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb14-5"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Hello world!</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span> <span class="co">// print Hello world! to console</span></span>
+<span id="cb14-6"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="dv">4</span><span class="op">;</span> <span class="co">// print 4 to console</span></span>
+<span id="cb14-7"><a href=""></a></span>
+<span id="cb14-8"><a href=""></a>    <span class="dt">int</span> x<span class="op">{</span> <span class="dv">5</span> <span class="op">};</span>             <span class="co">// define integer variable x, initialized with value 5</span></span>
+<span id="cb14-9"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> x<span class="op">;</span>         <span class="co">// print value of x (5) to console</span></span>
+<span id="cb14-10"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span>      <span class="co">// enter a new line</span></span>
+<span id="cb14-11"><a href=""></a></span>
+<span id="cb14-12"><a href=""></a>    <span class="co">// chain the output</span></span>
+<span id="cb14-13"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"I"</span> <span class="op">&lt;&lt;</span> <span class="st">" am"</span> <span class="op">&lt;&lt;</span> <span class="st">" Khiem"</span> <span class="op">&lt;&lt;</span> <span class="st">" Nguyen"</span> <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb14-14"><a href=""></a></span>
+<span id="cb14-15"><a href=""></a>    <span class="dt">int</span> a <span class="op">{</span> <span class="dv">8</span> <span class="op">},</span> b <span class="op">{</span> <span class="dv">1</span> <span class="op">};</span></span>
+<span id="cb14-16"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Hello "</span> <span class="op">&lt;&lt;</span> a <span class="op">&lt;&lt;</span> <span class="st">" planets and "</span> <span class="op">&lt;&lt;</span> b <span class="op">&lt;&lt;</span> <span class="st">" sun.</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb14-17"><a href=""></a></span>
+<span id="cb14-18"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb14-19"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section>
+<section id="using-stdendl-to-output-a-newline" class="slide level2">
+<h2>Using <code>std::endl</code> to output a newline</h2>
+<ul>
+<li>One way to output a newline is to output <code>std::endl</code> (which stands for “end line”)</li>
+</ul>
+<div id="lst-newline" class="cpp listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-newline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;15: Use <code>std::newline</code> to enter a new line
+</figcaption>
+<div aria-describedby="lst-newline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb15-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span><span class="pp"> </span><span class="co">// for std::cout and std::endl</span></span>
+<span id="cb15-2"><a href=""></a></span>
+<span id="cb15-3"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb15-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb15-5"><a href=""></a>    <span class="co">// std::endl will cause the cursor to move to the next line</span></span>
+<span id="cb15-6"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Hi!"</span> <span class="op">&lt;&lt;</span> <span class="bu">std::</span>endl<span class="op">;</span>                <span class="co">// try to remove std::endl here</span></span>
+<span id="cb15-7"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"My name is Alex."</span> <span class="op">&lt;&lt;</span> <span class="bu">std::</span>endl<span class="op">;</span>   <span class="co">// try to remove std::endl here</span></span>
+<span id="cb15-8"><a href=""></a></span>
+<span id="cb15-9"><a href=""></a>    <span class="co">// However, it is advisable to use:</span></span>
+<span id="cb15-10"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Hi!</span><span class="sc">\n</span><span class="st">"</span> <span class="op">&lt;&lt;</span> <span class="st">"My name is Khiem."</span> <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span>    <span class="co">// \n add a new line too</span></span>
+<span id="cb15-11"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb15-12"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section>
+<section id="using-stdcin-to-input-from-console" class="slide level2">
+<h2>Using <code>std::cin</code> to input from console</h2>
+<ul>
+<li><code>std::cin</code> is another predefined variable in the iostream library.</li>
+<li><code>std::cin</code> (which stands for “character input”) reads input from keyboard.</li>
+</ul>
+<div id="lst-use-stdcin" class="cpp listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-use-stdcin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;16: Use <code>std::cin</code> to input from keyboard
+</figcaption>
+<div aria-describedby="lst-use-stdcin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb16-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span><span class="pp">  </span><span class="co">// for std::cout and std::cin</span></span>
+<span id="cb16-2"><a href=""></a></span>
+<span id="cb16-3"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb16-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb16-5"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Enter a number: "</span><span class="op">;</span> <span class="co">// ask user for a number</span></span>
+<span id="cb16-6"><a href=""></a></span>
+<span id="cb16-7"><a href=""></a>    <span class="dt">int</span> x<span class="op">{};</span>       <span class="co">// define variable x to hold user input (and value-initialize it)</span></span>
+<span id="cb16-8"><a href=""></a>    <span class="bu">std::</span>cin <span class="op">&gt;&gt;</span> x<span class="op">;</span> <span class="co">// get number from keyboard and store it in variable x</span></span>
+<span id="cb16-9"><a href=""></a></span>
+<span id="cb16-10"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"You entered "</span> <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb16-11"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb16-12"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section>
+<section id="stdcin-is-buffered" class="slide level2">
+<h2><code>std::cin</code> is buffered</h2>
+<p>We’ll demonstrate this using the following program and run it two times – See compilation process.</p>
+<div id="lst-stdin-buffered" class="cpp listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-stdin-buffered-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;17: <code>std::cin</code> is buffered
+</figcaption>
+<div aria-describedby="lst-stdin-buffered-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb17-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span><span class="pp">  </span><span class="co">// for std::cout and std::cin</span></span>
+<span id="cb17-2"><a href=""></a></span>
+<span id="cb17-3"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb17-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb17-5"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Enter two numbers: "</span><span class="op">;</span></span>
+<span id="cb17-6"><a href=""></a></span>
+<span id="cb17-7"><a href=""></a>    <span class="dt">int</span> x<span class="op">{};</span></span>
+<span id="cb17-8"><a href=""></a>    <span class="bu">std::</span>cin <span class="op">&gt;&gt;</span> x<span class="op">;</span></span>
+<span id="cb17-9"><a href=""></a></span>
+<span id="cb17-10"><a href=""></a>    <span class="dt">int</span> y<span class="op">{};</span></span>
+<span id="cb17-11"><a href=""></a>    <span class="bu">std::</span>cin <span class="op">&gt;&gt;</span> y<span class="op">;</span></span>
+<span id="cb17-12"><a href=""></a></span>
+<span id="cb17-13"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"You entered "</span> <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> <span class="st">" and "</span> <span class="op">&lt;&lt;</span> y <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb17-14"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb17-15"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section>
+<section id="operator-and-operator" class="slide level2">
+<h2>Operator <code>&lt;&lt;</code> and Operator <code>&gt;&gt;</code></h2>
+<p>New programmers often mix up <code>std::cin</code>, <code>std::cout</code>, the insertion operator <code>&lt;&lt;</code> and the extraction operator <code>&gt;&gt;</code>. Here’s an easy way to remember:</p>
+<ul>
+<li><p><code>std::cout</code> is used to output a value (<code>cout</code> = character output).</p></li>
+<li><p><code>std::cin</code> is used to get an input value (<code>cin</code> = character input).</p></li>
+<li><p><code>&lt;&lt;</code> is used with <code>std::cout</code>, and <em>shows the direction that data is moving</em>.<br>
+<code>std::cout &lt;&lt; 4</code> moves the value <code>4</code> to the <code>std::cout</code> and thus to the console.</p></li>
+<li><p><code>&gt;&gt;</code> is used with std::cin, and <em>shows the direction that data is moving</em>.<br>
+<code>std::cin &gt;&gt; x</code> moves the value the user entered from the keyboard into variable x.</p></li>
+</ul>
+</section>
+<section id="uninitialized-variables" class="slide level2">
+<h2>Uninitialized variables</h2>
+<ul>
+<li>C/C++ does not automatically initialize most variables to a given value (such as zero).</li>
+<li>When a variable that is not initialized is given a memory address to use to store data, the default value of that variable is whatever (garbage) value happens to already be in that memory address!</li>
+<li>A variable that has not been given a known value (through initialization or assignment) is called an uninitialized variable.</li>
+</ul>
+<p>The terms “<em>initialized</em>” and “<em>uninitialized</em>” are not strict opposites:</p>
+<ul>
+<li>“<em>initialized</em>” means the object was provided with an initial value at the point of definition.</li>
+<li>“<em>unitialized</em>” means the object has not been given a known value yet (through any means, including assignment)</li>
+</ul>
+<p>To Recap:</p>
+<ul>
+<li>Initialized = The object is given a known value at the point of definition.</li>
+<li>Assignement = The object is given a known value beyond the point of definition.</li>
+<li>Uninitialized = The object has not been given a known value yet.</li>
+</ul>
+</section>
+<section id="unitialized-variables" class="slide level2">
+<h2>Unitialized variables</h2>
+<div id="lst-uninitialized-variable" class="cpp listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-uninitialized-variable-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;18: Uninitialized variables
+</figcaption>
+<div aria-describedby="lst-uninitialized-variable-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb18-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb18-2"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb18-3"><a href=""></a><span class="op">{</span></span>
+<span id="cb18-4"><a href=""></a>    <span class="co">// define an integer variable named x</span></span>
+<span id="cb18-5"><a href=""></a>    <span class="dt">int</span> x<span class="op">;</span>                  <span class="co">// this variable is uninitialized </span></span>
+<span id="cb18-6"><a href=""></a>                            <span class="co">// because we haven't given it a value</span></span>
+<span id="cb18-7"><a href=""></a></span>
+<span id="cb18-8"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span> <span class="co">// who knows what we'll get, because x is uninitialized</span></span>
+<span id="cb18-9"><a href=""></a></span>
+<span id="cb18-10"><a href=""></a>    <span class="dt">int</span> y <span class="op">{};</span>       <span class="co">// initialized to 0</span></span>
+<span id="cb18-11"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> y <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb18-12"><a href=""></a>    </span>
+<span id="cb18-13"><a href=""></a>    <span class="dt">int</span> z <span class="op">{</span> <span class="dv">42</span> <span class="op">};</span>   <span class="co">// initialized to 42</span></span>
+<span id="cb18-14"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> z <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb18-15"><a href=""></a></span>
+<span id="cb18-16"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb18-17"><a href=""></a><span class="op">}</span></span>
+<span id="cb18-18"><a href=""></a><span class="co">// my compiler always give x=0. To see the warning from the compiler, use</span></span>
+<span id="cb18-19"><a href=""></a><span class="co">// g++ -Wall -Wextra uninitialized_variable_01.cpp</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section>
+<section id="unitialized-variables-1" class="slide level2">
+<h2>Unitialized variables</h2>
+<div id="lst-uninitialized-variable" class="cpp listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-uninitialized-variable-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;19: Uninitialized variables
+</figcaption>
+<div aria-describedby="lst-uninitialized-variable-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb19-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb19-2"><a href=""></a></span>
+<span id="cb19-3"><a href=""></a><span class="dt">void</span> dirtyStack<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb19-4"><a href=""></a>    <span class="co">// We create some variables and give them values</span></span>
+<span id="cb19-5"><a href=""></a>    <span class="dt">int</span> a <span class="op">=</span> <span class="dv">42</span><span class="op">;</span></span>
+<span id="cb19-6"><a href=""></a>    <span class="dt">int</span> b <span class="op">=</span> <span class="dv">24</span><span class="op">;</span></span>
+<span id="cb19-7"><a href=""></a>    <span class="dt">int</span> c <span class="op">=</span> <span class="dv">66</span><span class="op">;</span></span>
+<span id="cb19-8"><a href=""></a>    <span class="co">// These values are now sitting on the stack memory</span></span>
+<span id="cb19-9"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Dirtying stack with: "</span> <span class="op">&lt;&lt;</span> a <span class="op">&lt;&lt;</span> <span class="st">", "</span> <span class="op">&lt;&lt;</span> b <span class="op">&lt;&lt;</span> <span class="st">", "</span> <span class="op">&lt;&lt;</span> c <span class="op">&lt;&lt;</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb19-10"><a href=""></a><span class="op">}</span></span>
+<span id="cb19-11"><a href=""></a></span>
+<span id="cb19-12"><a href=""></a><span class="dt">void</span> seeTheJunk<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb19-13"><a href=""></a>    <span class="dt">int</span> x<span class="op">;</span> <span class="co">// Uninitialized!</span></span>
+<span id="cb19-14"><a href=""></a>    <span class="co">// x will likely land on the same memory address where a, b, or c just were</span></span>
+<span id="cb19-15"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Value of uninitialized x: "</span> <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb19-16"><a href=""></a><span class="op">}</span></span>
+<span id="cb19-17"><a href=""></a></span>
+<span id="cb19-18"><a href=""></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb19-19"><a href=""></a>    dirtyStack<span class="op">();</span></span>
+<span id="cb19-20"><a href=""></a>    seeTheJunk<span class="op">();</span></span>
+<span id="cb19-21"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb19-22"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
