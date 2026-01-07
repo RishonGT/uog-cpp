@@ -201,3 +201,46 @@ add(2.0, 3.0);          // 2.0 and 3.0 are the arguments passed to function add(
 ```{.cpp #lst-double-number lst-cap="Combine what we have learned so far to write a stupid program"}
 {{< include ./cpp/double_a_number.cpp >}}
 ```
+
+## Call a function with the process of pass-by-value: More examples
+```{.cpp #lst-pass-by-value-more lst-cap="Call a function by using the process **pass by value**: More examples"}
+{{< include ./cpp/pass_by_value_more.cpp >}}
+```
+
+# Introduction to local scope
+
+## Local variables
+
+- Variables defined inside the body of a function are called local variables.
+- Function parameters are also generally considered to be local variables.
+```{.cpp #lst-local-variables lst-cap="Local variables"}
+int add(int x, int y) // function parameters x and y are local variables
+{
+    int z{ x + y };         // z is a local variable
+
+    return z;
+}
+```
+
+## Local variable lifetime
+
+- Function parameters are created and initialized when the function is entered, and variables within the function body are created and initialized at the point of definition.
+- The natural follow-up question is, "So when is an instantiated variable destroyed?". 
+
+**Answer**
+
+> Local variables are destroyed in the opposite order of creation at the end of the set of curly braces in which it is defined (or for a function parameter, at the end of the function).
+
+```{.cpp #lst-local-var-lifetime lst-cap="Lifetime of local variables"}
+double add(double x, double y)       // x and y created and initialized here
+{
+    double z{ x + y };         // z created and initialized here
+
+    return z;
+} // z, y, and x destroyed here
+```
+
+## Local variable lifetime: Example
+```{.cpp #lst-local-var-lifetime-ex lst-cap="Local variable lifetime: Example"}
+{{< include ./cpp/local_variable_lifetime.cpp >}}
+```
