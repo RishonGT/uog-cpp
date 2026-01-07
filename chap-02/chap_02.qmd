@@ -1,0 +1,149 @@
+---
+title: "C++ Basics:"
+subtitle: "Functions"
+author: |
+    Khiem Nguyen 
+    <br>Lecturer in Multiscale Materials
+    <br><khiem.nguyen@glasgow.ac.uk>
+author-meta: "Lecturer in Multiscale Materials"
+format: 
+    revealjs:
+        theme: simple   # other themes: beige, blood, dark, dracula, league, moon, night, serif, simple, sky, solarized
+        highlight-style: github
+        slide-number: true
+        title-slide-style: pandoc
+        echo: true
+        code-overflow: wrap
+        code-line-numbers: true
+        code-block-bg: false          # <-- remove white background in code blocks
+        # code-block-border-left: false # optional: remove left border
+        # highlight-style: monokai      # good for dark images
+        toc: true
+        toc-depth: 1
+        toc-title: Presentation Outline
+        css: simple.css
+---
+
+# Basic Syntax
+
+## An example of a user-defined function
+
+The most basic syntax to define a user-defined function
+```{.cpp #lst-most-basic-syntax code-filename="function_basic_syntax.cpp" lst-cap="Most basic syntax to define a user-defined function"}
+{{< include ./cpp/function_basic_syntax.cpp >}}
+```
+
+- The `function_name` is the name (identifier) of your user-defined function.
+- The parentheses after the identifier tell the compiler that we’re defining a function.
+
+## Define a function and call the function
+- Of course, after defining the function, we can call it multiple times.
+
+```{.cpp #lst-call-funcion lst-cap="Define function and call function"}
+{{< include ./cpp/call_function.cpp >}}
+```
+
+## Functions can call functions that call other functions
+```{.cpp #lst-function-call-function lst-cap="Function can call other functions"}
+{{< include ./cpp/function_call_function.cpp >}}
+```
+
+## Nested functions are not supported
+- A function whose definition is placed inside another function is a **nested function**.
+- Unlike Python and MATLAB, functions cannot be nested in C++.
+
+The following program is **not legal**:
+```{.cpp #lst-nested-function lst-cap="Function can call other functions"}
+{{< include ./cpp/nested_function.cpp >}}
+```
+# Function retrun values (value-returning functions)
+
+## Return values
+When we write a user-defined function, we get to determine whether the function will return a value back to the caller or not.
+
+- Indicate what type of value will be returnd (**return type**)
+- Use a **return statement** to indicate the specific value being returned to the caller.  
+
+```cpp
+return_type function_name()
+{   
+    // function body
+    return return_expression;
+}
+```
+
+When the return statement is executed: 
+
+1. The **return expression** is evaluated to produce a value.
+2. The value produced by the return expression is copied back to the caller. This copy is called the **return value** of the function.
+3. The function exits, and control returns to the caller.
+
+**Summary**
+
+The **return expression** produces the value to be returned. The return value is a copy of that value.
+
+## Return values: Code Demonstration
+```{.cpp #lst-return-value lst-cap="Return value in a function"}
+{{< include ./cpp/return_value.cpp >}}
+```
+
+## Revisiting `main()`
+
+In C++, there are two special requirements for main():
+
+- `main()` is required to return an `int`.
+- Explicit function calls to `main()` are disallowed.
+
+```{.cpp #lst-revisit-main lst-cap="This program will produce compile error!!!"}
+void foo()
+{
+    main(); // Compile error: main not allowed to be called explicitly
+}
+
+void main() // Compile error: main not allowed to have non-int return type
+{
+    foo();
+}
+```
+
+## Functions can only return a single value
+
+- A value-returning function can only return a single value back to the caller each time it is called.
+- There are various ways to work around the limitation of functions only being able to return a single value, which we’ll cover in future lessons.
+
+
+## Don't Repeat Yourself (DRY)
+
+_Golden Rule_  
+**Don't Repeat Yourself** (DRY)
+
+```{.cpp #lst-violate-DRY lst-cap="This program violates Don't Repeat Yourself and can be rewritten"}
+{{< include ./cpp/repeat_yourself.cpp >}}
+
+```
+
+## Don't Repeat Yourself (DRY)
+
+We can rewrite the above by define a function and reuse the function multiple times.
+```{.cpp #lst-DRY lst-cap="Rewrite the above program to conform with DRY"}
+{{< include ./cpp/dont_repeat_yourself.cpp >}}
+```
+
+# Void functions (non-value returning functions)
+
+## Void return values
+
+To tell the compiler that a function does not return a value, a return type of `void` is used.
+```{.cpp #lst-return-void lst-cap="non-value returning functions return void"}
+{{< include ./cpp/return_void.cpp >}}
+```
+
+## Void functions do not need a return statement
+
+- A void function will automatically return to the caller at the end of the function. No return statement is required.
+- A return statement (with no return value) can be used in a void function -- such a statement will cause the function to return to the caller at the point where the return statement is executed.
+- Consequently, putting an empty return statement at the end of a void function is redundant.
+```{.cpp #lst-void-return lst-cap="`return` in a void function will cause the function to return to the caller"}
+{{< include ./cpp/void_return.cpp >}}
+```
+
