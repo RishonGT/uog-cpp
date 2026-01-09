@@ -1,0 +1,55 @@
+---
+title: "C++ Basics:"
+subtitle: "Control Flow"
+author: |
+    Khiem Nguyen 
+    <br>Lecturer in Multiscale Materials
+    <br><khiem.nguyen@glasgow.ac.uk>
+author-meta: "Lecturer in Multiscale Materials"
+format: 
+    revealjs:
+        theme: simple   # other themes: beige, blood, dark, dracula, league, moon, night, serif, simple, sky, solarized
+        highlight-style: github
+        slide-number: true
+        title-slide-style: pandoc
+        echo: true
+        code-overflow: wrap
+        code-line-numbers: true
+        code-block-bg: false          # <-- remove white background in code blocks
+        # code-block-border-left: false # optional: remove left border
+        # highlight-style: monokai      # good for dark images
+        toc: true
+        toc-depth: 1
+        toc-title: Presentation Outline
+        css: simple.css
+---
+
+# Control flow introduction
+
+## Categories of flow control statements
+
+::: { .fragment}
+- We have already learned "control flow" in Python Programming. 
+- So, we do not need to explain what they are and what they are for. 
+::: 
+
+::: { .fragment}
+However, we recall:
+
+| Categories | Meaning | Implemented by |
+|----------|---------|----------------|
+| Conditional statements | | `if`, `else`, `switch` |
+| Jumps | | `goto`, `break`, `continue` |
+| Function calls | | function calls `function()`, `return`
+| Loops | | `while`, `do-while`, `for`, `ranged-for` |
+| Halts | | `std::exit()`, `std::abort()` |
+| Exceptions | | `try`, `throw`, `catch` |
+:::
+
+::: { .fragment}
+**Our goal**: 
+
+- We learn some commonly used control flow statements, redirect you to extra materials.
+- In the end, we can learn all the things in $10$ weeks. 😌
+- We do not need all to get $A1$ grade 😁.
+::: 
