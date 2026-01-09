@@ -244,3 +244,309 @@ double add(double x, double y)       // x and y created and initialized here
 ```{.cpp #lst-local-var-lifetime-ex lst-cap="Local variable lifetime: Example"}
 {{< include ./cpp/local_variable_lifetime.cpp >}}
 ```
+
+## What happens when an object is destroyed?
+
+- In most cases, nothing happens. The destroyed object simply becomes invalid.
+- At some point after destruction, the memory used by the object will be deallocated (freed up for reuse).
+
+### Destructor
+
+- If the object is a class type object, prior to destruction, a special function called a destructor is invoked. 
+- We study destructors when we study "**Object-oriented Programming**" (**OOP**).
+
+## Local scope (block scope)
+
+::: {.fragment}
+### Scope
+::: {.incremental}
+- An identifier's **scope** determines where the identifier can be seen and used within the source code.
+- When an identifier can be seen and used, we say it is in **scope**.
+- When an identifier can not be seen, we can not use it, and we say it is **out of scope**.
+:::
+:::
+
+::: {.fragment}
+### Local scope
+::: {.incremental}
+- The identifier of a local variable has **local scope**.
+- An identifier with local scope (technically called block scope) is usable from the point of definition to the end of the innermost pair of curly braces containing the identifier (or for function parameters, at the end of the function).
+:::
+:::
+
+::: {.fragment}
+> **Scope is a compile-time property**, and trying to use an identifier when it is not in scope will result in a compile error.
+:::
+
+## Local scope: Example 01
+This program compiles fine and outputs what we expected.
+```{.cpp #lst-local-scope-01 lst-cap="Local scope: Example 01"}
+{{< include ./cpp/local_scope_01.cpp >}}
+```
+
+## Local scope: Example 02
+Let us look at this program.
+```{.cpp #lst-local-scope-01 lst-cap="Local scope: Example 02"}
+{{< include ./cpp/local_scope_02.cpp >}}
+```
+
+## Scope versus Lifetime
+
+In programming in general, **scope** and **lifetime** are two closely related but distinct concepts that determine how and when a variable can be used.
+
+The simplest way to remember:
+
+- **Scope** is about **Visibility** (Where can I see this variable in the code?).
+- **Lifetime** is about **Existence** (How long does this variable stay in memory?).
+
+## Scope versus Lifetime
+
+### Scope (the "**where**")
+- **Scope** refers to the region of your program's source code where a variable's name is recognized and can be used. 
+- If you try to access a variable outside its scope, the compiler will throw an error saying the variable is undefined. 
+- Therefore, **Scope**  is a **compile-time property** in C/C++.
+
+> **Remark**: Other languages, we have Dynamic Scope (versus Static Scope as in C++) which is a runtime property
+
+::: { .fragment}
+### Lifetime
+- **Lifetime** (also called storage duration) refers to the time interval during which the variable actually occupies a physical spot in your computer's memory. 
+- It starts when the memory is allocated and ends when it is reclaimed by the system.
+- Therefore, **Lifetime**  is a **run-time property**.
+:::
+
+## Scope versus Lifetime: Example
+
+```{.cpp #lst-scope-vs-lifetime lst-cap="Scope versus Lifetime"}
+{{< include ./cpp/scope_vs_lifetime.cpp >}}
+```
+::: { .fragment}
+But I don't think you actually believe me. Let me prove this to you!
+:::
+## Scope versus Lifetime: Example
+```{.cpp #lst-scope-vs-lifetime-proof lst-cap="Prove that Scope and Lifetime are different concepts"}
+{{< include ./cpp/scope_vs_lifetime_proof.cpp >}}
+```
+::: { .fragment}
+I hope you believe me now. Actually, you can debug the code in the last slide and still see that variable `x` is alive during the execution of `second_function()`.
+:::
+
+# Forward declarations and definitions
+
+## Quick introduction
+
+```{.cpp #lst-without-forward-declaration lst-cap="Seemingly innocent sampe program that gives compile error"}
+{{< include ./cpp/without_forward_declaration.cpp >}}
+```
+
+- This program doesn’t compile is as the compiler compiles the contents of code files sequentially. 
+- When the compiler reaches the function call `add()` in `main()`, it does not know what `add` is.
+
+## Fix the "innocent" program -- Option 1: Reorder the function definitions
+```{.cpp #lst-fix-innocent-program-01 lst-cap="Reorder the function definitions to fix the innocent program"}
+{{< include ./cpp/reorder_function_defs.cpp >}}
+```
+- The fixing is simple.
+- But, what happens if we have _many functions_ and _the functions may call each other_.
+- We must figure out which functions call which other functions.
+
+## Fix the "innocent" program -- Option 1: Use a forward declaration
+
+```{.cpp #lst-forward-declration lst-cap="Use forward decleration to fix the innocent program"}
+{{< include ./cpp/with_forward_declaration.cpp >}}
+```
+
+## Why forward declarations!!!
+::: { .incremental}
+- Why would we use a **forward declaration** if we could just reorder the functions to make our programs work?
+- Most often, forward declarations are used to tell the compiler about the existence of some function that has been defined in a different code file.
+- Reordering isn’t possible in this scenario because the caller and the callee are in completely different files!
+- _Forward declarations allow us to define functions in whatever order maximizes organization_ (e.g. by clustering related functions together) or reader understanding.
+:::
+
+::: { .fragment}
+> Less often, there are times when we have two functions that call each other. Reordering isn’t possible in this case either, as there is no way to reorder the functions such that each is before the other. Forward declarations give us a way to resolve such circular dependencies.
+:::
+
+# Programs with multiple code files
+
+## Adding files to your project
+
+- As programs get larger, it is common to split them into multiple files for organizational or reusability purposes. 
+- One advantage of working with an IDE is that they make working with multiple files much easier. 
+- You already know how to create and compile single-file projects. Adding new files to existing projects is not difficult.
+
+> - It is not easy to teach how to add files to the project using lecture slide. 
+> - I will illustrate the steps here in live lecture and also in the recorded video (to be uploaded!)
+
+## A multi-file example
+Let us revisit
+```{.cpp #lst-without-forward-declaration lst-cap="Seemingly innocent sampe program that gives compile error"}
+{{< include ./cpp/without_forward_declaration.cpp >}}
+```
+
+## A multi-file example
+Now, let us take a look at a similar multi-file program
+
+```{.cpp #lst-add-file lst-cap="File `add.cpp`"}
+float add(float x, float y)
+{
+    return x + y;
+}
+```
+```{.cpp #lst-main-file lst-cap="File `main.cpp`"}
+#include <iostream>
+int main()
+{
+    std::cout << "The sum of 3 and 4 is: " << add(3.0, 4.0) << '\n';
+    return 0;
+}
+```
+
+- Your compiler may compile either `add.cpp` or `main.cpp` first. 
+- Either way, `main.cpp` will fail to compile, giving the same compiler error as the previous example.
+
+    ```bash
+    'add': identifier not found
+    ```
+
+## Why limited visibility and short memory in compilation process
+
+This limited visibility and short memory is intentional, for a few reasons:
+
+::: { .incremental}
+- It allows the source files of a project to be compiled in any order.
+- When we change a source file, only that source file needs to be recompiled.
+- It reduces the possibility of naming conflicts between identifiers in different files.
+:::
+
+::: { .fragment}
+**What to do next**
+::: 
+
+::: { .fragment}
+- Our options for a solution here are the same as before: place the definition of function `add` before function `main`, or **satisfy the compiler with a forward declaration**. 
+- In this case, because function `add` is in another file, the _reordering option isn't possible_.
+::: 
+
+## A multi-file example: Using forward declaration
+
+```{.cpp #lst-main-file lst-cap="File `main.cpp`"}
+#include <iostream>
+
+// needed so main.cpp knows that add() is a function defined elsewhere
+float add(float x, float y)
+
+int main()
+{
+    std::cout << "The sum of 3 and 4 is: " << add(3.0, 4.0) << '\n';
+    return 0;
+}
+```
+
+```{.cpp #lst-add-file lst-cap="File `add.cpp`"}
+float add(float x, float y)
+{
+    return x + y;
+}
+```
+
+How to compile:
+```bash
+g++ main.cpp add.cpp -o program
+```
+
+# Header files
+
+## Header files
+::: { .incremental}
+- As programs grow larger (and make use of more files and functions), having to manually add a large number of (possibly different) forward declarations to the top of each file becomes extremely tedious.
+
+    > For example, if you have a 5 file program, each of which requires 10 forward declarations, you’re going to have to copy/paste in 50 forward declarations.  
+    > Now consider the case where you have 100 files and they each require 100 forward declarations. This simply doesn’t scale!
+    
+- To address this issue, C++ programs typically take a different approach: **Header Files**
+:::
+
+## Header files
+
+- Header files usually have a `.h` extension, but you will occasionally see them with a `.hpp` extension or no extension at all.
+- Conventionally, header files are used to propagate a bunch of related forward declarations into a code file.
+
+> **Key insight**
+>   
+> Header files allow us to put declarations in one place and then import them wherever we need them. This can save a lot of typing in multi-file programs.
+
+## Using header files to propagate forward declarations
+
+- Let us go back to the example we were discussing in a previous lesson.
+```{.cpp #lst-add-file lst-cap="File `add.cpp`"}
+float add(float x, float y)
+{
+    return x + y;
+}
+```
+
+```{.cpp #lst-main-file lst-cap="File `main.cpp`"}
+#include <iostream>
+
+float add(float x, float y) // forward declaration for "main" to see "add"
+
+int main()
+{
+    std::cout << "The sum of 3 and 4 is: " << add(3.0, 4.0) << '\n';
+    return 0;
+}
+```
+
+## Using header files to propagate forward declarations
+
+Here's our completed header file:
+
+```{.cpp #lst-add.h lst-cap="Header file for function `add()`: `add.h`"}
+// This is the content of the .h file, which is where the declarations go
+float add(float x, float y);    // function prototype for add.h 
+                                // don't forget the semicolon!
+```
+
+```{ .cpp #lst-main.cpp lst-cap="Main program file: `main.cpp`"}
+#include "add.h"    // Insert contents of add.h at this point.  
+                    // Note use of double quotes here.
+#include <iostream>
+int main() {
+    std::cout << "The sum of 3 and 4 is " << add(3, 4) << '\n';
+    return 0;
+}
+```
+
+```{.cpp #lst-add.cpp lst-cap="File implementing function `add()`: `add.cpp`"}
+#include "add.h"    // Insert contents of add.h at this point.  
+                    // Note use of double quotes here.
+float add(float x, float y) { return x + y; }
+```
+
+## Compiling and Linking
+![Compiling and Linking](./figures/IncludeHeader.png)
+
+Compile the program as follows:
+```bash
+g++ main.cpp add.h -c main.o
+g++ add.cpp add.h -c add.o
+g++ main.o add.o -o program
+```
+
+# What's next after this chapter
+
+## Things you can learn after this chapter
+
+You can learn the following topics through
+
+- Google Gemini using Guided Learning mode
+- Website [learncpp.com](https://www.learncpp.com)
+
+Extra content to learn:
+
+1. Naming collisions and an introduction to namespaces - [Click on this link](https://www.learncpp.com/cpp-tutorial/naming-collisions-and-an-introduction-to-namespaces/)
+2. Introduction to preprocessor - [Click on this link](https://www.learncpp.com/cpp-tutorial/introduction-to-the-preprocessor/)
+3. Header guards - [Click on this link](https://www.learncpp.com/cpp-tutorial/header-guards/)
+

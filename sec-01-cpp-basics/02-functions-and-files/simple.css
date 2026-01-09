@@ -70,12 +70,18 @@
 
 /* Increase font size of code block captions */
 div.listing-caption {
-    font-size: 1.2em !important;   /* Adjust this to 1.2em or 1.5em if needed */
-    font-weight: 600 !important;   /* Makes it slightly bolder */
+    font-size: 1.5em !important;   /* Adjust this to 1.2em or 1.5em if needed */
+    font-weight: 800 !important;   /* Makes it slightly bolder */
     color: #333333;                /* Dark color for better contrast on 'sky' theme */
     margin-bottom: 0.5em !important; 
     margin-top: 0.5em !important;
     text-align: right;              /* Usually looks better aligned with the code */
+}
+
+.listing-caption, .caption {
+  font-size: 2.0em !important; /* Adjust 1.2 to your preferred size */
+  font-weight: bold;
+  margin-top: 12px;
 }
 
 /* If you are using the 'filename' attribute, style that too */
