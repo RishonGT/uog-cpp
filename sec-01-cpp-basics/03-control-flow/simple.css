@@ -64,7 +64,7 @@
 
 /* Highlighted lines (using data-line-numbers) */
 .reveal .has-highlights tr.current-line {
-    background-color: rgba(38, 79, 120, 0.4) !important;
+    background-color: rgba(29, 122, 214, 0.4) !important;
 }
 
 
@@ -72,7 +72,7 @@
 div.listing-caption {
     font-size: 1.5em !important;   /* Adjust this to 1.2em or 1.5em if needed */
     font-weight: 800 !important;   /* Makes it slightly bolder */
-    color: #333333;                /* Dark color for better contrast on 'sky' theme */
+    color: #df5858;              /* Dark color for better contrast on 'sky' theme */
     margin-bottom: 0.5em !important; 
     margin-top: 0.5em !important;
     text-align: right;              /* Usually looks better aligned with the code */
@@ -86,8 +86,14 @@ div.listing-caption {
 
 /* If you are using the 'filename' attribute, style that too */
 .code-with-filename .code-with-filename-file {
-    font-size: 1.0em !important;
+    font-size: 1.2em !important;
     padding: 5px 15px !important;
+}
+
+.code-block-title {
+    background-color: transparent !important;
+    border: none !important;
+    padding-left: 0 !important;
 }
 
 /* 4. Highlight "Key Concepts" or Annotations */
