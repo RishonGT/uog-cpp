@@ -209,6 +209,9 @@
 <li><a href="#/do-while-statements" id="/toc-do-while-statements"><code>do-while</code> statements</a></li>
 <li><a href="#/for-statements" id="/toc-for-statements"><code>for</code> statements</a></li>
 <li><a href="#/break-and-continue" id="/toc-break-and-continue"><code>break</code> and <code>continue</code></a></li>
+<li><a href="#/further-notes-about-break-continue-and-return" id="/toc-further-notes-about-break-continue-and-return">Further notes about <code>break</code>, <code>continue</code> and <code>return</code></a></li>
+<li><a href="#/question-answer" id="/toc-question-answer">Question &amp; Answer</a></li>
+<li><a href="#/homework" id="/toc-homework">Homework</a></li>
 </ul>
 </nav>
 </section>
@@ -1464,9 +1467,53 @@ Listing&nbsp;24: Use <code>break</code> to break out of an infinite loop
 </section>
 <section id="continue-demonstration" class="slide level2">
 <h2><code>continue</code>: Demonstration</h2>
+</section></section>
+<section>
+<section id="further-notes-about-break-continue-and-return" class="title-slide slide level1 center">
+<h1>Further notes about <code>break</code>, <code>continue</code> and <code>return</code></h1>
+
 </section>
-<section id="qa-for-chocolate" class="slide level2">
-<h2>Q&amp;A for Chocolate</h2>
+<section id="debate-about-about-break-and-continue" class="slide level2">
+<h2>Debate about about <code>break</code> and <code>continue</code></h2>
+<ul>
+<li>In the past, <strong>Structured Programming</strong> purists argued that <code>break</code> and <code>continue</code> were just hidden verions of the <code>goto</code> statement and should be avoided.</li>
+<li>However, in monder C++ development, the concensus has shifted: <strong>use them when they make your code more readable and interpretable</strong>.</li>
+</ul>
+</section>
+<section id="debate-about-about-break-and-continue-example" class="slide level2">
+<h2>Debate about about <code>break</code> and <code>continue</code>: Example</h2>
+<ul>
+<li>Without <code>continue</code>, the following code is rather difficult to read</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb45-1"><a href=""></a><span class="cf">for</span> <span class="op">(</span><span class="at">const</span> <span class="kw">auto</span><span class="op">&amp;</span> item <span class="op">:</span> inventory<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb45-2"><a href=""></a>    <span class="cf">if</span> <span class="op">(</span>item<span class="op">.</span>isValid<span class="op">())</span> <span class="op">{</span></span>
+<span id="cb45-3"><a href=""></a>        <span class="cf">if</span> <span class="op">(</span>item<span class="op">.</span>isAvailable<span class="op">())</span> <span class="op">{</span></span>
+<span id="cb45-4"><a href=""></a>            <span class="cf">if</span> <span class="op">(</span>item<span class="op">.</span>price <span class="op">&lt;</span> budget<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb45-5"><a href=""></a>                <span class="co">// Core logic is buried 3 levels deep</span></span>
+<span id="cb45-6"><a href=""></a>                process<span class="op">(</span>item<span class="op">);</span></span>
+<span id="cb45-7"><a href=""></a>            <span class="op">}</span></span>
+<span id="cb45-8"><a href=""></a>        <span class="op">}</span></span>
+<span id="cb45-9"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb45-10"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>With <code>continue</code>, the code is easier to read</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb46-1"><a href=""></a><span class="cf">for</span> <span class="op">(</span><span class="at">const</span> <span class="kw">auto</span><span class="op">&amp;</span> item <span class="op">:</span> inventory<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb46-2"><a href=""></a>    <span class="cf">if</span> <span class="op">(!</span>item<span class="op">.</span>isValid<span class="op">())</span> <span class="cf">continue</span><span class="op">;</span></span>
+<span id="cb46-3"><a href=""></a>    <span class="cf">if</span> <span class="op">(!</span>item<span class="op">.</span>isAvailable<span class="op">())</span> <span class="cf">continue</span><span class="op">;</span></span>
+<span id="cb46-4"><a href=""></a>    <span class="cf">if</span> <span class="op">(</span>item<span class="op">.</span>price <span class="op">&gt;=</span> budget<span class="op">)</span> <span class="cf">continue</span><span class="op">;</span></span>
+<span id="cb46-5"><a href=""></a></span>
+<span id="cb46-6"><a href=""></a>    <span class="co">// Core logic is easy to see at the top level</span></span>
+<span id="cb46-7"><a href=""></a>    process<span class="op">(</span>item<span class="op">);</span></span>
+<span id="cb46-8"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section></section>
+<section>
+<section id="question-answer" class="title-slide slide level1 center">
+<h1>Question &amp; Answer</h1>
+
+</section>
+<section id="qa-for-chocolate-question-01" class="slide level2">
+<h2>Q&amp;A for Chocolate: Question 01</h2>
 <p><strong>Question</strong>:&nbsp; How will this programe <strong>behave</strong>?</p>
 <div id="lst-Q-and-A" class="listing quarto-float quarto-figure quarto-figure-left">
 <figure class="quarto-float quarto-float-lst">
@@ -1478,25 +1525,84 @@ Listing&nbsp;25: How will this program behave?
 <div class="code-with-filename-file">
 <pre><strong>Q_and_A_01.cpp</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb45-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
-<span id="cb45-2"><a href=""></a></span>
-<span id="cb45-3"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
-<span id="cb45-4"><a href=""></a><span class="op">{</span></span>
-<span id="cb45-5"><a href=""></a>    <span class="dt">int</span> count<span class="op">{</span> <span class="dv">0</span> <span class="op">};</span></span>
-<span id="cb45-6"><a href=""></a>    <span class="cf">while</span> <span class="op">(</span>count <span class="op">&lt;</span> <span class="dv">10</span><span class="op">)</span></span>
-<span id="cb45-7"><a href=""></a>    <span class="op">{</span></span>
-<span id="cb45-8"><a href=""></a>        <span class="cf">if</span> <span class="op">(</span>count <span class="op">==</span> <span class="dv">5</span><span class="op">)</span></span>
-<span id="cb45-9"><a href=""></a>            <span class="cf">continue</span><span class="op">;</span> </span>
-<span id="cb45-10"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> count <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
-<span id="cb45-11"><a href=""></a></span>
-<span id="cb45-12"><a href=""></a>        <span class="op">++</span>count<span class="op">;</span> </span>
-<span id="cb45-13"><a href=""></a>    <span class="op">}</span></span>
-<span id="cb45-14"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb45-15"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb47-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb47-2"><a href=""></a></span>
+<span id="cb47-3"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb47-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb47-5"><a href=""></a>    <span class="dt">int</span> count<span class="op">{</span> <span class="dv">0</span> <span class="op">};</span></span>
+<span id="cb47-6"><a href=""></a>    <span class="cf">while</span> <span class="op">(</span>count <span class="op">&lt;</span> <span class="dv">10</span><span class="op">)</span></span>
+<span id="cb47-7"><a href=""></a>    <span class="op">{</span></span>
+<span id="cb47-8"><a href=""></a>        <span class="cf">if</span> <span class="op">(</span>count <span class="op">==</span> <span class="dv">5</span><span class="op">)</span></span>
+<span id="cb47-9"><a href=""></a>            <span class="cf">continue</span><span class="op">;</span> </span>
+<span id="cb47-10"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> count <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb47-11"><a href=""></a></span>
+<span id="cb47-12"><a href=""></a>        <span class="op">++</span>count<span class="op">;</span> </span>
+<span id="cb47-13"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb47-14"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb47-15"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </figure>
 </div>
+</section>
+<section id="qa-for-chocolate-question-02" class="slide level2">
+<h2>Q&amp;A for Chocolate: Question 02</h2>
+<p>What is your opinion about it? <span class="math inline">\(\Rightarrow\)</span> Just say something, say whatever you think</p>
+<p>#include <iostream></iostream></p>
+<p>int main() { int count{ 0 }; // count how many times the loop iterates bool keep_looping { true }; // controls whether the loop ends or not while (keep_looping) { std::cout &lt;&lt; “Enter ‘e’ to exit this loop or any other character to continue:”; char ch{}; std::cin &gt;&gt; ch;</p>
+<pre><code>    if (ch == 'e')
+        keep_looping = false;
+    else
+    {
+        ++count;
+        std::cout &lt;&lt; "We've iterated " &lt;&lt; count &lt;&lt; " times\n";
+    }
+}
+
+return 0;</code></pre>
+<p>}</p>
+</section>
+<section id="qa-for-chocolate-question-02-1" class="slide level2">
+<h2>Q&amp;A for Chocolate: Question 02</h2>
+<p>Nothing is shown here just in case I made a mistake, double clicking <span class="math inline">\(\ldots\)</span></p>
+</section>
+<section id="qa-for-chocolate-question-02-2" class="slide level2">
+<h2>Q&amp;A for Chocolate: Question 02</h2>
+<p>It is better to write as follows:</p>
+<p>#include <iostream></iostream></p>
+<p>int main() { int count{ 0 }; // count how many times the loop iterates while (true) // loop until user terminates { std::cout &lt;&lt; “Enter ‘e’ to exit this loop or any other character to continue:”; char ch{}; std::cin &gt;&gt; ch;</p>
+<pre><code>    if (ch == 'e')
+        break;
+
+    ++count;
+    std::cout &lt;&lt; "We've iterated " &lt;&lt; count &lt;&lt; " times\n";
+}
+
+return 0;</code></pre>
+<p>}</p>
+</section></section>
+<section>
+<section id="homework" class="title-slide slide level1 center">
+<h1>Homework</h1>
+
+</section>
+<section id="self-taught-materials" class="slide level2">
+<h2>Self-taught materials</h2>
+<p>Use Gemini - Guided Learning Mode to learn the following two topics:</p>
+<ol type="1">
+<li><p>Basic data types in C++. At least you should learn the most (if not all) of the following basic data types</p>
+<ul>
+<li>Integers: <code>int</code> <code>unsigned int</code>, <code>long int</code>, <span class="math inline">\(\ldots\)</span></li>
+<li>Real numbers: <code>float</code>, <code>double</code></li>
+<li>Boolean: <code>bool</code></li>
+<li><code>void</code> data type</li>
+<li>Character and String: <code>char</code>, <code>std::string</code></li>
+</ul></li>
+<li><p><code>namespace</code> in C++</p>
+<ul>
+<li>You will see that <code>std</code> is a namespace.</li>
+</ul></li>
+</ol>
 
 </section></section>
     </div>

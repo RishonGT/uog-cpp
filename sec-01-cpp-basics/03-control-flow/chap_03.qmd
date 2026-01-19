@@ -693,6 +693,41 @@ I believe that the difference between `break` and `return` is an easy concept fo
 
 ## `continue`: Demonstration
 
+# Further notes about `break`, `continue` and `return`
+
+## Debate about about `break` and `continue`
+- In the past, **Structured Programming** purists argued that `break` and `continue` were just hidden verions of the `goto` statement and should be avoided.
+- However, in monder C++ development, the concensus has shifted: **use them when they make your code more readable and interpretable**.
+
+## Debate about about `break` and `continue`: Example
+
+- Without `continue`, the following code is rather difficult to read
+```{.cpp}
+for (const auto& item : inventory) {
+    if (item.isValid()) {
+        if (item.isAvailable()) {
+            if (item.price < budget) {
+                // Core logic is buried 3 levels deep
+                process(item);
+            }
+        }
+    }
+}
+```
+
+- With `continue`, the code is easier to read
+```{.cpp}
+for (const auto& item : inventory) {
+    if (!item.isValid()) continue;
+    if (!item.isAvailable()) continue;
+    if (item.price >= budget) continue;
+
+    // Core logic is easy to see at the top level
+    process(item);
+}
+```
+
+
 # Question & Answer
 
 ## Q&A for Chocolate: Question 01
@@ -720,3 +755,20 @@ Nothing is shown here just in case I made a mistake, double clicking $\ldots$
 It is better to write as follows:
 
 {{< include ./cpp/Q_and_A_02_rewrite.cpp >}}
+
+# Homework
+
+## Self-taught materials
+
+Use Gemini - Guided Learning Mode to learn the following two topics:
+
+1. Basic data types in C++. At least you should learn the most (if not all) of the following basic data types
+
+   - Integers: `int` `unsigned int`, `long int`, $\ldots$ 
+   - Real numbers: `float`, `double`
+   - Boolean: `bool`
+   - `void` data type
+   - Character and String: `char`, `std::string` 
+2. `namespace` in C++
+
+    - You will see that `std` is a namespace.
