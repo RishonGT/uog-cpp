@@ -618,3 +618,105 @@ This program will output:
 {{< include ./cpp/nested_for_loops.cpp >}}
 ```
 :::
+
+# `break` and `continue`
+
+## `break` and `continue`: Quick recap
+
+> - The `break` statement causes a `while` loop, `do-while` loop, `for` loop, or `switch` statement to end, with execution continuing with the next statement after the loop or `switch` being broken out of.
+>
+> - The `continue` statement provides a convenient way to end the current iteration of a loop without terminating the entire loop.
+
+- In general, you want to use `break` and `continue` statements within conditional statements.
+  - What's the point to define a loop and `break` out of the loop after one first iteration.
+  - What's the point to define a loop and use `continue` to make the iterations run as normal.
+- We have learned `break` and `continue` from programming in Python. The functionalities of `break` and `continue` in C++ are essentially the same.
+
+
+
+## `break` and `continue`: Flowchart
+
+::: {.columns}
+::: {.column width="50%"}
+![`break` statement](./figures/break-statement-flowchart.png)
+:::
+::: {.column width="50%"}
+![`continue` statement](./figures/continue-statement-flowchart.png)
+:::
+:::
+
+## Breaking in `switch`
+
+- One of the difference as compared to Python is that we need `break` to avoid fall-through in `switch` statement.
+- A `break` is typically used at the end of each case to signify the case is finished.
+
+## Breaking in `switch`: Demonstration
+::: {#lst-break-a-switch lst-cap="Use `break` to avoid fall-through in `switch` statement" filename="break_a_switch.cpp"}
+```{.cpp}
+{{< include ./cpp/break_a_switch.cpp >}}
+```
+:::
+
+## Breaking a loop: Demonstration
+
+::: {#lst-break-a-loop lst-cap="Use `break` to break out of a loop" filename="break_a_loop.cpp"}
+```{.cpp}
+{{< include ./cpp/break_a_switch.cpp >}}
+```
+:::
+
+## Breakin an infinite loop: Demonstration
+A `break` is also a common way to get out of an *intentional infinite* loop.
+
+::: {#lst-break-infinite-loop lst-cap="Use `break` to break out of an infinite loop" filename="break_infinite_loop.cpp"}
+```{.cpp}
+{{< include ./cpp/break_infinite_loop.cpp >}}
+```
+:::
+
+## `break` versus `return`
+
+I believe it is easy to distinguish `break` from `return` in terms of functionalities. But just in case $\ldots$
+
+- A `break` statement terminates the switch or loop, and execution continues at the first statement beyond the switch or loop.
+- A `return` statement terminates the entire function that the loop is within, and execution continues at point where the function was called.
+
+I believe that the difference between `break` and `return` is an easy concept for Year-3 students, but let me give a demonstration just in case $\ldots$
+
+## `break` versus `return`: Demonstration
+
+::: {#lst-break-infinite-loop lst-cap="Use `break` to break out of an infinite loop" filename="break_vs_return.cpp"}
+```{.cpp}
+{{< include ./cpp/break_vs_return.cpp >}}
+```
+:::
+
+## `continue`: Demonstration
+
+# Question & Answer
+
+## Q&A for Chocolate: Question 01
+
+**Question**:&nbsp; How will this programe **behave**?
+
+::: {#lst-Q-and-A lst-cap="How will this program behave?" filename="Q_and_A_01.cpp"}
+```{.cpp}
+{{< include ./cpp/Q_and_A_01.cpp >}}
+```
+:::
+
+## Q&A for Chocolate: Question 02
+
+What is your opinion about it? $\Rightarrow$ Just say something, say whatever you think
+
+{{< include ./cpp/Q_and_A_02.cpp >}}
+
+## Q&A for Chocolate: Question 02
+
+Nothing is shown here just in case I made a mistake, double clicking $\ldots$
+
+## Q&A for Chocolate: Question 02
+
+It is better to write as follows:
+
+{{< include ./cpp/Q_and_A_02_rewrite.cpp >}}

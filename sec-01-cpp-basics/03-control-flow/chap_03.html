@@ -208,6 +208,7 @@
 <li><a href="#/introduction-to-loops-and-while-statements" id="/toc-introduction-to-loops-and-while-statements">Introduction to loops and <code>while</code> statements</a></li>
 <li><a href="#/do-while-statements" id="/toc-do-while-statements"><code>do-while</code> statements</a></li>
 <li><a href="#/for-statements" id="/toc-for-statements"><code>for</code> statements</a></li>
+<li><a href="#/break-and-continue" id="/toc-break-and-continue"><code>break</code> and <code>continue</code></a></li>
 </ul>
 </nav>
 </section>
@@ -1218,9 +1219,281 @@ Listing&nbsp;20: A example of nested <code>for</code> loops
 <span id="cb40-11"><a href=""></a></span>
 <span id="cb40-12"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
 <span id="cb40-13"><a href=""></a>    <span class="op">}</span></span>
-<span id="cb40-14"><a href=""></a></span>
-<span id="cb40-15"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb40-16"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb40-14"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb40-15"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section></section>
+<section>
+<section id="break-and-continue" class="title-slide slide level1 center">
+<h1><code>break</code> and <code>continue</code></h1>
+
+</section>
+<section id="break-and-continue-quick-recap" class="slide level2">
+<h2><code>break</code> and <code>continue</code>: Quick recap</h2>
+<blockquote>
+
+<ul>
+<li><p>The <code>break</code> statement causes a <code>while</code> loop, <code>do-while</code> loop, <code>for</code> loop, or <code>switch</code> statement to end, with execution continuing with the next statement after the loop or <code>switch</code> being broken out of.</p></li>
+<li><p>The <code>continue</code> statement provides a convenient way to end the current iteration of a loop without terminating the entire loop.</p></li>
+</ul>
+
+</blockquote>
+<ul>
+<li>In general, you want to use <code>break</code> and <code>continue</code> statements within conditional statements.
+<ul>
+<li>What’s the point to define a loop and <code>break</code> out of the loop after one first iteration.</li>
+<li>What’s the point to define a loop and use <code>continue</code> to make the iterations run as normal.</li>
+</ul></li>
+<li>We have learned <code>break</code> and <code>continue</code> from programming in Python. The functionalities of <code>break</code> and <code>continue</code> in C++ are essentially the same.</li>
+</ul>
+</section>
+<section id="break-and-continue-flowchart" class="slide level2">
+<h2><code>break</code> and <code>continue</code>: Flowchart</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="./figures/break-statement-flowchart.png"></p>
+<figcaption><code>break</code> statement</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="./figures/continue-statement-flowchart.png"></p>
+<figcaption><code>continue</code> statement</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="breaking-in-switch" class="slide level2">
+<h2>Breaking in <code>switch</code></h2>
+<ul>
+<li>One of the difference as compared to Python is that we need <code>break</code> to avoid fall-through in <code>switch</code> statement.</li>
+<li>A <code>break</code> is typically used at the end of each case to signify the case is finished.</li>
+</ul>
+</section>
+<section id="breaking-in-switch-demonstration" class="slide level2">
+<h2>Breaking in <code>switch</code>: Demonstration</h2>
+<div id="lst-break-a-switch" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-break-a-switch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;21: Use <code>break</code> to avoid fall-through in <code>switch</code> statement
+</figcaption>
+<div aria-describedby="lst-break-a-switch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>break_a_switch.cpp</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb41-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb41-2"><a href=""></a></span>
+<span id="cb41-3"><a href=""></a><span class="dt">void</span> print_math<span class="op">(</span><span class="dt">int</span> x<span class="op">,</span> <span class="dt">int</span> y<span class="op">,</span> <span class="dt">char</span> ch<span class="op">)</span></span>
+<span id="cb41-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb41-5"><a href=""></a>    <span class="cf">switch</span> <span class="op">(</span>ch<span class="op">)</span></span>
+<span id="cb41-6"><a href=""></a>    <span class="op">{</span></span>
+<span id="cb41-7"><a href=""></a>    <span class="cf">case</span> <span class="ch">'+'</span><span class="op">:</span></span>
+<span id="cb41-8"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> <span class="st">" + "</span> <span class="op">&lt;&lt;</span> y <span class="op">&lt;&lt;</span> <span class="st">" = "</span> <span class="op">&lt;&lt;</span> x <span class="op">+</span> y <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb41-9"><a href=""></a>        <span class="co">// don't fall-through to next case -- Remove break to see the difference</span></span>
+<span id="cb41-10"><a href=""></a>        <span class="cf">break</span><span class="op">;</span>      </span>
+<span id="cb41-11"><a href=""></a>    <span class="cf">case</span> <span class="ch">'-'</span><span class="op">:</span></span>
+<span id="cb41-12"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> <span class="st">" - "</span> <span class="op">&lt;&lt;</span> y <span class="op">&lt;&lt;</span> <span class="st">" = "</span> <span class="op">&lt;&lt;</span> x <span class="op">-</span> y <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb41-13"><a href=""></a>        <span class="cf">break</span><span class="op">;</span>      <span class="co">// don't fall-through to next case</span></span>
+<span id="cb41-14"><a href=""></a>    <span class="cf">case</span> <span class="ch">'*'</span><span class="op">:</span></span>
+<span id="cb41-15"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> <span class="st">" * "</span> <span class="op">&lt;&lt;</span> y <span class="op">&lt;&lt;</span> <span class="st">" = "</span> <span class="op">&lt;&lt;</span> x <span class="op">*</span> y <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb41-16"><a href=""></a>        <span class="cf">break</span><span class="op">;</span>      <span class="co">// don't fall-through to next case</span></span>
+<span id="cb41-17"><a href=""></a>    <span class="cf">case</span> <span class="ch">'/'</span><span class="op">:</span></span>
+<span id="cb41-18"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> <span class="st">" / "</span> <span class="op">&lt;&lt;</span> y <span class="op">&lt;&lt;</span> <span class="st">" = "</span> <span class="op">&lt;&lt;</span> x <span class="op">/</span> y <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb41-19"><a href=""></a>        <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb41-20"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb41-21"><a href=""></a><span class="op">}</span></span>
+<span id="cb41-22"><a href=""></a></span>
+<span id="cb41-23"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb41-24"><a href=""></a><span class="op">{</span></span>
+<span id="cb41-25"><a href=""></a>    print_math<span class="op">(</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="ch">'+'</span><span class="op">);</span></span>
+<span id="cb41-26"><a href=""></a>    print_math<span class="op">(</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="ch">'-'</span><span class="op">);</span></span>
+<span id="cb41-27"><a href=""></a>    print_math<span class="op">(</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="ch">'*'</span><span class="op">);</span></span>
+<span id="cb41-28"><a href=""></a>    print_math<span class="op">(</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="ch">'/'</span><span class="op">);</span></span>
+<span id="cb41-29"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb41-30"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</figure>
+</div>
+</section>
+<section id="breaking-a-loop-demonstration" class="slide level2">
+<h2>Breaking a loop: Demonstration</h2>
+<div id="lst-break-a-loop" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-break-a-loop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;22: Use <code>break</code> to break out of a loop
+</figcaption>
+<div aria-describedby="lst-break-a-loop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>break_a_loop.cpp</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb42-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb42-2"><a href=""></a></span>
+<span id="cb42-3"><a href=""></a><span class="dt">void</span> print_math<span class="op">(</span><span class="dt">int</span> x<span class="op">,</span> <span class="dt">int</span> y<span class="op">,</span> <span class="dt">char</span> ch<span class="op">)</span></span>
+<span id="cb42-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb42-5"><a href=""></a>    <span class="cf">switch</span> <span class="op">(</span>ch<span class="op">)</span></span>
+<span id="cb42-6"><a href=""></a>    <span class="op">{</span></span>
+<span id="cb42-7"><a href=""></a>    <span class="cf">case</span> <span class="ch">'+'</span><span class="op">:</span></span>
+<span id="cb42-8"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> <span class="st">" + "</span> <span class="op">&lt;&lt;</span> y <span class="op">&lt;&lt;</span> <span class="st">" = "</span> <span class="op">&lt;&lt;</span> x <span class="op">+</span> y <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb42-9"><a href=""></a>        <span class="co">// don't fall-through to next case -- Remove break to see the difference</span></span>
+<span id="cb42-10"><a href=""></a>        <span class="cf">break</span><span class="op">;</span>      </span>
+<span id="cb42-11"><a href=""></a>    <span class="cf">case</span> <span class="ch">'-'</span><span class="op">:</span></span>
+<span id="cb42-12"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> <span class="st">" - "</span> <span class="op">&lt;&lt;</span> y <span class="op">&lt;&lt;</span> <span class="st">" = "</span> <span class="op">&lt;&lt;</span> x <span class="op">-</span> y <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb42-13"><a href=""></a>        <span class="cf">break</span><span class="op">;</span>      <span class="co">// don't fall-through to next case</span></span>
+<span id="cb42-14"><a href=""></a>    <span class="cf">case</span> <span class="ch">'*'</span><span class="op">:</span></span>
+<span id="cb42-15"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> <span class="st">" * "</span> <span class="op">&lt;&lt;</span> y <span class="op">&lt;&lt;</span> <span class="st">" = "</span> <span class="op">&lt;&lt;</span> x <span class="op">*</span> y <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb42-16"><a href=""></a>        <span class="cf">break</span><span class="op">;</span>      <span class="co">// don't fall-through to next case</span></span>
+<span id="cb42-17"><a href=""></a>    <span class="cf">case</span> <span class="ch">'/'</span><span class="op">:</span></span>
+<span id="cb42-18"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> <span class="st">" / "</span> <span class="op">&lt;&lt;</span> y <span class="op">&lt;&lt;</span> <span class="st">" = "</span> <span class="op">&lt;&lt;</span> x <span class="op">/</span> y <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb42-19"><a href=""></a>        <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb42-20"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb42-21"><a href=""></a><span class="op">}</span></span>
+<span id="cb42-22"><a href=""></a></span>
+<span id="cb42-23"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb42-24"><a href=""></a><span class="op">{</span></span>
+<span id="cb42-25"><a href=""></a>    print_math<span class="op">(</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="ch">'+'</span><span class="op">);</span></span>
+<span id="cb42-26"><a href=""></a>    print_math<span class="op">(</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="ch">'-'</span><span class="op">);</span></span>
+<span id="cb42-27"><a href=""></a>    print_math<span class="op">(</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="ch">'*'</span><span class="op">);</span></span>
+<span id="cb42-28"><a href=""></a>    print_math<span class="op">(</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="ch">'/'</span><span class="op">);</span></span>
+<span id="cb42-29"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb42-30"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</figure>
+</div>
+</section>
+<section id="breakin-an-infinite-loop-demonstration" class="slide level2">
+<h2>Breakin an infinite loop: Demonstration</h2>
+<p>A <code>break</code> is also a common way to get out of an <em>intentional infinite</em> loop.</p>
+<div id="lst-break-infinite-loop" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-break-infinite-loop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;23: Use <code>break</code> to break out of an infinite loop
+</figcaption>
+<div aria-describedby="lst-break-infinite-loop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>break_infinite_loop.cpp</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb43-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb43-2"><a href=""></a></span>
+<span id="cb43-3"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb43-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb43-5"><a href=""></a>    <span class="cf">while</span> <span class="op">(</span><span class="kw">true</span><span class="op">)</span> <span class="co">// infinite loop</span></span>
+<span id="cb43-6"><a href=""></a>    <span class="op">{</span></span>
+<span id="cb43-7"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Enter 0 to exit or any other integer to continue: "</span><span class="op">;</span></span>
+<span id="cb43-8"><a href=""></a>        <span class="dt">int</span> num<span class="op">{};</span></span>
+<span id="cb43-9"><a href=""></a>        <span class="bu">std::</span>cin <span class="op">&gt;&gt;</span> num<span class="op">;</span></span>
+<span id="cb43-10"><a href=""></a></span>
+<span id="cb43-11"><a href=""></a>        <span class="co">// exit loop if user enters 0</span></span>
+<span id="cb43-12"><a href=""></a>        <span class="cf">if</span> <span class="op">(</span>num <span class="op">==</span> <span class="dv">0</span><span class="op">)</span></span>
+<span id="cb43-13"><a href=""></a>            <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb43-14"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb43-15"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"We're out!</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb43-16"><a href=""></a>    </span>
+<span id="cb43-17"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb43-18"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</figure>
+</div>
+</section>
+<section id="break-versus-return" class="slide level2">
+<h2><code>break</code> versus <code>return</code></h2>
+<p>I believe it is easy to distinguish <code>break</code> from <code>return</code> in terms of functionalities. But just in case <span class="math inline">\(\ldots\)</span></p>
+<ul>
+<li>A <code>break</code> statement terminates the switch or loop, and execution continues at the first statement beyond the switch or loop.</li>
+<li>A <code>return</code> statement terminates the entire function that the loop is within, and execution continues at point where the function was called.</li>
+</ul>
+<p>I believe that the difference between <code>break</code> and <code>return</code> is an easy concept for Year-3 students, but let me give a demonstration just in case <span class="math inline">\(\ldots\)</span></p>
+</section>
+<section id="break-versus-return-demonstration" class="slide level2">
+<h2><code>break</code> versus <code>return</code>: Demonstration</h2>
+<div id="lst-break-infinite-loop" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-break-infinite-loop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;24: Use <code>break</code> to break out of an infinite loop
+</figcaption>
+<div aria-describedby="lst-break-infinite-loop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>break_vs_return.cpp</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb44-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb44-2"><a href=""></a></span>
+<span id="cb44-3"><a href=""></a><span class="dt">int</span> break_or_return<span class="op">()</span></span>
+<span id="cb44-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb44-5"><a href=""></a>    <span class="cf">while</span> <span class="op">(</span><span class="kw">true</span><span class="op">)</span> <span class="co">// infinite loop</span></span>
+<span id="cb44-6"><a href=""></a>    <span class="op">{</span></span>
+<span id="cb44-7"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Enter 'b' to break or 'r' to return: "</span><span class="op">;</span></span>
+<span id="cb44-8"><a href=""></a>        <span class="dt">char</span> ch<span class="op">{};</span></span>
+<span id="cb44-9"><a href=""></a>        <span class="bu">std::</span>cin <span class="op">&gt;&gt;</span> ch<span class="op">;</span></span>
+<span id="cb44-10"><a href=""></a></span>
+<span id="cb44-11"><a href=""></a>        <span class="cf">if</span> <span class="op">(</span>ch <span class="op">==</span> <span class="ch">'b'</span><span class="op">)</span></span>
+<span id="cb44-12"><a href=""></a>            <span class="cf">break</span><span class="op">;</span> <span class="co">// execution will continue at the first statement beyond the loop</span></span>
+<span id="cb44-13"><a href=""></a></span>
+<span id="cb44-14"><a href=""></a>        <span class="cf">if</span> <span class="op">(</span>ch <span class="op">==</span> <span class="ch">'r'</span><span class="op">)</span></span>
+<span id="cb44-15"><a href=""></a>            <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span> <span class="co">// return will cause the function to immediately return to the caller (in this case, main())</span></span>
+<span id="cb44-16"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb44-17"><a href=""></a></span>
+<span id="cb44-18"><a href=""></a>    <span class="co">// breaking the loop causes execution to resume here</span></span>
+<span id="cb44-19"><a href=""></a></span>
+<span id="cb44-20"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"We broke out of the loop</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb44-21"><a href=""></a></span>
+<span id="cb44-22"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span>   <span class="co">// return 0 if we broke out of the loop and did not return earlier.</span></span>
+<span id="cb44-23"><a href=""></a><span class="op">}</span></span>
+<span id="cb44-24"><a href=""></a></span>
+<span id="cb44-25"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb44-26"><a href=""></a><span class="op">{</span></span>
+<span id="cb44-27"><a href=""></a>    <span class="dt">int</span> return_value<span class="op">{</span> break_or_return<span class="op">()</span> <span class="op">};</span></span>
+<span id="cb44-28"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Function break_or_return returned "</span> <span class="op">&lt;&lt;</span> return_value <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb44-29"><a href=""></a></span>
+<span id="cb44-30"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb44-31"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</figure>
+</div>
+</section>
+<section id="continue-demonstration" class="slide level2">
+<h2><code>continue</code>: Demonstration</h2>
+</section>
+<section id="qa-for-chocolate" class="slide level2">
+<h2>Q&amp;A for Chocolate</h2>
+<p><strong>Question</strong>:&nbsp; How will this programe <strong>behave</strong>?</p>
+<div id="lst-Q-and-A" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-Q-and-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;25: How will this program behave?
+</figcaption>
+<div aria-describedby="lst-Q-and-A-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Q_and_A_01.cpp</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb45-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb45-2"><a href=""></a></span>
+<span id="cb45-3"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb45-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb45-5"><a href=""></a>    <span class="dt">int</span> count<span class="op">{</span> <span class="dv">0</span> <span class="op">};</span></span>
+<span id="cb45-6"><a href=""></a>    <span class="cf">while</span> <span class="op">(</span>count <span class="op">&lt;</span> <span class="dv">10</span><span class="op">)</span></span>
+<span id="cb45-7"><a href=""></a>    <span class="op">{</span></span>
+<span id="cb45-8"><a href=""></a>        <span class="cf">if</span> <span class="op">(</span>count <span class="op">==</span> <span class="dv">5</span><span class="op">)</span></span>
+<span id="cb45-9"><a href=""></a>            <span class="cf">continue</span><span class="op">;</span> </span>
+<span id="cb45-10"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> count <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb45-11"><a href=""></a></span>
+<span id="cb45-12"><a href=""></a>        <span class="op">++</span>count<span class="op">;</span> </span>
+<span id="cb45-13"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb45-14"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb45-15"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </div>
 </figure>
 </div>
