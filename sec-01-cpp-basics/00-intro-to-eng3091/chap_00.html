@@ -6,11 +6,13 @@
 <script src="chap_00_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="chap_00_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="chap_00_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="chap_00_files/libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="chap_00_files/libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="chap_00_files/libs/quarto-contrib/videojs/video.min.js"></script>
+<link href="chap_00_files/libs/quarto-contrib/videojs/video-js.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Lecturer in Multiscale Materials">
-  <title>C++ Basics</title>
+  <title>Introduction to ENG3091</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -194,19 +196,25 @@
     <div class="slides">
 
 <section id="title-slide" class="center">
-  <h1 class="title">C++ Basics</h1>
-  <p class="subtitle">Gentle introduction to compiled language</p>
+  <h1 class="title">Introduction to ENG3091</h1>
+  <p class="subtitle">What we expect to learn</p>
   <p class="author"></p><p>Khiem Nguyen <br>Lecturer in Multiscale Materials <br><a href="mailto:khiem.nguyen@glasgow.ac.uk" class="email">khiem.nguyen@glasgow.ac.uk</a></p><p></p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Presentation Outline</h2>
 <ul>
+<li><a href="#/introduction-to-cc" id="/toc-introduction-to-cc">Introduction to C/C++</a></li>
 <li><a href="#/curriculum-assessment" id="/toc-curriculum-assessment">Curriculum &amp; Assessment</a></li>
 </ul>
 </nav>
 </section>
-<section id="introduction-to-cc" class="slide level2">
-<h2>Introduction to C/C++</h2>
+<section>
+<section id="introduction-to-cc" class="title-slide slide level1 center">
+<h1>Introduction to C/C++</h1>
+
+</section>
+<section id="a-small-history" class="slide level2">
+<h2>A small history</h2>
 <h3 id="before-c-there-was-c">Before C++, there was C:</h3>
 <ul>
 <li>The C language was developed in 1972 by Dennis Ritchie at Bell Telephone lab, primarily as a systems programming language (to write operating systems).</li>
@@ -314,7 +322,7 @@ Listing&nbsp;2: Do some maths
 <ul>
 <li>We need to compile this program to see the output. Watch me!</li>
 </ul>
-</section>
+</section></section>
 <section>
 <section id="curriculum-assessment" class="title-slide slide level1 center">
 <h1>Curriculum &amp; Assessment</h1>
@@ -322,48 +330,127 @@ Listing&nbsp;2: Do some maths
 </section>
 <section id="curriculum" class="slide level2">
 <h2>Curriculum</h2>
-<ul>
-<li><span class="math inline">\(5\)</span> Study Sections
 <ol type="1">
-<li>Basic C++: Seriously basic</li>
-<li>Basic C++: Real business</li>
-<li>Object-oriented Programming</li>
-<li>Some standard libraries</li>
-<li>Unified Modelling Language</li>
-</ol></li>
+<li><p><span style="color:red"><strong>Basic C++</strong></span></p>
+<p>Variables, Functions, Control Flow<br>
+</p></li>
+<li><p><span style="color:red"><strong>Intermediate C++</strong></span></p>
+<p>References, Pointers, Template, Function Overriding, Dynamic Array</p></li>
+<li><p><span style="color:red"><strong>Object-oriented Programming</strong> (OOP)</span></p>
+<p><span class="math inline">\(4\)</span> pillars of OOP: <span class="math inline">\((1)\)</span> Encapsulation, <span class="math inline">\((2)\)</span> Abstraction, <span class="math inline">\((3)\)</span> Inheritance, <span class="math inline">\((4)\)</span> Polymorphism</p></li>
+<li><p><span style="color:red"><strong>Standard Template Library (STL)</strong></span></p>
+<ul>
+<li>Some commonly used STL containers: Vector, List, Array, <span class="math inline">\(\ldots\)</span></li>
+<li>Some commonly used STL algorithms: Sort, Find, Count, Unique, <span class="math inline">\(\ldots\)</span></li>
+</ul></li>
+<li><p><span style="color:red"><strong>Unified Modelling Language</strong></span>:</p>
+<p>In this course, we learn how to organize a large project by using class diagrams</p></li>
+</ol>
+</section>
+<section id="curriculum-extra-when-we-have-enough-time" class="slide level2">
+<h2>Curriculum: Extra when we have enough time</h2>
+<ol start="6" type="1">
+<li><p><span style="color:red"><strong>make</strong></span> and <span style="color:red"><strong>cmake</strong></span> – Extra materials: Coverred if we have enough time.</p>
+<p>How to automate build process, how to install open-source libraries and how to build our own libraries</p></li>
+</ol>
+</section>
+<section id="what-is-software-engineering" class="slide level2">
+<h2>What is <strong>software engineering</strong>?</h2>
+<video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="./figure/software_engineering_video.mp4"></video>
+</section>
+<section id="what-is-software-engineering-1" class="slide level2">
+<h2>What is <strong>software engineering</strong>?</h2>
+<iframe data-external="1" src="https://www.youtube.com/embed/4qSk8_AZwIg" width="100%" height="85%" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</section>
+<section id="the-word-software-engineering-is-overstated-in-this-course" class="slide level2">
+<h2>The word <strong>software engineering</strong> is overstated in this course!!!</h2>
+<p>My opinions:</p>
+<ul>
+<li class="fragment"><p>You must be kidding me.</p>
+<ul>
+<li class="fragment"><p>A software engineer’s average salary varies greatly by location, experience, and company, but in the UK, it generally ranges from entry-level around <span class="math inline">\(£25k-£35k\)</span> up to <span class="math inline">\(£70k+\)</span> for senior roles, with London often paying more, while in the US, median total compensation can exceed $<span class="math inline">\(180k\)</span>, especially at top tech firms.</p></li>
+<li class="fragment"><p><span style="color:red">The School of Engineering asks me to teach Software Engineering in 10 weeks?</span>&nbsp; <span style="color:blue">Mission impossible!</span></p></li>
+</ul></li>
+<li class="fragment"><p>Can you become a software engineer after <span class="math inline">\(10\)</span> weeks of learning C++ and class diagrams?</p>
+<ul>
+<li class="fragment"><span style="color:red">HELL NO</span></li>
+</ul></li>
+<li class="fragment"><p>Then, why do we even need to learn?</p>
+<ul>
+<li class="fragment"><span style="color:red">Whoever we want to become, we need to build the first brick.</span></li>
+</ul></li>
 </ul>
 </section>
+<section id="will-learning-programming-software-engineering-be-still-relevant-in-ai-era" class="slide level2">
+<h2>Will learning Programming &amp; Software Engineering be still relevant in AI era?</h2>
+<blockquote>
+<p><em>I am teaching C++ at School of Engineering, Uni of Glasgow. Many students believe that AI Chatbot like ChatGPT, Gemini and CoPilot will soon replace software engineering. What is your opinion about this?</em></p>
+</blockquote>
+<p>Let us ask Gemini, CoPilot and ChatGPT what they think.</p>
+</section>
+<section id="answer-from-gemini" class="slide level2">
+<h2>Answer from Gemini</h2>
+
+<img data-src="./figure/gemini_will_ai_replace_software_engineer.png" class="r-stretch"></section>
+<section id="answer-from-copilot" class="slide level2">
+<h2>Answer from CoPilot</h2>
+
+<img data-src="./figure/copilot_will_ai_replace_software_engineer.png" class="r-stretch"></section>
+<section id="answer-from-chatgpt" class="slide level2">
+<h2>Answer from ChatGPT</h2>
+
+<img data-src="./figure/chatgpt_will_ai_replace_software_engineer.png" class="r-stretch"></section>
 <section id="assessment" class="slide level2">
 <h2>Assessment</h2>
 <ul>
 <li><span class="math inline">\(2\)</span> Continuous Assessments: <span class="math inline">\(25\%\)</span> + <span class="math inline">\(25\%\)</span>
 <ul>
-<li>For each assessment: A pair of students will work on the same assignment and get the same grade.</li>
+<li>For each assessment: A group of <span class="math inline">\(2\)</span> or <span class="math inline">\(3\)</span> students will work on the same assignment and get the same grade (peer review grade is under consideration).</li>
+<li>Please talk to each other and team up on your willing.</li>
 <li>From my own experience, you tend to get better grades working in pair/group than working individually.</li>
 </ul></li>
 <li><span class="math inline">\(1\)</span> Paper Exam: <span class="math inline">\(50\%\)</span></li>
 </ul>
 </section>
+<section id="performce-of-the-students-in-the-last-few-years" class="slide level2">
+<h2>Performce of the students in the last few years</h2>
+<p>Performance on the last three years</p>
+<ul>
+<li>Year 2022/2023 – Nick Bailey: 36 <span class="math inline">\(\rightarrow\)</span> On average, E2</li>
+<li>Year 2023/2024 – Nick Bailey: 35 <span class="math inline">\(\rightarrow\)</span> On average, E2</li>
+<li>Year 2024/2025 – Khiem Nguyen: 45 <span class="math inline">\(\rightarrow\)</span> On average, D2</li>
+<li>Mid-term assignment grades from me are also significantly higher than from Nick Bailey – <strong>On average</strong>: A3 (or probably A2) from me and A5 from Nick Bailey.</li>
+</ul>
+<p><span style="color:blue"><strong>Question</strong></span>&nbsp; <em>Huge difference between mid-term assignments and final paper exam???</em></p>
+<div class="fragment">
+<p><span style="color:blue"><strong>Answer</strong></span>&nbsp; <em>Yes, ChatGPT can help in mid-term</em>, but <span style="color:red">not in the paper exam</span>.</p>
+</div>
+<div class="fragment">
+<blockquote>
+<p>On average, I am confident to say I am generally more lenient than many other lecturers.</p>
+<p>But, I cannot give points to a completely wrong answer.</p>
+</blockquote>
+</div>
+</section>
 <section id="how-to-learn-this-course" class="slide level2">
 <h2>How to learn this course</h2>
 <ul>
-<li>As with any programming language, you need to:
+<li class="fragment">As with any programming language, you need to:
 <ol type="1">
-<li><strong>practice</strong></li>
-<li><strong>practice</strong></li>
-<li><strong>practice</strong></li>
+<li class="fragment"><strong>practice</strong></li>
+<li class="fragment"><strong>practice</strong></li>
+<li class="fragment"><strong>practice</strong></li>
 </ol></li>
-<li>Can you use <strong>AI Chatbot</strong> to <strong>learn</strong> this course?
+<li class="fragment">Can you use <strong>AI Chatbot</strong> to <strong>learn</strong> this course?
 <ul>
-<li>Hell, yes!</li>
-<li>But you really need to “<strong>learn</strong>”</li>
-<li>There is a difference between <strong>“you understand”</strong> and <strong>“you think you understand”</strong>.</li>
+<li class="fragment">Hell, yes!</li>
+<li class="fragment">But you really need to “<strong>learn</strong>”. There is a <em>hudge</em> difference between <strong>“you understand”</strong> and <strong>“you think you understand”</strong>.</li>
 </ul></li>
-<li>It is <strong>foolish</strong> to think that
+<li class="fragment">It is <strong>foolish</strong> to think that
 <ol type="1">
-<li>“I only need to worry about the big picture, AI Chatbot will do programming in the future.”</li>
-<li>“AI Chatbot will replace software developers.”</li>
-<li>“Why do we need to study programming in the era of AI Boom!”</li>
+<li class="fragment">“I only need to worry about the big picture, AI Chatbot will do programming in the future.”</li>
+<li class="fragment">“AI Chatbot will replace software developers.”</li>
+<li class="fragment">“Why do we need to study programming in the era of AI Boom!”</li>
 </ol></li>
 </ul>
 
@@ -751,6 +838,7 @@ Listing&nbsp;2: Do some maths
         }
       });
       </script>
+    <script>videojs(video_shortcode_videojs_video1);</script>
     
 
 </body></html>

@@ -1,6 +1,6 @@
 ---
-title: "C++ Basics"
-subtitle: "Gentle introduction to compiled language"
+title: "Introduction to ENG3091"
+subtitle: "What we expect to learn"
 author: |
     Khiem Nguyen 
     <br>Lecturer in Multiscale Materials
@@ -24,7 +24,10 @@ format:
         css: simple.css
 ---
 
-## Introduction to C/C++
+
+# Introduction to C/C++
+
+## A small history
 
 ### Before C++, there was C:
 
@@ -98,30 +101,116 @@ C++ also has a large number of high-quality 3rd party libraries available, which
 # Curriculum & Assessment
 
 ## Curriculum
-- $5$ Study Sections
-    1. Basic C++: Seriously basic
-    2. Basic C++: Real business
-    3. Object-oriented Programming
-    4. Some standard libraries
-    5. Unified Modelling Language
+
+1. [**Basic C++**]{style="color:red"}
+   
+    Variables, Functions, Control Flow  
+2. [**Intermediate C++**]{style="color:red"}
+
+    References, Pointers, Template, Function Overriding, Dynamic Array
+3. [**Object-oriented Programming** (OOP)]{style="color:red"}
+
+    $4$ pillars of OOP: $(1)$ Encapsulation, $(2)$ Abstraction, $(3)$ Inheritance, $(4)$ Polymorphism
+4. [**Standard Template Library (STL)**]{style="color:red"}
+    - Some commonly used STL containers: Vector, List, Array, $\ldots$
+    - Some commonly used STL algorithms: Sort, Find, Count, Unique, $\ldots$
+5. [**Unified Modelling Language**]{style="color:red"}:
+
+    In this course, we learn how to organize a large project by using class diagrams
+
+## Curriculum: Extra when we have enough time
+
+6. [**make**]{style="color:red"} and [**cmake**]{style="color:red"} -- Extra materials: Coverred if we have enough time.
+
+    How to automate build process, how to install open-source libraries and how to build our own libraries
+
+## What is **software engineering**?
+
+{{< video ./figure/software_engineering_video.mp4 >}}
+
+## What is **software engineering**?
+
+{{< video https://www.youtube.com/watch?v=4qSk8_AZwIg width="100%" height="85%" >}}
+
+## The word **software engineering** is overstated in this course!!!
+
+My opinions:
+
+::: {.incremental}
+- You must be kidding me. 
+
+    - A software engineer's average salary varies greatly by location, experience, and company, but in the UK, it generally ranges from entry-level around $£25k-£35k$ up to $£70k+$ for senior roles, with London often paying more, while in the US, median total compensation can exceed $$180k$, especially at top tech firms.
+
+    - [The School of Engineering asks me to teach Software Engineering in 10 weeks?]{style="color:red"}&nbsp; [Mission impossible!]{style="color:blue"}
+
+- Can you become a software engineer after $10$ weeks of learning C++ and class diagrams? 
+
+    - [HELL NO]{style="color:red"}
+- Then, why do we even need to learn? 
+
+    - [Whoever we want to become, we need to build the first brick.]{style="color:red"}
+:::
+
+
+## Will learning Programming & Software Engineering be still relevant in AI era?
+
+
+> _I am teaching C++ at School of Engineering, Uni of Glasgow. Many students believe that AI Chatbot like ChatGPT, Gemini and CoPilot will soon replace software engineering. What is your opinion about this?_
+
+
+Let us ask Gemini, CoPilot and ChatGPT what they think.
+
+
+## Answer from Gemini
+![](./figure/gemini_will_ai_replace_software_engineer.png)
+
+## Answer from CoPilot
+![](./figure/copilot_will_ai_replace_software_engineer.png)
+
+## Answer from ChatGPT
+![](./figure/chatgpt_will_ai_replace_software_engineer.png)
+
 
 ## Assessment
 - $2$ Continuous Assessments: $25\%$ + $25\%$
-    - For each assessment: A pair of students will work on the same assignment and get the same grade.
+    - For each assessment: A group of $2$ or $3$ students will work on the same assignment and get the same grade (peer review grade is under consideration). 
+    - Please talk to each other and team up on your willing.
     - From my own experience, you tend to get better grades working in pair/group than working individually.
 - $1$ Paper Exam: $50\%$
 
+## Performce of the students in the last few years
+Performance on the last three years
+
+- Year 2022/2023 -- Nick Bailey: 36   $\rightarrow$ On average, E2
+- Year 2023/2024 -- Nick Bailey: 35   $\rightarrow$ On average, E2
+- Year 2024/2025 -- Khiem Nguyen: 45   $\rightarrow$ On average, D2
+- Mid-term assignment grades from me are also significantly higher than from Nick Bailey -- **On average**: A3 (or probably A2) from me and A5 from Nick Bailey.
+
+[**Question**]{style="color:blue"}&nbsp; *Huge difference between mid-term assignments and final paper exam???*
+
+::: {.fragment}
+[**Answer**]{style="color:blue"}&nbsp; *Yes, ChatGPT can help in mid-term*, but [not in the paper exam]{style="color:red"}.
+:::
+
+::: {.fragment}
+> On average, I am confident to say I am generally more lenient than many other lecturers.
+>
+> But, I cannot give points to a completely wrong answer.
+:::
+
 ## How to learn this course
+
+::: {.incremental}
+
 - As with any programming language, you need to:
     1. **practice**
     2. **practice**
     3. **practice**
 - Can you use **AI Chatbot** to **learn** this course? 
     - Hell, yes!
-    - But you really need to "**learn**"
-    - There is a difference between **"you understand"** and **"you think you understand"**.
+    - But you really need to "**learn**". There is a _hudge_ difference between **"you understand"** and **"you think you understand"**.
 - It is **foolish** to think that 
     1. "I only need to worry about the big picture, AI Chatbot will do programming in the future."
     2. "AI Chatbot will replace software developers."
     3. "Why do we need to study programming in the era of AI Boom!"
-
+:::
