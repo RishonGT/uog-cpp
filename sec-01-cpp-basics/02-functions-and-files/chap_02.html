@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Lecturer in Multiscale Materials">
-  <title>C++ Basics:</title>
+  <title>Functions</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -194,8 +194,8 @@
     <div class="slides">
 
 <section id="title-slide" class="center">
-  <h1 class="title">C++ Basics:</h1>
-  <p class="subtitle">Functions</p>
+  <h1 class="title">Functions</h1>
+  <p class="subtitle">Functions, Working with Multiple Files and Header Files</p>
   <p class="author"></p><p>Khiem Nguyen <br>Lecturer in Multiscale Materials <br><a href="mailto:khiem.nguyen@glasgow.ac.uk" class="email">khiem.nguyen@glasgow.ac.uk</a></p><p></p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
@@ -221,13 +221,17 @@
 <section id="an-example-of-a-user-defined-function" class="slide level2">
 <h2>An example of a user-defined function</h2>
 <p>The most basic syntax to define a user-defined function</p>
-<div id="lst-most-basic-syntax" class="cpp listing quarto-float quarto-figure quarto-figure-left" data-code-filename="function_basic_syntax.cpp">
+<div id="lst-most-basic-syntax" class="cpp listing quarto-float quarto-figure quarto-figure-left" data-filename="`function_basic_syntax.cpp`">
 <figure class="quarto-float quarto-float-lst">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-most-basic-syntax-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listing&nbsp;1: Most basic syntax to define a user-defined function
+Listing&nbsp;1: Most basic syntax to define a user-defined function.
 </figcaption>
 <div aria-describedby="lst-most-basic-syntax-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-code-filename="function_basic_syntax.cpp"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href=""></a><span class="dt">return_type</span> function_name<span class="op">()</span> <span class="co">// This is the function header </span></span>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>function_basic_syntax.cpp</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-filename="function_basic_syntax.cpp"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href=""></a><span class="dt">return_type</span> function_name<span class="op">()</span> <span class="co">// This is the function header </span></span>
 <span id="cb1-2"><a href=""></a>                            <span class="co">// (tells the compiler about the existence</span></span>
 <span id="cb1-3"><a href=""></a>                            <span class="co">//  of the function)</span></span>
 <span id="cb1-4"><a href=""></a><span class="op">{</span></span>
@@ -235,6 +239,7 @@ Listing&nbsp;1: Most basic syntax to define a user-defined function
 <span id="cb1-6"><a href=""></a>    <span class="co">// (tells the compiler what the function does)</span></span>
 <span id="cb1-7"><a href=""></a><span class="op">}</span></span>
 <span id="cb1-8"><a href=""></a><span class="co">// This file is not compilable as it has no main() function</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </div>
 </figure>
 </div>
@@ -251,7 +256,7 @@ Listing&nbsp;1: Most basic syntax to define a user-defined function
 <div id="lst-call-funcion" class="cpp listing quarto-float quarto-figure quarto-figure-left">
 <figure class="quarto-float quarto-float-lst">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-call-funcion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listing&nbsp;2: Define function and call function
+Listing&nbsp;2: Define function and call function. Filename: <code>call_function.cpp</code>
 </figcaption>
 <div aria-describedby="lst-call-funcion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span><span class="pp"> </span><span class="co">// for std::cout</span></span>
@@ -282,28 +287,21 @@ Listing&nbsp;3: Function can call other functions
 </figcaption>
 <div aria-describedby="lst-function-call-function-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span><span class="pp"> </span><span class="co">// for std::cout</span></span>
-<span id="cb3-2"><a href=""></a></span>
-<span id="cb3-3"><a href=""></a><span class="dt">void</span> do_thing_B<span class="op">()</span></span>
-<span id="cb3-4"><a href=""></a><span class="op">{</span></span>
-<span id="cb3-5"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"In do_thing_B()</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
-<span id="cb3-6"><a href=""></a><span class="op">}</span></span>
-<span id="cb3-7"><a href=""></a></span>
-<span id="cb3-8"><a href=""></a><span class="dt">void</span> do_thing_A<span class="op">()</span></span>
-<span id="cb3-9"><a href=""></a><span class="op">{</span></span>
-<span id="cb3-10"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Starting do_thing_A()</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
-<span id="cb3-11"><a href=""></a>    do_thing_B<span class="op">();</span></span>
-<span id="cb3-12"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Ending do_thing_A()</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
-<span id="cb3-13"><a href=""></a><span class="op">}</span></span>
-<span id="cb3-14"><a href=""></a></span>
-<span id="cb3-15"><a href=""></a><span class="co">// Definition of function main()</span></span>
-<span id="cb3-16"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
-<span id="cb3-17"><a href=""></a><span class="op">{</span></span>
-<span id="cb3-18"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Starting main()</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
-<span id="cb3-19"><a href=""></a>    do_thing_A<span class="op">();</span></span>
-<span id="cb3-20"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Ending main()</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
-<span id="cb3-21"><a href=""></a></span>
-<span id="cb3-22"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb3-23"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-2"><a href=""></a><span class="dt">void</span> do_thing_B<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-3"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"In do_thing_B()</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-4"><a href=""></a><span class="op">}</span></span>
+<span id="cb3-5"><a href=""></a><span class="dt">void</span> do_thing_A<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-6"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Starting do_thing_A()</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-7"><a href=""></a>    do_thing_B<span class="op">();</span></span>
+<span id="cb3-8"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Ending do_thing_A()</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-9"><a href=""></a><span class="op">}</span></span>
+<span id="cb3-10"><a href=""></a><span class="co">// Definition of function main()</span></span>
+<span id="cb3-11"><a href=""></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-12"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Starting main()</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-13"><a href=""></a>    do_thing_A<span class="op">();</span></span>
+<span id="cb3-14"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Ending main()</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-15"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-16"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
@@ -370,13 +368,17 @@ Listing&nbsp;4: Function can call other functions
 </section>
 <section id="return-values-code-demonstration" class="slide level2">
 <h2>Return values: Code Demonstration</h2>
-<div id="lst-return-value" class="cpp listing quarto-float quarto-figure quarto-figure-left">
+<div id="lst-return-value" class="cpp listing quarto-float quarto-figure quarto-figure-left" data-filename="return_value.cpp">
 <figure class="quarto-float quarto-float-lst">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-return-value-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Listing&nbsp;5: Return value in a function
 </figcaption>
 <div aria-describedby="lst-return-value-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb6-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>return_value.cpp</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" data-filename="return_value.cpp"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb6-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
 <span id="cb6-2"><a href=""></a></span>
 <span id="cb6-3"><a href=""></a><span class="dt">int</span> get_value_from_user<span class="op">()</span> <span class="co">// this function now returns an integer value</span></span>
 <span id="cb6-4"><a href=""></a><span class="op">{</span></span>
@@ -396,6 +398,7 @@ Listing&nbsp;5: Return value in a function
 <span id="cb6-18"><a href=""></a></span>
 <span id="cb6-19"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb6-20"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </div>
 </figure>
 </div>
@@ -1061,13 +1064,17 @@ Listing&nbsp;23: Seemingly innocent sampe program that gives compile error
 </section>
 <section id="fix-the-innocent-program-option-1-reorder-the-function-definitions" class="slide level2">
 <h2>Fix the “innocent” program – Option 1: Reorder the function definitions</h2>
-<div id="lst-fix-innocent-program-01" class="cpp listing quarto-float quarto-figure quarto-figure-left">
+<div id="lst-fix-innocent-program-01" class="cpp listing quarto-float quarto-figure quarto-figure-left" data-filename="reorder_function_defs.cpp">
 <figure class="quarto-float quarto-float-lst">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-fix-innocent-program-01-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listing&nbsp;24: Reorder the function definitions to fix the innocent program
+Listing&nbsp;24: Reorder the function definitions to fix the innocent program.
 </figcaption>
 <div aria-describedby="lst-fix-innocent-program-01-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb26-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>reorder_function_defs.cpp</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26" data-filename="reorder_function_defs.cpp"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb26-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
 <span id="cb26-2"><a href=""></a></span>
 <span id="cb26-3"><a href=""></a><span class="dt">int</span> add<span class="op">(</span><span class="dt">int</span> x<span class="op">,</span> <span class="dt">int</span> y<span class="op">)</span></span>
 <span id="cb26-4"><a href=""></a><span class="op">{</span></span>
@@ -1080,6 +1087,7 @@ Listing&nbsp;24: Reorder the function definitions to fix the innocent program
 <span id="cb26-11"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb26-12"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</div>
 </figure>
 </div>
 <ul>
@@ -1090,13 +1098,17 @@ Listing&nbsp;24: Reorder the function definitions to fix the innocent program
 </section>
 <section id="fix-the-innocent-program-option-1-use-a-forward-declaration" class="slide level2">
 <h2>Fix the “innocent” program – Option 1: Use a forward declaration</h2>
-<div id="lst-forward-declration" class="cpp listing quarto-float quarto-figure quarto-figure-left">
+<div id="lst-forward-declration" class="cpp listing quarto-float quarto-figure quarto-figure-left" data-filename="with_forward_declaration.cpp">
 <figure class="quarto-float quarto-float-lst">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-forward-declration-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Listing&nbsp;25: Use forward decleration to fix the innocent program
 </figcaption>
 <div aria-describedby="lst-forward-declration-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb27-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>with_forward_declaration.cpp</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27" data-filename="with_forward_declaration.cpp"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb27-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
 <span id="cb27-2"><a href=""></a></span>
 <span id="cb27-3"><a href=""></a><span class="dt">int</span> add<span class="op">(</span><span class="dt">int</span> x<span class="op">,</span> <span class="dt">int</span> y<span class="op">);</span> <span class="co">// forward declaration of add() (using a function declaration)</span></span>
 <span id="cb27-4"><a href=""></a></span>
@@ -1111,6 +1123,7 @@ Listing&nbsp;25: Use forward decleration to fix the innocent program
 <span id="cb27-13"><a href=""></a><span class="op">{</span></span>
 <span id="cb27-14"><a href=""></a>    <span class="cf">return</span> x <span class="op">+</span> y<span class="op">;</span></span>
 <span id="cb27-15"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </div>
 </figure>
 </div>
@@ -1551,7 +1564,7 @@ Listing&nbsp;35: File implementing function <code>add()</code>: <code>add.cpp</c
         defaultTiming: null,
 
         // Enable slide navigation via mouse wheel
-        mouseWheel: false,
+        mouseWheel: true,
 
         // The display mode that will be used to show slides
         display: 'block',

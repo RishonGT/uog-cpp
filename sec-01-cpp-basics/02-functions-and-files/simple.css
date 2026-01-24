@@ -84,10 +84,18 @@ div.listing-caption {
   margin-top: 12px;
 }
 
-/* If you are using the 'filename' attribute, style that too */
-.code-with-filename .code-with-filename-file {
-    font-size: 1.0em !important;
-    padding: 5px 15px !important;
+/* Target the filename container specifically */
+.code-with-filename .code-with-filename-file pre {
+  background-color: rgb(255, 255, 255) !important;
+  border: 0 !important;
+  padding-left: 10 !important;
+  padding-right: 10 !important;
+}
+
+/* Add the 'filename:' prefix */
+.code-with-filename .code-with-filename-file .caption::before {
+  content: "Filename: ";
+  font-weight: bold; /* Optional: makes the label stand out */
 }
 
 /* 4. Highlight "Key Concepts" or Annotations */

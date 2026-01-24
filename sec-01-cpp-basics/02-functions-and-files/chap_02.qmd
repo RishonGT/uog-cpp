@@ -1,6 +1,6 @@
 ---
-title: "C++ Basics:"
-subtitle: "Functions"
+title: "Functions"
+subtitle: "Functions, Working with Multiple Files and Header Files"
 author: |
     Khiem Nguyen 
     <br>Lecturer in Multiscale Materials
@@ -9,6 +9,7 @@ author-meta: "Lecturer in Multiscale Materials"
 format: 
     revealjs:
         theme: simple   # other themes: beige, blood, dark, dracula, league, moon, night, serif, simple, sky, solarized
+        mouse-wheel: true
         highlight-style: github
         slide-number: true
         title-slide-style: pandoc
@@ -29,7 +30,7 @@ format:
 ## An example of a user-defined function
 
 The most basic syntax to define a user-defined function
-```{.cpp #lst-most-basic-syntax code-filename="function_basic_syntax.cpp" lst-cap="Most basic syntax to define a user-defined function"}
+```{.cpp #lst-most-basic-syntax filename="function_basic_syntax.cpp" lst-cap="Most basic syntax to define a user-defined function." filename=`function_basic_syntax.cpp`}
 {{< include ./cpp/function_basic_syntax.cpp >}}
 ```
 
@@ -39,7 +40,7 @@ The most basic syntax to define a user-defined function
 ## Define a function and call the function
 - Of course, after defining the function, we can call it multiple times.
 
-```{.cpp #lst-call-funcion lst-cap="Define function and call function"}
+```{.cpp #lst-call-funcion lst-cap="Define function and call function. Filename: `call_function.cpp`"}
 {{< include ./cpp/call_function.cpp >}}
 ```
 
@@ -83,7 +84,7 @@ When the return statement is executed:
 The **return expression** produces the value to be returned. The return value is a copy of that value.
 
 ## Return values: Code Demonstration
-```{.cpp #lst-return-value lst-cap="Return value in a function"}
+```{.cpp #lst-return-value lst-cap="Return value in a function" filename=return_value.cpp}
 {{< include ./cpp/return_value.cpp >}}
 ```
 
@@ -343,7 +344,7 @@ I hope you believe me now. Actually, you can debug the code in the last slide an
 - When the compiler reaches the function call `add()` in `main()`, it does not know what `add` is.
 
 ## Fix the "innocent" program -- Option 1: Reorder the function definitions
-```{.cpp #lst-fix-innocent-program-01 lst-cap="Reorder the function definitions to fix the innocent program"}
+```{.cpp #lst-fix-innocent-program-01 lst-cap="Reorder the function definitions to fix the innocent program." filename="reorder_function_defs.cpp"}
 {{< include ./cpp/reorder_function_defs.cpp >}}
 ```
 - The fixing is simple.
@@ -352,7 +353,7 @@ I hope you believe me now. Actually, you can debug the code in the last slide an
 
 ## Fix the "innocent" program -- Option 1: Use a forward declaration
 
-```{.cpp #lst-forward-declration lst-cap="Use forward decleration to fix the innocent program"}
+```{.cpp #lst-forward-declration lst-cap="Use forward decleration to fix the innocent program" filename="with_forward_declaration.cpp"}
 {{< include ./cpp/with_forward_declaration.cpp >}}
 ```
 
