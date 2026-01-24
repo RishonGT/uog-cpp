@@ -36,6 +36,15 @@
 *.exe
 *.out
 *.app
-
+*.zip
 # debug information files
 *.dwo
+
+typst-test/
+lecture_note/
+test/
+slides/
+.vscode/
+sec-01-cpp-basics/00-intro-to-eng3091/spreadsheets
+
+
