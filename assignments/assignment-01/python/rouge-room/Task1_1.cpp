@@ -4,7 +4,6 @@
 #include <cstdlib> 
 
 // w, h, x, y -> width, height, player x, player y commit
-// miller github test
 void draw_room(int w, int h, int x, int y){
     // Print the top wall
     std::cout << "+" << std::string(w, '-') << "+" << std::endl;
