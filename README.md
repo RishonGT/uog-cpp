@@ -16,20 +16,30 @@ It can be debatable when the contents in two sections "C++ basics" and "C++ inte
 
 ## Section 01: C++ Basics
 
-|Chapters      | Content
-|:--------------|:--------
-| `00-intro-to-eng3091` | Introduction to the course ENG3091, course materials, marking system and how the course is run.v |
-| `01-structure-and-variables` | - 
-
-1. **Chapter** 00  
+- **Chapter 00** &mdash; Folder `00-intro-to-eng3091`
     - Welcome to ENG3091, course materials, marking system and how the course is run.
-2. Chapter 01
+- **Chapter 01** &mdash; Folder `01-structure-and-variables`
     - How a basic C++ program source code looks like. 
     - Declare and initialize variables in C++. 
     -  Input and output values in C++ using `iostream`
+- **Chapter 02** &mdash; Folder `02-functions-and-files`
+- **Chapter 03** &mdash; Folder `03-control-flow`
+- **Chapter 04** &mdash; Folder `04-constants-and-strings`
+    - Define constant parameters in functions
+    - Data type `std::string`
 
-## Section 02
+## Section 02: C++ Intermediates
+- **Chapter 05** &mdash; Folder `05-function-overloading`
+- **Chapter 06** &mdash; Folder `06-function-template`
+- **Chapter 07** &mdash; Folder `07-compound-types-references-pointers`
+- **Chapter 08** &mdash; Folder `08-compound-types-enums-structs`
+- **Chapter 09** &mdash; Folder `09-dynamic-allocation`
 
-## Section 03
+## Section 03: Object oriented programming
+- **Chapter 10** &mdash; Folder `10-intro-to-classes`
+- **Chapter 11** &mdash; Folder `11-more-on-classes`
+- **Chapter 12** &mdash; Folder `12-inheritance`
+- **Chapter 13** &mdash; Folder `13-operator-overlading`
+- **Chapter 13** &mdash; Folder `13-virtual-functions`
 
-## Section 04
+## Section 04: UML Class Diagram
