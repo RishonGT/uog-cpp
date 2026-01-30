@@ -100,6 +100,8 @@
   <link href="chap_05_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="chap_05_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="chap_05_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="chap_05_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="chap_05_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
   <link href="chap_05_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
@@ -489,10 +491,10 @@ Listing&nbsp;3: Delete a function using <code>= delete</code> specifier &amp;mda
 <span id="cb12-12"><a href=""></a><span class="op">{</span></span>
 <span id="cb12-13"><a href=""></a>    print_int<span class="op">(</span><span class="dv">97</span><span class="op">);</span>   <span class="co">// okay</span></span>
 <span id="cb12-14"><a href=""></a></span>
-<span id="cb12-15"><a href=""></a>    print_int<span class="op">(</span><span class="ch">'a'</span><span class="op">);</span>  <span class="co">// compile error: function deleted</span></span>
-<span id="cb12-16"><a href=""></a>    print_int<span class="op">(</span><span class="kw">true</span><span class="op">);</span> <span class="co">// compile error: function deleted</span></span>
+<span id="cb12-15"><a href=""></a>    <span class="co">// print_int('a');  // compile error: function deleted</span></span>
+<span id="cb12-16"><a href=""></a>    <span class="co">// print_int(true); // compile error: function deleted</span></span>
 <span id="cb12-17"><a href=""></a></span>
-<span id="cb12-18"><a href=""></a>    print_int<span class="op">(</span><span class="fl">5.0</span><span class="op">);</span>  <span class="co">// compile error: ambiguous match</span></span>
+<span id="cb12-18"><a href=""></a>    <span class="co">// print_int(5.0);  // compile error: ambiguous match</span></span>
 <span id="cb12-19"><a href=""></a></span>
 <span id="cb12-20"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb12-21"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -756,6 +758,7 @@ Listing&nbsp;9: Overload a function with default argument — Filename: <code>de
   <script src="chap_05_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
   <script src="chap_05_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="chap_05_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="chap_05_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
   <script src="chap_05_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -777,7 +780,8 @@ Listing&nbsp;9: Overload a function with default argument — Filename: <code>de
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -948,7 +952,7 @@ Listing&nbsp;9: Overload a function with default argument — Filename: <code>de
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
           RevealMath,
           RevealNotes,
