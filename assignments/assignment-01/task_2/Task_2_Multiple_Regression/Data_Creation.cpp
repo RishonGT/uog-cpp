@@ -18,17 +18,19 @@ int main(){
     double gradient_1 = 2.5;
     double gradient_2 = 3.7;
     double intercept = 57.0;
-    float noise = 50.0;
-    vector<double> x;
+    float noise = 0.0;
+    vector<double> x1, x2;
     vector<double> y;
 
     // Generate data points with noise
     for(int i = 0; i < 1000; i++){
-        x.push_back(i + 1); // Start from 1
-        y.push_back(Linear_function(x[i], intercept, gradient_1, gradient_2)); // Use the linear function to calculate y values
+        x1.push_back(i + 1); // 1-1000
+        x2.push_back((i+1)*2-1); // x2 = 2*x1 - 1
+        y.push_back(Linear_function(x1[i], x2[i], intercept, gradient_1, gradient_2)); // Use the linear function to calculate y values
 
         // Add noise to the x and y values
-        x[i] = noise_function(x[i], noise);
+        x1[i] = noise_function(x1[i], noise);
+        x2[i] = noise_function(x2[i], noise);
         y[i] = noise_function(y[i], noise);
 
     }
@@ -37,7 +39,7 @@ int main(){
     if (output_file.is_open()) {
         output_file << "x,y\n"; // Write the header
         for (int i = 0; i < 1000; i++) {
-            output_file << x[i] << "," << y[i] << "\n";
+            output_file << x1[i] << "," << x2[i] << "," << y[i] << "\n";
         }
         output_file.close();
         cout << "Data has been written to data.csv" << endl;
