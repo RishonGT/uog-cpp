@@ -1,0 +1,1 @@
+double Linear_function( double x, double intercept, double gradient_1, double gradient_2);
