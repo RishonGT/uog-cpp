@@ -1,5 +1,5 @@
 #include <iostream>
-#include "linear_function.h"
+#include "Linear_function.h"
 #include <cstdlib>
 #include <fstream>
 #include <vector>
@@ -15,8 +15,9 @@ double noise_function(double x, float noise)
 }
 
 int main(){
-    double k = 2.5;
-    double m = 57.0;
+    double gradient_1 = 2.5;
+    double gradient_2 = 3.7;
+    double intercept = 57.0;
     float noise = 50.0;
     vector<double> x;
     vector<double> y;
@@ -24,7 +25,7 @@ int main(){
     // Generate data points with noise
     for(int i = 0; i < 1000; i++){
         x.push_back(i + 1); // Start from 1
-        y.push_back(linear_function(x[i], m, k));
+        y.push_back(Linear_function(x[i], intercept, gradient_1, gradient_2)); // Use the linear function to calculate y values
 
         // Add noise to the x and y values
         x[i] = noise_function(x[i], noise);
