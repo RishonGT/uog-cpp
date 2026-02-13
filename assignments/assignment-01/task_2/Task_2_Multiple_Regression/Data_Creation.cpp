@@ -23,9 +23,10 @@ int main(){
     vector<double> y;
 
     // Generate data points with noise
+    srand(42); // Set seed for reproducible results
     for(int i = 0; i < 1000; i++){
         x1.push_back(i + 1); // 1-1000
-        x2.push_back((i+1)*2-1); // x2 = 2*x1 - 1
+        x2.push_back(((rand() % 200) + 1)); // Independent random values 1-200
         y.push_back(Linear_function(x1[i], x2[i], intercept, gradient_1, gradient_2)); // Use the linear function to calculate y values
 
         // Add noise to the x and y values
@@ -37,7 +38,7 @@ int main(){
     // Write the data to a CSV file
     ofstream output_file("data.csv");
     if (output_file.is_open()) {
-        output_file << "x,y\n"; // Write the header
+        output_file << "x1,x2,y\n"; // Write the header
         for (int i = 0; i < 1000; i++) {
             output_file << x1[i] << "," << x2[i] << "," << y[i] << "\n";
         }

@@ -82,7 +82,9 @@ int main() {
 
     // Gradient Descent Algorithm
     double current_loss = loss_function(x1, x2, y, w1, w2, b, x1.size());
-    do {
+    double prev_loss = current_loss;
+    
+    for (int iter = 0; iter < max_iterations; iter++) {
         double dw1 = 0.0; // Gradient Differential for x1
         double dw2 = 0.0; // Gradient Differential for x2
         double db = 0.0; // Gradient for b
@@ -102,19 +104,23 @@ int main() {
         w2 -= learning_rate * dw2;
         b -= learning_rate * db;
 
-        iteration++; // Increment iteration count
-
-        if (iteration % 500 == 0) { // Print loss every 100 iterations
-            current_loss = loss_function(x1, x2, y, w1, w2, b, x1.size());
-            cout << "Iteration: " << iteration << ", Loss: " << current_loss << endl;
+        // Calculate current loss
+        current_loss = loss_function(x1, x2, y, w1, w2, b, x1.size());
+        
+        if (iter % 500 == 0) { // Print loss every 500 iterations
+            cout << "Iteration: " << iter << ", Loss: " << current_loss << endl;
             cout << "w1: " << w1 << ", w2: " << w2 << ", b: " << b << endl;
         }
 
-        if (iteration >= max_iterations) {
+        // Check for convergence
+        if (current_loss < 0.0001 || abs(prev_loss - current_loss) < 1e-9) {
+            cout << "Converged at iteration: " << iter << ", Final Loss: " << current_loss << endl;
             break;
         }
-
-    } while (current_loss > 0.0001); // Stop when loss is sufficiently low
+        
+        prev_loss = current_loss;
+        iteration = iter;
+    }
 
     // Denormalize the parameters
     double w1_original = w1 * (std_y / std_x1);
