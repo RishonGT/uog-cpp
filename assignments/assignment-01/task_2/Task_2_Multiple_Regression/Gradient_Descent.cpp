@@ -5,10 +5,10 @@
 
 using namespace std;
 
-double loss_function(const vector<double>& x, const vector<double>& y, double w, double b, int m) {
+double loss_function(const vector<double>& x1, const vector<double>&x2, const vector<double>& y, double w1, double w2, double b, int m) {
     double total_loss = 0.0;
     for (int i = 0; i < m; i++) {
-        total_loss += (w * x[i] + b - y[i]) * (w * x[i] + b - y[i]); // Squared error
+        total_loss += (w1 * x1[i] + w2 * x2[i]+ b - y[i]) * (w1 * x1[i] + w2 * x2[i]+ b - y[i]); // Squared error
     }
     return total_loss / (2 * m); // Mean Squared Error
 }
@@ -21,80 +21,93 @@ int main() {
         return 1;
     }
 
-    vector<double> x, y;
+    vector<double> x1, x2, y;
 
     // Store the data from the CSV file into vectors
     string line;
     int index = 0;
     getline(input_file, line); // Skip the header line
     while (getline(input_file, line) && index < 1000) {
-        size_t comma_pos = line.find(',');
-        if (comma_pos != string::npos) {
-            x.push_back(stod(line.substr(0, comma_pos))); // Convert x value to double
-            y.push_back(stod(line.substr(comma_pos + 1))); // Convert y value to double
+        size_t first_comma = line.find(',');
+        size_t second_comma = line.find(',', first_comma + 1);
+        if (first_comma != string::npos && second_comma != string::npos) {
+            x1.push_back(stod(line.substr(0, first_comma)));
+            x2.push_back(stod(line.substr(first_comma + 1, second_comma - first_comma - 1)));
+            y.push_back(stod(line.substr(second_comma + 1)));
             index++;
         }
     }
 
     input_file.close();
 
-    if (x.empty() || y.empty()) {
-        cerr << "No data points found in the file." << endl;
+    if (x1.empty() || x2.empty() || y.empty()) {
+        cerr << "No data points found in the file or x2 is empty." << endl;
         return 1;
     }
 
     // Normalize the data
-    double mean_x = 0.0, mean_y = 0.0;
-    for (int i = 0; i < x.size(); i++) {
-        mean_x += x[i];
+    double mean_x1 = 0.0, mean_x2 = 0.0, mean_y = 0.0;
+    for (int i = 0; i < x1.size(); i++) {
+        mean_x1 += x1[i];
+        mean_x2 += x2[i];
         mean_y += y[i];
     }
-    mean_x /= x.size();
-    mean_y /= x.size();
+    mean_x1 /= x1.size();
+    mean_x2 /= x2.size();
+    mean_y /= y.size();
 
-    double std_x = 0.0, std_y = 0.0;
-    for (int i = 0; i < x.size(); i++) {
-        std_x += (x[i] - mean_x) * (x[i] - mean_x);
+    double std_x1 = 0.0, std_x2 = 0.0, std_y = 0.0;
+    for (int i = 0; i < x1.size(); i++) {
+        std_x1 += (x1[i] - mean_x1) * (x1[i] - mean_x1);
+        std_x2 += (x2[i] - mean_x2) *(x2[i] - mean_x2);
         std_y += (y[i] - mean_y) * (y[i] - mean_y);
     }
-    std_x = sqrt(std_x / x.size());
-    std_y = sqrt(std_y / x.size());
+    std_x1 = sqrt(std_x1 / x1.size());
+    std_x2 = sqrt(std_x2 / x2.size());
+    std_y = sqrt(std_y / y.size());
 
-    for (int i = 0; i < x.size(); i++) {
-        x[i] = (x[i] - mean_x) / std_x;
+    for (int i = 0; i < x1.size(); i++) {
+        x1[i] = (x1[i] - mean_x1) / std_x1;
+        x2[i] = (x2[i] - mean_x2) / std_x2;
         y[i] = (y[i] - mean_y) / std_y;
     }
 
     // Initialize parameters for gradient descent
-    double w = 0.0; // Slope
+    double w1 = 0.0; // Slope
+    double w2 = 0.0;
     double b = 0.0; // Intercept
-    double learning_rate = 0.1;
+    double learning_rate = 0.01; // Reduced learning rate for stability
     int max_iterations = 10000; // Maximum number of iterations
     int iteration = 0;
 
     // Gradient Descent Algorithm
-    double current_loss = loss_function(x, y, w, b, x.size());
+    double current_loss = loss_function(x1, x2, y, w1, w2, b, x1.size());
     do {
-        double dw = 0.0; // Gradient for w
+        double dw1 = 0.0; // Gradient Differential for x1
+        double dw2 = 0.0; // Gradient Differential for x2
         double db = 0.0; // Gradient for b
 
         // Calculate gradients
-        for (int i = 0; i < x.size(); i++) {
-            dw += (w * x[i] + b - y[i]) * x[i]; // Derivative with respect to w
-            db += (w * x[i] + b - y[i]); // Derivative with respect to b
+        for (int i = 0; i < x1.size(); i++) {
+            dw1 += (w1 * x1[i] + w2 * x2[i] + b - y[i]) * x1[i]; // Derivative with respect to w1
+            dw2 += (w1 * x1[i] + w2 * x2[i] + b - y[i]) * x2[i];
+            db += (w1 * x1[i] + w2 * x2[i] + b - y[i]); // Derivative with respect to b
         }
-        dw /= x.size();
-        db /= x.size();
+        dw1 /= x1.size();
+        dw2 /= x2.size();
+        db /= y.size();
 
         // Update parameters
-        w -= learning_rate * dw;
+        w1 -= learning_rate * dw1;
+        w2 -= learning_rate * dw2;
         b -= learning_rate * db;
 
         iteration++; // Increment iteration count
 
         if (iteration % 500 == 0) { // Print loss every 100 iterations
-            current_loss = loss_function(x, y, w, b, x.size());
+            current_loss = loss_function(x1, x2, y, w1, w2, b, x1.size());
             cout << "Iteration: " << iteration << ", Loss: " << current_loss << endl;
+            cout << "w1: " << w1 << ", w2: " << w2 << ", b: " << b << endl;
         }
 
         if (iteration >= max_iterations) {
@@ -104,12 +117,14 @@ int main() {
     } while (current_loss > 0.0001); // Stop when loss is sufficiently low
 
     // Denormalize the parameters
-    double w_original = w * (std_y / std_x);
-    double b_original = (mean_y - w_original * mean_x);
+    double w1_original = w1 * (std_y / std_x1);
+    double w2_original = w2 * (std_y / std_x2);
+    double b_original = mean_y - (w1_original * mean_x1) - (w2_original * mean_x2);
 
     // Output the calculated parameters
     cout << "Calculated parameters after Gradient Descent:" << endl;
-    cout << "w (slope): " << w_original << endl;
+    cout << "x1 (slope): " << w1_original << endl;
+    cout << "x2 (slope): " << w2_original << endl;
     cout << "b (intercept): " << b_original << endl;
 
     return 0;
