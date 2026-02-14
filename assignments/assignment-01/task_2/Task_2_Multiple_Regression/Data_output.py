@@ -37,7 +37,36 @@ ax3.set_ylabel('y')
 ax3.set_title('x2 vs y')
 
 plt.tight_layout()
+# Define plane parameters (set `m1`, `m2`, `b` here)
+# Example: m1 = 1.0, m2 = 0.5, b = 0.0
+m1 = 2.46313
+m2 = 3.64895
+b = 543.613
+
+# Create a grid over the x1/x2 ranges and evaluate the plane y = m1*x1 + m2*x2 + b
+x1_s = np.linspace(x1.min(), x1.max(), 20)
+x2_s = np.linspace(x2.min(), x2.max(), 20)
+X1, X2 = np.meshgrid(x1_s, x2_s)
+Y_plane = m1 * X1 + m2 * X2 + b
+
+# Plot the plane on the 3D axes
+ax3d.plot_surface(X1, X2, Y_plane, color='orange', alpha=0.5, linewidth=0, antialiased=True)
+
+# --- Projections of the plane onto the 2D plots ---
+# For x1 vs y (ax2): show shaded envelope of plane across x2 range
+x1_line = np.linspace(x1.min(), x1.max(), 200)
+y_proj_x1_min = m1 * x1_line + m2 * x2.min() + b
+y_proj_x1_max = m1 * x1_line + m2 * x2.max() + b
+ax2.fill_between(x1_line, y_proj_x1_min, y_proj_x1_max, color='orange', alpha=0.15)
+
+# For x2 vs y (ax3): show shaded envelope of plane across x1 range
+x2_line = np.linspace(x2.min(), x2.max(), 200)
+y_proj_x2_min = m1 * x1.min() + m2 * x2_line + b
+y_proj_x2_max = m1 * x1.max() + m2 * x2_line + b
+ax3.fill_between(x2_line, y_proj_x2_min, y_proj_x2_max, color='orange', alpha=0.15)
+
 output_file = 'data_plots.png'
 fig.savefig(output_file, dpi=150)
 print(f'Plots saved to {output_file}')
+print(f'Plane: y = {m1}*x1 + {m2}*x2 + {b}')
 
