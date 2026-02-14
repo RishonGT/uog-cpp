@@ -1,0 +1,94 @@
+---
+title: "References & Pointers"
+# subtitle: "Control Flow"
+author: |
+    Khiem Nguyen 
+    <br>Lecturer in Multiscale Materials
+    <br><khiem.nguyen@glasgow.ac.uk>
+author-meta: "Lecturer in Multiscale Materials"
+format: 
+    revealjs:
+        theme: simple   # other themes: beige, blood, dark, dracula, league, moon, night, serif, simple, sky, solarized
+        mouse-wheel: true
+        highlight-style: github
+        slide-number: true
+        title-slide-style: pandoc
+        echo: true
+        code-overflow: wrap
+        code-line-numbers: true
+        code-block-bg: false          # <-- remove white background in code blocks
+        # code-block-border-left: false # optional: remove left border
+        # highlight-style: monokai      # good for dark images
+        toc: true
+        toc-depth: 1
+        toc-title: Presentation Outline
+        chalkboard: true
+        css: simple.css
+---
+
+# Introduction to compound data types
+
+## Quick intro
+&#10149; Let us write a program doing maths with fractions:
+
+::: {#lst-function-program lst-cap="A program for doing maths in fractions. Filename=`fraction_program.cpp`"}
+```{ .cpp}
+{{< include ./cpp/fraction_program.cpp >}}
+```
+:::
+&#10149; Of course, we want to have a data type representing the concept of Fraction.
+
+## Quick intro
+
+&#10149; Now imagine that we are writing a program that needs to keep a list of employee IDs.
+```{.cpp}
+int main()
+{
+    int id1 { 42 };
+    int id2 { 24 };
+    int id3 { 162 };
+    
+    double salary1 { 42123.3 };
+    double salary2 { 43784.5 };
+    double salary3 { 39469.2 };
+
+    // Names, roles, job titles and blah blah
+}
+```
+&#10149; What if we had $100$ employes? Clearly, this naive approach simply does not scale.
+
+## Quick intro: Compound data types
+
+Fortunately, C++ supports **compound data types** (sometimes called **composite data types**).
+
+- **Compound data types** are types that are defined in terms of other existing data types.
+- **Compound data types** have additional properties & behaviros that make the useful for certain types of problems.
+
+
+## Compound data types
+
+C++ supports the following compound types.
+
+::: {.fragment}
+### Fundamental Compound Types (built-in)
+- Functions (we already learned)
+- C-style arrays
+- Pointers
+- References
+:::
+
+### User-defined Compound Types
+- Structs (using keyword `struct`)
+- Classes (using keyword `class`)
+- Enumerations (using keyword `num` or `enum class`)
+- Unions (using `union`)
+
+
+::: {.fragment}
+We shall learn most of them (not all of them due to time constraints).
+
+- I aim at cover the following topics in the live lectures: C-style arrays, pointers, references, structs, classes, enumerations.
+- You will see that structs and classes are very similar, and studying one carefully is enough.
+:::
+
+
