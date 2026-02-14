@@ -17,7 +17,7 @@ double noise_function(double x, float noise)
 int main(){
     double gradient_1 = 2.5;
     double gradient_2 = 3.7;
-    double intercept = 57.0;
+    double intercept = 500.0;
     float noise = 0.0;
     vector<double> x1, x2;
     vector<double> y;
@@ -26,7 +26,7 @@ int main(){
     srand(42); // Set seed for reproducible results
     for(int i = 0; i < 1000; i++){
         x1.push_back(i + 1); // 1-1000
-        x2.push_back(((rand() % 200) + 1)); // Independent random values 1-200
+        x2.push_back(((rand() % 1000) + 1)); // Independent random values 1-1000
         y.push_back(Linear_function(x1[i], x2[i], intercept, gradient_1, gradient_2)); // Use the linear function to calculate y values
 
         // Add noise to the x and y values
