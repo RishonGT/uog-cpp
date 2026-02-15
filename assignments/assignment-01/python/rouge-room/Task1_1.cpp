@@ -3,16 +3,19 @@
 #include <unistd.h>
 #include <cstdlib> 
 
-// w, h, x, y -> width, height, player x, player y commit
+// w, h, x, y -> width, height, player x, player y 
 void draw_room(int w, int h, int x, int y){
     // Print the top wall
     std::cout << "+" << std::string(w, '-') << "+" << std::endl;
 
-    // Print the sides
+    // Print the rows in the middle of the room
     for (int i = 0; i < h; ++i) {
+        
+        // If the row being printed has the player inside
         if (i == y) {
             std::cout << "|" << std::string(x, '.')<< '@' << std::string(w - x - 1, '.') << "|" << std::endl;
         }
+        // Empty row
         else {
             std::cout << "|" << std::string(w,'.') << "|" << std::endl;
         }
@@ -22,43 +25,50 @@ void draw_room(int w, int h, int x, int y){
     std::cout << "+" << std::string(w, '-') << "+" << std::endl;
 }
 
-class Room {
-// This can be accessed by other parts of the program
-public:
-    // Program draws a room of given width and height
-    Room(int width, int height) : width(width), height(height) {}
-    // Draw the room with the player at (x, y)
-    void draw(int x, int y) {
-        draw_room(width, height, x, y);
-    }
-    // Getters for width and height
-    int getWidth() const {
-        return width;
-    }
-    int getHeight() const {
-        return height;
-    }
-
-// This can only be accessed by member functions of Room
-private:
-    int width;
-    int height;
-};
-
 // Function to get a single character input without waiting for Enter key
 char getch() {
-    struct termios oldt, newt;
+    struct termios oldt, newt;  // Use termios.h to change terminal settings temporarily
     char ch;
-    tcgetattr(STDIN_FILENO, &oldt); // Get current terminal attributes
+
+    tcgetattr(STDIN_FILENO, &oldt); // Get current terminal attributes and store in oldt
     newt = oldt;
     newt.c_lflag &= ~(ICANON | ECHO); // Disable canonical mode and echo
+
     tcsetattr(STDIN_FILENO, TCSANOW, &newt); // Apply new attributes
     ch = getchar(); // Read a single character
     tcsetattr(STDIN_FILENO, TCSANOW, &oldt); // Restore old attributes
+
     return ch;
 }
 
+// This class is responsible for drawing and updating the room
+class Room {
+    public:
+
+        // Initialises the room with width and height
+        Room(int w, int h) : width(w), height(h) {}
+
+        // Draw the room with the player at (x, y)
+        void draw(int x, int y) {
+            draw_room(width, height, x, y);
+        }
+        
+        // Used to find the current width and height of the players
+        int getWidth() const {
+            return width;
+        }
+        int getHeight() const {
+            return height;
+        }
+
+    // Private members to store the dimensions of the room
+    private:
+        int width;
+        int height;
+    };
+
 int main() {
+    // Initialize a 10x5 room with player at the top right
     int width = 10;
     int height = 5;
     int x = 0; 
@@ -96,10 +106,6 @@ int main() {
         }
 
 
-
-
     }
-    
-
     return 0;
 }
