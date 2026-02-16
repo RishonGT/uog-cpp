@@ -203,6 +203,9 @@
 <h2 id="toc-title">Presentation Outline</h2>
 <ul>
 <li><a href="#/introduction-to-compound-data-types" id="/toc-introduction-to-compound-data-types">Introduction to compound data types</a></li>
+<li><a href="#/value-categories-lvalues-and-rvalues" id="/toc-value-categories-lvalues-and-rvalues">Value categories (lvalues and rvalues)</a></li>
+<li><a href="#/regarding-lvalue-and-rvalue-expressions" id="/toc-regarding-lvalue-and-rvalue-expressions">Regarding lvalue and rvalue expressions</a></li>
+<li><a href="#/lvalue-references" id="/toc-lvalue-references">lvalue references</a></li>
 </ul>
 </nav>
 </section>
@@ -283,6 +286,7 @@ Listing&nbsp;1: A program for doing maths in fractions. Filename=<code>fraction_
 <li>References</li>
 </ul>
 </div>
+<div class="fragment">
 <h3 id="user-defined-compound-types">User-defined Compound Types</h3>
 <ul>
 <li>Structs (using keyword <code>struct</code>)</li>
@@ -290,13 +294,384 @@ Listing&nbsp;1: A program for doing maths in fractions. Filename=<code>fraction_
 <li>Enumerations (using keyword <code>num</code> or <code>enum class</code>)</li>
 <li>Unions (using <code>union</code>)</li>
 </ul>
-<div class="fragment">
+</div>
+</section>
+<section id="compound-data-types-1" class="slide level2">
+<h2>Compound data types</h2>
 <p>We shall learn most of them (not all of them due to time constraints).</p>
 <ul>
-<li>I aim at cover the following topics in the live lectures: C-style arrays, pointers, references, structs, classes, enumerations.</li>
+<li>I aim at cover the following topics in the live lectures
+<ul>
+<li>references</li>
+<li>pointers</li>
+<li>C-style arrays</li>
+<li>structs</li>
+<li>classes</li>
+<li>enumerations.</li>
+</ul></li>
 <li>You will see that structs and classes are very similar, and studying one carefully is enough.</li>
 </ul>
+</section>
+<section id="function-is-a-compound-data-type" class="slide level2">
+<h2>Function is a compound data type</h2>
+<p>In fact, we’ve been using one compound type regularly: <strong>Functions</strong>.</p>
+<p>➥ Consider this function</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href=""></a><span class="dt">void</span> do_something<span class="op">(</span><span class="dt">int</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The type of this function is</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb4-1"><a href=""></a><span class="dt">void</span><span class="op">(</span><span class="dt">int</span><span class="op">,</span> <span class="dt">double</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section></section>
+<section>
+<section id="value-categories-lvalues-and-rvalues" class="title-slide slide level1 center">
+<h1>Value categories (lvalues and rvalues)</h1>
+<p>Before we discuss lvalue references, we take a detour to learn <strong>lvalue</strong>.</p>
+</section>
+<section id="expression" class="slide level2">
+<h2>Expression</h2>
+<ul>
+<li><strong>Recall</strong>: An <strong>expression</strong> is <em>a combination of literals, variables, operators and function calls that can be executed to produce a singular value</em>.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb5-1"><a href=""></a></span>
+<span id="cb5-2"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb5-3"><a href=""></a><span class="dt">double</span> multiply<span class="op">(</span><span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> x <span class="op">*</span> y<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb5-4"><a href=""></a><span class="dt">double</span> add<span class="op">(</span><span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> x <span class="op">+</span> y<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb5-5"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb5-6"><a href=""></a><span class="op">{</span></span>
+<span id="cb5-7"><a href=""></a>    <span class="co">// The expression add(2 + multiply(3, 4), 3) evaluates to the value 15.</span></span>
+<span id="cb5-8"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> add<span class="op">(</span><span class="dv">2</span> <span class="op">+</span> multiply<span class="op">(</span><span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">),</span> <span class="dv">3</span><span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span> </span>
+<span id="cb5-9"><a href=""></a></span>
+<span id="cb5-10"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-11"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<h3 id="properties-of-an-expression">Properties of an expression</h3>
+<ul>
+<li>To help determine how expressions should evaluate and where they can be used, all expressions in C++ has two properties:
+<ul>
+<li>a <span style="color:red"><strong>type</strong></span> category</li>
+<li>a <span style="color:red"><strong>value</strong></span> gategory</li>
+</ul></li>
+</ul>
+</section>
+<section id="the-type-of-an-expression" class="slide level2">
+<h2>The type of an expression</h2>
+<p>The type of an expression is equivalent to the type of the value, object, or function that results from the evaluated expression.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb6-1"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb6-2"><a href=""></a><span class="op">{</span></span>
+<span id="cb6-3"><a href=""></a>    <span class="kw">auto</span> v1 <span class="op">{</span> <span class="dv">12</span> <span class="op">/</span> <span class="dv">4</span> <span class="op">};</span> <span class="co">// int / int =&gt; int</span></span>
+<span id="cb6-4"><a href=""></a>    <span class="kw">auto</span> v2 <span class="op">{</span> <span class="fl">12.0</span> <span class="op">/</span> <span class="dv">4</span> <span class="op">};</span> <span class="co">// double / int =&gt; double</span></span>
+<span id="cb6-5"><a href=""></a></span>
+<span id="cb6-6"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-7"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="the-type-of-an-expression-1" class="slide level2">
+<h2>The type of an expression</h2>
+<p>The compiler can use the type of an expression to determine whether an expression is valid in a given context.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb7-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb7-2"><a href=""></a></span>
+<span id="cb7-3"><a href=""></a><span class="dt">void</span> print<span class="op">(</span><span class="dt">int</span> x<span class="op">)</span></span>
+<span id="cb7-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb7-5"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb7-6"><a href=""></a><span class="op">}</span></span>
+<span id="cb7-7"><a href=""></a></span>
+<span id="cb7-8"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb7-9"><a href=""></a><span class="op">{</span></span>
+<span id="cb7-10"><a href=""></a>    print<span class="op">(</span><span class="st">"foo"</span><span class="op">);</span> <span class="co">// error: print() was expecting an int argument, we tried to pass in a string literal</span></span>
+<span id="cb7-11"><a href=""></a></span>
+<span id="cb7-12"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-13"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="the-value-category-of-an-expression" class="slide level2">
+<h2>The value category of an expression</h2>
+<p>➥ Consider the following program</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb8-1"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb8-2"><a href=""></a><span class="op">{</span></span>
+<span id="cb8-3"><a href=""></a>    <span class="dt">int</span> x <span class="op">{};</span></span>
+<span id="cb8-4"><a href=""></a>    x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>      <span class="co">// valid: we can assign 5 to x</span></span>
+<span id="cb8-5"><a href=""></a>    <span class="dv">5</span> <span class="op">=</span> x<span class="op">;</span>      <span class="co">// error: cannot assign value of x to literal value 5</span></span>
+<span id="cb8-6"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-7"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>One of these assigments is valid (<code>x = 5</code>) and the other is not (assigning <code>x</code> to <code>5</code>, what the hell?)</li>
+<li>As a human with common sense, we can clearly see <code>5 = x</code> does not make sense.</li>
+</ul>
+<p><strong>Question</strong>&nbsp; But how does the compiler know which expression can legally appear on either side of an assignment statement?</p>
+<div class="fragment">
+<p><strong>Answer</strong>&nbsp; The answer lies in the second property of expressions: <span style="color:red">value category</span></p>
 </div>
+</section>
+<section id="the-value-category-of-an-expression-1" class="slide level2">
+<h2>The value category of an expression</h2>
+<ul>
+<li class="fragment">Prior to C++11, there were only two possible value categories: <strong>lvalue</strong> and <strong>rvalue</strong></li>
+<li class="fragment">In C++11, three additional value categories, <strong>glvalue</strong>, <strong>prvalue</strong> and <strong>xvalue</strong> were added to support new feature called <strong>move semantics</strong></li>
+<li class="fragment">We shall focus on <em>lvalue</em> and <em>rvalue</em> first.</li>
+</ul>
+</section></section>
+<section>
+<section id="regarding-lvalue-and-rvalue-expressions" class="title-slide slide level1 center">
+<h1>Regarding lvalue and rvalue expressions</h1>
+
+</section>
+<section id="lvalue-expression" class="slide level2">
+<h2>lvalue expression</h2>
+<ul>
+<li class="fragment">An <strong>lvalue</strong> is an an expression that evaluates to an identifiable object or function (or bit-field).</li>
+<li class="fragment">Unfortunately, the term “identity” is used by the C++ standard, but is not well-defined.</li>
+<li class="fragment">An entity (such as an object or function) that has an identity can be differentiated from other similar entities (typically by comparing the addresses of the entity)</li>
+<li class="fragment">Entities with identities can be accessed via an identifier, reference, or pointer, and typically have a lifetime longer than a single expression or statement.</li>
+</ul>
+<div class="fragment">
+<blockquote>
+<p>Loosely speaking, we can think of identifier as the name of a variable, a function because we can identify them by name.</p>
+</blockquote>
+</div>
+<div class="fragment">
+<p>➥ Look at this example</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb9-1"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb9-2"><a href=""></a><span class="op">{</span></span>
+<span id="cb9-3"><a href=""></a>    <span class="dt">int</span> x <span class="op">{</span> <span class="dv">5</span> <span class="op">};</span></span>
+<span id="cb9-4"><a href=""></a>    <span class="dt">int</span> y <span class="op">{</span> x <span class="op">};</span>        <span class="co">// x is an lvalue expression</span></span>
+<span id="cb9-5"><a href=""></a></span>
+<span id="cb9-6"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-7"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="rvalue-expression" class="slide level2">
+<h2>rvalue expression</h2>
+<ul>
+<li class="fragment">An <strong>rvalue</strong> is an expression that is not an <strong>lvalue</strong>.</li>
+<li class="fragment">rvalue expressions evaluate to a value.</li>
+<li class="fragment">Commonly seen rvalues include
+<ul>
+<li class="fragment">literals (except C-style string literals – which are lvalues)</li>
+<li class="fragment">return value of functions</li>
+<li class="fragment">return value of operators that return by value</li>
+</ul></li>
+</ul>
+<div class="fragment">
+<blockquote>
+<p><strong>rvalues</strong> are not identifiable (meaning they have to be used immediately), and only exist within the scope of the expression in which they are used.</p>
+</blockquote>
+</div>
+</section>
+<section id="rvalue-expression-example" class="slide level2">
+<h2>rvalue expression: Example</h2>
+<div id="lst-rvalue-example" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-rvalue-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;2: rvalue expression example. Filenmae=<code>rvalue_expression.example.cpp</code>
+</figcaption>
+<div aria-describedby="lst-rvalue-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb10-1"><a href=""></a><span class="dt">int</span> return5<span class="op">()</span></span>
+<span id="cb10-2"><a href=""></a><span class="op">{</span></span>
+<span id="cb10-3"><a href=""></a>    <span class="cf">return</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb10-4"><a href=""></a><span class="op">}</span></span>
+<span id="cb10-5"><a href=""></a></span>
+<span id="cb10-6"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb10-7"><a href=""></a><span class="op">{</span></span>
+<span id="cb10-8"><a href=""></a>    <span class="dt">int</span> x<span class="op">{</span> <span class="dv">5</span> <span class="op">};</span>             <span class="co">// 5 is an rvalue expression</span></span>
+<span id="cb10-9"><a href=""></a>    <span class="at">const</span> <span class="dt">double</span> d<span class="op">{</span> <span class="fl">1.2</span> <span class="op">};</span>  <span class="co">// 1.2 is an rvalue expression</span></span>
+<span id="cb10-10"><a href=""></a></span>
+<span id="cb10-11"><a href=""></a>    <span class="dt">int</span> y <span class="op">{</span> x <span class="op">};</span>            <span class="co">// x is a modifiable lvalue expression</span></span>
+<span id="cb10-12"><a href=""></a>    <span class="at">const</span> <span class="dt">double</span> e <span class="op">{</span> d <span class="op">};</span>   <span class="co">// d is a non-modifiable lvalue expression</span></span>
+<span id="cb10-13"><a href=""></a>    <span class="dt">int</span> z <span class="op">{</span> return5<span class="op">()</span> <span class="op">};</span>    <span class="co">// return5() is an rvalue expression (since the result is returned by value)</span></span>
+<span id="cb10-14"><a href=""></a></span>
+<span id="cb10-15"><a href=""></a>    <span class="dt">int</span> w <span class="op">{</span> x <span class="op">+</span> <span class="dv">1</span> <span class="op">};</span>                <span class="co">// x + 1 is an rvalue expression</span></span>
+<span id="cb10-16"><a href=""></a>    <span class="dt">int</span> q <span class="op">{</span> <span class="kw">static_cast</span><span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;(</span>d<span class="op">)</span> <span class="op">};</span>  <span class="co">// the result of static casting d to an int is an rvalue expression</span></span>
+<span id="cb10-17"><a href=""></a></span>
+<span id="cb10-18"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb10-19"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<ul>
+<li><code>return5()</code>, <code>x + 1</code> and <code>static_cast&lt;int&gt;(d)</code> are rvalues because these expressions produce temporary values that are not identifiable objects.</li>
+</ul>
+</section>
+<section id="lvalue-expressions-versus-rvalue-expressions" class="slide level2">
+<h2>lvalue expressions versus rvalue expressions</h2>
+<p>It is hard to remember/understand lvalue expressions versus rvalue expressions. But we can summarize</p>
+<blockquote>
+<p><strong>Key insight</strong></p>
+<p><span style="color:red"><strong>lvalue</strong></span> expressions evaluate to an <span style="color:red"><strong>identifiable object</strong></span> <span style="color:blue"><strong>rvalue</strong></span> expressions evalute to a <span style="color:blue"><strong>value</strong></span>.</p>
+</blockquote>
+</section>
+<section id="value-categories-and-operators" class="slide level2">
+<h2>Value categories and operators</h2>
+<p>Unless otherwise specified, <span style="color:red"><strong>operators expect their operands to be rvalues</strong></span>.</p>
+<div id="lst-rvalue-example" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-rvalue-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;3: rvalue expression example. Filenmae=<code>value_categories_in_operators.cpp</code>
+</figcaption>
+<div aria-describedby="lst-rvalue-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb11-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb11-2"><a href=""></a></span>
+<span id="cb11-3"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb11-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb11-5"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="dv">1</span> <span class="op">+</span> <span class="dv">2</span><span class="op">;</span> <span class="co">// 1 and 2 are rvalues, operator+ returns an rvalue</span></span>
+<span id="cb11-6"><a href=""></a></span>
+<span id="cb11-7"><a href=""></a>    <span class="co">// But what about this -- did we learn that x and y should be lvalues?:</span></span>
+<span id="cb11-8"><a href=""></a>    <span class="dt">double</span> x <span class="op">{</span> <span class="fl">24.1</span> <span class="op">};</span></span>
+<span id="cb11-9"><a href=""></a>    <span class="dt">double</span> y <span class="op">{</span> <span class="fl">42.2</span> <span class="op">};</span></span>
+<span id="cb11-10"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> x <span class="op">+</span> y<span class="op">;</span>     <span class="co">// x and y are rvalues in the expression x + y.</span></span>
+<span id="cb11-11"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb11-12"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section>
+<section id="come-back-to-the-original-question-x-5-vs-5-x" class="slide level2">
+<h2>Come back to the original question: <code>x = 5</code> vs <code>5 = x</code></h2>
+<p>We can answer the question about why <code>x = 5</code> is valid but <code>5 = x</code> is not valid:</p>
+<p>➥ <strong>An assignment operation requires its left operand to be a modifiable lvalue expression.</strong></p>
+<p>➥ The assignment <code>5 = x</code> fails because the left operand expression <code>5</code> is an rvalue, not a modifiable lvalue.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb12-1"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb12-2"><a href=""></a><span class="op">{</span></span>
+<span id="cb12-3"><a href=""></a>    <span class="dt">int</span> x<span class="op">{};</span></span>
+<span id="cb12-4"><a href=""></a></span>
+<span id="cb12-5"><a href=""></a>    <span class="co">// Assignment requires the left operand to be a modifiable </span></span>
+<span id="cb12-6"><a href=""></a>    <span class="co">// lvalue expression and the right operand to be an rvalue </span></span>
+<span id="cb12-7"><a href=""></a>    <span class="co">// expression</span></span>
+<span id="cb12-8"><a href=""></a>    x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>  <span class="co">// valid: x is a modifiable lvalue expression </span></span>
+<span id="cb12-9"><a href=""></a>            <span class="co">// and 5 is an rvalue expression</span></span>
+<span id="cb12-10"><a href=""></a></span>
+<span id="cb12-11"><a href=""></a>    <span class="dv">5</span> <span class="op">=</span> x<span class="op">;</span>  <span class="co">// error: 5 is an rvalue expression and x </span></span>
+<span id="cb12-12"><a href=""></a>            <span class="co">// is a modifiable lvalue expression</span></span>
+<span id="cb12-13"><a href=""></a></span>
+<span id="cb12-14"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb12-15"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="you-might-ask-how-about-y-x" class="slide level2">
+<h2>You might ask: How about <code>y = x</code></h2>
+<p>You might ask now: How about <code>y = x</code>?</p>
+<p>➥&nbsp; It is a legitimate question. Look at this</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb13-1"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb13-2"><a href=""></a><span class="op">{</span></span>
+<span id="cb13-3"><a href=""></a>    <span class="dt">int</span> x<span class="op">{</span> <span class="dv">1</span> <span class="op">};</span></span>
+<span id="cb13-4"><a href=""></a>    <span class="dt">int</span> y<span class="op">{</span> <span class="dv">2</span> <span class="op">};</span></span>
+<span id="cb13-5"><a href=""></a></span>
+<span id="cb13-6"><a href=""></a>    x <span class="op">=</span> y<span class="op">;</span> <span class="co">// y is not an rvalue, but this is legal</span></span>
+<span id="cb13-7"><a href=""></a></span>
+<span id="cb13-8"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb13-9"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Question</strong>&nbsp; What is your opinion about this?</p>
+</div>
+</section>
+<section id="lvalue-to-rvalue-conversion" class="slide level2">
+<h2>lvalue-to-rvalue conversion</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb14-1"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb14-2"><a href=""></a><span class="op">{</span></span>
+<span id="cb14-3"><a href=""></a>    <span class="dt">int</span> x<span class="op">{</span> <span class="dv">1</span> <span class="op">};</span></span>
+<span id="cb14-4"><a href=""></a>    <span class="dt">int</span> y<span class="op">{</span> <span class="dv">2</span> <span class="op">};</span></span>
+<span id="cb14-5"><a href=""></a></span>
+<span id="cb14-6"><a href=""></a>    x <span class="op">=</span> y<span class="op">;</span> <span class="co">// y is not an rvalue, but this is legal</span></span>
+<span id="cb14-7"><a href=""></a></span>
+<span id="cb14-8"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb14-9"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p>➜ The lvalue expression <code>y</code> undergoes an lvalue-to-rvalue conversion, which evaluates <code>y</code> to produce an rvalue (value <code>2</code>).</p>
+</div>
+<div class="fragment">
+<ul>
+<li>In cases where an rvalue is expected but an lvalue is provided, the lvalue will undergo an <span style="color:red"><strong>lvalue-to-rvalue conversion</strong></span>.</li>
+<li>This basically means the <em>lvalue</em> is evaluted to produce its value, which is an <em>rvalue</em>.</li>
+</ul>
+</div>
+<div class="fragment">
+<blockquote>
+<p><strong>Key insight</strong></p>
+<p>An lvalue will implicitly convert to an rvalue. <span style="color:magenta">This means an lvalue can be used anywhere an rvalue is expected.</span>. <span style="color:blue">An rvalue, on the other hand, will not implicitly convert to an lvalue.</span></p>
+</blockquote>
+</div>
+</section>
+<section id="lvalue-to-rvalue-conversion-1" class="slide level2">
+<h2>lvalue-to-rvalue conversion</h2>
+<p>➥ Consider this example</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb15-1"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb15-2"><a href=""></a><span class="op">{</span> </span>
+<span id="cb15-3"><a href=""></a>    <span class="dt">int</span> x <span class="op">{</span> <span class="dv">42</span> <span class="op">};</span></span>
+<span id="cb15-4"><a href=""></a></span>
+<span id="cb15-5"><a href=""></a>    x <span class="op">=</span> x <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb15-6"><a href=""></a></span>
+<span id="cb15-7"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb15-8"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>The variable <code>x</code> is being used in two different contexts.</li>
+<li>On the left side of assignment operator (<code>=</code>), <code>x</code> is an lvalue expression that evaluates to the variable <code>x</code>.</li>
+<li>On the right side of the assignment operator (<code>=</code>), <code>x</code> undergoes an lvalue-to-rvalue conversion.</li>
+<li>Then, <code>x</code> is evaluated to value <code>42</code> so that it can be used as the left operand of <code>operator+</code>.</li>
+<li><code>operator+</code> returns the <em>rvalue</em> expression <code>43</code>.</li>
+</ul>
+</section>
+<section id="how-to-differentiate-lvalues-and-rvalues" class="slide level2">
+<h2>How to differentiate lvalues and rvalues</h2>
+<ul>
+<li><strong>lvalue expressions</strong> are those that evaluate to functions or identifiable objects (including variables) that <span style="color:red"><strong>persist beyond the end of the expression</strong></span>.</li>
+<li><strong>rvalue expressions</strong> are those that evaluate to values, including literals and temporary objects that <span style="color:blue"><strong>do not persist beyond the end of the expression</strong></span>.</li>
+</ul>
+</section>
+<section id="a-program-telling-what-kind-of-expression-something-is" class="slide level2">
+<h2>A program telling what kind of expression something is</h2>
+<div id="lst-rvalue-example" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-rvalue-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;4: rvalue expression example. Filenmae=<code>tell_value_categories.cpp</code>
+</figcaption>
+<div aria-describedby="lst-rvalue-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb16-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb16-2"><a href=""></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
+<span id="cb16-3"><a href=""></a></span>
+<span id="cb16-4"><a href=""></a><span class="co">// T&amp; is an lvalue reference, so this overload will be preferred for lvalues</span></span>
+<span id="cb16-5"><a href=""></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
+<span id="cb16-6"><a href=""></a><span class="kw">constexpr</span> <span class="dt">bool</span> is_lvalue<span class="op">(</span>T<span class="op">&amp;)</span></span>
+<span id="cb16-7"><a href=""></a><span class="op">{</span></span>
+<span id="cb16-8"><a href=""></a>    <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb16-9"><a href=""></a><span class="op">}</span></span>
+<span id="cb16-10"><a href=""></a></span>
+<span id="cb16-11"><a href=""></a><span class="co">// T&amp;&amp; is an rvalue reference, so this overload will be preferred for rvalues</span></span>
+<span id="cb16-12"><a href=""></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
+<span id="cb16-13"><a href=""></a><span class="kw">constexpr</span> <span class="dt">bool</span> is_lvalue<span class="op">(</span>T<span class="op">&amp;&amp;)</span></span>
+<span id="cb16-14"><a href=""></a><span class="op">{</span></span>
+<span id="cb16-15"><a href=""></a>    <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb16-16"><a href=""></a><span class="op">}</span></span>
+<span id="cb16-17"><a href=""></a></span>
+<span id="cb16-18"><a href=""></a><span class="co">// A helper macro (#expr prints whatever is passed in for expr as text)</span></span>
+<span id="cb16-19"><a href=""></a><span class="pp">#define PRINTVCAT</span><span class="op">(</span>expr<span class="op">)</span><span class="pp"> </span><span class="op">{</span><span class="pp"> </span><span class="bu">std::</span>cout<span class="pp"> </span><span class="op">&lt;&lt;</span><span class="pp"> </span><span class="op">#</span>expr<span class="pp"> </span><span class="op">&lt;&lt;</span><span class="pp"> </span><span class="st">" is an "</span><span class="pp"> </span><span class="op">&lt;&lt;</span><span class="pp"> </span><span class="op">(</span>is_lvalue<span class="op">(</span>expr<span class="op">)</span><span class="pp"> </span><span class="op">?</span><span class="pp"> </span><span class="st">"lvalue</span><span class="sc">\n</span><span class="st">"</span><span class="pp"> </span><span class="op">:</span><span class="pp"> </span><span class="st">"rvalue</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span><span class="pp"> </span><span class="op">}</span></span>
+<span id="cb16-20"><a href=""></a></span>
+<span id="cb16-21"><a href=""></a><span class="dt">int</span> get_int<span class="op">()</span> <span class="op">{</span> <span class="cf">return</span> <span class="dv">5</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb16-22"><a href=""></a></span>
+<span id="cb16-23"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb16-24"><a href=""></a><span class="op">{</span></span>
+<span id="cb16-25"><a href=""></a>    PRINTVCAT<span class="op">(</span><span class="dv">5</span><span class="op">);</span>        <span class="co">// rvalue</span></span>
+<span id="cb16-26"><a href=""></a>    PRINTVCAT<span class="op">(</span>get_int<span class="op">());</span> <span class="co">// rvalue</span></span>
+<span id="cb16-27"><a href=""></a>    <span class="dt">int</span> x <span class="op">{</span> <span class="dv">5</span> <span class="op">};</span></span>
+<span id="cb16-28"><a href=""></a>    PRINTVCAT<span class="op">(</span>x<span class="op">);</span>        <span class="co">// lvalue</span></span>
+<span id="cb16-29"><a href=""></a>    PRINTVCAT<span class="op">(</span><span class="bu">std::</span>string <span class="op">{</span><span class="st">"Hello"</span><span class="op">});</span> <span class="co">// rvalue</span></span>
+<span id="cb16-30"><a href=""></a>    PRINTVCAT<span class="op">(</span><span class="st">"Hello"</span><span class="op">);</span>  <span class="co">// lvalue</span></span>
+<span id="cb16-31"><a href=""></a>    PRINTVCAT<span class="op">(++</span>x<span class="op">);</span>      <span class="co">// lvalue</span></span>
+<span id="cb16-32"><a href=""></a>    PRINTVCAT<span class="op">(</span>x<span class="op">++);</span>      <span class="co">// rvalue</span></span>
+<span id="cb16-33"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section></section>
+<section>
+<section id="lvalue-references" class="title-slide slide level1 center">
+<h1>lvalue references</h1>
+
+</section>
+<section id="references" class="slide level2">
+<h2>References</h2>
+<p>A <span style="color:red"><strong>reference</strong></span> is an alias for an existing object.</p>
+<ul>
+<li>Once a reference has been defined, any operation on the reference is applied to the object being referenced.</li>
+<li>We can use a reference to read or modify the object being referenced.</li>
+</ul>
+<p><strong>Note</strong>&nbsp;</p>
+<ul>
+<li>Although references might seem silly, useless or redundant, they are used everywhere in C++.</li>
+<li>Otherwise, people won’t introduce this concept.</li>
+</ul>
 
 </section></section>
     </div>
