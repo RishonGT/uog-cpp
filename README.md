@@ -108,7 +108,7 @@ It can be debatable whether the contents in the two sections "C++ Basics" and "C
 
 - **Chapter 00** &mdash; Folder `00-intro-to-eng3091`
     - Welcome to ENG3091, course materials, marking system and how the course is run.
-- **Chapter 01** &mdash; Folder `01-structure-and-variables`
+- **Chapter 01** &mdash; Folder `01-structure-and-varaibles`
     - How a basic C++ program source code looks like. 
     - Declare and initialize variables in C++. 
     -  Input and output values in C++ using `iostream`
