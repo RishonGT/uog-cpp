@@ -1,26 +1,108 @@
 # uog-cpp
 
-
 **Learn C++ at University of Glasgow**
 
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![C++](https://img.shields.io/badge/C++-11%2F14%2F17-00599C.svg)](https://isocpp.org/)
 
-This repo is developed by heavily using [www.learncpp.com](www.learncpp.com). However, the repo does not try to compile the website into a single book.
+This repository contains comprehensive C++ learning materials developed for the University of Glasgow. The content is structured as a progressive course covering C++ fundamentals, intermediate concepts, and object-oriented programming principles.
 
-# Contents
-The repo is divided into the following sections: 
+**Acknowledgment**: This repository is developed by heavily using [www.learncpp.com](https://www.learncpp.com) as a primary reference. However, the repo does not try to compile the website into a single book.
 
-1. **Section 01**: C++ Basics
-2. **Section 02**: C++ Intermediate
-3. **Section 03**: Object-oriented Programming in C++
-4. **Section 04**: UML Class Diagrams. 
+## Table of Contents
+- [Repository Structure](#repository-structure)
+- [Prerequisites](#prerequisites)
+- [Getting Started](#getting-started)
+- [Course Contents](#course-contents)
+  - [Section 01: C++ Basics](#section-01-c-basics)
+  - [Section 02: C++ Intermediate](#section-02-c-intermediate)
+- [Assignments](#assignments)
+- [How to Use This Repository](#how-to-use-this-repository)
+- [Contributing](#contributing)
+- [License](#license)
+- [Author](#author)
 
-Each section corresponds to one folder and contains multiple chapters that cover various topics in C++ programming. Each chapter in one sepcfic section is numbered sequentially. Note that chapter numbers in Section 02 continue from the last chapter number in Section 01, and so on for Section 03 and Section 04.
+## Repository Structure
+The repository is divided into the following sections: 
+
+1. **Section 01**: C++ Basics - Foundational concepts
+2. **Section 02**: C++ Intermediate - Advanced fundamental topics
+
+Each section corresponds to one folder and contains multiple chapters covering various topics in C++ programming. Each chapter in a specific section is numbered sequentially. 
+
+**Note**: Chapter numbers in Section 02 continue from the last chapter number in Section 01.
+
+Each chapter typically includes:
+- `.qmd` files - Quarto markdown source files for presentations
+- `.html` files - Rendered HTML presentations
+- `cpp/` directory - C++ example code and demonstrations
+- Supporting files and resources
+
+## Prerequisites
+
+Before starting with this course material, you should have:
+
+- **Basic programming knowledge**: Familiarity with programming concepts (variables, functions, loops)
+- **C++ compiler**: GCC, Clang, or MSVC
+  - GCC 7.0+ or Clang 5.0+ recommended for C++17 support
+  - MSVC 2017+ on Windows
+- **Text editor or IDE**: VS Code, Visual Studio, CLion, or any C++ compatible editor
+- **Quarto (optional)**: For rendering presentation files
+  - Install from [quarto.org](https://quarto.org)
+
+### Installing C++ Compiler
+
+**Linux/Ubuntu:**
+```bash
+sudo apt-get update
+sudo apt-get install build-essential
+```
+
+**macOS:**
+```bash
+xcode-select --install
+```
+
+**Windows:**
+- Install [MinGW-w64](https://www.mingw-w64.org/) or
+- Install [Visual Studio Community](https://visualstudio.microsoft.com/vs/community/)
+
+## Getting Started
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/RishonGT/uog-cpp.git
+   cd uog-cpp
+   ```
+
+2. **Navigate to a chapter**:
+   ```bash
+   cd sec-01-cpp-basics/01-structure-and-varaibles
+   ```
+
+3. **Compile and run examples**:
+   ```bash
+   cd cpp
+   g++ -std=c++17 example_file.cpp -o example
+   ./example
+   ```
+
+4. **View presentations**:
+   - Open `.html` files directly in your web browser
+   - Or render from `.qmd` files using Quarto:
+     ```bash
+     quarto render chapter_file.qmd
+     ```
+
+## Course Contents
+
+### Educational Philosophy
 
 **REMARK**  
-It can be debatable when the contents in two sections "C++ basics" and "C++ intermediate" should not be considered separate as they are all actually foundational in C++. However, for educational purpose, I want to separate the contents in these two sections for two reasons:
+It can be debatable whether the contents in the two sections "C++ Basics" and "C++ Intermediate" should be considered separate, as they are all foundational in C++. However, for educational purposes, the content is separated for two key reasons:
 
-- It is easier for the students to follow, and to structure the course Moodle to reflect the GitHub materials.
-- The content in Section "C++ Intermediate" is only available and not relevant in Python programming that is taught in Year 2. They involve sophisticated topics such as pointers, reference, pass by value, pass by reference, pass by address, lvalue, rvalue. In fact, Python has something like "pass an immutable object" that feels like _pass by value_ and "pass a mutable object" that feels like _pass by reference_.
+- **Easier learning progression**: This structure helps students follow the material systematically and allows the course Moodle to reflect the GitHub materials clearly.
+- **Language comparison perspective**: The content in "C++ Intermediate" covers sophisticated topics such as pointers, references, pass by value, pass by reference, pass by address, lvalue, and rvalue. These concepts are not directly relevant to Python programming (taught in Year 2), though Python has similar concepts like "pass an immutable object" (similar to pass by value) and "pass a mutable object" (similar to pass by reference).
 
 ## Section 01: C++ Basics
 
@@ -47,7 +129,7 @@ It can be debatable when the contents in two sections "C++ basics" and "C++ inte
     - Define constant parameters in functions
     - Data type `std::string`
 
-## Section 02: C++ Intermediates
+## Section 02: C++ Intermediate
 - **Chapter 05** &mdash; Folder `05-function-overloading`
   - Quick intro to function overloading
   - Function overload resolution & ambigous matches
@@ -65,49 +147,83 @@ It can be debatable when the contents in two sections "C++ basics" and "C++ inte
   - Intro to pointers
   - `null` pointers
   - Pass by address
-- **Chapter 08** &mdash; Folder `08-compound-types-enums-structs`
-  - Unscoped enumerations
-  - Unscoped enumerator integral conversions
-  - Intro to structs, members, and member selection
-  - Struct aggregate initialization
-  - Default member initialization
-  - Member selection with pointers and references
-  - Quick intro to class templates
-- **Chapter 09** &mdash; Folder `09-dynamic-allocation`
-  - Dynamic memory allocation with `new` and `delete`
-  - Dynamically allocating arrays
-## Section 03: Object oriented programming
-- **Chapter 10** &mdash; Folder `10-intro-to-classes`
-  - Intro to classes
-  - Member functions
-  - Const class objects and const member functions
-  - Public and private members & access specifiers
-  - Access functions
-  - Member functions returning references to data members
-  - Encapsulation: Benefits of data hiding
-  - Intro to **constructors**
-  - Constructor member initializer lists
-- **Chapter 11** &mdash; Folder `11-more-on-classes`
-  - The hidden `this` pointer and member function chaining
-  - Classes and header files
-  - Nested types
-  - Intro to **destructors**
-  - Static member variables
-  - Static member functions
-  - Friend non-member functions
-  - Friend classes and friend member functions
-- **Chapter 12** &mdash; Folder `12-inheritance`
-  - Intro to **inheritance**
-  - Basic inheritance in C++
-  - Order of construction of derived classes
-  - Inheritance and access specifiers
-  - Adding new functionality to a derived class
-  - Calling inherited functions and overriding behavior
-  - Hiding inherited functionality
-  - Multiple inheritance
-- **Chapter 13** &mdash; Folder `13-operator-overlading`
-- **Chapter 14** &mdash; Folder `14-virtual-functions`
-  - Pointers and references to base class of derived objects
-  - Virtual functions and polymorphism
 
-## Section 04: UML Class Diagram
+## Assignments
+
+The `assignments/` directory contains course assignments and related materials. Each assignment includes:
+- Problem descriptions
+- Starter code (where applicable)
+- Test cases or requirements
+
+## How to Use This Repository
+
+### For Students
+
+1. **Follow sequentially**: Start with Section 01, Chapter 00 and progress through the chapters in order
+2. **Practice with examples**: Each chapter includes code examples in the `cpp/` directory
+3. **Compile and experiment**: Modify the example code to reinforce your understanding
+4. **Review presentations**: Use the HTML presentations as lecture notes
+5. **Complete assignments**: Work through assignments to apply what you've learned
+
+### For Instructors
+
+- The `.qmd` (Quarto) files are the source material that can be edited and re-rendered
+- Each chapter is self-contained with examples and presentations
+- Materials follow a progressive learning path suitable for semester-long courses
+- Assignments can be customized based on course requirements
+
+### Compiling Examples
+
+Most examples can be compiled with:
+```bash
+g++ -std=c++17 -Wall -Wextra filename.cpp -o output
+./output
+```
+
+Some examples may require additional flags or libraries. Check comments in the source files for specific requirements.
+
+## Contributing
+
+Contributions are welcome! If you find errors, have suggestions, or want to add content:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/improvement`)
+3. Make your changes
+4. Commit your changes (`git commit -am 'Add improvement'`)
+5. Push to the branch (`git push origin feature/improvement`)
+6. Open a Pull Request
+
+### Contribution Guidelines
+
+- Follow the existing code style and organization
+- Test all code examples before submitting
+- Update documentation to reflect any changes
+- Ensure Quarto files render correctly
+
+## License
+
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
+
+## Author
+
+**Khiem Nguyen**  
+University of Glasgow
+
+---
+
+## Roadmap
+
+**Planned Future Sections** (work in progress):
+
+- **Section 03**: Object-oriented Programming in C++
+  - Chapters 10-14: Classes, inheritance, polymorphism, operator overloading, and virtual functions
+- **Section 04**: UML Class Diagrams
+  - Visual modeling and design patterns
+
+*Note: Sections 03 and 04 are mentioned in the roadmap but are not yet available in the repository.*
+
+---
+
+**Last Updated**: February 2026
+
+For questions or feedback, please open an issue on GitHub.
