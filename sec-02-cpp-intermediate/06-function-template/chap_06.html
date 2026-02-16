@@ -208,6 +208,9 @@
 <li><a href="#/function-template-instantiation" id="/toc-function-template-instantiation">Function template instantiation</a></li>
 <li><a href="#/template-argument-deduction" id="/toc-template-argument-deduction">Template argument deduction</a></li>
 <li><a href="#/further-on-function-templates" id="/toc-further-on-function-templates">Further on function templates</a></li>
+<li><a href="#/function-templates-with-multiple-template-types" id="/toc-function-templates-with-multiple-template-types">Function templates with multiple template types</a></li>
+<li><a href="#/function-templates-with-multiple-template-type-parameters" id="/toc-function-templates-with-multiple-template-type-parameters">Function templates with multiple template type parameters</a></li>
+<li><a href="#/an-introduction-to-auto-keyword" id="/toc-an-introduction-to-auto-keyword">An introduction to <code>auto</code> keyword</a></li>
 </ul>
 </nav>
 </section>
@@ -744,11 +747,308 @@ Listing&nbsp;7: Instantiated function that does not make sense sematically Filen
 </div>
 </figure>
 </div>
+</section></section>
+<section>
+<section id="function-templates-with-multiple-template-types" class="title-slide slide level1 center">
+<h1>Function templates with multiple template types</h1>
+
 </section>
-<section id="function-templates-and-default-arguments-for-non-template-parameters" class="slide level2">
-<h2>Function templates and default arguments for non-template parameters</h2>
+<section id="rationale" class="slide level2">
+<h2>Rationale</h2>
+<p>➥ Let us look at the example:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb24-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb24-2"><a href=""></a></span>
+<span id="cb24-3"><a href=""></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
+<span id="cb24-4"><a href=""></a>T max<span class="op">(</span>T x<span class="op">,</span> T y<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb24-5"><a href=""></a>    <span class="cf">return</span> <span class="op">(</span>x <span class="op">&lt;</span> y<span class="op">)</span> <span class="op">?</span> y <span class="op">:</span> x<span class="op">;</span></span>
+<span id="cb24-6"><a href=""></a><span class="op">}</span></span>
+<span id="cb24-7"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb24-8"><a href=""></a><span class="op">{</span></span>
+<span id="cb24-9"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> max<span class="op">(</span><span class="dv">2</span><span class="op">,</span> <span class="fl">3.5</span><span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span>  <span class="co">// compile error</span></span>
+<span id="cb24-10"><a href=""></a></span>
+<span id="cb24-11"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb24-12"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>➥ The compiler will issue a bunch of (probably crazy looking) error messages.</p>
+<p><strong>Question</strong> Can somebody explain why?</p>
+</section>
+<section id="rationale-1" class="slide level2">
+<h2>Rationale</h2>
+<p>We can fix the above issue as</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb25-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb25-2"><a href=""></a></span>
+<span id="cb25-3"><a href=""></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
+<span id="cb25-4"><a href=""></a>T max<span class="op">(</span>T x<span class="op">,</span> T y<span class="op">)</span></span>
+<span id="cb25-5"><a href=""></a><span class="op">{</span></span>
+<span id="cb25-6"><a href=""></a>    <span class="cf">return</span> <span class="op">(</span>x <span class="op">&lt;</span> y<span class="op">)</span> <span class="op">?</span> y <span class="op">:</span> x<span class="op">;</span></span>
+<span id="cb25-7"><a href=""></a><span class="op">}</span></span>
+<span id="cb25-8"><a href=""></a></span>
+<span id="cb25-9"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb25-10"><a href=""></a><span class="op">{</span></span>
+<span id="cb25-11"><a href=""></a>    <span class="co">// we've explicitly specified type double, so the compiler won't use template argument deduction</span></span>
+<span id="cb25-12"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> max<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span><span class="dv">2</span><span class="op">,</span> <span class="fl">3.5</span><span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb25-13"><a href=""></a></span>
+<span id="cb25-14"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb25-15"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>➜ It would be even nicer if we didn’t even have to think about the types when making a function call to max at all.</p>
+</section></section>
+<section>
+<section id="function-templates-with-multiple-template-type-parameters" class="title-slide slide level1 center">
+<h1>Function templates with multiple template type parameters</h1>
+
+</section>
+<section id="function-templates-with-multiple-template-type-parameters-1" class="slide level2">
+<h2>Function templates with multiple template type parameters</h2>
+<ul>
+<li><strong>Root or problem</strong>:
+<ul>
+<li>defined the single template type (<code>T</code>) for our function template</li>
+<li>specified that both parameters must of the same type</li>
+</ul></li>
+<li>Rewrite our function template in such a way that our parameters can resolve to different types.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb26-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb26-2"><a href=""></a></span>
+<span id="cb26-3"><a href=""></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">,</span> <span class="kw">typename</span> U<span class="op">&gt;</span> <span class="co">// We're using two template type parameters named T and U</span></span>
+<span id="cb26-4"><a href=""></a><span class="kw">auto</span> max<span class="op">(</span>T x<span class="op">,</span> U y<span class="op">)</span> <span class="co">// x can resolve to type T, and y can resolve to type U</span></span>
+<span id="cb26-5"><a href=""></a><span class="op">{</span></span>
+<span id="cb26-6"><a href=""></a>    <span class="cf">return</span> <span class="op">(</span>x <span class="op">&lt;</span> y<span class="op">)</span> <span class="op">?</span> y <span class="op">:</span> x<span class="op">;</span> <span class="co">// uh oh, we have a narrowing conversion problem here</span></span>
+<span id="cb26-7"><a href=""></a><span class="op">}</span></span>
+<span id="cb26-8"><a href=""></a></span>
+<span id="cb26-9"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb26-10"><a href=""></a><span class="op">{</span></span>
+<span id="cb26-11"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> max<span class="op">(</span><span class="fl">3.5</span><span class="op">,</span> <span class="dv">2</span><span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span> <span class="co">// resolves to max&lt;int, double&gt;</span></span>
+<span id="cb26-12"><a href=""></a></span>
+<span id="cb26-13"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb26-14"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>➜ The compiler can instatiate <code>max&lt;int, double&gt;(int, double)</code> for executing <code>max(2, 3.5)</code>.</p>
+</section>
+<section id="function-templates-with-multiple-template-type-parameters-2" class="slide level2">
+<h2>Function templates with multiple template type parameters</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb27-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb27-2"><a href=""></a></span>
+<span id="cb27-3"><a href=""></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">,</span> <span class="kw">typename</span> U<span class="op">&gt;</span> <span class="co">// We're using two template type parameters named T and U</span></span>
+<span id="cb27-4"><a href=""></a><span class="kw">auto</span> max<span class="op">(</span>T x<span class="op">,</span> U y<span class="op">)</span> <span class="co">// x can resolve to type T, and y can resolve to type U</span></span>
+<span id="cb27-5"><a href=""></a><span class="op">{</span></span>
+<span id="cb27-6"><a href=""></a>    <span class="cf">return</span> <span class="op">(</span>x <span class="op">&lt;</span> y<span class="op">)</span> <span class="op">?</span> y <span class="op">:</span> x<span class="op">;</span> <span class="co">// uh oh, we have a narrowing conversion problem here</span></span>
+<span id="cb27-7"><a href=""></a><span class="op">}</span></span>
+<span id="cb27-8"><a href=""></a></span>
+<span id="cb27-9"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb27-10"><a href=""></a><span class="op">{</span></span>
+<span id="cb27-11"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> max<span class="op">(</span><span class="fl">3.5</span><span class="op">,</span> <span class="dv">2</span><span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span> <span class="co">// resolves to max&lt;int, double&gt;</span></span>
+<span id="cb27-12"><a href=""></a></span>
+<span id="cb27-13"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb27-14"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>➥ Let us run the snippet and see the outcome.</p>
+<div class="fragment">
+<p><strong>Question</strong>&nbsp; Why do you see you you saw?</p>
+</div>
+<div class="fragment">
+<p><strong>Question</strong>&nbsp; How do we resolve the above issue?</p>
+</div>
+</section>
+<section id="function-templates-with-multiple-template-type-parameters-3" class="slide level2">
+<h2>Function templates with multiple template type parameters</h2>
+<p>➜ We let the compiler deduce what the return type should be by using <code>auto</code></p>
+<div id="lst-two-template-parameters-return-auto" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-two-template-parameters-return-auto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;8: Let the compiler deduce the return type using <code>auto</code>. Filename=<code>two_template_type_parameters_auto.cpp</code>
+</figcaption>
+<div aria-describedby="lst-two-template-parameters-return-auto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb28-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb28-2"><a href=""></a></span>
+<span id="cb28-3"><a href=""></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">,</span> <span class="kw">typename</span> U<span class="op">&gt;</span></span>
+<span id="cb28-4"><a href=""></a><span class="kw">auto</span> max<span class="op">(</span>T x<span class="op">,</span> U y<span class="op">)</span> <span class="co">// ask compiler can figure out what the relevant return type is</span></span>
+<span id="cb28-5"><a href=""></a><span class="op">{</span></span>
+<span id="cb28-6"><a href=""></a>    <span class="cf">return</span> <span class="op">(</span>x <span class="op">&lt;</span> y<span class="op">)</span> <span class="op">?</span> y <span class="op">:</span> x<span class="op">;</span></span>
+<span id="cb28-7"><a href=""></a><span class="op">}</span></span>
+<span id="cb28-8"><a href=""></a></span>
+<span id="cb28-9"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb28-10"><a href=""></a><span class="op">{</span></span>
+<span id="cb28-11"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> max<span class="op">(</span><span class="dv">2</span><span class="op">,</span> <span class="fl">3.5</span><span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb28-12"><a href=""></a></span>
+<span id="cb28-13"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb28-14"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<p>➥ Let us compile and run the code.</p>
+</section>
+<section id="using-stdcommon_type_t" class="slide level2">
+<h2>Using <code>std::common_type_t</code></h2>
+<ul>
+<li><code>std::common_type_t</code> is a metafunction used to determine the <strong>single type of which all passed types can be implicitly converted</strong></li>
+<li>Need <code>#include &lt;type_traits&gt;</code></li>
+</ul>
+<p><strong>Basic Examples</strong></p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 24%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Type passed</th>
+<th style="text-align: left;">Resulting <code>std::commont_type_t</code></th>
+<th style="text-align: left;">Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>int</code> and <code>double</code></td>
+<td style="text-align: left;"><code>double</code></td>
+<td style="text-align: left;"><code>int</code> promotes to <code>double</code> without losing precision</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>int</code> and <code>long</code></td>
+<td style="text-align: left;"><code>long</code></td>
+<td style="text-align: left;">Standard integer promotion rules</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>Derived1</code> and <code>Derived2</code></td>
+<td style="text-align: left;"><code>Base</code></td>
+<td style="text-align: left;">If both inherit from the same base, the base is the common type</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="using-stdcommon_type_t-1" class="slide level2">
+<h2>Using <code>std::common_type_t</code></h2>
+<div id="lst-two-template-parameters-return-auto" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-two-template-parameters-return-auto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;9: An example of using <code>std::common_type_t</code>. Filename=<code>using_commont_type_t.cpp</code>
+</figcaption>
+<div aria-describedby="lst-two-template-parameters-return-auto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb29-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb29-2"><a href=""></a><span class="pp">#include </span><span class="im">&lt;type_traits&gt;</span></span>
+<span id="cb29-3"><a href=""></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">,</span> <span class="kw">typename</span> U<span class="op">&gt;</span></span>
+<span id="cb29-4"><a href=""></a><span class="bu">std::</span>common_type_t<span class="op">&lt;</span>T<span class="op">,</span> U<span class="op">&gt;</span> max<span class="op">(</span>T a<span class="op">,</span> U b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb29-5"><a href=""></a>    <span class="cf">return</span> <span class="op">(</span>a <span class="op">&lt;</span> b<span class="op">)</span> <span class="op">?</span> b <span class="op">:</span> a<span class="op">;</span></span>
+<span id="cb29-6"><a href=""></a><span class="op">}</span></span>
+<span id="cb29-7"><a href=""></a></span>
+<span id="cb29-8"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb29-9"><a href=""></a><span class="op">{</span></span>
+<span id="cb29-10"><a href=""></a>    <span class="kw">auto</span> max_value <span class="op">=</span> max<span class="op">(</span><span class="dv">5</span><span class="op">,</span> <span class="fl">10.5</span><span class="op">);</span> <span class="co">// result will be of type double</span></span>
+<span id="cb29-11"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"max(5, 10.5) = "</span> <span class="op">&lt;&lt;</span> max_value <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb29-12"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb29-13"><a href=""></a><span class="op">}</span></span>
+<span id="cb29-14"><a href=""></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<ul>
+<li>It is fine to use <code>auto</code> with the help of recent compilers.</li>
+</ul>
+</section></section>
+<section>
+<section id="an-introduction-to-auto-keyword" class="title-slide slide level1 center">
+<h1>An introduction to <code>auto</code> keyword</h1>
+
+</section>
+<section id="keyword-auto" class="slide level2">
+<h2>Keyword <code>auto</code></h2>
+<ul>
+<li class="fragment">The <code>auto</code> keyword is one of the most transformative features of modern C++.<sup>1</sup></li>
+<li class="fragment">At its core, <code>auto</code> tells the compiler to <strong>deduce</strong> the type of a variable from its initializer.</li>
+<li class="fragment">Instead of manually typing out ocmplex type names, the compiler looks at what is on the right side of the <code>=</code> sign and figures it out for you at compile time.</li>
+<li class="fragment">This does not make C++ “dynamically typed” like Python.</li>
+<li class="fragment">The type is still fixed once the compiler determines it, ensuring your code remains fast and type-safe.</li>
+</ul>
+<div class="fragment">
+<p><strong>Examples</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb30-1"><a href=""></a><span class="kw">auto</span> age <span class="op">=</span> <span class="dv">25</span><span class="op">;</span>              <span class="co">// int</span></span>
+<span id="cb30-2"><a href=""></a><span class="kw">auto</span> price <span class="op">=</span> <span class="fl">42.99</span><span class="op">;</span>         <span class="co">// double</span></span>
+<span id="cb30-3"><a href=""></a><span class="kw">auto</span> greeting <span class="op">=</span> <span class="st">"Hello"</span><span class="op">;</span>    <span class="co">// const char*</span></span>
+<span id="cb30-4"><a href=""></a><span class="bu">std::</span>string name <span class="op">=</span> <span class="st">"Khiem Nguyen"</span><span class="op">;</span></span>
+<span id="cb30-5"><a href=""></a><span class="kw">auto</span> my_name <span class="op">=</span> name<span class="op">;</span>        <span class="co">// std::string</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>Well, I started to learn C++ when C++ was not modern.</p></li></ol></aside></section>
+<section id="keyword-auto-1" class="slide level2">
+<h2>Keyword <code>auto</code></h2>
+<p>➥ One nuance involves <strong>type modifiers</strong> like <code>const</code> and references (<code>&amp;</code>). By default, <code>auto</code> drops these.</p>
+<p>For examples:</p>
+<ul>
+<li>If we have a <code>const int</code>, plain <code>auto</code> will just deduce an <code>int</code></li>
+<li>If we want to keep the const-ness or make it a reference, we have to be explicit.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb31-1"><a href=""></a><span class="at">const</span> <span class="dt">int</span> constant_val <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb31-2"><a href=""></a><span class="kw">auto</span> x <span class="op">=</span> constant_val<span class="op">;</span>       <span class="co">// x is just an 'int' (a copy)</span></span>
+<span id="cb31-3"><a href=""></a><span class="at">const</span> <span class="kw">auto</span> y <span class="op">=</span> constant_val<span class="op">;</span> <span class="co">// y is 'const int'</span></span>
+<span id="cb31-4"><a href=""></a><span class="kw">auto</span><span class="op">&amp;</span> z <span class="op">=</span> constant_val<span class="op">;</span>      <span class="co">// z is 'const int&amp;' (a reference)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<blockquote>
+<p><strong>Remark</strong></p>
+<p>Don’t worry: <em>We will learn reference soon in the next chapter</em>.</p>
+</blockquote>
+</div>
+</section>
+<section id="abbreviated-function" class="slide level2">
+<h2>Abbreviated function</h2>
+<ul>
+<li>The <code>auto</code> keyword became a cornerstone of modern programming in 2011 with the release of C++11.</li>
+</ul>
+<blockquote>
+<p>C++20 introduces a new use of the <code>auto</code> keyword: When the <code>auto</code> keyword is used as a parameter type in a normal function, the compiler will automatically convert the function into a function template with each <code>auto</code> parameter becoming an independent template type parameter.</p>
+</blockquote>
+<p><strong>Example</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb32-1"><a href=""></a><span class="kw">auto</span> max<span class="op">(</span><span class="kw">auto</span> x<span class="op">,</span> <span class="kw">auto</span> y<span class="op">)</span></span>
+<span id="cb32-2"><a href=""></a><span class="op">{</span></span>
+<span id="cb32-3"><a href=""></a>    <span class="cf">return</span> <span class="op">(</span>x <span class="op">&lt;</span> y<span class="op">)</span> <span class="op">?</span> y <span class="op">:</span> x<span class="op">;</span></span>
+<span id="cb32-4"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>is shorthand in C++20 for the following</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb33-1"><a href=""></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">,</span> <span class="kw">typename</span> U<span class="op">&gt;</span></span>
+<span id="cb33-2"><a href=""></a><span class="kw">auto</span> max<span class="op">(</span>T x<span class="op">,</span> U y<span class="op">)</span></span>
+<span id="cb33-3"><a href=""></a><span class="op">{</span></span>
+<span id="cb33-4"><a href=""></a>    <span class="cf">return</span> <span class="op">(</span>x <span class="op">&lt;</span> y<span class="op">)</span> <span class="op">?</span> y <span class="op">:</span> x<span class="op">;</span></span>
+<span id="cb33-5"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="function-templates-may-be-overloaded" class="slide level2">
+<h2>Function templates may be overloaded</h2>
+<ul>
+<li>Function templates can also be overloaded.</li>
+<li>Such overloads can have a different number of template types and/or a different number or type of function parameters.</li>
+</ul>
+</section>
+<section id="function-templates-may-be-overloaded-1" class="slide level2">
+<h2>Function templates may be overloaded</h2>
+<div id="lst-function-templates-overloaded" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-function-templates-overloaded-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;10: Function templates can be overloaded. Filename=<code>function_templates_overloaded.cpp</code>
+</figcaption>
+<div aria-describedby="lst-function-templates-overloaded-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb34-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb34-2"><a href=""></a></span>
+<span id="cb34-3"><a href=""></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
+<span id="cb34-4"><a href=""></a><span class="kw">auto</span> add<span class="op">(</span>T x<span class="op">,</span> T y<span class="op">)</span> <span class="op">{</span>    <span class="co">// Add two values with matching types</span></span>
+<span id="cb34-5"><a href=""></a>    <span class="cf">return</span> x <span class="op">+</span> y<span class="op">;</span></span>
+<span id="cb34-6"><a href=""></a><span class="op">}</span></span>
+<span id="cb34-7"><a href=""></a><span class="co">// As of C++20 we could also use auto add(auto x, auto y)</span></span>
+<span id="cb34-8"><a href=""></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">,</span> <span class="kw">typename</span> U<span class="op">&gt;</span>   </span>
+<span id="cb34-9"><a href=""></a><span class="kw">auto</span> add<span class="op">(</span>T x<span class="op">,</span> U y<span class="op">)</span> <span class="op">{</span>    <span class="co">// Add two values with non-matching types</span></span>
+<span id="cb34-10"><a href=""></a>    <span class="cf">return</span> x <span class="op">+</span> y<span class="op">;</span></span>
+<span id="cb34-11"><a href=""></a><span class="op">}</span></span>
+<span id="cb34-12"><a href=""></a><span class="co">// As of C++20 we could also use auto add(auto x, auto y, auto z)</span></span>
+<span id="cb34-13"><a href=""></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">,</span> <span class="kw">typename</span> U<span class="op">,</span> <span class="kw">typename</span> V<span class="op">&gt;</span></span>
+<span id="cb34-14"><a href=""></a><span class="kw">auto</span> add<span class="op">(</span>T x<span class="op">,</span> U y<span class="op">,</span> V z<span class="op">)</span> <span class="op">{</span>   <span class="co">// Add three values with any type</span></span>
+<span id="cb34-15"><a href=""></a>    <span class="cf">return</span> x <span class="op">+</span> y <span class="op">+</span> z<span class="op">;</span></span>
+<span id="cb34-16"><a href=""></a><span class="op">}</span></span>
+<span id="cb34-17"><a href=""></a></span>
+<span id="cb34-18"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb34-19"><a href=""></a><span class="op">{</span></span>
+<span id="cb34-20"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> add<span class="op">(</span><span class="fl">1.2</span><span class="op">,</span> <span class="fl">3.4</span><span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span> <span class="co">// instantiates and calls add&lt;double&gt;()</span></span>
+<span id="cb34-21"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> add<span class="op">(</span><span class="fl">5.6</span><span class="op">,</span> <span class="dv">7</span><span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span>   <span class="co">// instantiates and calls add&lt;double, int&gt;()</span></span>
+<span id="cb34-22"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> add<span class="op">(</span><span class="dv">8</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">10</span><span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span> <span class="co">// instantiates and calls add&lt;int, int, int&gt;()</span></span>
+<span id="cb34-23"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb34-24"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
 
 </section></section>
+
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
