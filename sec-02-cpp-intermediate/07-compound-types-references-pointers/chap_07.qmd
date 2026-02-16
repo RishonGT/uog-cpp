@@ -379,7 +379,7 @@ int main()
 
 ## A program telling what kind of expression something is
 
-::: {#lst-rvalue-example lst-cap="rvalue expression example. Filenmae=`tell_value_categories.cpp`"}
+::: {#lst-tell-value-categories lst-cap="Program telling value categories. Filename=`tell_value_categories.cpp`"}
 ```{.cpp}
 {{< include ./cpp/tell_value_categories.cpp >}}
 ```
@@ -394,7 +394,264 @@ A [**reference**]{style="color:red"} is an alias for an existing object.
 - Once a reference has been defined, any operation on the reference is applied to the object being referenced.
 - We can use a reference to read or modify the object being referenced.
 
+::: {.fragment}
 **Note**&nbsp; 
 
 - Although references might seem silly, useless or redundant, they are used everywhere in C++. 
 - Otherwise, people won't introduce this concept.
+:::
+
+::: {.fragment}
+> **Key point**
+>
+> [A **reference** is essentially identical to the object being referenced.]{style="color:navy"}
+:::
+
+::: { .fragment}
+Two types of references:
+
+- [lvalue references]{style="color:red"}
+- [rvalue references]{style="color:red"}
+
+**Note** &#10149; We discuss **lvalue references** in this Chapter.
+:::
+
+# lvalue reference
+
+## lvalue reference: Definition
+
+::: {.fragment}
+> An [**lvalue reference**]{style="color:red"} acts as an [**alias**]{style="color:red"} for an existing lvalue (such as a variable)
+:::
+
+::: {.fragment}
+&#10149;&nbsp; **lvalue reference** is commonly just called a [**reference**]{style="color:red"} since prior to C++ there was only one type of reference.
+
+&#10149;&nbsp; Just like the type of an object determines what kind of value it can hold, [the type of a reference determines what type of object it can reference.]{style="color:navy"}
+:::
+
+::: {.fragment}
+**Some history**
+
+- By history, we just call "*reference*". 
+- When you hear an expert saying "*reference*", they mean "*lvalue reference*".
+- In fact, not all the veteran in C++ knows two types of references.
+:::
+
+## lvalue reference: Syntax
+
+&#10149;&nbsp; lvalue reference types can be identified by use of a [**single ampersand**]{style="color:red"} in the type specifier
+
+```{.cpp}
+// regular types
+int        // a normal int type (not an reference)
+int&       // an lvalue reference to an int object
+double&    // an lvalue reference to a double object
+const int& // an lvalue reference to a const int object
+```
+
+::: {.fragment}
+**Remark**
+
+- Note that we use <u>only one ampersand</u> (&) for lvalue reference. 
+- We shall learn that <u>two ampersands</u> (&&) are used for rvalue reference.
+:::
+
+::: {.fragment}
+**Interpretation**
+
+- `int&` is the type of an lvalue reference to an `int` object.
+- `const int&` is the type of an lvalue reference to a `const int` object. 
+:::
+
+::: {.fragment}
+**Terminology**
+
+- A type that specifies a reference (e.g. `int&`) is called a [**reference type**]{style="color:red"}
+- The type that can be referenced (e.g. `int`) is called the [**referenced type**]{style="color:red"}
+:::
+
+# lvalue reference variables
+
+## lvalue reference variables
+
+An [**lvalue reference variable**]{style="color:red"} is a variable that acts as a reference to an lvalue (usually another variable)
+
+::: {#lst-lvalue-reference-variable lst-cap="Define lvalue reference variable. Filename=`tell_value_categories.cpp`"}
+```{.cpp}
+{{< include ./cpp/lvalue_reference_variables.cpp >}}
+```
+:::
+
+- The type `int&` defines `ref` as an lvalue reference to an `int`.
+- We initialize `ref` with lvalue expression `x`.
+- Thereafter, `ref` and `x` can be used synonymously.
+
+&#10149;&nbsp; Let us run this code snippet.
+
+## lvalue reference variables: Writing style
+
+
+**Writing style**
+
+::: {.fragment}
+- It does not matter whether the ampersand is "attached" to the type name (`int& ref`) or the variable's name (`int &ref`)
+- Modern C++ programmers tend to prefer attaching the ampersand to the type, i.e. `int& ref`.
+- The style `int& ref` makes it clear that the reference is part of the type information, not the identifier.
+:::
+
+::: {.fragment}
+> **Best practice**
+>
+> When defining a reference, place the ampersand next to the type (not the reference variable's name)
+:::
+
+::: {.fragment}
+**Warning for later learning**
+
+- We shall learn **pointers** and **address of objects**. 
+- The ampersand in this context does not mean "address of" (also retrieved by using ampersand). *Be careful!*
+- But don't worry too much, you will see the difference after some practice.
+:::
+
+## lvalue reference to non-const and lvalue reference to const
+
+Two kinds of lvalue references (just common sense):
+
+- [**lvalue reference to non-const**]{style="color:red"}, or a [**non-const lvalue reference**]{style="color:red"} is an lvalue reference to a non-const (non-constant lvalue). 
+- [**lvalue reference to const**]{style="color:blue"}, or a [**const lvalue reference**]{style="color:blue"} is an lvalue reference to a const.
+
+&#10149;&nbsp; We shall focus on lvalue reference to non-const first.
+
+# Modifying values through a non-const lvalue reference
+
+## Modifying values through a non-const lvalue reference
+We can also use a non-const reference to modify the value of the object being referenced.
+
+::: {#lst-modify-through-ref lst-cap="Modifying values through non-const lvalue references. Filename=`modify_value_through_nonconst_reference.cpp`"}
+```{.cpp}
+{{< include ./cpp/modify_value_through_nonconst_reference.cpp >}}
+```
+:::
+&#10149;&nbsp; Let us run this code snippet. **Question**: What would be the output you expect to see?
+
+##  Reference initialization
+
+Much like constants, [**all references must be initialized**]{style="color:navy"}.
+
+```{.cpp}
+int main()
+{
+    int& invalid_ref;   // error: references must be initialized
+
+    int x { 5 };
+    int& ref { x };     // okay: reference to int is bound to int variable
+
+    return 0;
+}
+```
+
+::: {.fragment}
+**Terminologies**
+
+- References are initialized using a form of initialization called [**reference initialization**]{style="color:red"}
+- When a reference is initialized with an object (or function), we say it is [**bound**]{style="color:red"} to that object (or function).
+- The process by which a reference is bound is called [**reference binding**]{style="color:red"}
+- The object (or function) being referenced is called the [**referent**]{style="color:red"}
+:::
+
+:::{.fragment}
+> Don't worry! *I won't test your memory of these terminologies in the paper exam.*
+:::
+
+## Reference initialization: more
+
+non-const lvalue references can only be bound to a *modifiable* lvalue
+```{.cpp}
+int main()
+{
+    int x { 5 };
+    int& ref { x };         // okay: non-const lvalue reference bound to a modifiable lvalue
+
+    const int y { 5 };      // const int
+
+    // invalid: non-const lvalue reference can't bind to a non-modifiable lvalue
+    int& invalidRef { y };  
+
+    // invalid: non-const lvalue reference can't bind to an rvalue
+    int& invalidRef2 { 0 }; 
+
+    return 0;
+}
+```
+:::{.fragment}
+**Question**&nbsp; Why cannot we bound non-const lvalue reference to a const value?
+:::
+
+::: {.fragment}
+> **Key insight** (just common sense)
+>
+> If non-const lvalue references could be bound to non-modifiable (const) lvalues or rvalues, then you would be able to change those values through the reference, which would be a violation of their const-ness.
+:::
+
+## References cannot be reseated (changed to refer to another object)
+
+&#10149;&nbsp; [**Once initialized, a reference cannot be reseated.**]{style="color:navy"} It cannot be changed to reference another object.
+
+::: {#lst-ref-cannot-be-reseated lst-cap="References cannot be reseated (changed to refer another object). Filename=`reference_cannot_be_reseated.cpp`"}
+```{.cpp}
+{{< include ./cpp/reference_cannot_be_reseated.cpp >}}
+```
+:::
+
+&#10149;&nbsp; Let us run this code snippet. Surprisingly, this program prints `6`.
+
+::: {.fragment}
+&#10140;&nbsp; **What happened**: When a reference is evaluated in an expression, it resolves to the object it’s referencing. So, `ref = y` does not change `ref` to now reference `y`. Rather, because `ref` is an alias for `x`, the expression evaluates as if it was written `x = y` -- and since `y` evaluates to value `6`, `x` is assigned the value `6`.
+:::
+
+## References and refents have independent lifetimes
+
+[**The lifetime of a reference and the lifetime of its referent are independent**]{style="color:navy"}
+
+- A reference can be destroyed before the object it is referencing.
+- The object being referenced can be destroyed before the reference.
+
+*When a reference is destroyed before the referent, the referent is not impacted.*
+
+::: {#lst-lifetime-reference-referent lst-cap="References and referents have independent lifetimes. Filename=`lifetime_reference_and_referent.cpp`"}
+```{.cpp}
+{{< include ./cpp/lifetime_reference_and_referent.cpp >}}
+```
+:::
+
+## Dangling references
+
+::: {.incremental}
+- When an object being referenced is destroyed before a reference to it, the reference is left referencing an object that no longer exists. 
+- Such a reference is called a [**dangling reference**]{style="color:red"}. 
+- *Accessing a dangling reference leads to undefined behavior.*
+:::
+
+## References are not objects
+
+::: {.incremental}
+- Perhaps surprisingly, references are not objects in C++. 
+- A reference is not required to exist or occupy storage. 
+- If possible, the compiler will optimize references away by replacing all occurrences of a reference with the referent.
+- However, this isn’t always possible, and in such cases, references may require storage.
+:::
+
+
+::: {.fragment}
+**Consequences**
+
+- The term "reference variable" is a bit of a misnomer, as variables are objects with a name, and references aren’t objects.
+- Because references are not objects, they cannot be used anywhere an object is required (e.g. you cannot have a reference to a reference, since an lvalue reference must reference an identifiable object).
+:::
+
+::: {.fragment}
+> Although references seem a bit useless at this point, they are used a lot. We will cover one of the primary reasons why shortly.
+:::
+
+# Pass by lvalue reference
