@@ -39,9 +39,9 @@ ax3.set_title('x2 vs y')
 plt.tight_layout()
 # Define plane parameters (set `m1`, `m2`, `b` here)
 # Example: m1 = 1.0, m2 = 0.5, b = 0.0
-m1 = 2.46313
-m2 = 3.64895
-b = 543.613
+m1 = 2.40402
+m2 = 3.58494
+b = 606.071
 
 # Create a grid over the x1/x2 ranges and evaluate the plane y = m1*x1 + m2*x2 + b
 x1_s = np.linspace(x1.min(), x1.max(), 20)
