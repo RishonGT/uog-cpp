@@ -3,9 +3,8 @@
 #include <cmath>
 #include <vector>
 
-using namespace std;
 
-double loss_function(const vector<double>& x, const vector<double>& y, double w, double b, int m) {
+double loss_function(const std::vector<double>& x, const std::vector<double>& y, double w, double b, int m) {
     double total_loss = 0.0;
     for (int i = 0; i < m; i++) {
         total_loss += (w * x[i] + b - y[i]) * (w * x[i] + b - y[i]); // Squared error
@@ -15,21 +14,21 @@ double loss_function(const vector<double>& x, const vector<double>& y, double w,
 
 int main() {
     // Open the CSV file for reading
-    ifstream input_file("data.csv");
+    std::ifstream input_file("data.csv");
     if (!input_file.is_open()) {
-        cerr << "Unable to open file for reading." << endl;
+        std::cerr << "Unable to open file for reading." << std::endl;
         return 1;
     }
 
-    vector<double> x, y;
+    std::vector<double> x, y;
 
     // Store the data from the CSV file into vectors
-    string line;
+    std::string line;
     int index = 0;
     getline(input_file, line); // Skip the header line
     while (getline(input_file, line) && index < 1000) {
         size_t comma_pos = line.find(',');
-        if (comma_pos != string::npos) {
+        if (comma_pos != std::string::npos) {
             x.push_back(stod(line.substr(0, comma_pos))); // Convert x value to double
             y.push_back(stod(line.substr(comma_pos + 1))); // Convert y value to double
             index++;
@@ -39,7 +38,7 @@ int main() {
     input_file.close();
 
     if (x.empty() || y.empty()) {
-        cerr << "No data points found in the file." << endl;
+        std::cerr << "No data points found in the file." << std::endl;
         return 1;
     }
 
@@ -94,7 +93,7 @@ int main() {
 
         if (iteration % 500 == 0) { // Print loss every 100 iterations
             current_loss = loss_function(x, y, w, b, x.size());
-            cout << "Iteration: " << iteration << ", Loss: " << current_loss << endl;
+            std::cout << "Iteration: " << iteration << ", Loss: " << current_loss << std::endl;
         }
 
         if (iteration >= max_iterations) {
@@ -108,9 +107,9 @@ int main() {
     double b_original = (mean_y - w_original * mean_x);
 
     // Output the calculated parameters
-    cout << "Calculated parameters after Gradient Descent:" << endl;
-    cout << "w (slope): " << w_original << endl;
-    cout << "b (intercept): " << b_original << endl;
+    std::cout << "Calculated parameters after Gradient Descent:" << std::endl;
+    std::cout << "w (slope): " << w_original << std::endl;
+    std::cout << "b (intercept): " << b_original << std::endl;
 
     return 0;
 }
