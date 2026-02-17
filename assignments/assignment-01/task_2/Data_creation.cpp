@@ -4,7 +4,6 @@
 #include <fstream>
 #include <vector>
 
-using namespace std;
 
 // Function to add random noise to a value
 double noise_function(double x, float noise)
@@ -14,12 +13,13 @@ double noise_function(double x, float noise)
     return x;
 }
 
+
 int main(){
     double k = 2.5;
     double m = 57.0;
     float noise = 50.0;
-    vector<double> x;
-    vector<double> y;
+    std::vector<double> x;
+    std::vector<double> y;
 
     // Generate data points with noise
     for(int i = 0; i < 1000; i++){
@@ -32,16 +32,16 @@ int main(){
 
     }
     // Write the data to a CSV file
-    ofstream output_file("data.csv");
+    std::ofstream output_file("data.csv");
     if (output_file.is_open()) {
         output_file << "x,y\n"; // Write the header
         for (int i = 0; i < 1000; i++) {
             output_file << x[i] << "," << y[i] << "\n";
         }
         output_file.close();
-        cout << "Data has been written to data.csv" << endl;
+        std::cout << "Data has been written to data.csv" << std::endl;
     } else {
-        cerr << "Unable to open file for writing." << endl;
+        std::cerr << "Unable to open file for writing." << std::endl;
     }
 
 
