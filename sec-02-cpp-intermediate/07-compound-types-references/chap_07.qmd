@@ -772,3 +772,47 @@ Because a reference to a non-const value can only bind to a modifiable lvalue (e
 - We also want to avoid making copy.
 :::
 :::
+
+# Pass by const lvalue reference
+
+**Recall**
+
+Unlike a reference to non-const (which can only bind to modifiable lvalues), a reference to const can bind to modifiable lvalues, non-modifiable lvalues, and rvalues.
+
+## Pass by const lvalue reference
+
+&#10149;&nbsp; If we make a reference parameter const, then it will be able to bind to any type of argument.
+
+::: {#lst-pass-by-const-reference lst-cap="By making a reference parameter const, we can pass non-modifiable lvalues and rvalue literals. Filename=`pass_by_reference_change_value.cpp`"}
+```{.cpp}
+{{< include ./cpp/pass_by_reference_accept_modifiable_lvalues.cpp >}}
+```
+:::
+
+## Pass by const lvalue reference
+
+- Passing by const reference offers the same primary benefit as pass by non-const reference (avoiding making a copy of the argument).
+- The function can not change the value being referenced.
+
+The following is not allowed:
+```{.cpp}
+void add_value(const double& ref, double value)
+{
+    ref = ref + value;  // not allowed.
+                        // We promise the compiler that ref is const.
+}
+```
+
+&#10149;&nbsp; Fortunately, in most cases we don't want our functions modifying the value of arguments. But we also don't want to make expensive copies. We are greedy😉😉!!!
+
+## Pass by const lvalue reference: Best Practice
+
+::: {.my-box}
+**Best practice**
+
+Favor passing by const reference over passing by non-const reference unless you have a specific reason to do otherwise (e.g. the function needs to change the value of an argument).
+:::
+
+&#10149;&nbsp; Now, we can understand the motivation for allowing const lvalue references to bind to rvalues: 
+
+&#10140;&nbsp; [Without that capability, there would be no way to pass literals (or other rvalues) to functions that used pass by reference!]{style="color:navy"}

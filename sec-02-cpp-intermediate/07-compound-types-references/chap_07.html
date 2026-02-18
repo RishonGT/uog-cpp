@@ -210,6 +210,7 @@
 <li><a href="#/lvalue-reference-variables" id="/toc-lvalue-reference-variables">lvalue reference variables</a></li>
 <li><a href="#/modifying-values-through-a-non-const-lvalue-reference" id="/toc-modifying-values-through-a-non-const-lvalue-reference">Modifying values through a non-const lvalue reference</a></li>
 <li><a href="#/pass-by-lvalue-reference" id="/toc-pass-by-lvalue-reference">Pass by lvalue reference</a></li>
+<li><a href="#/pass-by-const-lvalue-reference" id="/toc-pass-by-const-lvalue-reference">Pass by const lvalue reference</a></li>
 </ul>
 </nav>
 </section>
@@ -1222,6 +1223,63 @@ Listing&nbsp;14: Pass by reference can only accept modifiable lvalue arguments F
 <li class="fragment">We also want to avoid making copy.</li>
 </ul>
 </div>
+</section></section>
+<section>
+<section id="pass-by-const-lvalue-reference" class="title-slide slide level1 center">
+<h1>Pass by const lvalue reference</h1>
+<p><strong>Recall</strong></p>
+<p>Unlike a reference to non-const (which can only bind to modifiable lvalues), a reference to const can bind to modifiable lvalues, non-modifiable lvalues, and rvalues.</p>
+</section>
+<section id="pass-by-const-lvalue-reference-1" class="slide level2">
+<h2>Pass by const lvalue reference</h2>
+<p>➥&nbsp; If we make a reference parameter const, then it will be able to bind to any type of argument.</p>
+<div id="lst-pass-by-const-reference" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-pass-by-const-reference-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;15: By making a reference parameter const, we can pass non-modifiable lvalues and rvalue literals. Filename=<code>pass_by_reference_change_value.cpp</code>
+</figcaption>
+<div aria-describedby="lst-pass-by-const-reference-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb30-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb30-2"><a href=""></a></span>
+<span id="cb30-3"><a href=""></a><span class="dt">void</span> print_value<span class="op">(</span><span class="dt">int</span><span class="op">&amp;</span> y<span class="op">)</span> <span class="co">// y only accepts modifiable lvalues</span></span>
+<span id="cb30-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb30-5"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> y <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb30-6"><a href=""></a><span class="op">}</span></span>
+<span id="cb30-7"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb30-8"><a href=""></a><span class="op">{</span></span>
+<span id="cb30-9"><a href=""></a>    <span class="dt">int</span> x <span class="op">{</span> <span class="dv">5</span> <span class="op">};</span></span>
+<span id="cb30-10"><a href=""></a>    print_value<span class="op">(</span>x<span class="op">);</span> <span class="co">// ok: x is a modifiable lvalue</span></span>
+<span id="cb30-11"><a href=""></a>    <span class="at">const</span> <span class="dt">int</span> z <span class="op">{</span> <span class="dv">5</span> <span class="op">};</span></span>
+<span id="cb30-12"><a href=""></a>    <span class="co">// print_value(z); // error: z is a non-modifiable lvalue</span></span>
+<span id="cb30-13"><a href=""></a>    <span class="co">// print_value(5); // error: 5 is an rvalue</span></span>
+<span id="cb30-14"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb30-15"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section>
+<section id="pass-by-const-lvalue-reference-2" class="slide level2">
+<h2>Pass by const lvalue reference</h2>
+<ul>
+<li>Passing by const reference offers the same primary benefit as pass by non-const reference (avoiding making a copy of the argument).</li>
+<li>The function can not change the value being referenced.</li>
+</ul>
+<p>The following is not allowed:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb31-1"><a href=""></a><span class="dt">void</span> add_value<span class="op">(</span><span class="at">const</span> <span class="dt">double</span><span class="op">&amp;</span> ref<span class="op">,</span> <span class="dt">double</span> value<span class="op">)</span></span>
+<span id="cb31-2"><a href=""></a><span class="op">{</span></span>
+<span id="cb31-3"><a href=""></a>    ref <span class="op">=</span> ref <span class="op">+</span> value<span class="op">;</span>  <span class="co">// not allowed.</span></span>
+<span id="cb31-4"><a href=""></a>                        <span class="co">// We promise the compiler that ref is const.</span></span>
+<span id="cb31-5"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>➥&nbsp; Fortunately, in most cases we don’t want our functions modifying the value of arguments. But we also don’t want to make expensive copies. We are greedy😉😉!!!</p>
+</section>
+<section id="pass-by-const-lvalue-reference-best-practice" class="slide level2">
+<h2>Pass by const lvalue reference: Best Practice</h2>
+<div class="my-box">
+<p><strong>Best practice</strong></p>
+<p>Favor passing by const reference over passing by non-const reference unless you have a specific reason to do otherwise (e.g.&nbsp;the function needs to change the value of an argument).</p>
+</div>
+<p>➥&nbsp; Now, we can understand the motivation for allowing const lvalue references to bind to rvalues:</p>
+<p>➜&nbsp; <span style="color:navy">Without that capability, there would be no way to pass literals (or other rvalues) to functions that used pass by reference!</span></p>
 
 </section></section>
     </div>
