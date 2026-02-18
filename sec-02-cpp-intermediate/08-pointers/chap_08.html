@@ -205,6 +205,8 @@
 <li><a href="#/introduction-to-pointers" id="/toc-introduction-to-pointers">Introduction to pointers</a></li>
 <li><a href="#/pointers" id="/toc-pointers">Pointers</a></li>
 <li><a href="#/pointer-initialization" id="/toc-pointer-initialization">Pointer initialization</a></li>
+<li><a href="#/pointers-and-assignment" id="/toc-pointers-and-assignment">Pointers and Assignment</a></li>
+<li><a href="#/the-address-of-operator-returns-a-pointer" id="/toc-the-address-of-operator-returns-a-pointer">The address-of operator returns a pointer</a></li>
 </ul>
 </nav>
 </section>
@@ -357,7 +359,7 @@ Listing&nbsp;3: An example of using pointers, address-of operator and dereferenc
 </figure>
 </div>
 <p>➥&nbsp; Let us run this code snippet.</p>
-<p><strong>Question</strong>: What would you expect to see?</p>
+<p><span style="color:navy"><strong>Question</strong></span>: What would you expect to see?</p>
 <p><strong>Note</strong>: The asterisk is part of the declaration syntax for pointers, not the use of dereference.</p>
 </section>
 <section id="pointers-declare-multiple-pointers-in-one-line" class="slide level2">
@@ -448,6 +450,200 @@ Listing&nbsp;5: Initialize pointers using addresses. Filename=<code>initialize_p
 <li><code>ptr</code> is holding address of <code>x</code>.</li>
 <li><code>ptr</code> is <strong>pointing to</strong> <code>x</code>.</li>
 </ul>
+</section></section>
+<section>
+<section id="pointers-and-assignment" class="title-slide slide level1 center">
+<h1>Pointers and Assignment</h1>
+<p>Because pointers are objects, we can perform assignment on them.</p>
+</section>
+<section id="pointers-and-assignment-1" class="slide level2">
+<h2>Pointers and assignment</h2>
+<p>Use assignment with pointers in two ways:</p>
+<ul>
+<li>To change what the pointer is pointing at: Assign the pointer a new address.</li>
+<li>To change the value being pointed at: Assign the <em>dereferenced</em> pointer a new value</li>
+</ul>
+<div id="lst-assign-pointer-to-new-address" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-assign-pointer-to-new-address-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;6: Assign a pointer to a new address. Filename=<code>assign_pointer_to_new_address.cpp</code>
+</figcaption>
+<div aria-describedby="lst-assign-pointer-to-new-address-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb10-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb10-2"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb10-3"><a href=""></a><span class="op">{</span></span>
+<span id="cb10-4"><a href=""></a>    <span class="dt">double</span> x <span class="op">{</span> <span class="fl">42.0</span> <span class="op">};</span></span>
+<span id="cb10-5"><a href=""></a>    <span class="dt">double</span><span class="op">*</span> ptr<span class="op">{</span> <span class="op">&amp;</span>x <span class="op">};</span> <span class="co">// ptr initialized to point at x</span></span>
+<span id="cb10-6"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="op">*</span>ptr <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span> <span class="co">// print the value at the address being pointed to (x's address)</span></span>
+<span id="cb10-7"><a href=""></a></span>
+<span id="cb10-8"><a href=""></a>    <span class="dt">double</span> y<span class="op">{</span> <span class="fl">24.0</span> <span class="op">};</span></span>
+<span id="cb10-9"><a href=""></a>    ptr <span class="op">=</span> <span class="op">&amp;</span>y<span class="op">;</span> <span class="co">// // change ptr to point at y</span></span>
+<span id="cb10-10"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="op">*</span>ptr <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span> <span class="co">// print the value at the address being pointed to (y's address)</span></span>
+<span id="cb10-11"><a href=""></a></span>
+<span id="cb10-12"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb10-13"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<p>➥&nbsp; Let us run this code snippet. <span style="color:navy"><strong>Question</strong></span> Write code to change the value of <code>x</code> to <code>24</code> via using <code>ptr</code>.</p>
+</section>
+<section id="pointers-and-assignment-2" class="slide level2">
+<h2>Pointers and assignment</h2>
+<div id="lst-change-value-using-dereference" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-change-value-using-dereference-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;7: Change value of variable via dereferencing a pointer. Filename=<code>change_value_using_dereference.cpp</code>
+</figcaption>
+<div aria-describedby="lst-change-value-using-dereference-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb11-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb11-2"><a href=""></a></span>
+<span id="cb11-3"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb11-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb11-5"><a href=""></a>    <span class="dt">double</span> x<span class="op">{</span> <span class="dv">42</span> <span class="op">};</span></span>
+<span id="cb11-6"><a href=""></a>    <span class="dt">double</span><span class="op">*</span> ptr<span class="op">{</span> <span class="op">&amp;</span>x <span class="op">};</span>          <span class="co">// initialize ptr with address of variable x</span></span>
+<span id="cb11-7"><a href=""></a></span>
+<span id="cb11-8"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span>     <span class="co">// print x's value</span></span>
+<span id="cb11-9"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="op">*</span>ptr <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span>  <span class="co">// print the value at the address that ptr is </span></span>
+<span id="cb11-10"><a href=""></a>                                <span class="co">// holding (x's address)</span></span>
+<span id="cb11-11"><a href=""></a></span>
+<span id="cb11-12"><a href=""></a>    <span class="op">*</span>ptr <span class="op">=</span> <span class="dv">24</span><span class="op">;</span>  <span class="co">// The object at the address held by ptr (x) </span></span>
+<span id="cb11-13"><a href=""></a>                <span class="co">// assigned value 24 (note that ptr is dereferenced here)</span></span>
+<span id="cb11-14"><a href=""></a></span>
+<span id="cb11-15"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb11-16"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="op">*</span>ptr <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span>  <span class="co">// print the value at the address that ptr is </span></span>
+<span id="cb11-17"><a href=""></a>                                <span class="co">// holding (x's address)</span></span>
+<span id="cb11-18"><a href=""></a></span>
+<span id="cb11-19"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb11-20"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section>
+<section id="pointers-and-assignment-key-insight" class="slide level2">
+<h2>Pointers and assignment: Key insight</h2>
+<div class="my-box">
+<p><strong>Key insight</strong></p>
+<ul>
+<li><p>When we use a pointer without a dereference (<code>ptr</code>), we are accessing the address held by the pointer. Modifying this (<code>ptr = &amp;y;</code>) changes what the pointer is pointing at.</p></li>
+<li><p>When we dereference a pointer (<code>*ptr</code>), we are accessing the object being pointed at. Modifying this (<code>*ptr = 6;</code>) changes the value of the object being pointed at.</p></li>
+</ul>
+</div>
+<p>At this point, you should already feel:</p>
+<p><span style="color:navy">Pointers behave much like lvalue references</span></p>
+</section>
+<section id="pointers-behave-much-like-lvalue-reference" class="slide level2">
+<h2>Pointers behave much like lvalue reference</h2>
+<p>Important to note: <span style="color:navy">pointer is not lvalue reference</span>. But we can write code like this:</p>
+<div id="lst-pointers-behave-much-like-references" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-pointers-behave-much-like-references-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;8: Pointers behave much like lvalue references. But they are not the same. Filename=<code>pointers_behave_like_references.cpp</code>
+</figcaption>
+<div aria-describedby="lst-pointers-behave-much-like-references-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb12-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb12-2"><a href=""></a></span>
+<span id="cb12-3"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb12-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb12-5"><a href=""></a>    <span class="dt">int</span> x<span class="op">{</span> <span class="dv">5</span> <span class="op">};</span></span>
+<span id="cb12-6"><a href=""></a>    <span class="dt">int</span><span class="op">&amp;</span> ref <span class="op">{</span> x <span class="op">};</span>  <span class="co">// get a reference to x</span></span>
+<span id="cb12-7"><a href=""></a>    <span class="dt">int</span><span class="op">*</span> ptr <span class="op">{</span> <span class="op">&amp;</span>x <span class="op">};</span> <span class="co">// get a pointer to x</span></span>
+<span id="cb12-8"><a href=""></a></span>
+<span id="cb12-9"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> x<span class="op">;</span></span>
+<span id="cb12-10"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> ref<span class="op">;</span>  <span class="co">// use the reference to print x's value (5)</span></span>
+<span id="cb12-11"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="op">*</span>ptr <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span> <span class="co">// use the pointer to print x's value (5)</span></span>
+<span id="cb12-12"><a href=""></a></span>
+<span id="cb12-13"><a href=""></a>    ref <span class="op">=</span> <span class="dv">6</span><span class="op">;</span> <span class="co">// use the reference to change the value of x</span></span>
+<span id="cb12-14"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> x<span class="op">;</span></span>
+<span id="cb12-15"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> ref<span class="op">;</span>  <span class="co">// use the reference to print x's value (6)</span></span>
+<span id="cb12-16"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="op">*</span>ptr <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span> <span class="co">// use the pointer to print x's value (6)</span></span>
+<span id="cb12-17"><a href=""></a></span>
+<span id="cb12-18"><a href=""></a>    <span class="op">*</span>ptr <span class="op">=</span> <span class="dv">7</span><span class="op">;</span> <span class="co">// use the pointer to change the value of x</span></span>
+<span id="cb12-19"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> x<span class="op">;</span></span>
+<span id="cb12-20"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> ref<span class="op">;</span>  <span class="co">// use the reference to print x's value (7)</span></span>
+<span id="cb12-21"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="op">*</span>ptr <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span> <span class="co">// use the pointer to print x's value (7)</span></span>
+<span id="cb12-22"><a href=""></a></span>
+<span id="cb12-23"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb12-24"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<p>➥</p>
+</section>
+<section id="pointers-behave-much-like-lvalue-reference-figure-demonstration" class="slide level2">
+<h2>Pointers behave much like lvalue reference: Figure demonstration</h2>
+
+<img data-src="./figures/pointer-behave-much-like-reference.png" class="r-stretch"></section>
+<section id="but-references-are-not-pointers" class="slide level2">
+<h2>But references are not pointers</h2>
+<p>There are some other differences between pointers:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 41%">
+<col style="width: 58%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">References</th>
+<th style="text-align: left;">Pointers</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">must be initialized</td>
+<td style="text-align: left;">not required to be initialized</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">are not objects</td>
+<td style="text-align: left;">are objects</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">cannot be reseated</td>
+<td style="text-align: left;">can change what they are pointing at</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">must always be bound to an object</td>
+<td style="text-align: left;">can point to nothing (null pointer)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">“safe” (outside of dangling reference)</td>
+<td style="text-align: left;">are inherently dangerous (we’ll discuss in the next lesson)</td>
+</tr>
+</tbody>
+</table>
+</section></section>
+<section>
+<section id="the-address-of-operator-returns-a-pointer" class="title-slide slide level1 center">
+<h1>The address-of operator returns a pointer</h1>
+
+</section>
+<section id="the-address-of-operator-returns-a-pointer-1" class="slide level2">
+<h2>The address-of operator returns a pointer</h2>
+<ul>
+<li>The address-of operator <em>does not</em> return the address of its operand <em>as a literal</em>.</li>
+<li><span style="color:navy">It returns a pointer</span> to the operand (whose value is the address of the operand).</li>
+</ul>
+<p>➥&nbsp; <strong>Example</strong>: Given variable <code>int x</code>, <code>&amp;x</code> returns an <code>int*</code> holding the address of <code>x</code>.</p>
+<div id="lst-address-of-returns-pointer" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-address-of-returns-pointer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;9: The address-of operator does not return the address of its operand as a literal. It returns a pointer to the operand. Filename=<code>address_of_returns_pointer.cpp</code>
+</figcaption>
+<div aria-describedby="lst-address-of-returns-pointer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb13-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb13-2"><a href=""></a><span class="pp">#include </span><span class="im">&lt;typeinfo&gt;</span></span>
+<span id="cb13-3"><a href=""></a></span>
+<span id="cb13-4"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb13-5"><a href=""></a><span class="op">{</span></span>
+<span id="cb13-6"><a href=""></a>    <span class="dt">double</span> x<span class="op">{</span> <span class="fl">42.0</span> <span class="op">};</span></span>
+<span id="cb13-7"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="kw">typeid</span><span class="op">(</span>x<span class="op">).</span>name<span class="op">()</span> <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span>  <span class="co">// print the type of x</span></span>
+<span id="cb13-8"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="kw">typeid</span><span class="op">(&amp;</span>x<span class="op">).</span>name<span class="op">()</span> <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span> <span class="co">// print the type of &amp;x</span></span>
+<span id="cb13-9"><a href=""></a></span>
+<span id="cb13-10"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb13-11"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<p>➥&nbsp; Let us run this code snippet.</p>
 
 </section></section>
     </div>

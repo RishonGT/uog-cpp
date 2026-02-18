@@ -141,7 +141,7 @@ double*;    // a pointer to an double value (holds the address of a double value
 ::: 
 &#10149;&nbsp; Let us run this code snippet. 
 
-**Question**: What would you expect to see?
+[**Question**]{style="color:navy"}: What would you expect to see?
 
 **Note**: The asterisk is part of the declaration syntax for pointers, not the use of dereference.
 
@@ -208,5 +208,91 @@ This is where **pointers** get their name from:
 - `ptr` is holding address of `x`.
 - `ptr` is **pointing to** `x`.
 
+# Pointers and Assignment
 
+Because pointers are objects, we can perform assignment on them.
+
+## Pointers and assignment
+
+Use assignment with pointers in two ways:
+
+- To change what the pointer is pointing at: Assign the pointer a new address.
+- To change the value being pointed at: Assign the _dereferenced_ pointer a new value
+
+::: {#lst-assign-pointer-to-new-address lst-cap="Assign a pointer to a new address. Filename=`assign_pointer_to_new_address.cpp`"}
+```{.cpp}
+{{< include ./cpp/assign_pointer_to_new_address.cpp >}}
+```
+:::
+&#10149;&nbsp; Let us run this code snippet. [**Question**]{style="color:navy"} Write code to change the value of `x` to `24` via using `ptr`.
+
+
+## Pointers and assignment
+
+::: {#lst-change-value-using-dereference lst-cap="Change value of variable via dereferencing a pointer. Filename=`change_value_using_dereference.cpp`"}
+```{.cpp}
+{{< include ./cpp/change_value_using_dereference.cpp >}}
+```
+:::
+
+## Pointers and assignment: Key insight
+
+:::{.my-box}
+**Key insight**
+
+- When we use a pointer without a dereference (`ptr`), we are accessing the address held by the pointer. Modifying this (`ptr = &y;`) changes what the pointer is pointing at.
+
+- When we dereference a pointer (`*ptr`), we are accessing the object being pointed at. Modifying this (`*ptr = 6;`) changes the value of the object being pointed at.
+:::
+
+At this point, you should already feel:
+
+[Pointers behave much like lvalue references]{style="color:navy"}
+
+## Pointers behave much like lvalue reference
+
+Important to note: [pointer is not lvalue reference]{style="color:navy"}. But we can write code like this:
+
+::: {#lst-pointers-behave-much-like-references lst-cap="Pointers behave much like lvalue references. But they are not the same. Filename=`pointers_behave_like_references.cpp`"}
+```{.cpp}
+{{< include ./cpp/pointers_behave_like_references.cpp >}}
+```
+:::
+
+&#10149;
+
+## Pointers behave much like lvalue reference: Figure demonstration
+
+![](./figures/pointer-behave-much-like-reference.png)
+
+## But references are not pointers
+
+There are some other differences between pointers:
+
+| References | Pointers |
+|:------|:---------|
+| must be initialized | not required to be initialized |
+| are not objects | are objects |
+| cannot be reseated | can change what they are pointing at |
+| must always be bound to an object | can point to nothing (null pointer)|
+| "safe" (outside of dangling reference) | are inherently dangerous (we'll discuss in the next lesson) | 
+
+# The address-of operator returns a pointer
+
+
+
+## The address-of operator returns a pointer
+
+- The address-of operator _does not_ return the address of its operand _as a literal_.
+- [It returns a pointer]{style="color:navy"} to the operand (whose value is the address of the operand).
+
+&#10149;&nbsp; **Example**: Given variable `int x`, `&x` returns an `int*` holding the address of `x`.
+
+::: {#lst-address-of-returns-pointer lst-cap="The address-of operator does not return the address of its operand as a literal. It returns a pointer to the operand. Filename=`address_of_returns_pointer.cpp`"}
+```{.cpp}
+{{< include ./cpp/address_of_returns_pointer.cpp >}}
+```
+:::
+
+&#10149;&nbsp; Let us run this code snippet.
 
