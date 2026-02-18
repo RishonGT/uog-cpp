@@ -655,3 +655,120 @@ int main()
 :::
 
 # Pass by lvalue reference
+
+Why do we create an alias to a variable when we can just use the variable itself?
+
+## Rationale: Recalling pass by value
+
+We discussed [**pass by value**]{style="color:red"}, where an argument passed to a function is copied into the function's parameter.
+
+::: {#lst-pass-by-value lst-cap="An example of pass by value Filename=`pass_by_value.cpp`"}
+```{.cpp}
+{{< include ./cpp/pass_by_value.cpp >}}
+```
+:::
+
+## Rationale: Some objects are expensive to copy
+
+::: {.fragment}
+::: {.incremental}
+- Most of the types provided by the standard library (such as `std::string`) are class types. Class types are usually expensive to copy.
+- We want to avoid making unnecessary copies of objects that are expensive to copy, especially when these copied objects will be destroyed almost immediately.
+:::
+:::
+
+:::{.fragment}
+::: {#lst-pass-by-value-string lst-cap="Making a copy of `std::string` object is expensive. Filename=`pass_by_value_string.cpp`"}
+```{.cpp}
+{{< include ./cpp/pass_by_value_string.cpp >}}
+```
+:::
+&#10149;&nbsp;This program is inefficient.
+:::
+
+## Pass by reference
+
+::: {.fragment}
+::: {.incremental}
+- To avoid making an expensive copy, we can use [**pass by reference**]{style="color:red"} instead of _pass by value_.
+- To use [**pass by reference**]{style="color:red"}, we declare a function parameter as a _reference type_ (or _const reference type_) rather than as a normal type.
+:::
+:::
+
+::: {.fragment}
+::: {#lst-pass-by-reference lst-cap="To avoid expensive copy of arguments, use pass by reference. Filename=`pass_by_reference.cpp`"}
+```{.cpp}
+{{< include ./cpp/pass_by_reference.cpp >}}
+```
+:::
+
+&#10149;&nbsp; When the function is called, each reference parameter is bound to the appropriate argument. **Note** _the ampersand in_ `std::string& y` _for the parameter declaration_.
+:::
+
+## Pass by reference: Key insight
+
+::: {.my-box}
+**Key insight**
+
+[**Pass by reference**]{style="color:red"} allows us to pass arguments to a function [without making copies]{style="color:red"} of those arguments each time the function is called.
+:::
+
+&#10149;&nbsp; You don't believe me 😑😑😑 Let us run the following program in the next slide.
+
+
+## Pass by reference: Examine the addresses
+
+::: {#lst-pass-by-reference-address lst-cap="Mix of pass by value and pass by reference. Filename=`pass_by_value_vs_pass_by_reference.cpp`"}
+```{.cpp}
+{{< include ./cpp/pass_by_value_vs_pass_by_reference.cpp >}}
+```
+:::
+
+## Pass by reference allows us to change the value of an argument
+
+&#10149;&nbsp; Since a reference acts identically to the object being referenced, any changes made to the reference parameter will affect the argument.
+
+::: {#lst-pass-by-ref-change-value lst-cap="Pass by reference allows us to change the value of an argument. Filename=`pass_by_reference_change_value.cpp`"}
+```{.cpp}
+{{< include ./cpp/pass_by_reference_change_value.cpp >}}
+```
+:::
+
+&#10149;&nbsp; Let us run this code snippet.
+
+## Pass by reference allows us to change the value of an argument: Key insight
+
+::: {.my-box}
+**Key insight**
+
+Passing values by reference to non-const allows us to write functions that modify the value of arguments passed in.
+:::
+
+## Pass by reference can only accept modifiable lvalue arguments
+
+Because a reference to a non-const value can only bind to a modifiable lvalue (essentially a non-const variable) &#10140; this means that [_pass by reference only works with arguments that are modifiable lvalues._]{style="color:navy"}
+
+::: {#lst-pass-by-reference-accept-modifiable-lvalue lst-cap="Pass by reference can only accept modifiable lvalue arguments  Filename=`pass_by_reference_change_value.cpp`"}
+```{.cpp}
+{{< include ./cpp/pass_by_reference_accept_modifiable_lvalues.cpp >}}
+```
+:::
+
+&#10149;&nbsp; Open the `cpp` file to see that IntelliSense informs the error before compilation.
+
+## Pass by reference can only accept modifiable lvalue arguments
+
+Because a reference to a non-const value can only bind to a modifiable lvalue (essentially a non-const variable) &#10140; this means that [_pass by reference only works with arguments that are modifiable lvalues._]{style="color:navy"}
+
+
+<div style="height: 100px;"></div>
+
+:::{.fragment}
+&#10149;&nbsp; A problem arises here:
+
+::: {.incremental}
+- We define a const object which is pretty expensive to make copy.
+- We want to pass this const object as a function argument. 
+- We also want to avoid making copy.
+:::
+:::

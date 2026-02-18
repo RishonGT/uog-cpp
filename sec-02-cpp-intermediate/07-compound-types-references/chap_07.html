@@ -640,20 +640,20 @@ Listing&nbsp;4: Program telling value categories. Filename=<code>tell_value_cate
 <span id="cb16-16"><a href=""></a><span class="op">}</span></span>
 <span id="cb16-17"><a href=""></a></span>
 <span id="cb16-18"><a href=""></a><span class="co">// A helper macro (#expr prints whatever is passed in for expr as text)</span></span>
-<span id="cb16-19"><a href=""></a><span class="pp">#define PRINTVCAT</span><span class="op">(</span>expr<span class="op">)</span><span class="pp"> </span><span class="op">{</span><span class="pp"> </span><span class="bu">std::</span>cout<span class="pp"> </span><span class="op">&lt;&lt;</span><span class="pp"> </span><span class="op">#</span>expr<span class="pp"> </span><span class="op">&lt;&lt;</span><span class="pp"> </span><span class="st">" is an "</span><span class="pp"> </span><span class="op">&lt;&lt;</span><span class="pp"> </span><span class="op">(</span>is_lvalue<span class="op">(</span>expr<span class="op">)</span><span class="pp"> </span><span class="op">?</span><span class="pp"> </span><span class="st">"lvalue</span><span class="sc">\n</span><span class="st">"</span><span class="pp"> </span><span class="op">:</span><span class="pp"> </span><span class="st">"rvalue</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span><span class="pp"> </span><span class="op">}</span></span>
+<span id="cb16-19"><a href=""></a><span class="pp">#define PRINT_VALUE_CATEGORY</span><span class="op">(</span>expr<span class="op">)</span><span class="pp"> </span><span class="op">{</span><span class="pp"> </span><span class="bu">std::</span>cout<span class="pp"> </span><span class="op">&lt;&lt;</span><span class="pp"> </span><span class="op">#</span>expr<span class="pp"> </span><span class="op">&lt;&lt;</span><span class="pp"> </span><span class="st">" is an "</span><span class="pp"> </span><span class="op">&lt;&lt;</span><span class="pp"> </span><span class="op">(</span>is_lvalue<span class="op">(</span>expr<span class="op">)</span><span class="pp"> </span><span class="op">?</span><span class="pp"> </span><span class="st">"lvalue</span><span class="sc">\n</span><span class="st">"</span><span class="pp"> </span><span class="op">:</span><span class="pp"> </span><span class="st">"rvalue</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span><span class="pp"> </span><span class="op">}</span></span>
 <span id="cb16-20"><a href=""></a></span>
 <span id="cb16-21"><a href=""></a><span class="dt">int</span> get_int<span class="op">()</span> <span class="op">{</span> <span class="cf">return</span> <span class="dv">5</span><span class="op">;</span> <span class="op">}</span></span>
 <span id="cb16-22"><a href=""></a></span>
 <span id="cb16-23"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
 <span id="cb16-24"><a href=""></a><span class="op">{</span></span>
-<span id="cb16-25"><a href=""></a>    PRINTVCAT<span class="op">(</span><span class="dv">5</span><span class="op">);</span>        <span class="co">// rvalue</span></span>
-<span id="cb16-26"><a href=""></a>    PRINTVCAT<span class="op">(</span>get_int<span class="op">());</span> <span class="co">// rvalue</span></span>
+<span id="cb16-25"><a href=""></a>    PRINT_VALUE_CATEGORY<span class="op">(</span><span class="dv">5</span><span class="op">);</span>           <span class="co">// rvalue</span></span>
+<span id="cb16-26"><a href=""></a>    PRINT_VALUE_CATEGORY<span class="op">(</span>get_int<span class="op">());</span>   <span class="co">// rvalue</span></span>
 <span id="cb16-27"><a href=""></a>    <span class="dt">int</span> x <span class="op">{</span> <span class="dv">5</span> <span class="op">};</span></span>
-<span id="cb16-28"><a href=""></a>    PRINTVCAT<span class="op">(</span>x<span class="op">);</span>        <span class="co">// lvalue</span></span>
-<span id="cb16-29"><a href=""></a>    PRINTVCAT<span class="op">(</span><span class="bu">std::</span>string <span class="op">{</span><span class="st">"Hello"</span><span class="op">});</span> <span class="co">// rvalue</span></span>
-<span id="cb16-30"><a href=""></a>    PRINTVCAT<span class="op">(</span><span class="st">"Hello"</span><span class="op">);</span>  <span class="co">// lvalue</span></span>
-<span id="cb16-31"><a href=""></a>    PRINTVCAT<span class="op">(++</span>x<span class="op">);</span>      <span class="co">// lvalue</span></span>
-<span id="cb16-32"><a href=""></a>    PRINTVCAT<span class="op">(</span>x<span class="op">++);</span>      <span class="co">// rvalue</span></span>
+<span id="cb16-28"><a href=""></a>    PRINT_VALUE_CATEGORY<span class="op">(</span>x<span class="op">);</span>                        <span class="co">// lvalue</span></span>
+<span id="cb16-29"><a href=""></a>    PRINT_VALUE_CATEGORY<span class="op">(</span><span class="bu">std::</span>string <span class="op">{</span><span class="st">"Hello"</span><span class="op">});</span>    <span class="co">// rvalue</span></span>
+<span id="cb16-30"><a href=""></a>    PRINT_VALUE_CATEGORY<span class="op">(</span><span class="st">"Hello"</span><span class="op">);</span>                  <span class="co">// lvalue</span></span>
+<span id="cb16-31"><a href=""></a>    PRINT_VALUE_CATEGORY<span class="op">(++</span>x<span class="op">);</span>                      <span class="co">// lvalue</span></span>
+<span id="cb16-32"><a href=""></a>    PRINT_VALUE_CATEGORY<span class="op">(</span>x<span class="op">++);</span>                      <span class="co">// rvalue</span></span>
 <span id="cb16-33"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
@@ -1006,10 +1006,224 @@ Listing&nbsp;8: References and referents have independent lifetimes. Filename=<c
 </blockquote>
 </div>
 </section></section>
+<section>
 <section id="pass-by-lvalue-reference" class="title-slide slide level1 center">
 <h1>Pass by lvalue reference</h1>
-
+<p>Why do we create an alias to a variable when we can just use the variable itself?</p>
 </section>
+<section id="rationale-recalling-pass-by-value" class="slide level2">
+<h2>Rationale: Recalling pass by value</h2>
+<p>We discussed <span style="color:red"><strong>pass by value</strong></span>, where an argument passed to a function is copied into the function’s parameter.</p>
+<div id="lst-pass-by-value" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-pass-by-value-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;9: An example of pass by value Filename=<code>pass_by_value.cpp</code>
+</figcaption>
+<div aria-describedby="lst-pass-by-value-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb24-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb24-2"><a href=""></a></span>
+<span id="cb24-3"><a href=""></a><span class="dt">void</span> print_value<span class="op">(</span><span class="dt">double</span> v<span class="op">)</span></span>
+<span id="cb24-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb24-5"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> v <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb24-6"><a href=""></a><span class="op">}</span>   <span class="co">// v is destroyed here</span></span>
+<span id="cb24-7"><a href=""></a></span>
+<span id="cb24-8"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb24-9"><a href=""></a><span class="op">{</span></span>
+<span id="cb24-10"><a href=""></a>    <span class="dt">double</span> x <span class="op">{</span> <span class="fl">42.0</span> <span class="op">};</span></span>
+<span id="cb24-11"><a href=""></a></span>
+<span id="cb24-12"><a href=""></a>    print_value<span class="op">(</span>x<span class="op">);</span> <span class="co">// x is passed by value (copied) </span></span>
+<span id="cb24-13"><a href=""></a>                    <span class="co">// into parameter v (inexpensive)</span></span>
+<span id="cb24-14"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb24-15"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section>
+<section id="rationale-some-objects-are-expensive-to-copy" class="slide level2">
+<h2>Rationale: Some objects are expensive to copy</h2>
+<div class="fragment">
+<ul>
+<li class="fragment">Most of the types provided by the standard library (such as <code>std::string</code>) are class types. Class types are usually expensive to copy.</li>
+<li class="fragment">We want to avoid making unnecessary copies of objects that are expensive to copy, especially when these copied objects will be destroyed almost immediately.</li>
+</ul>
+</div>
+<div class="fragment">
+<div id="lst-pass-by-value-string" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-pass-by-value-string-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;10: Making a copy of <code>std::string</code> object is expensive. Filename=<code>pass_by_value_string.cpp</code>
+</figcaption>
+<div aria-describedby="lst-pass-by-value-string-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb25-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb25-2"><a href=""></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
+<span id="cb25-3"><a href=""></a></span>
+<span id="cb25-4"><a href=""></a><span class="dt">void</span> print_value<span class="op">(</span><span class="bu">std::</span>string y<span class="op">)</span></span>
+<span id="cb25-5"><a href=""></a><span class="op">{</span></span>
+<span id="cb25-6"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> y <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb25-7"><a href=""></a><span class="op">}</span> <span class="co">// y is destroyed here</span></span>
+<span id="cb25-8"><a href=""></a></span>
+<span id="cb25-9"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb25-10"><a href=""></a><span class="op">{</span></span>
+<span id="cb25-11"><a href=""></a>    <span class="bu">std::</span>string x <span class="op">{</span> <span class="st">"My name is Khiem, what's your name?"</span> <span class="op">};</span> <span class="co">// x is a std::string</span></span>
+<span id="cb25-12"><a href=""></a>    print_value<span class="op">(</span>x<span class="op">);</span> <span class="co">// x is passed by value (copied) </span></span>
+<span id="cb25-13"><a href=""></a>                    <span class="co">// into parameter y (expensive)</span></span>
+<span id="cb25-14"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb25-15"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<p>➥&nbsp;This program is inefficient.</p>
+</div>
+</section>
+<section id="pass-by-reference" class="slide level2">
+<h2>Pass by reference</h2>
+<div class="fragment">
+<ul>
+<li class="fragment">To avoid making an expensive copy, we can use <span style="color:red"><strong>pass by reference</strong></span> instead of <em>pass by value</em>.</li>
+<li class="fragment">To use <span style="color:red"><strong>pass by reference</strong></span>, we declare a function parameter as a <em>reference type</em> (or <em>const reference type</em>) rather than as a normal type.</li>
+</ul>
+</div>
+<div class="fragment">
+<div id="lst-pass-by-reference" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-pass-by-reference-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;11: To avoid expensive copy of arguments, use pass by reference. Filename=<code>pass_by_reference.cpp</code>
+</figcaption>
+<div aria-describedby="lst-pass-by-reference-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb26-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb26-2"><a href=""></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
+<span id="cb26-3"><a href=""></a><span class="dt">void</span> print_value<span class="op">(</span><span class="bu">std::</span>string<span class="op">&amp;</span> y<span class="op">)</span> <span class="co">// type changed to std::string&amp;</span></span>
+<span id="cb26-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb26-5"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> y <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb26-6"><a href=""></a><span class="op">}</span> <span class="co">// y is destroyed here</span></span>
+<span id="cb26-7"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb26-8"><a href=""></a><span class="op">{</span></span>
+<span id="cb26-9"><a href=""></a>    <span class="bu">std::</span>string x <span class="op">{</span> <span class="st">"Hello, world!"</span> <span class="op">};</span></span>
+<span id="cb26-10"><a href=""></a>    print_value<span class="op">(</span>x<span class="op">);</span> <span class="co">// x is now passed by reference into </span></span>
+<span id="cb26-11"><a href=""></a>                    <span class="co">// reference parameter y (inexpensive)</span></span>
+<span id="cb26-12"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb26-13"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<p>➥&nbsp; When the function is called, each reference parameter is bound to the appropriate argument. <strong>Note</strong> <em>the ampersand in</em> <code>std::string&amp; y</code> <em>for the parameter declaration</em>.</p>
+</div>
+</section>
+<section id="pass-by-reference-key-insight" class="slide level2">
+<h2>Pass by reference: Key insight</h2>
+<div class="my-box">
+<p><strong>Key insight</strong></p>
+<p><span style="color:red"><strong>Pass by reference</strong></span> allows us to pass arguments to a function <span style="color:red">without making copies</span> of those arguments each time the function is called.</p>
+</div>
+<p>➥&nbsp; You don’t believe me 😑😑😑 Let us run the following program in the next slide.</p>
+</section>
+<section id="pass-by-reference-examine-the-addresses" class="slide level2">
+<h2>Pass by reference: Examine the addresses</h2>
+<div id="lst-pass-by-reference-address" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-pass-by-reference-address-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;12: Mix of pass by value and pass by reference. Filename=<code>pass_by_value_vs_pass_by_reference.cpp</code>
+</figcaption>
+<div aria-describedby="lst-pass-by-reference-address-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb27-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb27-2"><a href=""></a></span>
+<span id="cb27-3"><a href=""></a><span class="dt">void</span> print_addresses<span class="op">(</span><span class="dt">double</span> val<span class="op">,</span> <span class="dt">double</span><span class="op">&amp;</span> ref<span class="op">)</span></span>
+<span id="cb27-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb27-5"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"The address of the value parameter is    : "</span> <span class="op">&lt;&lt;</span> <span class="op">&amp;</span>val <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb27-6"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"The address of the reference parameter is: "</span> <span class="op">&lt;&lt;</span> <span class="op">&amp;</span>ref <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb27-7"><a href=""></a><span class="op">}</span></span>
+<span id="cb27-8"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb27-9"><a href=""></a><span class="op">{</span></span>
+<span id="cb27-10"><a href=""></a>    <span class="dt">double</span> x <span class="op">{</span> <span class="fl">42.0</span> <span class="op">};</span></span>
+<span id="cb27-11"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"The address of x is: "</span> <span class="op">&lt;&lt;</span> <span class="op">&amp;</span>x <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb27-12"><a href=""></a>    print_addresses<span class="op">(</span>x<span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb27-13"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb27-14"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section>
+<section id="pass-by-reference-allows-us-to-change-the-value-of-an-argument" class="slide level2">
+<h2>Pass by reference allows us to change the value of an argument</h2>
+<p>➥&nbsp; Since a reference acts identically to the object being referenced, any changes made to the reference parameter will affect the argument.</p>
+<div id="lst-pass-by-ref-change-value" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-pass-by-ref-change-value-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;13: Pass by reference allows us to change the value of an argument. Filename=<code>pass_by_reference_change_value.cpp</code>
+</figcaption>
+<div aria-describedby="lst-pass-by-ref-change-value-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb28-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb28-2"><a href=""></a></span>
+<span id="cb28-3"><a href=""></a><span class="dt">void</span> add_value<span class="op">(</span><span class="dt">double</span> <span class="op">&amp;</span>y<span class="op">,</span> <span class="dt">double</span> v<span class="op">)</span> <span class="co">// y is bound to the actual object x</span></span>
+<span id="cb28-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb28-5"><a href=""></a>    y <span class="op">+=</span> v<span class="op">;</span> <span class="co">// this modifies the actual object x</span></span>
+<span id="cb28-6"><a href=""></a><span class="op">}</span></span>
+<span id="cb28-7"><a href=""></a></span>
+<span id="cb28-8"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb28-9"><a href=""></a><span class="op">{</span></span>
+<span id="cb28-10"><a href=""></a>    <span class="dt">double</span> x <span class="op">{</span> <span class="fl">42.0</span> <span class="op">};</span></span>
+<span id="cb28-11"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"value of x = "</span> <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb28-12"><a href=""></a>    add_value<span class="op">(</span>x<span class="op">,</span> <span class="fl">24.0</span><span class="op">);</span></span>
+<span id="cb28-13"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"value of x = "</span> <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span> <span class="co">// x has been modified</span></span>
+<span id="cb28-14"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb28-15"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<p>➥&nbsp; Let us run this code snippet.</p>
+</section>
+<section id="pass-by-reference-allows-us-to-change-the-value-of-an-argument-key-insight" class="slide level2">
+<h2>Pass by reference allows us to change the value of an argument: Key insight</h2>
+<div class="my-box">
+<p><strong>Key insight</strong></p>
+<p>Passing values by reference to non-const allows us to write functions that modify the value of arguments passed in.</p>
+</div>
+</section>
+<section id="pass-by-reference-can-only-accept-modifiable-lvalue-arguments" class="slide level2">
+<h2>Pass by reference can only accept modifiable lvalue arguments</h2>
+<p>Because a reference to a non-const value can only bind to a modifiable lvalue (essentially a non-const variable) ➜ this means that <span style="color:navy"><em>pass by reference only works with arguments that are modifiable lvalues.</em></span></p>
+<div id="lst-pass-by-reference-accept-modifiable-lvalue" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-pass-by-reference-accept-modifiable-lvalue-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;14: Pass by reference can only accept modifiable lvalue arguments Filename=<code>pass_by_reference_change_value.cpp</code>
+</figcaption>
+<div aria-describedby="lst-pass-by-reference-accept-modifiable-lvalue-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb29-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb29-2"><a href=""></a></span>
+<span id="cb29-3"><a href=""></a><span class="dt">void</span> print_value<span class="op">(</span><span class="dt">int</span><span class="op">&amp;</span> y<span class="op">)</span> <span class="co">// y only accepts modifiable lvalues</span></span>
+<span id="cb29-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb29-5"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> y <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb29-6"><a href=""></a><span class="op">}</span></span>
+<span id="cb29-7"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb29-8"><a href=""></a><span class="op">{</span></span>
+<span id="cb29-9"><a href=""></a>    <span class="dt">int</span> x <span class="op">{</span> <span class="dv">5</span> <span class="op">};</span></span>
+<span id="cb29-10"><a href=""></a>    print_value<span class="op">(</span>x<span class="op">);</span> <span class="co">// ok: x is a modifiable lvalue</span></span>
+<span id="cb29-11"><a href=""></a>    <span class="at">const</span> <span class="dt">int</span> z <span class="op">{</span> <span class="dv">5</span> <span class="op">};</span></span>
+<span id="cb29-12"><a href=""></a>    <span class="co">// print_value(z); // error: z is a non-modifiable lvalue</span></span>
+<span id="cb29-13"><a href=""></a>    <span class="co">// print_value(5); // error: 5 is an rvalue</span></span>
+<span id="cb29-14"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb29-15"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<p>➥&nbsp; Open the <code>cpp</code> file to see that IntelliSense informs the error before compilation.</p>
+</section>
+<section id="pass-by-reference-can-only-accept-modifiable-lvalue-arguments-1" class="slide level2">
+<h2>Pass by reference can only accept modifiable lvalue arguments</h2>
+<p>Because a reference to a non-const value can only bind to a modifiable lvalue (essentially a non-const variable) ➜ this means that <span style="color:navy"><em>pass by reference only works with arguments that are modifiable lvalues.</em></span></p>
+<div style="height: 100px;">
+
+</div>
+<div class="fragment">
+<p>➥&nbsp; A problem arises here:</p>
+<ul>
+<li class="fragment">We define a const object which is pretty expensive to make copy.</li>
+<li class="fragment">We want to pass this const object as a function argument.</li>
+<li class="fragment">We also want to avoid making copy.</li>
+</ul>
+</div>
+
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
