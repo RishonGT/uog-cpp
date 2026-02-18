@@ -76,6 +76,7 @@ It can be debatable when the contents in two sections "C++ basics" and "C++ inte
 - **Chapter 09** &mdash; Folder `09-dynamic-allocation`
   - Dynamic memory allocation with `new` and `delete`
   - Dynamically allocating arrays
+  
 ## Section 03: Object oriented programming
 - **Chapter 10** &mdash; Folder `10-intro-to-classes`
   - Intro to classes
