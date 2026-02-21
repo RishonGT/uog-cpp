@@ -211,6 +211,8 @@
 <li><a href="#/function-templates-with-multiple-template-types" id="/toc-function-templates-with-multiple-template-types">Function templates with multiple template types</a></li>
 <li><a href="#/function-templates-with-multiple-template-type-parameters" id="/toc-function-templates-with-multiple-template-type-parameters">Function templates with multiple template type parameters</a></li>
 <li><a href="#/an-introduction-to-auto-keyword" id="/toc-an-introduction-to-auto-keyword">An introduction to <code>auto</code> keyword</a></li>
+<li><a href="#/keyword-constexpr" id="/toc-keyword-constexpr">Keyword <code>constexpr</code></a></li>
+<li><a href="#/non-type-template-parameters" id="/toc-non-type-template-parameters">Non-type template parameters</a></li>
 </ul>
 </nav>
 </section>
@@ -1046,6 +1048,41 @@ Listing&nbsp;10: Function templates can be overloaded. Filename=<code>function_t
 </div>
 </figure>
 </div>
+</section></section>
+<section>
+<section id="keyword-constexpr" class="title-slide slide level1 center">
+<h1>Keyword <code>constexpr</code></h1>
+<p>We shall learn <em>non-type template parameters</em> subsequently. Before that, we make a detour to learn <code>constexpr</code>.</p>
+</section>
+<section id="constexpr-concept" class="slide level2">
+<h2><code>constexpr</code>: Concept</h2>
+<div class="my-box">
+<p><code>constexpr</code> is a <em>powerful</em> keyword that <span style="color:navy">tells the compiler a value or function can be evaluated at compile-time</span></p>
+</div>
+<p>➥&nbsp; <strong>Meaning:</strong>&nbsp; The computer does the work while it’s building the program, rather than while we are actually running the program.</p>
+<p>Two common usages:</p>
+<ul>
+<li><p><code>constexpr</code> variables</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb35-1"><a href=""></a><span class="kw">constexpr</span> <span class="dt">int</span> max_users <span class="op">=</span> <span class="dv">100</span><span class="op">;</span> <span class="co">// The compiler knows this is 100 forever.</span></span>
+<span id="cb35-2"><a href=""></a><span class="dt">int</span> limit <span class="op">=</span> <span class="dv">50</span><span class="op">;</span> </span>
+<span id="cb35-3"><a href=""></a><span class="co">// constexpr int dynamic_limit = limit; // Error! 'limit' could change at runtime.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><code>constexpr</code> functions</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb36-1"><a href=""></a><span class="kw">constexpr</span> <span class="dt">int</span> square<span class="op">(</span><span class="dt">int</span> x<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb36-2"><a href=""></a>    <span class="cf">return</span> x <span class="op">*</span> x<span class="op">;</span></span>
+<span id="cb36-3"><a href=""></a><span class="op">}</span></span>
+<span id="cb36-4"><a href=""></a></span>
+<span id="cb36-5"><a href=""></a><span class="kw">constexpr</span> <span class="dt">int</span> result <span class="op">=</span> square<span class="op">(</span><span class="dv">10</span><span class="op">);</span> <span class="co">// 'result' becomes 100 at compile-time.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ul>
+</section></section>
+<section>
+<section id="non-type-template-parameters" class="title-slide slide level1 center">
+<h1>Non-type template parameters</h1>
+<p>While type template parameters are the most common type of template parameter used, there is another kind of template parameter worth knowing: <span style="color:red"><strong>non-type template parameter</strong></span></p>
+</section>
+<section id="non-type-template-parameters-1" class="slide level2">
+<h2>Non-type template parameters</h2>
+<p>A <span style="color:red"><strong>non-type template parameter</strong></span> is a template parameter with a fixed type that serves as a placeholder for a <code>constexpr value</code> passed in as a template argument.</p>
+<p><strong>Recall</strong>&nbsp; <code>constexpr</code> is a keyword introduced in C++11 that tells the compiler a value or function can be evaluated at compile-time.</p>
 
 </section></section>
 
