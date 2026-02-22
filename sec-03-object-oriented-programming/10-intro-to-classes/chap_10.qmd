@@ -1,0 +1,206 @@
+---
+title: "Object-oriented programming"
+author: |
+    Khiem Nguyen 
+    <br>Lecturer in Multiscale Materials
+    <br><khiem.nguyen@glasgow.ac.uk>
+author-meta: "Lecturer in Multiscale Materials"
+format: 
+    revealjs:
+        theme: simple   # other themes: beige, blood, dark, dracula, league, moon, night, serif, simple, sky, solarized
+        mouse-wheel: true
+        highlight-style: github
+        slide-number: true
+        title-slide-style: pandoc
+        echo: true
+        code-overflow: wrap
+        code-line-numbers: true
+        code-block-bg: false          # <-- remove white background in code blocks
+        # code-block-border-left: false # optional: remove left border
+        # highlight-style: monokai      # good for dark images
+        toc: true
+        toc-depth: 1
+        toc-title: Presentation Outline
+        chalkboard: true
+        css: simple.css
+---
+
+# Why Object-Oriented Programming
+
+## Procedure programming vs Object-oriented programming
+- Up to now, we've been doing a type of programming called [**procedure programming**]{style="color:red"}. In procedure programming, the functions and the data those functions operate on are separate entities.
+
+- In [**object-oriented programming**]{style="color:red"} (OOP), the focus is on creating program-defined data types that contain both properties and a set of well-defined behaviors.
+
+We won't discuss why we need Object-Oriented Programming (OOP) in this course:
+
+- We have all learned the importance of OOP in "Introductory Programming 2" and other programming courses.
+- [Since the 1990s, OOP has been the industry standard.]{style="color:navy"}
+
+<u>Instead, I walk you through some job posts in software engineer industry.</u>
+
+
+
+## The dominance of OOP
+
+- [**Why it's popular**]{style="color:navy"}: It mimics how we perceive the world -- objects with properties and behaviors.
+- [**Scalable**]{style="color:navy"}: OOP makes it possible to manage large, complex systems where we need to "encapsulate" data to prevent bugs.
+- [**The industry "lungs"**]{style="color:navy"}: If you look at job postings or legacy codebases, [OOP is everywhere.]{style="color:navy"}
+
+![](./figures/mathwork-job-post.png)
+
+_You don't need to know MATLAB to find a job in Mathworks_. [Instead, you need experience in C++ and OOP.]{style="color:red"}
+
+## C++ is highly desired in industry
+
+I asked Gemini about software engineering roles at MathWorks (developing MATLAB you use all the time.)
+![](./figures/gemini-reply-regarding-jobs-at-mathworks.png)
+
+## C++ is highly desired in industry: Software architecture at Airbus
+
+![](./figures/airbus-software-architect.png)
+
+## Git Control and OOP are essential skills in industry
+Note the requirement of experience with Java. For your record, [Java is a pure OOP programming language]{style="color:red"}.
+
+![](./figures/airbus-software-developer.png)
+
+## Why OOP
+
+::: {.my-box}
+_I hope this is more than enough to convince you why we need to learn Object-Oriented Programming, especially in C++._
+:::
+
+# `struct` vs `class`
+
+**Importance Note** 
+
+
+:::{.my-box}
+[_In C++, the difference between a `struct` and a `class` is surprising small from a technical standpoint_]{style="color:red"}, but quite significant from a **stylistic** and **architecture** standpoint.
+:::
+
+- Therefore, any example that is implemented using a struct could be implemented using a class, or vice-versa. 
+- However, from a practical standpoint, we use `struct` and `class` differently.
+
+## `struct` vs `class`: Technical difference (defaults)
+
+In C++, a `struct` and a `class` are almost identical, except for the default access level of their members and inheritance. That's it!
+
+**Default Access Control**
+
+- `struct`: Members (variables and functions) are `public` by default
+- `class` : Members are `private` by default
+  
+**Default Inheritance**
+
+- `struct`: Inherits `publicly` by default
+- `class` : Inherits `privately` by default
+
+We shall study these concepts soon.
+
+## `struct` vs `class`: Google C++ style
+
+Technically, you can use `struct` and `class` interchangably. Practically, we use them with different purposes. Google suggests
+  
+![](./figures/google-struct-vs-class.png)
+
+## `struct` vs `class`: Google C++ style
+
+**Key points**
+
+- Use a `struct` only for passive objects that carry data; everything else is a `class`.
+- The `struct` and `class` keywords behave almost identically in C++. We add our own semantic meanings to each keyword, so you should use the appropriate keyword for the data-type you're defining.
+
+# Defining a class: Syntax
+
+## Defining a class
+
+- A class is a **program-defined** data type. Sometimes, you hear **user-defined** data type.
+- Classes are defined similarly to structs: Classes are defined using the `class` keyword, structs using the `struct` keyword.
+
+```{.cpp}
+class Employee
+{
+    int m_id {};            // m_ stands for member, m_id is the member variable
+    int m_age {};
+    double m_wage {};   
+}
+```
+
+**Naming convention**
+
+&#10149;&nbsp; The prefix `m_` is used to signify the member variables of a class.
+
+&#10149;&nbsp; We discuss why member variables of a class are often prefixed with an `m_` in upcoming lesson.
+
+## Naming convention: Google style
+
+![](./figures/google-class-data-members-naming-convention.png)
+
+## Naming convention: Which to choose
+
+
+- Several companies and wide industry adopt the prefix `m_` naming convention.
+    
+    ```{.cpp}
+    class Employee
+    {
+        int m_id {};
+        int m_age {};
+        double m_wage {};   
+    }
+    ```
+- Google suggests trailing underscore, such as `id_`, `age_`, and `wage_`
+  
+    ```{.cpp}
+    class Employee
+    {
+        int id_ {};
+        int age_ {};
+        double wage_ {}
+    }
+    ```
+
+&#10149;&nbsp; We'll use the prefix `m_` convention as intelliSense will suggest variable names when we type `m_`.
+
+## A `class` can implement a `struct`
+
+By declaring `public` member variables, a `class` behaves just like a `struct`.
+
+::: {#lst-class-like-struct lst-cap="A `class` behaves like a `struct` by declaring member variables `public`. Filename=`class_just_like_struct.cpp`"}
+```{.cpp}
+{{< include ./cpp/class_just_like_struct.cpp >}}
+```
+:::
+
+## Most of the C++ standard library is classes
+
+We have already been using class objects, perhaps without knowing it:
+
+- `std::string`
+- `std::string_view`
+- `std::vector`
+
+In fact, most of the non-aliased types in the standard library are defined as classes!
+
+::: {.my-box}
+Classes are really the heart and soul of C++ -- they are so foundational that C++ was originally named “C with classes”!
+:::
+
+# Member functions
+
+## Member functions
+- In addition to having member variables, `class` types (which include `struct`, `class`, `union`) can have their own functions.
+- Functions that belong to a class type are called [**member functions**]{style="color:red"}.
+- Functions that are not member functions are called [**non-member functions**]{style="color:red"}.
+
+## A member function example
+
+In this lesson, we'll use strucuts to show examples of member functions -- but everything we show here applies equally well to classes.
+
+::: {#lst-class-like-struct lst-cap="An example of member function. Filename=`member_function_example.cpp`"}
+```{.cpp}
+{{< include ./cpp/member_function_example.cpp >}}
+```
+:::
