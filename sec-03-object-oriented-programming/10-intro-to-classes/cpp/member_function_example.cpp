@@ -15,7 +15,7 @@ struct Date
 
 int main()
 {
-    Date today { 2020, 10, 14 }; // aggregate initialize our struct
+    Date today { 2026, 02, 26 }; // aggregate initialize our struct
     today.day = 16; // member variables accessed using member selection operator (.)
     today.print();  // member functions also accessed using member selection operator (.)
     std::cout << '\n';

@@ -65,11 +65,152 @@ Note the requirement of experience with Java. For your record, [Java is a pure O
 
 ![](./figures/airbus-software-developer.png)
 
-## Why OOP
+## Why OOP: $4$ key pillars of OOP
 
 ::: {.my-box}
 _I hope this is more than enough to convince you why we need to learn Object-Oriented Programming, especially in C++._
 :::
+
+:::{.fragment}
+&#10149;&nbsp; But that's a very lazy explanation.
+:::
+
+::: {.fragment}
+&#10149;&nbsp; There are four **key pillars in Object-Oriented Programming**
+
+1. **Encapsulation**
+2. **Abstraction**
+3. **Inheritance**
+4. **Polymorphism**
+
+We shall quickly go through each of them, explain what they are and why they are.
+:::
+
+## Encapsulation
+
+&#9998;&nbsp; [**Encapsulation**]{style="color:red"} is the practice of bundling data (variables) and methods (functions) that operate on that data into a single unit called **class**.
+
+&#9998;&nbsp; It involves "hiding" the internal state of the object from the outside world to prevent accidental interference.
+
+:::{.fragment}
+- **Example 1**&nbsp; Remember what you learned in Python:
+
+  - `ndarray` object in NumPy library
+  - `Figure` object is returned when you plot `pyplot.plot(x, y)` 
+:::
+
+::: {.fragment}
+- **Example 2**&nbsp; Think of this code snippet `a = np.array([1, 'two', 3])`:
+
+  - The interpreter tells you the error and _exactly what kind of error you made_.
+  - This is because there is _a ton of checking behind the scene_, and _the user does not need to know._
+:::
+
+::: {.fragment}
+- **Example 3**&nbsp; Think of registering a student at UoG (python): `Student(name="Bull Shit", age=7)`
+
+  - There must be some behind-the-scene checking, or otherwise mistakes can easily slip through.
+  - Inform the user that something is wrong.
+:::
+
+## Encapsulation
+
+In C++, we use [**access specifiers**]{style="color:red"} to achieve this:
+
+&#9998;&nbsp; `private`: Members are only accessible within the class.
+
+&#9998;&nbsp; `public`: Members are accessible from outside the class.
+
+::: {.fragment}
+- **Example**&nbsp; Think of a **Bank Account**
+  - You should not be able to change the `balance` variable directly from outside -- otherwise, the bank is F___ed up.
+  - You should have to use `deposit()` or `withdraw()` method that checks if the transaction is valid.
+:::
+
+## Encapsulation
+
+Encapsulation enhances **security**.
+
+![](./figures/oop.jpg)
+
+## Abstraction
+
+&#9998;&nbsp; [**Abstraction**]{style="color:red"} is about **simplifying** things.
+
+&#9998;&nbsp; It means showing only the essential features of an object and hiding the complex background details.
+
+![](./figures/oop-abstraction.jpg)
+
+
+## Abstraction
+  
+[**Why use abstraction**]{style="color:red"}
+
+- **Reduces complexity**: We only deal with a high-level interface (from a user point of view)
+- **Easy Maintaince**: We can change the internal "engine" of our code (from a developer point of view) without changing how other people use it.
+
+:::{.fragment}
+- **Example**&nbsp; Think of a **Coffee Machine**:
+  - only need to know which button to press
+  - no need to understand the internal water pressure, size of grind bean, etc.
+:::
+
+::: {.fragment}
+- **Example**&nbsp; We want to build a graphics app:
+  - We want to "_draw_" different shapes, but the ways we draw a Circle and a Square are different.
+  - We create an [**Abstract Class**]{style="color:red"} called **Shape**. It acts as a blueprint that says: "Anything that is a shape must have a `draw()` method,
+    ```{.cpp}
+    class Shape {
+    public:
+        // Pure virtual function makes this an Abstract Class
+        virtual void draw() = 0; 
+    };
+    ```
+:::
+
+## Encapsulation vs Abstraction
+
+- [**Encapsulation**]{style="color:red"} is about [**protection and data integrity**]{style="color:blue"}.
+  - **Example**&nbsp; Check if a `battery_level` is negative
+  - **Example**&nbsp; Check if a `withdrawl_amount` exeeds a balance
+- [**Abstraction**]{style="color:red"} is about [**interface and simplification**]{style="color:blue"}.
+  - **Example**&nbsp; Allow user to simply call `set_battery(50)` without having to see the `if (value < 0)` logic hidden inside.
+
+**My own opinion**:
+
+- I try my best to find examples to illustrate these two points. 
+- Sometimes, I can get confused by myself. 
+- Some examples can sit at the intersection of both encapsulation & abstraction.
+- Don't worry if you get confused after this 🤨
+
+## Inheritance
+
+&#9998;&nbsp; [**Inheritance**]{style="color:red"} allows us to create a new class (**Derived** class or **Child** class) based on existing class (**Base** class or **Parent** class).
+
+&#9998;&nbsp; The child class "_inherits_" the attributes and behaviors of the parent, which helps us [_avoid writing the same code over and over again_]{style="color:red"} &#10140; [Don't repeat yourself]{style="color:blue"}.
+
+:::{.fragment}
+- **Example**&nbsp; An circle is an ellipse.
+  - A circle is an ellipse with the same length of two axes.
+  - If one can draw an ellipse, there is no point to copy/paste the code to draw a circle.
+:::
+
+:::{.fragment}
+- **Example**&nbsp; Lecturer, Member of Teaching Office, Technician, Demonstrators are all Employee with names, age, salary, etc.
+  - combine all common features and behaviors for all kinds of Employee
+  - bundle these features and behaviors into Employee
+  - no need to repeat code for each kind of Employee
+:::
+
+## Polymorphism
+
+[**Polymorphism**]{style="color:red"} allows an object to be treated as an instance of its parent class, but still behave according to its own specific type.
+
+:::{.fragment}
+- **Example**&nbsp; We can have a list of different shapes and tell them all to `draw()`, and they will each "know" how to draw themselves correctly.
+- We shall understand this pillar better when we reach this point.
+:::
+
 
 # `struct` vs `class`
 
@@ -195,12 +336,71 @@ Classes are really the heart and soul of C++ -- they are so foundational that C+
 - Functions that belong to a class type are called [**member functions**]{style="color:red"}.
 - Functions that are not member functions are called [**non-member functions**]{style="color:red"}.
 
+## A non-member function example
+Let us look at the following example:
+
+::: {#lst-nonmember-function-example lst-cap="An example of non-member function. Filename=`non_member_function_example.cpp`"}
+```{.cpp}
+{{< include ./cpp/non_member_function_example.cpp >}}
+```
+:::
+
 ## A member function example
 
-In this lesson, we'll use strucuts to show examples of member functions -- but everything we show here applies equally well to classes.
+In this lesson, we'll use structs to show examples of member functions -- but everything we show here applies equally well to classes.
 
-::: {#lst-class-like-struct lst-cap="An example of member function. Filename=`member_function_example.cpp`"}
+::: {#lst-member-function-example lst-cap="An example of member function. Filename=`member_function_example.cpp`"}
 ```{.cpp}
 {{< include ./cpp/member_function_example.cpp >}}
+```
+:::
+
+## Calling member functions and the implicit object
+
+- In the non-member example, we call
+  
+    ```{.cpp}
+    print(today)
+    ```
+- In the member example, we call 
+  
+    ```{.cpp}
+    today.print()
+    ```
+
+- In the member function case, we don't pass `today` as an argument.
+- The object is **implicitly** passed to the member function.
+- The object that member function is called on is called [**implicit object**]{style="color:red"}
+
+## Assessing members inside a member function uses the implicit object
+&#10149;&nbsp; In the non-member example, we define
+  
+```{.cpp}
+// non-member version of print
+void print(const Date& date)
+{
+    // member variables accessed using member selection operator (.)
+    std::cout << date.year << '/' << date.month << '/' << date.day;
+}
+```
+
+&#10149;&nbsp; In the member example, we define
+
+```{.cpp}
+void print() // defines a member function named print()
+{
+    std::cout << year << '/' << month << '/' << day;
+}
+```
+- We access the members as `year`, `month`, and `day`.
+- Any member identifier that is not prefixed with the member selection operator (`.`) is associated with the implicit object.
+- `year`, `month`, and `day` (which are not prefixed) evaluate to the values of `today.year`, `today.month`, and `today.day` respectively.
+- **Note**&nbsp; This looks different from Python you know: `self.year`, `self.month`, `self.day`.
+
+## Member functions can be overloaded
+
+::: {#lst-overload-member-function lst-cap="Member functions can be overloaded. Filename=`overload_member_functions.cpp`"}
+```{.cpp}
+{{< include ./cpp/overload_member_functions.cpp >}}
 ```
 :::

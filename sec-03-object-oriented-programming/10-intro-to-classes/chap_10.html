@@ -250,10 +250,167 @@
 <p>Note the requirement of experience with Java. For your record, <span style="color:red">Java is a pure OOP programming language</span>.</p>
 
 <img data-src="./figures/airbus-software-developer.png" class="r-stretch"></section>
-<section id="why-oop" class="slide level2">
-<h2>Why OOP</h2>
+<section id="why-oop-4-key-pillars-of-oop" class="slide level2">
+<h2>Why OOP: <span class="math inline">\(4\)</span> key pillars of OOP</h2>
 <div class="my-box">
 <p><em>I hope this is more than enough to convince you why we need to learn Object-Oriented Programming, especially in C++.</em></p>
+</div>
+<div class="fragment">
+<p>➥&nbsp; But that’s a very lazy explanation.</p>
+</div>
+<div class="fragment">
+<p>➥&nbsp; There are four <strong>key pillars in Object-Oriented Programming</strong></p>
+<ol type="1">
+<li><strong>Encapsulation</strong></li>
+<li><strong>Abstraction</strong></li>
+<li><strong>Inheritance</strong></li>
+<li><strong>Polymorphism</strong></li>
+</ol>
+<p>We shall quickly go through each of them, explain what they are and why they are.</p>
+</div>
+</section>
+<section id="encapsulation" class="slide level2">
+<h2>Encapsulation</h2>
+<p>✎&nbsp; <span style="color:red"><strong>Encapsulation</strong></span> is the practice of bundling data (variables) and methods (functions) that operate on that data into a single unit called <strong>class</strong>.</p>
+<p>✎&nbsp; It involves “hiding” the internal state of the object from the outside world to prevent accidental interference.</p>
+<div class="fragment">
+<ul>
+<li><p><strong>Example 1</strong>&nbsp; Remember what you learned in Python:</p>
+<ul>
+<li><code>ndarray</code> object in NumPy library</li>
+<li><code>Figure</code> object is returned when you plot <code>pyplot.plot(x, y)</code></li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><p><strong>Example 2</strong>&nbsp; Think of this code snippet <code>a = np.array([1, 'two', 3])</code>:</p>
+<ul>
+<li>The interpreter tells you the error and <em>exactly what kind of error you made</em>.</li>
+<li>This is because there is <em>a ton of checking behind the scene</em>, and <em>the user does not need to know.</em></li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><p><strong>Example 3</strong>&nbsp; Think of registering a student at UoG (python): <code>Student(name="Bull Shit", age=7)</code></p>
+<ul>
+<li>There must be some behind-the-scene checking, or otherwise mistakes can easily slip through.</li>
+<li>Inform the user that something is wrong.</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="encapsulation-1" class="slide level2">
+<h2>Encapsulation</h2>
+<p>In C++, we use <span style="color:red"><strong>access specifiers</strong></span> to achieve this:</p>
+<p>✎&nbsp; <code>private</code>: Members are only accessible within the class.</p>
+<p>✎&nbsp; <code>public</code>: Members are accessible from outside the class.</p>
+<div class="fragment">
+<ul>
+<li><strong>Example</strong>&nbsp; Think of a <strong>Bank Account</strong>
+<ul>
+<li>You should not be able to change the <code>balance</code> variable directly from outside – otherwise, the bank is F___ed up.</li>
+<li>You should have to use <code>deposit()</code> or <code>withdraw()</code> method that checks if the transaction is valid.</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="encapsulation-2" class="slide level2">
+<h2>Encapsulation</h2>
+<p>Encapsulation enhances <strong>security</strong>.</p>
+
+<img data-src="./figures/oop.jpg" class="r-stretch"></section>
+<section id="abstraction" class="slide level2">
+<h2>Abstraction</h2>
+<p>✎&nbsp; <span style="color:red"><strong>Abstraction</strong></span> is about <strong>simplifying</strong> things.</p>
+<p>✎&nbsp; It means showing only the essential features of an object and hiding the complex background details.</p>
+
+<img data-src="./figures/oop-abstraction.jpg" class="r-stretch"></section>
+<section id="abstraction-1" class="slide level2">
+<h2>Abstraction</h2>
+<p><span style="color:red"><strong>Why use abstraction</strong></span></p>
+<ul>
+<li><strong>Reduces complexity</strong>: We only deal with a high-level interface (from a user point of view)</li>
+<li><strong>Easy Maintaince</strong>: We can change the internal “engine” of our code (from a developer point of view) without changing how other people use it.</li>
+</ul>
+<div class="fragment">
+<ul>
+<li><strong>Example</strong>&nbsp; Think of a <strong>Coffee Machine</strong>:
+<ul>
+<li>only need to know which button to press</li>
+<li>no need to understand the internal water pressure, size of grind bean, etc.</li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><strong>Example</strong>&nbsp; We want to build a graphics app:
+<ul>
+<li><p>We want to “<em>draw</em>” different shapes, but the ways we draw a Circle and a Square are different.</p></li>
+<li><p>We create an <span style="color:red"><strong>Abstract Class</strong></span> called <strong>Shape</strong>. It acts as a blueprint that says: “Anything that is a shape must have a <code>draw()</code> method,</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href=""></a><span class="kw">class</span> Shape <span class="op">{</span></span>
+<span id="cb1-2"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb1-3"><a href=""></a>    <span class="co">// Pure virtual function makes this an Abstract Class</span></span>
+<span id="cb1-4"><a href=""></a>    <span class="kw">virtual</span> <span class="dt">void</span> draw<span class="op">()</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> </span>
+<span id="cb1-5"><a href=""></a><span class="op">};</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="encapsulation-vs-abstraction" class="slide level2">
+<h2>Encapsulation vs Abstraction</h2>
+<ul>
+<li><span style="color:red"><strong>Encapsulation</strong></span> is about <span style="color:blue"><strong>protection and data integrity</strong></span>.
+<ul>
+<li><strong>Example</strong>&nbsp; Check if a <code>battery_level</code> is negative</li>
+<li><strong>Example</strong>&nbsp; Check if a <code>withdrawl_amount</code> exeeds a balance</li>
+</ul></li>
+<li><span style="color:red"><strong>Abstraction</strong></span> is about <span style="color:blue"><strong>interface and simplification</strong></span>.
+<ul>
+<li><strong>Example</strong>&nbsp; Allow user to simply call <code>set_battery(50)</code> without having to see the <code>if (value &lt; 0)</code> logic hidden inside.</li>
+</ul></li>
+</ul>
+<p><strong>My own opinion</strong>:</p>
+<ul>
+<li>I try my best to find examples to illustrate these two points.</li>
+<li>Sometimes, I can get confused by myself.</li>
+<li>Some examples can sit at the intersection of both encapsulation &amp; abstraction.</li>
+<li>Don’t worry if you get confused after this 🤨</li>
+</ul>
+</section>
+<section id="inheritance" class="slide level2">
+<h2>Inheritance</h2>
+<p>✎&nbsp; <span style="color:red"><strong>Inheritance</strong></span> allows us to create a new class (<strong>Derived</strong> class or <strong>Child</strong> class) based on existing class (<strong>Base</strong> class or <strong>Parent</strong> class).</p>
+<p>✎&nbsp; The child class “<em>inherits</em>” the attributes and behaviors of the parent, which helps us <span style="color:red"><em>avoid writing the same code over and over again</em></span> ➜ <span style="color:blue">Don’t repeat yourself</span>.</p>
+<div class="fragment">
+<ul>
+<li><strong>Example</strong>&nbsp; An circle is an ellipse.
+<ul>
+<li>A circle is an ellipse with the same length of two axes.</li>
+<li>If one can draw an ellipse, there is no point to copy/paste the code to draw a circle.</li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><strong>Example</strong>&nbsp; Lecturer, Member of Teaching Office, Technician, Demonstrators are all Employee with names, age, salary, etc.
+<ul>
+<li>combine all common features and behaviors for all kinds of Employee</li>
+<li>bundle these features and behaviors into Employee</li>
+<li>no need to repeat code for each kind of Employee</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="polymorphism" class="slide level2">
+<h2>Polymorphism</h2>
+<p><span style="color:red"><strong>Polymorphism</strong></span> allows an object to be treated as an instance of its parent class, but still behave according to its own specific type.</p>
+<div class="fragment">
+<ul>
+<li><strong>Example</strong>&nbsp; We can have a list of different shapes and tell them all to <code>draw()</code>, and they will each “know” how to draw themselves correctly.</li>
+<li>We shall understand this pillar better when we reach this point.</li>
+</ul>
 </div>
 </section></section>
 <section>
@@ -307,12 +464,12 @@
 <li>A class is a <strong>program-defined</strong> data type. Sometimes, you hear <strong>user-defined</strong> data type.</li>
 <li>Classes are defined similarly to structs: Classes are defined using the <code>class</code> keyword, structs using the <code>struct</code> keyword.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href=""></a><span class="kw">class</span> Employee</span>
-<span id="cb1-2"><a href=""></a><span class="op">{</span></span>
-<span id="cb1-3"><a href=""></a>    <span class="dt">int</span> <span class="va">m_id</span> <span class="op">{};</span>            <span class="co">// m_ stands for member, m_id is the member variable</span></span>
-<span id="cb1-4"><a href=""></a>    <span class="dt">int</span> <span class="va">m_age</span> <span class="op">{};</span></span>
-<span id="cb1-5"><a href=""></a>    <span class="dt">double</span> <span class="va">m_wage</span> <span class="op">{};</span>   </span>
-<span id="cb1-6"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href=""></a><span class="kw">class</span> Employee</span>
+<span id="cb2-2"><a href=""></a><span class="op">{</span></span>
+<span id="cb2-3"><a href=""></a>    <span class="dt">int</span> <span class="va">m_id</span> <span class="op">{};</span>            <span class="co">// m_ stands for member, m_id is the member variable</span></span>
+<span id="cb2-4"><a href=""></a>    <span class="dt">int</span> <span class="va">m_age</span> <span class="op">{};</span></span>
+<span id="cb2-5"><a href=""></a>    <span class="dt">double</span> <span class="va">m_wage</span> <span class="op">{};</span>   </span>
+<span id="cb2-6"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Naming convention</strong></p>
 <p>➥&nbsp; The prefix <code>m_</code> is used to signify the member variables of a class.</p>
 <p>➥&nbsp; We discuss why member variables of a class are often prefixed with an <code>m_</code> in upcoming lesson.</p>
@@ -325,19 +482,19 @@
 <h2>Naming convention: Which to choose</h2>
 <ul>
 <li><p>Several companies and wide industry adopt the prefix <code>m_</code> naming convention.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href=""></a><span class="kw">class</span> Employee</span>
-<span id="cb2-2"><a href=""></a><span class="op">{</span></span>
-<span id="cb2-3"><a href=""></a>    <span class="dt">int</span> <span class="va">m_id</span> <span class="op">{};</span></span>
-<span id="cb2-4"><a href=""></a>    <span class="dt">int</span> <span class="va">m_age</span> <span class="op">{};</span></span>
-<span id="cb2-5"><a href=""></a>    <span class="dt">double</span> <span class="va">m_wage</span> <span class="op">{};</span>   </span>
-<span id="cb2-6"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Google suggests trailing underscore, such as <code>id_</code>, <code>age_</code>, and <code>wage_</code></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href=""></a><span class="kw">class</span> Employee</span>
 <span id="cb3-2"><a href=""></a><span class="op">{</span></span>
-<span id="cb3-3"><a href=""></a>    <span class="dt">int</span> <span class="va">id_</span> <span class="op">{};</span></span>
-<span id="cb3-4"><a href=""></a>    <span class="dt">int</span> <span class="va">age_</span> <span class="op">{};</span></span>
-<span id="cb3-5"><a href=""></a>    <span class="dt">double</span> <span class="va">wage_</span> <span class="op">{}</span></span>
+<span id="cb3-3"><a href=""></a>    <span class="dt">int</span> <span class="va">m_id</span> <span class="op">{};</span></span>
+<span id="cb3-4"><a href=""></a>    <span class="dt">int</span> <span class="va">m_age</span> <span class="op">{};</span></span>
+<span id="cb3-5"><a href=""></a>    <span class="dt">double</span> <span class="va">m_wage</span> <span class="op">{};</span>   </span>
 <span id="cb3-6"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Google suggests trailing underscore, such as <code>id_</code>, <code>age_</code>, and <code>wage_</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb4-1"><a href=""></a><span class="kw">class</span> Employee</span>
+<span id="cb4-2"><a href=""></a><span class="op">{</span></span>
+<span id="cb4-3"><a href=""></a>    <span class="dt">int</span> <span class="va">id_</span> <span class="op">{};</span></span>
+<span id="cb4-4"><a href=""></a>    <span class="dt">int</span> <span class="va">age_</span> <span class="op">{};</span></span>
+<span id="cb4-5"><a href=""></a>    <span class="dt">double</span> <span class="va">wage_</span> <span class="op">{}</span></span>
+<span id="cb4-6"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 </ul>
 <p>➥&nbsp; We’ll use the prefix <code>m_</code> convention as intelliSense will suggest variable names when we type <code>m_</code>.</p>
 </section>
@@ -350,28 +507,28 @@
 Listing&nbsp;1: A <code>class</code> behaves like a <code>struct</code> by declaring member variables <code>public</code>. Filename=<code>class_just_like_struct.cpp</code>
 </figcaption>
 <div aria-describedby="lst-class-like-struct-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb4-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
-<span id="cb4-2"><a href=""></a></span>
-<span id="cb4-3"><a href=""></a><span class="kw">class</span> Date       <span class="co">// we changed struct to class</span></span>
-<span id="cb4-4"><a href=""></a><span class="op">{</span></span>
-<span id="cb4-5"><a href=""></a><span class="kw">public</span><span class="op">:</span>          <span class="co">// and added this line, which is called an access specifier</span></span>
-<span id="cb4-6"><a href=""></a>    <span class="dt">int</span> <span class="va">m_day</span><span class="op">{};</span> <span class="co">// and added "m_" prefixes to each of the member names</span></span>
-<span id="cb4-7"><a href=""></a>    <span class="dt">int</span> <span class="va">m_month</span><span class="op">{};</span></span>
-<span id="cb4-8"><a href=""></a>    <span class="dt">int</span> <span class="va">m_year</span><span class="op">{};</span></span>
-<span id="cb4-9"><a href=""></a><span class="op">};</span></span>
-<span id="cb4-10"><a href=""></a></span>
-<span id="cb4-11"><a href=""></a><span class="dt">void</span> print_date<span class="op">(</span><span class="at">const</span> Date<span class="op">&amp;</span> date<span class="op">)</span></span>
-<span id="cb4-12"><a href=""></a><span class="op">{</span></span>
-<span id="cb4-13"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> date<span class="op">.</span><span class="va">m_day</span> <span class="op">&lt;&lt;</span> <span class="ch">'/'</span> <span class="op">&lt;&lt;</span> date<span class="op">.</span><span class="va">m_month</span> <span class="op">&lt;&lt;</span> <span class="ch">'/'</span> <span class="op">&lt;&lt;</span> date<span class="op">.</span><span class="va">m_year</span><span class="op">;</span></span>
-<span id="cb4-14"><a href=""></a><span class="op">}</span></span>
-<span id="cb4-15"><a href=""></a></span>
-<span id="cb4-16"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
-<span id="cb4-17"><a href=""></a><span class="op">{</span></span>
-<span id="cb4-18"><a href=""></a>    Date date<span class="op">{</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">21</span> <span class="op">};</span></span>
-<span id="cb4-19"><a href=""></a>    print_date<span class="op">(</span>date<span class="op">);</span></span>
-<span id="cb4-20"><a href=""></a></span>
-<span id="cb4-21"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb4-22"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb5-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb5-2"><a href=""></a></span>
+<span id="cb5-3"><a href=""></a><span class="kw">class</span> Date       <span class="co">// we changed struct to class</span></span>
+<span id="cb5-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb5-5"><a href=""></a><span class="kw">public</span><span class="op">:</span>          <span class="co">// and added this line, which is called an access specifier</span></span>
+<span id="cb5-6"><a href=""></a>    <span class="dt">int</span> <span class="va">m_day</span><span class="op">{};</span> <span class="co">// and added "m_" prefixes to each of the member names</span></span>
+<span id="cb5-7"><a href=""></a>    <span class="dt">int</span> <span class="va">m_month</span><span class="op">{};</span></span>
+<span id="cb5-8"><a href=""></a>    <span class="dt">int</span> <span class="va">m_year</span><span class="op">{};</span></span>
+<span id="cb5-9"><a href=""></a><span class="op">};</span></span>
+<span id="cb5-10"><a href=""></a></span>
+<span id="cb5-11"><a href=""></a><span class="dt">void</span> print_date<span class="op">(</span><span class="at">const</span> Date<span class="op">&amp;</span> date<span class="op">)</span></span>
+<span id="cb5-12"><a href=""></a><span class="op">{</span></span>
+<span id="cb5-13"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> date<span class="op">.</span><span class="va">m_day</span> <span class="op">&lt;&lt;</span> <span class="ch">'/'</span> <span class="op">&lt;&lt;</span> date<span class="op">.</span><span class="va">m_month</span> <span class="op">&lt;&lt;</span> <span class="ch">'/'</span> <span class="op">&lt;&lt;</span> date<span class="op">.</span><span class="va">m_year</span><span class="op">;</span></span>
+<span id="cb5-14"><a href=""></a><span class="op">}</span></span>
+<span id="cb5-15"><a href=""></a></span>
+<span id="cb5-16"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb5-17"><a href=""></a><span class="op">{</span></span>
+<span id="cb5-18"><a href=""></a>    Date date<span class="op">{</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">21</span> <span class="op">};</span></span>
+<span id="cb5-19"><a href=""></a>    print_date<span class="op">(</span>date<span class="op">);</span></span>
+<span id="cb5-20"><a href=""></a></span>
+<span id="cb5-21"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-22"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
@@ -402,38 +559,153 @@ Listing&nbsp;1: A <code>class</code> behaves like a <code>struct</code> by decla
 <li>Functions that are not member functions are called <span style="color:red"><strong>non-member functions</strong></span>.</li>
 </ul>
 </section>
+<section id="a-non-member-function-example" class="slide level2">
+<h2>A non-member function example</h2>
+<p>Let us look at the following example:</p>
+<div id="lst-nonmember-function-example" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-nonmember-function-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;2: An example of non-member function. Filename=<code>non_member_function_example.cpp</code>
+</figcaption>
+<div aria-describedby="lst-nonmember-function-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb6-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb6-2"><a href=""></a></span>
+<span id="cb6-3"><a href=""></a><span class="kw">struct</span> Date</span>
+<span id="cb6-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb6-5"><a href=""></a>    <span class="co">// here are our member variables</span></span>
+<span id="cb6-6"><a href=""></a>    <span class="dt">int</span> year <span class="op">{};</span></span>
+<span id="cb6-7"><a href=""></a>    <span class="dt">int</span> month <span class="op">{};</span></span>
+<span id="cb6-8"><a href=""></a>    <span class="dt">int</span> day <span class="op">{};</span></span>
+<span id="cb6-9"><a href=""></a><span class="op">};</span></span>
+<span id="cb6-10"><a href=""></a></span>
+<span id="cb6-11"><a href=""></a><span class="dt">void</span> print<span class="op">(</span><span class="at">const</span> Date<span class="op">&amp;</span> date<span class="op">)</span></span>
+<span id="cb6-12"><a href=""></a><span class="op">{</span></span>
+<span id="cb6-13"><a href=""></a>    <span class="co">// member variables accessed using member selection operator (.)</span></span>
+<span id="cb6-14"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> date<span class="op">.</span>year <span class="op">&lt;&lt;</span> <span class="ch">'/'</span> <span class="op">&lt;&lt;</span> date<span class="op">.</span>month <span class="op">&lt;&lt;</span> <span class="ch">'/'</span> <span class="op">&lt;&lt;</span> date<span class="op">.</span>day<span class="op">;</span></span>
+<span id="cb6-15"><a href=""></a><span class="op">}</span></span>
+<span id="cb6-16"><a href=""></a></span>
+<span id="cb6-17"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb6-18"><a href=""></a><span class="op">{</span></span>
+<span id="cb6-19"><a href=""></a>    Date today <span class="op">{</span> <span class="dv">2026</span><span class="op">,</span> <span class="bn">02</span><span class="op">,</span> <span class="dv">27</span> <span class="op">};</span> <span class="co">// aggregate initialize our struct</span></span>
+<span id="cb6-20"><a href=""></a></span>
+<span id="cb6-21"><a href=""></a>    today<span class="op">.</span>day <span class="op">=</span> <span class="dv">16</span><span class="op">;</span> <span class="co">// member variables accessed using member selection operator (.)</span></span>
+<span id="cb6-22"><a href=""></a>    print<span class="op">(</span>today<span class="op">);</span>   <span class="co">// non-member function accessed using normal calling convention</span></span>
+<span id="cb6-23"><a href=""></a></span>
+<span id="cb6-24"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-25"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section>
 <section id="a-member-function-example" class="slide level2">
 <h2>A member function example</h2>
-<p>In this lesson, we’ll use strucuts to show examples of member functions – but everything we show here applies equally well to classes.</p>
-<div id="lst-class-like-struct" class="listing quarto-float quarto-figure quarto-figure-left">
+<p>In this lesson, we’ll use structs to show examples of member functions – but everything we show here applies equally well to classes.</p>
+<div id="lst-member-function-example" class="listing quarto-float quarto-figure quarto-figure-left">
 <figure class="quarto-float quarto-float-lst">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-class-like-struct-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listing&nbsp;2: An example of member function. Filename=<code>member_function_example.cpp</code>
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-member-function-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;3: An example of member function. Filename=<code>member_function_example.cpp</code>
 </figcaption>
-<div aria-describedby="lst-class-like-struct-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb5-1"><a href=""></a><span class="co">// Member function version</span></span>
-<span id="cb5-2"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
-<span id="cb5-3"><a href=""></a></span>
-<span id="cb5-4"><a href=""></a><span class="kw">struct</span> Date</span>
-<span id="cb5-5"><a href=""></a><span class="op">{</span></span>
-<span id="cb5-6"><a href=""></a>    <span class="dt">int</span> year <span class="op">{};</span>        <span class="co">// we don't use m_ here for struct.</span></span>
-<span id="cb5-7"><a href=""></a>    <span class="dt">int</span> month <span class="op">{};</span></span>
-<span id="cb5-8"><a href=""></a>    <span class="dt">int</span> day <span class="op">{};</span></span>
-<span id="cb5-9"><a href=""></a></span>
-<span id="cb5-10"><a href=""></a>    <span class="dt">void</span> print<span class="op">()</span> <span class="co">// defines a member function named print</span></span>
-<span id="cb5-11"><a href=""></a>    <span class="op">{</span></span>
-<span id="cb5-12"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> year <span class="op">&lt;&lt;</span> <span class="ch">'/'</span> <span class="op">&lt;&lt;</span> month <span class="op">&lt;&lt;</span> <span class="ch">'/'</span> <span class="op">&lt;&lt;</span> day<span class="op">;</span></span>
-<span id="cb5-13"><a href=""></a>    <span class="op">}</span></span>
-<span id="cb5-14"><a href=""></a><span class="op">};</span></span>
-<span id="cb5-15"><a href=""></a></span>
-<span id="cb5-16"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
-<span id="cb5-17"><a href=""></a><span class="op">{</span></span>
-<span id="cb5-18"><a href=""></a>    Date today <span class="op">{</span> <span class="dv">2020</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">14</span> <span class="op">};</span> <span class="co">// aggregate initialize our struct</span></span>
-<span id="cb5-19"><a href=""></a>    today<span class="op">.</span>day <span class="op">=</span> <span class="dv">16</span><span class="op">;</span> <span class="co">// member variables accessed using member selection operator (.)</span></span>
-<span id="cb5-20"><a href=""></a>    today<span class="op">.</span>print<span class="op">();</span>  <span class="co">// member functions also accessed using member selection operator (.)</span></span>
-<span id="cb5-21"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
-<span id="cb5-22"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb5-23"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div aria-describedby="lst-member-function-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb7-1"><a href=""></a><span class="co">// Member function version</span></span>
+<span id="cb7-2"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb7-3"><a href=""></a></span>
+<span id="cb7-4"><a href=""></a><span class="kw">struct</span> Date</span>
+<span id="cb7-5"><a href=""></a><span class="op">{</span></span>
+<span id="cb7-6"><a href=""></a>    <span class="dt">int</span> year <span class="op">{};</span>        <span class="co">// we don't use m_ here for struct.</span></span>
+<span id="cb7-7"><a href=""></a>    <span class="dt">int</span> month <span class="op">{};</span></span>
+<span id="cb7-8"><a href=""></a>    <span class="dt">int</span> day <span class="op">{};</span></span>
+<span id="cb7-9"><a href=""></a></span>
+<span id="cb7-10"><a href=""></a>    <span class="dt">void</span> print<span class="op">()</span> <span class="co">// defines a member function named print</span></span>
+<span id="cb7-11"><a href=""></a>    <span class="op">{</span></span>
+<span id="cb7-12"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> year <span class="op">&lt;&lt;</span> <span class="ch">'/'</span> <span class="op">&lt;&lt;</span> month <span class="op">&lt;&lt;</span> <span class="ch">'/'</span> <span class="op">&lt;&lt;</span> day<span class="op">;</span></span>
+<span id="cb7-13"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb7-14"><a href=""></a><span class="op">};</span></span>
+<span id="cb7-15"><a href=""></a></span>
+<span id="cb7-16"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb7-17"><a href=""></a><span class="op">{</span></span>
+<span id="cb7-18"><a href=""></a>    Date today <span class="op">{</span> <span class="dv">2026</span><span class="op">,</span> <span class="bn">02</span><span class="op">,</span> <span class="dv">26</span> <span class="op">};</span> <span class="co">// aggregate initialize our struct</span></span>
+<span id="cb7-19"><a href=""></a>    today<span class="op">.</span>day <span class="op">=</span> <span class="dv">16</span><span class="op">;</span> <span class="co">// member variables accessed using member selection operator (.)</span></span>
+<span id="cb7-20"><a href=""></a>    today<span class="op">.</span>print<span class="op">();</span>  <span class="co">// member functions also accessed using member selection operator (.)</span></span>
+<span id="cb7-21"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb7-22"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-23"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section>
+<section id="calling-member-functions-and-the-implicit-object" class="slide level2">
+<h2>Calling member functions and the implicit object</h2>
+<ul>
+<li><p>In the non-member example, we call</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb8-1"><a href=""></a>print<span class="op">(</span>today<span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>In the member example, we call</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb9-1"><a href=""></a>today<span class="op">.</span>print<span class="op">()</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>In the member function case, we don’t pass <code>today</code> as an argument.</p></li>
+<li><p>The object is <strong>implicitly</strong> passed to the member function.</p></li>
+<li><p>The object that member function is called on is called <span style="color:red"><strong>implicit object</strong></span></p></li>
+</ul>
+</section>
+<section id="assessing-members-inside-a-member-function-uses-the-implicit-object" class="slide level2">
+<h2>Assessing members inside a member function uses the implicit object</h2>
+<p>➥&nbsp; In the non-member example, we define</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb10-1"><a href=""></a><span class="co">// non-member version of print</span></span>
+<span id="cb10-2"><a href=""></a><span class="dt">void</span> print<span class="op">(</span><span class="at">const</span> Date<span class="op">&amp;</span> date<span class="op">)</span></span>
+<span id="cb10-3"><a href=""></a><span class="op">{</span></span>
+<span id="cb10-4"><a href=""></a>    <span class="co">// member variables accessed using member selection operator (.)</span></span>
+<span id="cb10-5"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> date<span class="op">.</span>year <span class="op">&lt;&lt;</span> <span class="ch">'/'</span> <span class="op">&lt;&lt;</span> date<span class="op">.</span>month <span class="op">&lt;&lt;</span> <span class="ch">'/'</span> <span class="op">&lt;&lt;</span> date<span class="op">.</span>day<span class="op">;</span></span>
+<span id="cb10-6"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>➥&nbsp; In the member example, we define</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb11-1"><a href=""></a><span class="dt">void</span> print<span class="op">()</span> <span class="co">// defines a member function named print()</span></span>
+<span id="cb11-2"><a href=""></a><span class="op">{</span></span>
+<span id="cb11-3"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> year <span class="op">&lt;&lt;</span> <span class="ch">'/'</span> <span class="op">&lt;&lt;</span> month <span class="op">&lt;&lt;</span> <span class="ch">'/'</span> <span class="op">&lt;&lt;</span> day<span class="op">;</span></span>
+<span id="cb11-4"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>We access the members as <code>year</code>, <code>month</code>, and <code>day</code>.</li>
+<li>Any member identifier that is not prefixed with the member selection operator (<code>.</code>) is associated with the implicit object.</li>
+<li><code>year</code>, <code>month</code>, and <code>day</code> (which are not prefixed) evaluate to the values of <code>today.year</code>, <code>today.month</code>, and <code>today.day</code> respectively.</li>
+<li><strong>Note</strong>&nbsp; This looks different from Python you know: <code>self.year</code>, <code>self.month</code>, <code>self.day</code>.</li>
+</ul>
+</section>
+<section id="member-functions-can-be-overloaded" class="slide level2">
+<h2>Member functions can be overloaded</h2>
+<div id="lst-overload-member-function" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-overload-member-function-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;4: Member functions can be overloaded. Filename=<code>overload_member_functions.cpp</code>
+</figcaption>
+<div aria-describedby="lst-overload-member-function-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb12-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb12-2"><a href=""></a><span class="pp">#include </span><span class="im">&lt;string_view&gt;</span></span>
+<span id="cb12-3"><a href=""></a></span>
+<span id="cb12-4"><a href=""></a><span class="kw">struct</span> Date</span>
+<span id="cb12-5"><a href=""></a><span class="op">{</span></span>
+<span id="cb12-6"><a href=""></a>    <span class="dt">int</span> year <span class="op">{};</span></span>
+<span id="cb12-7"><a href=""></a>    <span class="dt">int</span> month <span class="op">{};</span></span>
+<span id="cb12-8"><a href=""></a>    <span class="dt">int</span> day <span class="op">{};</span></span>
+<span id="cb12-9"><a href=""></a></span>
+<span id="cb12-10"><a href=""></a>    <span class="dt">void</span> print<span class="op">()</span></span>
+<span id="cb12-11"><a href=""></a>    <span class="op">{</span></span>
+<span id="cb12-12"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> year <span class="op">&lt;&lt;</span> <span class="ch">'/'</span> <span class="op">&lt;&lt;</span> month <span class="op">&lt;&lt;</span> <span class="ch">'/'</span> <span class="op">&lt;&lt;</span> day<span class="op">;</span></span>
+<span id="cb12-13"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb12-14"><a href=""></a></span>
+<span id="cb12-15"><a href=""></a>    <span class="dt">void</span> print<span class="op">(</span><span class="bu">std::</span>string_view prefix<span class="op">)</span></span>
+<span id="cb12-16"><a href=""></a>    <span class="op">{</span></span>
+<span id="cb12-17"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> prefix <span class="op">&lt;&lt;</span> year <span class="op">&lt;&lt;</span> <span class="ch">'/'</span> <span class="op">&lt;&lt;</span> month <span class="op">&lt;&lt;</span> <span class="ch">'/'</span> <span class="op">&lt;&lt;</span> day<span class="op">;</span></span>
+<span id="cb12-18"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb12-19"><a href=""></a><span class="op">};</span></span>
+<span id="cb12-20"><a href=""></a></span>
+<span id="cb12-21"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb12-22"><a href=""></a><span class="op">{</span></span>
+<span id="cb12-23"><a href=""></a>    Date today <span class="op">{</span> <span class="dv">2020</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">14</span> <span class="op">};</span></span>
+<span id="cb12-24"><a href=""></a></span>
+<span id="cb12-25"><a href=""></a>    today<span class="op">.</span>print<span class="op">();</span> <span class="co">// calls Date::print()</span></span>
+<span id="cb12-26"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb12-27"><a href=""></a></span>
+<span id="cb12-28"><a href=""></a>    today<span class="op">.</span>print<span class="op">(</span><span class="st">"The date is: "</span><span class="op">);</span> <span class="co">// calls Date::print(std::string_view)</span></span>
+<span id="cb12-29"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb12-30"><a href=""></a></span>
+<span id="cb12-31"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb12-32"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
