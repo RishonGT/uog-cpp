@@ -3,14 +3,10 @@
 
 struct Date
 {
-    int year {};
-    int month {};
-    int day {};
-
+    int year {}; int month {}; int day {};  // Do not write like this! Save space for slide
     void print() {
         std::cout << year << '/' << month << '/' << day;
     }
-
     void print(std::string_view prefix) {
         std::cout << prefix << year << '/' << month << '/' << day;
     }

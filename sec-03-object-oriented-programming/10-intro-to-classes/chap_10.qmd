@@ -5,6 +5,8 @@ author: |
     <br>Lecturer in Multiscale Materials
     <br><khiem.nguyen@glasgow.ac.uk>
 author-meta: "Lecturer in Multiscale Materials"
+filters:
+  - pencil.lua
 format: 
     revealjs:
         theme: simple   # other themes: beige, blood, dark, dracula, league, moon, night, serif, simple, sky, solarized
@@ -72,11 +74,11 @@ _I hope this is more than enough to convince you why we need to learn Object-Ori
 :::
 
 :::{.fragment}
-&#10149;&nbsp; But that's a very lazy explanation.
+&#9998;&nbsp; But that's a very lazy explanation.
 :::
 
 ::: {.fragment}
-&#10149;&nbsp; There are four **key pillars in Object-Oriented Programming**
+&#9998;&nbsp; There are four **key pillars in Object-Oriented Programming**
 
 1. **Encapsulation**
 2. **Abstraction**
@@ -271,9 +273,9 @@ class Employee
 
 **Naming convention**
 
-&#10149;&nbsp; The prefix `m_` is used to signify the member variables of a class.
+&#9998;&nbsp; The prefix `m_` is used to signify the member variables of a class.
 
-&#10149;&nbsp; We discuss why member variables of a class are often prefixed with an `m_` in upcoming lesson.
+&#9998;&nbsp; We discuss why member variables of a class are often prefixed with an `m_` in upcoming lesson.
 
 ## Naming convention: Google style
 
@@ -282,7 +284,7 @@ class Employee
 ## Naming convention: Which to choose
 
 
-- Several companies and wide industry adopt the prefix `m_` naming convention.
+- Several companies and wide industry have adopted the prefix `m_` naming convention.
     
     ```{.cpp}
     class Employee
@@ -303,7 +305,17 @@ class Employee
     }
     ```
 
-&#10149;&nbsp; We'll use the prefix `m_` convention as intelliSense will suggest variable names when we type `m_`.
+&#9998;&nbsp; When we use the prefix `m_` convention, the intelliSense will suggest variable names when we type `m_`.
+
+## Naming convention: Which to choose ... and But
+
+- The prefix `m_` or the suffix `_` help us to avoid **name shadowing** in **class constructors**.
+- When you learn more about modern C++ (in our lectures actually), you soon recognize: we don't even need the above naming conventions. 
+
+Conclusion:
+
+- I would prefer not to use the prefix naming convention `m_` in our lectures.
+- Saying that, sometimes I mix the convention `m_` in on purpose (or maybe by forgetting). 
 
 ## A `class` can implement a `struct`
 
@@ -329,7 +341,10 @@ In fact, most of the non-aliased types in the standard library are defined as cl
 Classes are really the heart and soul of C++ -- they are so foundational that C++ was originally named “C with classes”!
 :::
 
-# Member functions
+# Member functions and implicit objects
+
+- In this Section, we shall use `struct` to demonstrate the concepts. 
+- By using `struct`, I can demonstrate that `struct` and `class` are technically almost the same.
 
 ## Member functions
 - In addition to having member variables, `class` types (which include `struct`, `class`, `union`) can have their own functions.
@@ -373,7 +388,7 @@ In this lesson, we'll use structs to show examples of member functions -- but ev
 - The object that member function is called on is called [**implicit object**]{style="color:red"}
 
 ## Assessing members inside a member function uses the implicit object
-&#10149;&nbsp; In the non-member example, we define
+&#9998;&nbsp; In the non-member example, we define
   
 ```{.cpp}
 // non-member version of print
@@ -384,7 +399,7 @@ void print(const Date& date)
 }
 ```
 
-&#10149;&nbsp; In the member example, we define
+&#9998;&nbsp; In the member example, we define
 
 ```{.cpp}
 void print() // defines a member function named print()
@@ -395,12 +410,271 @@ void print() // defines a member function named print()
 - We access the members as `year`, `month`, and `day`.
 - Any member identifier that is not prefixed with the member selection operator (`.`) is associated with the implicit object.
 - `year`, `month`, and `day` (which are not prefixed) evaluate to the values of `today.year`, `today.month`, and `today.day` respectively.
-- **Note**&nbsp; This looks different from Python you know: `self.year`, `self.month`, `self.day`.
+
+## A comparison to OOP in Python
+
+```{.python}
+class Date:
+  def __init__(self, year=2026, month=2, date=28): # we learn constructor in C++ soon
+    self.year = year        
+    self.month = month
+    self.date = date
+  def print(self):
+    print(f"{self.year}/{self.month}/{self.date}")  # we don't have self. in C++
+
+# Use this class in global scope
+today = Date(2026,2,26) # when this lecture first took place
+today.print()
+# How about this: I know that many of you did not learn it in 
+# Introductory Programming 2. I am cooler :D
+Date.print(today) # exposes the implicit object in the statement today.print()
+```
+
+## A comparison to OOP in Python: Repeat last slide
+```{.python}
+class Date:
+  # blah blah
+  
+  def print(self):
+    print(f"{self.year}/{self.month}/{self.date}")  # we don't have self. in C++
+# Use this class in global scope
+today = Date(2026,2,26) # when this lecture first took place
+today.print()
+Date.print(today)   # this exposes the implicit object in the statement today.print()
+```
+
+- What we have just learned in C++ looks different from Python you know. We don't have `self`: `self.year`, `self.month`, `self.day`.
+- We shall learn an equivalence of `self` of Python in C++.
+- Statement `Date.print(today)` exposes the implicit object in statement `today.print()`
+
+## A comparison to OOP in Python: But Python is not as serious as C++
+```{.python}
+#| error: true
+class Date:
+  def __init__(self, year=2026, month=2, date=28): # we learn constructor in C++ soon
+    self.year = year        
+    self.month = month
+    self.date = date
+  
+  def print(self):
+    print(f"{self.year}/{self.month}/{self.date}")  # we don't have self. in C++
+# Use this class in global scope
+today = Date(2026,2,26) # when this lecture first took place
+my_name = "khiem"
+Date.print(my_name) # SYNTAX Correct, but run time error. my_name.year does not exist
+```
+
+## A comparison to OOP in Python: But Python is not as serious as C++
+
+```{.python}
+#| error: true
+class Date:
+  def __init__(self, year=2026, month=2, date=28): # we learn constructor in C++ soon
+    self.year, self.month, self.date = year, month, date
+  def print(self):
+    print(f"{self.year}/{self.month}/{self.date}")  # we don't have self. in C++
+
+class Foo:
+  def __init__(self):
+    self.year, self.month, self.date = "one", "two", 3
+# Use this class in global scope
+today = Date(2026,2,26) # when this lecture first took place
+foo_object = Foo()
+
+# SYNTAX correct, and Code run fine too. But it is just nonsense
+Date.print(foo_object) 
+```
+
 
 ## Member functions can be overloaded
+&#9998;&nbsp; Just like non-member functions, member functions can be overloaded.
 
 ::: {#lst-overload-member-function lst-cap="Member functions can be overloaded. Filename=`overload_member_functions.cpp`"}
 ```{.cpp}
 {{< include ./cpp/overload_member_functions.cpp >}}
 ```
 :::
+
+## Structs and member functions: A bit of history
+
+:::{.incremental}
+- In C, structs only have data members, not member functions.
+- While designing classes in C++, Bjarne Stroustrup considered whether structs (which were inherited from C) should be granted the ability to have member functions. 
+- Upon consideration, he determined that they should.
+- In modern C++, it is fine for structs to have member functions.
+:::
+
+:::{.my-box}
+&#9998;&nbsp; Both structs and classes are called [**class type**]{style="color:red"}
+:::
+
+# Const class objects and const member functions
+
+&#9998;&nbsp; Again, we shall use `struct` for examples in this section.
+
+## Const variables: A quick revisit
+- We learn: All const variables must be initialized at time of creation
+  ```{.cpp}
+  const int x { 42 }; 
+  const double double z {};    // initialze to zero.
+  ```
+- Similarly, class type objects can be made const using `const` keyword
+  ```{.cpp}
+  struct Date
+  {
+      int year {};
+      int month {};
+      int day {};
+  };
+  int main()
+  {
+      // const class type object
+      const Date today { 2020, 10, 14 };
+      return 0;
+  }
+  ```
+
+## Modifying the data members of const objects is disallowed
+
+&#9998;&nbsp; Any attempt to modify the data members of the object is disallowed.
+
+::: {#lst-modify-const-objects lst-cap="Modifying the data members of const objects is disallowed. Filename=`modify_members_of_const_objects.cpp`"}
+```{.cpp}
+{{< include ./cpp/modify_members_of_const_objects.cpp >}}
+```
+:::
+
+&#10149;&nbsp; Show the code with uncommented code. IntelliSense picked up the error before compilation.
+
+## Const objects may not call non-const member functions
+
+&#9998;&nbsp; You may be surprised that the following code causes compilation error.
+
+::: {#lst-modify-const-objects lst-cap="const object calling the non-const member functions will create compilation error." Filename=`const_objects_call_non_const_mem_functions.cpp`"}
+```{.cpp}
+{{< include ./cpp/const_objects_call_non_const_mem_functions.cpp >}}
+```
+:::
+
+## Const member functions
+
+&#9998;&nbsp; To address the above issue, we make `print()` a const member function.
+
+&#9998;&nbsp; A [**const member function**]{style="color:red"} is a member function that guarantees it will not modify the object or call any non-const member functions (as they may modify the object)
+
+::: {#lst-const-member-functions lst-cap="const member function can be called by const objects. Filename=`const_member_functions.cpp`"}
+```{.cpp}
+{{< include ./cpp/const_member_functions.cpp >}}
+```
+:::
+
+## Const member functions
+
+&#9998;&nbsp; **Not a surprise**: A const member function that attempts to change a data member or call a non-const member function will cause a compiler error to occur.
+
+::: {#lst-const-mem-function-change-mem-data lst-cap="A const member function cannot change data members. Filename=`const_member_functions_change_data_members.cpp`"}
+```{.cpp}
+{{< include ./cpp/const_member_functions_change_data_members.cpp >}}
+```
+:::
+
+
+## Const member functions can be called on non-const objects
+
+&#9998;&nbsp; **Not a surprise** (again): Const member functions may also be called on non-const objects.
+
+  - We promise the compiler _const member functions won't change the data members._
+  - Indeed, non-const objects calling const member functions cannot break such promise.
+
+## Const member functions can be called on non-const objects
+
+::: {#lst-nonconst-obj-call-const-memfunc lst-cap="A non-const object can call const member functions because it cannot break the promise of constant-ness. Filename=`nonconst_objects_call_const_mem_functions.cpp`"}
+```{.cpp}
+{{< include ./cpp/nonconst_objects_call_const_mem_functions.cpp >}}
+```
+:::
+
+## Const member functions can be called on non-const objects
+
+::: {.my-box}
+A member function that does not (and will not ever) modify the state of the object should be made const, so that it can be called on both const and non-const objects.
+:::
+
+## Wait a minute: What a mess
+
+- How am I supposed to remember all the const-ness thingys.
+- I am not even Tony Stark or Spider Man.
+
+
+:::{.fragment}
+So, I asked Gemini: 
+
+_There are too many things to remember about making function const and making reference const in writing C++ code to deal with const objects. Can you please give me one or two single golden rule so that I remember what I should do?_
+
+Gemini answers me (I shortened it a bit): 
+:::
+
+::: {.fragment}
+::: {.my-box}
+If you are working with **structs** or **classes**, here are the two golden rules that will cover 95% of your needs.
+
+&#9998;&nbsp; [**Rule 1**]{style="color:red"} The "[Read-Only]{style="color:blue"}" Rule (For Functions)
+
+&nbsp;&nbsp;&nbsp;&nbsp; If a function does not change the object's data, mark it `const` at the end.
+
+&nbsp;&nbsp;&nbsp;&nbsp; Think of it as a promise to the compiler.
+
+
+&#9998;&nbsp; [**Rule 2**]{style="color:red"} The "[Efficient Pass]{style="color:blue"}" Rule (For Parameters)
+
+&nbsp;&nbsp;&nbsp;&nbsp; Always pass objects by `const &` (const reference) unless they are tiny or we need to modify its value.
+:::
+:::
+&#10149;&nbsp; Let us combine both rules into one example
+
+## Const objects via pass by const reference
+
+:::{.fragment}
+[**Recap:**]{style="color:magenta"}
+
+- Passing a class type argument by value causes a copy of the class to be made -- which is slow.
+- **Passing by reference avoids making a copy.**
+:::
+
+:::{.fragment}
+[**Note**]{style="color:magenta"}
+
+- Note that modifying the argument's value is not the key point. It is a side effect.
+- If we add `const` qualifier, we cannot modify the arguments' value.
+- Of course, _we wish to modify the argument's value in reasonable cases._
+:::
+
+::: {.fragment}
+[**Another Note**]{style="color:magenta"}
+
+- Instantiating const local variables is one way to create const objects
+- Another common way to get a const object is [_by passing an object to a function by const reference. But, this only holds from the perspective of that function._]{style="color:red"}
+:::
+
+## Const objects via pass by const reference
+
+**Question**&nbsp; What's wrong with the following code?
+
+::: {#lst-const-objects-via-pass-by-const-ref-01 lst-cap="Passing an object by const reference make the object const in the perspective of the function. Filename=`const_objects_via_pass_by_const_ref_01.cpp`"}
+```{.cpp}
+{{< include ./cpp/const_objects_via_pass_by_const_ref_01.cpp >}}
+```
+:::
+
+&#10149;&nbsp; Compile the file and show the code in VSCode.
+
+## Const objects via pass by const reference
+
+Yup, the fix is simple: make `print()` const
+
+::: {#lst-const-objects-via-pass-by-const-ref-02 lst-cap="Fix the above code listing by making `print()` const. Filename=`const_objects_via_pass_by_const_ref_01.cpp`"}
+```{.cpp}
+{{< include ./cpp/const_objects_via_pass_by_const_ref_02.cpp >}}
+```
+:::
+

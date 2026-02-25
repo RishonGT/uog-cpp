@@ -3,9 +3,9 @@
 class Date       // we changed struct to class
 {
 public:          // and added this line, which is called an access specifier
-    int m_day{}; // and added "m_" prefixes to each of the member names
-    int m_month{};
-    int m_year{};
+    int m_day{};        // we can add "m_" prefixes to each of the member 
+    int m_month{};      // names to avoid shadowing. But this is not really necessary
+    int m_year{};       // in modern C++.
 };
 
 void print_date(const Date& date)

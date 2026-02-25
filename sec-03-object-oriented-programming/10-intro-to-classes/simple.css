@@ -20,6 +20,44 @@
   background-color: #dbd3d3;
 }
 
+/* 1. The Output Block (standard print output) */
+.cell-output-display code, .cell-output-stdout {
+    background-color: #f8f9fa; /* Light grey background */
+    border-left: 4px solid #045214; /* Blue accent line */
+    padding: 1em;
+    font-family: 'Ubuntu Mono', monospace;
+    font-size: 0.9em;
+    color: #000000 !important;
+    border-radius: 4px;
+}
+
+
+/* 2. The Error Block (if you use error: true) */
+.cell-output-stderr, .cell-output-error {
+    background-color: #fff5f5;
+    border-left: 4px solid #ff4136; /* Red accent for errors */
+    color: #d0021b;
+    padding: 1em;
+}
+
+
+/* Target the container for printed text output */
+.cell-output-stdout pre, 
+.cell-output-stdout code,
+.cell-output-display pre,
+.cell-output-display code {
+    color: #000000 !important;   /* Pure Black */
+    opacity: 1 !important;        /* Remove any transparency */
+    -webkit-text-fill-color: #000000 !important; /* Extra override for some browsers */
+}
+
+/* Optional: If the background is also too grey/shady, make it white */
+.cell-output {
+    background-color: #ffffff !important;
+    border: none !important;
+}
+
+
 /* 2. Enhanced Header Styling for Topics */
 .reveal h1,
 .reveal h2 {

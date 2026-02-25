@@ -3,9 +3,9 @@
 
 struct Date
 {
-    int year {};        // we don't use m_ here for struct.
-    int month {};
-    int day {};
+    int year {};        // We don't use m_ here for struct. Generally, we don't
+    int month {};       // want to write constructor for struct. Then, there is 
+    int day {};         // NO SHADOWING of variables (we talk later in `class`)
 
     void print() // defines a member function named print
     {
