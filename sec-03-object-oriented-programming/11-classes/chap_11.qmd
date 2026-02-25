@@ -203,3 +203,262 @@ You want to get the job in industry after using ChatGPT/Gemini to generate solut
 ## Setting access levels via access specifiers
 
 &#9998;&nbsp; We can explicitly set the access level of our members by using an access specifier.
+
+&#9998;&nbsp; An access specifier sets the access level of all members that follow the specifier. 
+
+&#9998;&nbsp; Three access specifiers:
+
+- `public:`
+- `private:`
+- `protected:`
+
+## Setting access levels via access specifiers: Example
+
+::: {#lst-access-specifier-ex lst-cap="We can use access specifiers to define access levels of members. Filename=`access_specifier_example.cpp`"}
+```{.cpp}
+{{< include ./cpp/access_specifier_example.cpp >}}
+```
+:::
+
+&#9998;&nbsp; We can omit `private:` specifier in `class` as classes default to `private` access.
+
+&#10149;&nbsp; Let us compile and run this code.
+
+## Access level summary
+
+|Access level |	Access specifier |	Member access |	Derived class access |	Public access |
+|:---- | :---- | :---- | :----- | :----- |
+| Public |`public:` |	yes	| yes	| yes |
+| Protected	|`protected:`|	yes	|yes	|no|
+| Private	 |`private:`|	yes|	no|	no|
+
+**Don't worry! We talk about this later.**
+
+- Some little practice will get you understand and remember them. 
+- However, notice the triangle pattern of "yes" and triangle pattern of "no".
+
+## Access levels work on a per-class basis
+
+&#9998;&nbsp; One nuance of C++ access levels that is often missed or misunderstood is that -- otherwise, it is a real big headache:
+
+:::{.my-box}
+**Access to members is defined on a per-class basis, not on a per-object basis.**
+:::
+
+## Access levels work on a per-class basis: Example
+
+::: {#lst-access-level-per-class lst-cap="Access levels work on per-class basis, not on object basis. Filename=`access_level_per_class_basis.cpp`"}
+```{.cpp}
+{{< include ./cpp/access_level_per_class_basis.cpp >}}
+```
+:::
+&#10149;&nbsp; We can access member `name` of the object `p` in the member function `kisses`. 
+
+&#10149;&nbsp; `p.name` is not private to only `p`. Any member functions of `Person` can access `name` of other `Person` objects.
+
+# A detour back to pointers & class type (`struct` and `class`)
+
+You have just seen `this->name`. 
+
+- But we skip the lecture on `struct` on purpose.
+- I explained why we skip the lecture on `struct`.
+- Now, I have to pay the price. We must make a detour to revisit pointers.
+
+## What is an aggregate?
+
+- In general programming, an aggregate data type (also called an aggregate) is any type that can contain multiple data members.
+- Some types of aggregates allow members to have different types (e.g. structs).
+- Others require that all members must be of a single type (e.g. arrays).
+
+**In our course:** 
+
+When we use the term "aggregate" (or "non-aggregate") we will mean the C++ definition of aggregate.
+
+
+
+## Aggregate initialization of a struct: Example
+
+::: {#lst-aggregate-initialization lst-cap="We can initialize aggregate by using copy-list initialization or list initialization. Filename=`aggregate_initialization.cpp`"}
+```{.cpp}
+{{< include ./cpp/aggregate_initialization.cpp >}}
+```
+:::
+
+::: {.my-box}
+**Best practice**: Prefer the (non-copy) braced list form when initializing aggregates.
+:::
+
+
+## Member selection with pointers and references
+
+## Member selection for references to structs 
+&#9998;&nbsp; Because references to an object act just like the object itself, we can also use the member selection operator (`.`) to select a member from a reference to a struct
+
+::: {#lst-reference-selects-members lst-cap="Reference to a struct object can selects members by using selection operator (`.`) Filename=`reference_selection_operator.cpp`"}
+```{.cpp}
+{{< include ./cpp/reference_selection_operator.cpp >}}
+```
+:::
+
+## Member selection for pointers to structs
+
+We know that this code is wrong -- **Question**: What is wrong here?
+```{.cpp}
+#include <iostream>
+
+struct Employee
+{
+    int id{};
+    int age{};
+    long double wage{};
+};
+
+int main()
+{
+    Employee khiem{ 1, 42, 429999999999999999999.42 };
+    Employee* ptr { &khiem };
+    std::cout << ptr.id << '\n'; 
+    return 0;
+}
+```
+&#10149;&nbsp; My salary is correct. It is not the error!
+
+## Member selection for pointers to structs
+&#10149;&nbsp; To fix this, we just need to dereference first to retrieve the struct object.
+
+::: {#lst-pointer-selects-members lst-cap="Pointer to a struct object can selects members by using dereference first. Filename=`pointers_to_structs_select_members_deref.cpp`"}
+```{.cpp}
+{{< include ./cpp/pointers_to_structs_select_members_deref.cpp >}}
+```
+:::
+
+&#10149;&nbsp; Now, both my salary and code are fine.
+
+## Member selection for pointers to structs
+
+&#9998;&nbsp; C++ offers a [**member selection from pointer operator**]{style="color:red"} (`->`) (also sometimes called the [**arrow operator**]{style="color:red"}) that can be used to select members from a pointer to an object.
+
+::: {#lst-pointer-selects-members lst-cap="Pointer to a struct object can selects members by using dereference first. Filename=`pointers_to_structs_select_members_deref.cpp`"}
+```{.cpp}
+{{< include ./cpp/pointers_to_structs_select_members_deref.cpp >}}
+```
+:::
+
+&#10149;&nbsp; `ptr->id` is just equivalent to `(*ptr).id`. That's all.
+
+## What's next
+
+From now on:
+
+- I prefer "no prefix, no suffix" naming convention, and use `this` pointer instead. 
+- We talk about this soon, but you kinda get the point here.
+
+# Introduction to constructors
+
+In Introductory Programming 2, you learn:
+
+- Constructor is defined by the special method: `__init__(self, ...)`
+- Constructor is used to do a lot of stuffs other than just assigning variable `self.age = age`, e.g., checking 
+  - whether `age < 0`
+  - whether `id` is unique
+  - whether `birthdate` is a proper date
+  - more
+
+
+**Note:**&nbsp; We can write constructors for both `struct` and `class`. We just don't see people do that for `struct`.
+
+::: {.v-space style="height: 60px;"}
+:::
+
+<center>We now learn constructors in C++.</center>
+
+
+## Intro to constructors: Rationale
+
+&#10149;&nbsp; We have just learned we can do this:
+```{.cpp}
+struct Foo // Foo is an aggregate
+{
+    int x {};
+    int y {};
+};
+
+int main()
+{
+    Foo foo { 6, 7 }; // uses aggregate initialization
+    return 0;
+}
+```
+
+## Intro to constructors: Rationale
+
+But we cannot do this:
+```{.cpp}
+class Foo // Foo is not an aggregate (has private members)
+{
+    int x {};
+    int y {};
+};
+int main()
+{
+    Foo foo { 6, 7 }; // compile error: can not use aggregate initialization
+    return 0;
+}
+```
+
+Not allowing class types with private members to be initialized via aggregate initialization makes sense:
+
+- Aggregate initialization requires knowing about the implementation of the class, which we’re intentionally trying to avoid when we hide our data members.
+- If our class had some kind of invariant (e.g., $18 < \text{age} < 65$ for working age), we would be relying on the user to initialize the class in a way that preserves the invariant.
+
+&#10140;&nbsp; [That's why we need a constructor and it can do all the security check if needed.]{style="color:red"} -- just like you learned in Python.
+
+## Constructors
+
+A [**constructor**]{style="color:red"} is a special member function that is [automatically called after a non-aggregate class type object is created]{style="color:blue"}.
+
+When a non-aggregate class type object is defined, the compiler looks to see if it can find an accessible constructor that is a match for the initialization values provided by the callers.^[Well, just like the compiler looks for functions and overloaded functions matching the funcation call.]
+
+
+::: {.my-box}
+**Key insight**
+
+- Many new programmers are confused about whether constructors create the objects or not. 
+- They do not -- the compiler sets up the memory allocation for the object prior to the constructor call. The constructor is then called on the uninitialized object.
+- After the constructor finishes executing, we say the object has been "constructed", and the object should now be in a consistent, usable state.
+:::
+
+[**Note**]{style="color:red"}
+
+&#9998;&nbsp; [Aggregates are not allowed to have constructors]{style="color:red"} -- so if we add a constructor to an aggregate, it is no longer an aggregate.
+
+## Naming constructors
+
+- Constructors must have the same name as the class (with the same capitalization).
+- For template classes, this name excludes the template parameters.^[We have not learned about this so far.]
+- Constructors have no return type (not even `void`)
+
+```{.cpp}
+class Student
+{
+private:
+    std::string name;
+    int age;
+    int ID;
+
+public:
+    Student(std::string name, int age, int ID) 
+    { 
+        // code goes here.
+    }   // Does this remind you of Python class?
+}
+```
+
+## A basic constructor example
+
+::: {#lst-basic-constructor-example lst-cap="Constructor must have the same name as class. Filename=`basic_constructor_example.cpp`"}
+```{.cpp}
+{{< include ./cpp/basic_constructor_example.cpp >}}
+```
+:::
+
