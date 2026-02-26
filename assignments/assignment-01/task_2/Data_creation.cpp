@@ -19,8 +19,8 @@ int main(){
     double k = 2.5;
     double m = 57.0;
     float noise = 50.0;
-    vector<double> x;
-    vector<double> y;
+    std::vector<double> x;
+    std::vector<double> y;
 
     // Generate data points with noise
     for(int i = 0; i < 1000; i++){

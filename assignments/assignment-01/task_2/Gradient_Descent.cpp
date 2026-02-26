@@ -95,7 +95,7 @@ int main() {
 
         if (iteration % 500 == 0) { // Print loss every 100 iterations
             current_loss = loss_function(x, y, w, b, x.size());
-            cout << "Iteration: " << iteration << ", Loss: " << current_loss << endl;
+            std::cout << "Iteration: " << iteration << ", Loss: " << current_loss << std::endl;
         }
 
         if (iteration >= max_iterations) {
