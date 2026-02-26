@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 
+
 int main() {
     // Open the CSV file for reading
     std::ifstream input_file("data.csv");
