@@ -13,14 +13,14 @@ double noise_function(double x, float noise)
     return x;
 }
 
+
 int main(){
     // Equation: y = 2.5x + 57.0, noise is +-25
     double k = 2.5;
     double m = 57.0;
     float noise = 50.0;
-
-    std::vector<double> x;
-    std::vector<double> y;
+    vector<double> x;
+    vector<double> y;
 
     // Generate data points with noise
     for(int i = 0; i < 1000; i++){
@@ -43,7 +43,6 @@ int main(){
             output_file << x[i] << "," << y[i] << "\n";
         }
         output_file.close();
-
         std::cout << "Data has been written to data.csv" << std::endl;
     } else {
         std::cerr << "Unable to open file for writing." << std::endl;

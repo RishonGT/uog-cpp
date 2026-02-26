@@ -3,7 +3,7 @@
 #include <cmath>
 #include <vector>
 
-// Function to calculate and return the loss (Mean Squared Error)
+
 double loss_function(const std::vector<double>& x, const std::vector<double>& y, double w, double b, int m) {
     double total_loss = 0.0;
     for (int i = 0; i < m; i++) {
@@ -92,6 +92,11 @@ int main() {
         b -= learning_rate * db;
 
         iteration++; // Increment iteration count
+
+        if (iteration % 500 == 0) { // Print loss every 100 iterations
+            current_loss = loss_function(x, y, w, b, x.size());
+            cout << "Iteration: " << iteration << ", Loss: " << current_loss << endl;
+        }
 
         if (iteration >= max_iterations) {
             break;

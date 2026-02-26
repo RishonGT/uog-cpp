@@ -18,7 +18,7 @@ int main(){
     double gradient_1 = 2.5;
     double gradient_2 = 3.7;
     double intercept = 500.0;
-    float noise = 0.0;
+    float noise = 200.0;
     vector<double> x1, x2;
     vector<double> y;
 
