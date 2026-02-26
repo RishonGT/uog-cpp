@@ -461,4 +461,29 @@ public:
 {{< include ./cpp/basic_constructor_example.cpp >}}
 ```
 :::
+&#10149;&nbsp; Let run this code snippet.
+
+# Constructor member initializer lists
+
+Can we do something like `self.x = x`, `self.y = y` in Python?
+
+## Mimic Python constructor: Part 1
+
+::: {#lst-mimic-python-constructor-01 lst-cap="Let us mimic Python constructor we have learned. Filename=`mimic_python_constructor_01.cpp`"}
+```{.cpp}
+{{< include ./cpp/mimic_python_constructor_01.cpp >}}
+```
+:::
+**Question**: How about we want to keep the constructor's parameter names `x` and `y`?
+
+## Mimic Python constructor: Part 2
+Yes, we can use the pointer `this` to make distinction: `this->x`
+
+::: {#lst-mimic-python-constructor-01 lst-cap="Let us mimic Python constructor we have learned. Filename=`mimic_python_constructor_01.cpp`"}
+```{.cpp}
+{{< include ./cpp/mimic_python_constructor_02.cpp >}}
+```
+:::
+
+## Member initialization via a member initialization list
 
