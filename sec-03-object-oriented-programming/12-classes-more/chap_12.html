@@ -206,6 +206,7 @@
 <li><a href="#/introduction-to-destructors" id="/toc-introduction-to-destructors">Introduction to destructors</a></li>
 <li><a href="#/class-template" id="/toc-class-template">Class Template</a></li>
 <li><a href="#/friend-non-member-functions" id="/toc-friend-non-member-functions">Friend non-member functions</a></li>
+<li><a href="#/friend-classes-and-friend-member-functions" id="/toc-friend-classes-and-friend-member-functions">Friend classes and friend member functions</a></li>
 </ul>
 </nav>
 </section>
@@ -878,7 +879,7 @@ Listing&nbsp;11: A non-member function can access data members of a class by bei
 <span id="cb25-6"><a href=""></a>    <span class="dt">double</span> value <span class="op">{</span> <span class="dv">0</span> <span class="op">};</span></span>
 <span id="cb25-7"><a href=""></a></span>
 <span id="cb25-8"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb25-9"><a href=""></a>    <span class="dt">void</span> add<span class="op">(</span><span class="dt">double</span> value<span class="op">)</span> <span class="op">{</span> value <span class="op">+=</span> value<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb25-9"><a href=""></a>    <span class="dt">void</span> add<span class="op">(</span><span class="dt">double</span> value<span class="op">)</span> <span class="op">{</span> <span class="kw">this</span><span class="op">-&gt;</span>value <span class="op">+=</span> value<span class="op">;</span> <span class="op">}</span></span>
 <span id="cb25-10"><a href=""></a>    <span class="co">// Here is the friend declaration that makes non-member function </span></span>
 <span id="cb25-11"><a href=""></a>    <span class="co">// void print(const Accumulator&amp; accumulator) a friend of Accumulator</span></span>
 <span id="cb25-12"><a href=""></a>    <span class="kw">friend</span> <span class="dt">void</span> print<span class="op">(</span><span class="at">const</span> Accumulator<span class="op">&amp;</span> accumulator<span class="op">);</span></span>
@@ -891,18 +892,422 @@ Listing&nbsp;11: A non-member function can access data members of a class by bei
 <span id="cb25-19"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> accumulator<span class="op">.</span>value<span class="op">;</span></span>
 <span id="cb25-20"><a href=""></a><span class="op">}</span></span>
 <span id="cb25-21"><a href=""></a></span>
-<span id="cb25-22"><a href=""></a><span class="dt">double</span> main<span class="op">()</span></span>
+<span id="cb25-22"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
 <span id="cb25-23"><a href=""></a><span class="op">{</span></span>
 <span id="cb25-24"><a href=""></a>    Accumulator acc<span class="op">{};</span></span>
-<span id="cb25-25"><a href=""></a>    acc<span class="op">.</span>add<span class="op">(</span><span class="dv">5</span><span class="op">);</span> <span class="co">// add 5 to the accumulator</span></span>
-<span id="cb25-26"><a href=""></a></span>
-<span id="cb25-27"><a href=""></a>    print<span class="op">(</span>acc<span class="op">);</span> <span class="co">// call the print() non-member function</span></span>
-<span id="cb25-28"><a href=""></a></span>
-<span id="cb25-29"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb25-30"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb25-25"><a href=""></a>    acc<span class="op">.</span>add<span class="op">(</span><span class="dv">42</span><span class="op">);</span>    <span class="co">// add 42 to the accumulator</span></span>
+<span id="cb25-26"><a href=""></a>    print<span class="op">(</span>acc<span class="op">);</span>     <span class="co">// call the print() non-member function</span></span>
+<span id="cb25-27"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb25-28"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb25-29"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
+</section>
+<section id="defining-a-friend-non-member-inside-a-class" class="slide level2">
+<h2>Defining a friend non-member inside a class</h2>
+<p>✎&nbsp; <code>friend</code> non-member functions can also be defined inside a class.</p>
+<div id="lst-friend-nonmember-function-inside-class" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-friend-nonmember-function-inside-class-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;12: Because <code>print()</code> is defined as a <code>friend</code>, it is treated as a non-member function. Filename=<code>friend_nonmember_function_inside_class.cpp</code>
+</figcaption>
+<div aria-describedby="lst-friend-nonmember-function-inside-class-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb26-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb26-2"><a href=""></a></span>
+<span id="cb26-3"><a href=""></a><span class="kw">class</span> Accumulator</span>
+<span id="cb26-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb26-5"><a href=""></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb26-6"><a href=""></a>    <span class="dt">int</span> value <span class="op">{</span> <span class="dv">0</span> <span class="op">};</span></span>
+<span id="cb26-7"><a href=""></a></span>
+<span id="cb26-8"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb26-9"><a href=""></a>    <span class="dt">void</span> add<span class="op">(</span><span class="dt">int</span> value<span class="op">)</span> <span class="op">{</span> <span class="kw">this</span><span class="op">-&gt;</span>value <span class="op">+=</span> value<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb26-10"><a href=""></a></span>
+<span id="cb26-11"><a href=""></a>    <span class="co">// Friend functions defined inside a class are non-member functions</span></span>
+<span id="cb26-12"><a href=""></a>    <span class="kw">friend</span> <span class="dt">void</span> print<span class="op">(</span><span class="at">const</span> Accumulator<span class="op">&amp;</span> accumulator<span class="op">)</span></span>
+<span id="cb26-13"><a href=""></a>    <span class="op">{</span></span>
+<span id="cb26-14"><a href=""></a>        <span class="co">// Because print() is a friend of Accumulator</span></span>
+<span id="cb26-15"><a href=""></a>        <span class="co">// it can access the private members of Accumulator</span></span>
+<span id="cb26-16"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> accumulator<span class="op">.</span>value<span class="op">;</span></span>
+<span id="cb26-17"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb26-18"><a href=""></a><span class="op">};</span></span>
+<span id="cb26-19"><a href=""></a></span>
+<span id="cb26-20"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb26-21"><a href=""></a><span class="op">{</span></span>
+<span id="cb26-22"><a href=""></a>    Accumulator acc<span class="op">{};</span></span>
+<span id="cb26-23"><a href=""></a>    acc<span class="op">.</span>add<span class="op">(</span><span class="dv">5</span><span class="op">);</span> <span class="co">// add 5 to the accumulator</span></span>
+<span id="cb26-24"><a href=""></a></span>
+<span id="cb26-25"><a href=""></a>    print<span class="op">(</span>acc<span class="op">);</span> <span class="co">// call the print() non-member function</span></span>
+<span id="cb26-26"><a href=""></a></span>
+<span id="cb26-27"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb26-28"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<p>➥&nbsp; <code>print()</code> is <strong>not</strong> a member of <code>Accumulator</code>. Since <code>print()</code> is defined as a <code>friend</code>, it is instead treated as a non-member function (as if it had been defined outside <code>Accumulator</code>).</p>
+</section>
+<section id="friend-of-multiple-classes" class="slide level2">
+<h2>Friend of multiple classes</h2>
+<p>✎&nbsp; A function can be a friend of more than one class at the same time.</p>
+<div id="lst-multiple-friends" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-multiple-friends-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;13: Function <code>print_weather()</code> is friend of two classes <code>Temperature</code> and <code>Humidity</code>. Filename=<code>function_friend_with_multiple_classes.cpp</code>
+</figcaption>
+<div aria-describedby="lst-multiple-friends-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb27-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb27-2"><a href=""></a></span>
+<span id="cb27-3"><a href=""></a><span class="kw">class</span> Humidity<span class="op">;</span> <span class="co">// forward declaration of Humidity. Otherwise, it give compile error.</span></span>
+<span id="cb27-4"><a href=""></a></span>
+<span id="cb27-5"><a href=""></a><span class="kw">class</span> Temperature</span>
+<span id="cb27-6"><a href=""></a><span class="op">{</span></span>
+<span id="cb27-7"><a href=""></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb27-8"><a href=""></a>    <span class="dt">int</span> temp <span class="op">{</span> <span class="dv">0</span> <span class="op">};</span></span>
+<span id="cb27-9"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb27-10"><a href=""></a>    <span class="kw">explicit</span> Temperature<span class="op">(</span><span class="dt">int</span> temp<span class="op">)</span> <span class="op">:</span> temp <span class="op">{</span> temp <span class="op">}</span> <span class="op">{</span> <span class="op">}</span></span>
+<span id="cb27-11"><a href=""></a></span>
+<span id="cb27-12"><a href=""></a>    <span class="kw">friend</span> <span class="dt">void</span> print_weather<span class="op">(</span><span class="at">const</span> Temperature<span class="op">&amp;</span> temperature<span class="op">,</span> <span class="at">const</span> Humidity<span class="op">&amp;</span> humidity<span class="op">);</span> <span class="co">// forward declaration needed for this line</span></span>
+<span id="cb27-13"><a href=""></a><span class="op">};</span></span>
+<span id="cb27-14"><a href=""></a></span>
+<span id="cb27-15"><a href=""></a><span class="kw">class</span> Humidity</span>
+<span id="cb27-16"><a href=""></a><span class="op">{</span></span>
+<span id="cb27-17"><a href=""></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb27-18"><a href=""></a>    <span class="dt">int</span> humidity <span class="op">{</span> <span class="dv">0</span> <span class="op">};</span></span>
+<span id="cb27-19"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb27-20"><a href=""></a>    <span class="kw">explicit</span> Humidity<span class="op">(</span><span class="dt">int</span> humidity<span class="op">)</span> <span class="op">:</span> humidity <span class="op">{</span> humidity <span class="op">}</span> <span class="op">{</span>  <span class="op">}</span></span>
+<span id="cb27-21"><a href=""></a></span>
+<span id="cb27-22"><a href=""></a>    <span class="kw">friend</span> <span class="dt">void</span> print_weather<span class="op">(</span><span class="at">const</span> Temperature<span class="op">&amp;</span> temperature<span class="op">,</span> <span class="at">const</span> Humidity<span class="op">&amp;</span> humidity<span class="op">);</span></span>
+<span id="cb27-23"><a href=""></a><span class="op">};</span></span>
+<span id="cb27-24"><a href=""></a></span>
+<span id="cb27-25"><a href=""></a><span class="dt">void</span> print_weather<span class="op">(</span><span class="at">const</span> Temperature<span class="op">&amp;</span> temperature<span class="op">,</span> <span class="at">const</span> Humidity<span class="op">&amp;</span> humidity<span class="op">)</span></span>
+<span id="cb27-26"><a href=""></a><span class="op">{</span></span>
+<span id="cb27-27"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"The temperature is "</span> <span class="op">&lt;&lt;</span> temperature<span class="op">.</span>temp <span class="op">&lt;&lt;</span></span>
+<span id="cb27-28"><a href=""></a>       <span class="st">" and the humidity is "</span> <span class="op">&lt;&lt;</span> humidity<span class="op">.</span>humidity <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb27-29"><a href=""></a><span class="op">}</span></span>
+<span id="cb27-30"><a href=""></a></span>
+<span id="cb27-31"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb27-32"><a href=""></a><span class="op">{</span></span>
+<span id="cb27-33"><a href=""></a>    Humidity hum <span class="op">{</span> <span class="dv">10</span> <span class="op">};</span></span>
+<span id="cb27-34"><a href=""></a>    Temperature temp <span class="op">{</span> <span class="dv">12</span> <span class="op">};</span></span>
+<span id="cb27-35"><a href=""></a></span>
+<span id="cb27-36"><a href=""></a>    print_weather<span class="op">(</span>temp<span class="op">,</span> hum<span class="op">);</span></span>
+<span id="cb27-37"><a href=""></a></span>
+<span id="cb27-38"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb27-39"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section>
+<section id="prefer-non-friend-functions-to-friend-functions" class="slide level2">
+<h2>Prefer non-friend functions to friend functions</h2>
+<p>✎&nbsp; We should prefer non-friend functions over friend functions.</p>
+<p>➥&nbsp; Look at this example: If we change the variable name <code>value</code>, we must change the body of <code>print()</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb28-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb28-2"><a href=""></a></span>
+<span id="cb28-3"><a href=""></a><span class="kw">class</span> Accumulator</span>
+<span id="cb28-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb28-5"><a href=""></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb28-6"><a href=""></a>    <span class="dt">int</span> value <span class="op">{</span> <span class="dv">0</span> <span class="op">};</span> <span class="co">// if we rename this data member</span></span>
+<span id="cb28-7"><a href=""></a></span>
+<span id="cb28-8"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb28-9"><a href=""></a>    <span class="dt">void</span> add<span class="op">(</span><span class="dt">int</span> value<span class="op">)</span> <span class="op">{</span> <span class="kw">this</span><span class="op">-&gt;</span>value <span class="op">+=</span> value<span class="op">;</span> <span class="op">}</span> <span class="co">// we need to modify this</span></span>
+<span id="cb28-10"><a href=""></a></span>
+<span id="cb28-11"><a href=""></a>    <span class="kw">friend</span> <span class="dt">void</span> print<span class="op">(</span><span class="at">const</span> Accumulator<span class="op">&amp;</span> accumulator<span class="op">);</span></span>
+<span id="cb28-12"><a href=""></a><span class="op">};</span></span>
+<span id="cb28-13"><a href=""></a></span>
+<span id="cb28-14"><a href=""></a><span class="dt">void</span> print<span class="op">(</span><span class="at">const</span> Accumulator<span class="op">&amp;</span> accumulator<span class="op">)</span></span>
+<span id="cb28-15"><a href=""></a><span class="op">{</span></span>
+<span id="cb28-16"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> accumulator<span class="op">.</span>value<span class="op">;</span> <span class="co">// and we need to modify this</span></span>
+<span id="cb28-17"><a href=""></a><span class="op">}</span></span>
+<span id="cb28-18"><a href=""></a></span>
+<span id="cb28-19"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb28-20"><a href=""></a><span class="op">{</span></span>
+<span id="cb28-21"><a href=""></a>    Accumulator acc<span class="op">{};</span></span>
+<span id="cb28-22"><a href=""></a>    acc<span class="op">.</span>add<span class="op">(</span><span class="dv">5</span><span class="op">);</span> <span class="co">// add 5 to the accumulator</span></span>
+<span id="cb28-23"><a href=""></a></span>
+<span id="cb28-24"><a href=""></a>    print<span class="op">(</span>acc<span class="op">);</span> <span class="co">// call the print() non-member function</span></span>
+<span id="cb28-25"><a href=""></a></span>
+<span id="cb28-26"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb28-27"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="prefer-non-friend-functions-to-friend-functions-1" class="slide level2">
+<h2>Prefer non-friend functions to friend functions</h2>
+<p>➥&nbsp; A better idea to fix this issue is to add getter function <code>value()</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb29-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb29-2"><a href=""></a></span>
+<span id="cb29-3"><a href=""></a><span class="kw">class</span> Accumulator</span>
+<span id="cb29-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb29-5"><a href=""></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb29-6"><a href=""></a>    <span class="dt">int</span> value <span class="op">{</span> <span class="dv">0</span> <span class="op">};</span></span>
+<span id="cb29-7"><a href=""></a></span>
+<span id="cb29-8"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb29-9"><a href=""></a>    <span class="dt">void</span> add<span class="op">(</span><span class="dt">int</span> value<span class="op">)</span> <span class="op">{</span> <span class="kw">this</span><span class="op">-&gt;</span>value <span class="op">+=</span> value<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb29-10"><a href=""></a>    <span class="dt">int</span> value<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> value<span class="op">;</span> <span class="op">}</span> <span class="co">// added this reasonable access function</span></span>
+<span id="cb29-11"><a href=""></a><span class="op">};</span></span>
+<span id="cb29-12"><a href=""></a></span>
+<span id="cb29-13"><a href=""></a><span class="dt">void</span> print<span class="op">(</span><span class="at">const</span> Accumulator<span class="op">&amp;</span> accumulator<span class="op">)</span> <span class="co">// no longer a friend of Accumulator</span></span>
+<span id="cb29-14"><a href=""></a><span class="op">{</span></span>
+<span id="cb29-15"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> accumulator<span class="op">.</span>value<span class="op">();</span> <span class="co">// use access function instead of direct access</span></span>
+<span id="cb29-16"><a href=""></a><span class="op">}</span></span>
+<span id="cb29-17"><a href=""></a></span>
+<span id="cb29-18"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb29-19"><a href=""></a><span class="op">{</span></span>
+<span id="cb29-20"><a href=""></a>    Accumulator acc<span class="op">{};</span></span>
+<span id="cb29-21"><a href=""></a>    acc<span class="op">.</span>add<span class="op">(</span><span class="dv">5</span><span class="op">);</span> <span class="co">// add 5 to the accumulator</span></span>
+<span id="cb29-22"><a href=""></a></span>
+<span id="cb29-23"><a href=""></a>    print<span class="op">(</span>acc<span class="op">);</span> <span class="co">// call the print() non-member function</span></span>
+<span id="cb29-24"><a href=""></a></span>
+<span id="cb29-25"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb29-26"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section></section>
+<section>
+<section id="friend-classes-and-friend-member-functions" class="title-slide slide level1 center">
+<h1>Friend classes and friend member functions</h1>
+<p>A [<strong>friend class</strong>] is a class that can access the private and protected members of another class.</p>
+<p>That’s it, just like that.</p>
+</section>
+<section id="friend-classes" class="slide level2">
+<h2>Friend classes</h2>
+<p>✎&nbsp; A <span style="color:red"><strong>friend class</strong></span> is a class that can access the private and protected members of another class.</p>
+<div id="lst-class-friend" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-class-friend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;14: As <code>Display</code> is a friend of <code>Storage</code>, <code>Display</code> members can access the private members of any <code>Storage</code> object. Filename=<code>friend_class_example.cpp</code>
+</figcaption>
+<div aria-describedby="lst-class-friend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb30-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb30-2"><a href=""></a></span>
+<span id="cb30-3"><a href=""></a><span class="kw">class</span> Storage</span>
+<span id="cb30-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb30-5"><a href=""></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb30-6"><a href=""></a>    <span class="dt">int</span> int_value <span class="op">{};</span></span>
+<span id="cb30-7"><a href=""></a>    <span class="dt">double</span> double_value <span class="op">{};</span></span>
+<span id="cb30-8"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb30-9"><a href=""></a>    Storage<span class="op">(</span><span class="dt">int</span> int_value<span class="op">,</span> <span class="dt">double</span> double_value<span class="op">)</span></span>
+<span id="cb30-10"><a href=""></a>       <span class="op">:</span> int_value <span class="op">{</span> int_value <span class="op">},</span> double_value <span class="op">{</span> double_value <span class="op">}</span> <span class="op">{</span> <span class="op">}</span></span>
+<span id="cb30-11"><a href=""></a></span>
+<span id="cb30-12"><a href=""></a>    <span class="co">// Make the Display class a friend of Storage</span></span>
+<span id="cb30-13"><a href=""></a>    <span class="kw">friend</span> <span class="kw">class</span> Display<span class="op">;</span></span>
+<span id="cb30-14"><a href=""></a><span class="op">};</span></span>
+<span id="cb30-15"><a href=""></a></span>
+<span id="cb30-16"><a href=""></a><span class="kw">class</span> Display</span>
+<span id="cb30-17"><a href=""></a><span class="op">{</span></span>
+<span id="cb30-18"><a href=""></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb30-19"><a href=""></a>    <span class="dt">bool</span> display_int_first <span class="op">{};</span></span>
+<span id="cb30-20"><a href=""></a></span>
+<span id="cb30-21"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb30-22"><a href=""></a>    Display<span class="op">(</span><span class="dt">bool</span> display_int_first<span class="op">)</span></span>
+<span id="cb30-23"><a href=""></a>         <span class="op">:</span> display_int_first <span class="op">{</span> display_int_first <span class="op">}</span> <span class="op">{</span> <span class="op">}</span></span>
+<span id="cb30-24"><a href=""></a></span>
+<span id="cb30-25"><a href=""></a>    <span class="co">// Because Display is a friend of Storage, Display members can access the private members of Storage</span></span>
+<span id="cb30-26"><a href=""></a>    <span class="dt">void</span> display_storage<span class="op">(</span><span class="at">const</span> Storage<span class="op">&amp;</span> storage<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb30-27"><a href=""></a>        <span class="cf">if</span> <span class="op">(</span>display_int_first<span class="op">)</span></span>
+<span id="cb30-28"><a href=""></a>            <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> storage<span class="op">.</span>int_value <span class="op">&lt;&lt;</span> <span class="ch">' '</span> <span class="op">&lt;&lt;</span> storage<span class="op">.</span>double_value <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb30-29"><a href=""></a>        <span class="cf">else</span> <span class="co">// display double first</span></span>
+<span id="cb30-30"><a href=""></a>            <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> storage<span class="op">.</span>double_value <span class="op">&lt;&lt;</span> <span class="ch">' '</span> <span class="op">&lt;&lt;</span> storage<span class="op">.</span>int_value <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb30-31"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb30-32"><a href=""></a></span>
+<span id="cb30-33"><a href=""></a>    <span class="dt">void</span> set_display_int_first<span class="op">(</span><span class="dt">bool</span> b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb30-34"><a href=""></a>         display_int_first <span class="op">=</span> b<span class="op">;</span></span>
+<span id="cb30-35"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb30-36"><a href=""></a><span class="op">};</span></span>
+<span id="cb30-37"><a href=""></a></span>
+<span id="cb30-38"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb30-39"><a href=""></a><span class="op">{</span></span>
+<span id="cb30-40"><a href=""></a>    Storage storage <span class="op">{</span> <span class="dv">5</span><span class="op">,</span> <span class="fl">6.7</span> <span class="op">};</span></span>
+<span id="cb30-41"><a href=""></a>    Display display <span class="op">{</span> <span class="kw">false</span> <span class="op">};</span></span>
+<span id="cb30-42"><a href=""></a>    display<span class="op">.</span>display_storage<span class="op">(</span>storage<span class="op">);</span></span>
+<span id="cb30-43"><a href=""></a>    display<span class="op">.</span>set_display_int_first<span class="op">(</span><span class="kw">true</span><span class="op">);</span></span>
+<span id="cb30-44"><a href=""></a>    display<span class="op">.</span>display_storage<span class="op">(</span>storage<span class="op">);</span></span>
+<span id="cb30-45"><a href=""></a></span>
+<span id="cb30-46"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb30-47"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section>
+<section id="friend-classes-more-information" class="slide level2">
+<h2>Friend classes: More information</h2>
+<ol type="1">
+<li><p><strong>Friendship is not reciprocal</strong></p>
+<p>Just because <code>Display</code> is a friend of <code>Storage</code> does not mean <code>Storage</code> is also a friend of <code>Display</code> – However, both can declare the other as friend.</p></li>
+<li><p><strong>Class friendship is not transitive</strong></p>
+<p>If <code>A</code> is a friend of <code>B</code> and <code>B</code> is a friend <code>C</code>, that does not imply <code>A</code> is a friend of <code>C</code>.</p></li>
+<li><p><strong>Friendship is not inherited</strong></p>
+<p>If <code>A</code> makes <code>B</code> a friend, classes derived from (child of) <code>B</code> are not friends of <code>A</code>.</p></li>
+</ol>
+</section>
+<section id="friend-member-functions" class="slide level2">
+<h2>Friend member functions</h2>
+<p>✎&nbsp; Instead of making an entire class a friend, we can make a single member function a friend.</p>
+<p>As this concept needs quite a lengthy explanation to make sense of the written code, this part is reserved for self-studied purpose.</p>
+</section>
+<section id="friend-member-functions-example-part-1" class="slide level2">
+<h2>Friend member functions: Example – Part 1</h2>
+<p>➥&nbsp; Let us start with this simple code: Filename=<code>friend_member_function_01.cpp</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb31-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb31-2"><a href=""></a></span>
+<span id="cb31-3"><a href=""></a><span class="kw">class</span> Display<span class="op">;</span> <span class="co">// forward declaration for class Display</span></span>
+<span id="cb31-4"><a href=""></a></span>
+<span id="cb31-5"><a href=""></a><span class="kw">class</span> Storage</span>
+<span id="cb31-6"><a href=""></a><span class="op">{</span></span>
+<span id="cb31-7"><a href=""></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb31-8"><a href=""></a>    <span class="dt">int</span> int_value <span class="op">{};</span></span>
+<span id="cb31-9"><a href=""></a>    <span class="dt">double</span> double_value <span class="op">{};</span></span>
+<span id="cb31-10"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb31-11"><a href=""></a>    Storage<span class="op">(</span><span class="dt">int</span> int_value<span class="op">,</span> <span class="dt">double</span> double_value<span class="op">)</span></span>
+<span id="cb31-12"><a href=""></a>        <span class="op">:</span> int_value <span class="op">{</span> int_value <span class="op">},</span> double_value <span class="op">{</span> double_value <span class="op">}</span></span>
+<span id="cb31-13"><a href=""></a>    <span class="op">{</span></span>
+<span id="cb31-14"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb31-15"><a href=""></a></span>
+<span id="cb31-16"><a href=""></a>    <span class="co">// Make the Display::display_storage member function a friend of the Storage class</span></span>
+<span id="cb31-17"><a href=""></a>    <span class="kw">friend</span> <span class="dt">void</span> Display<span class="op">::</span>display_storage<span class="op">(</span><span class="at">const</span> Storage<span class="op">&amp;</span> storage<span class="op">);</span> <span class="co">// error: Storage hasn't seen the full definition of class Display</span></span>
+<span id="cb31-18"><a href=""></a><span class="op">};</span></span>
+<span id="cb31-19"><a href=""></a></span>
+<span id="cb31-20"><a href=""></a><span class="kw">class</span> Display</span>
+<span id="cb31-21"><a href=""></a><span class="op">{</span></span>
+<span id="cb31-22"><a href=""></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb31-23"><a href=""></a>    <span class="dt">bool</span> display_int_first <span class="op">{};</span></span>
+<span id="cb31-24"><a href=""></a></span>
+<span id="cb31-25"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb31-26"><a href=""></a>    Display<span class="op">(</span><span class="dt">bool</span> display_int_first<span class="op">)</span></span>
+<span id="cb31-27"><a href=""></a>        <span class="op">:</span> display_int_first <span class="op">{</span> display_int_first <span class="op">}</span></span>
+<span id="cb31-28"><a href=""></a>    <span class="op">{</span></span>
+<span id="cb31-29"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb31-30"><a href=""></a></span>
+<span id="cb31-31"><a href=""></a>    <span class="dt">void</span> display_storage<span class="op">(</span><span class="at">const</span> Storage<span class="op">&amp;</span> storage<span class="op">)</span></span>
+<span id="cb31-32"><a href=""></a>    <span class="op">{</span></span>
+<span id="cb31-33"><a href=""></a>        <span class="cf">if</span> <span class="op">(</span><span class="va">m_displayIntFirst</span><span class="op">)</span></span>
+<span id="cb31-34"><a href=""></a>            <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> storage<span class="op">.</span>int_value <span class="op">&lt;&lt;</span> <span class="ch">' '</span> <span class="op">&lt;&lt;</span> storage<span class="op">.</span>double_value <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb31-35"><a href=""></a>        <span class="cf">else</span> <span class="co">// display double first</span></span>
+<span id="cb31-36"><a href=""></a>            <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> storage<span class="op">.</span>double_value <span class="op">&lt;&lt;</span> <span class="ch">' '</span> <span class="op">&lt;&lt;</span> storage<span class="op">.</span>int_value <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb31-37"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb31-38"><a href=""></a><span class="op">};</span></span>
+<span id="cb31-39"><a href=""></a></span>
+<span id="cb31-40"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb31-41"><a href=""></a><span class="op">{</span></span>
+<span id="cb31-42"><a href=""></a>    Storage storage <span class="op">{</span> <span class="dv">5</span><span class="op">,</span> <span class="fl">6.7</span> <span class="op">};</span></span>
+<span id="cb31-43"><a href=""></a>    Display display <span class="op">{</span> <span class="kw">false</span> <span class="op">};</span></span>
+<span id="cb31-44"><a href=""></a>    display<span class="op">.</span>display_storage<span class="op">(</span>storage<span class="op">);</span></span>
+<span id="cb31-45"><a href=""></a></span>
+<span id="cb31-46"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb31-47"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>➥&nbsp; To make a single member function a friend, the compiler has to have seen the full definition for the class of the friend member function (not just a forward declaration). ➜&nbsp; So this code won’t work.</p>
+</section>
+<section id="friend-member-functions-example-part-2" class="slide level2">
+<h2>Friend member functions: Example – Part 2</h2>
+<p>➥&nbsp; We exchange the def positions of <code>Display</code> and <code>Storage</code>: <code>friend_member_function_02.cpp</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb32-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb32-2"><a href=""></a></span>
+<span id="cb32-3"><a href=""></a><span class="kw">class</span> Display</span>
+<span id="cb32-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb32-5"><a href=""></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb32-6"><a href=""></a>    <span class="dt">bool</span> display_int_first <span class="op">{};</span></span>
+<span id="cb32-7"><a href=""></a></span>
+<span id="cb32-8"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb32-9"><a href=""></a>    Display<span class="op">(</span><span class="dt">bool</span> displayIntFirst<span class="op">)</span></span>
+<span id="cb32-10"><a href=""></a>        <span class="op">:</span> display_int_first <span class="op">{</span> displayIntFirst <span class="op">}</span></span>
+<span id="cb32-11"><a href=""></a>    <span class="op">{</span></span>
+<span id="cb32-12"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb32-13"><a href=""></a></span>
+<span id="cb32-14"><a href=""></a>    <span class="dt">void</span> display_storage<span class="op">(</span><span class="at">const</span> Storage<span class="op">&amp;</span> storage<span class="op">)</span> <span class="co">// compile error: compiler doesn't know what a Storage is</span></span>
+<span id="cb32-15"><a href=""></a>    <span class="op">{</span></span>
+<span id="cb32-16"><a href=""></a>        <span class="cf">if</span> <span class="op">(</span>display_int_first<span class="op">)</span></span>
+<span id="cb32-17"><a href=""></a>            <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> storage<span class="op">.</span>int_value <span class="op">&lt;&lt;</span> <span class="ch">' '</span> <span class="op">&lt;&lt;</span> storage<span class="op">.</span>double_value <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb32-18"><a href=""></a>        <span class="cf">else</span> <span class="co">// display double first</span></span>
+<span id="cb32-19"><a href=""></a>            <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> storage<span class="op">.</span>double_value <span class="op">&lt;&lt;</span> <span class="ch">' '</span> <span class="op">&lt;&lt;</span> storage<span class="op">.</span>int_value <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb32-20"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb32-21"><a href=""></a><span class="op">};</span></span>
+<span id="cb32-22"><a href=""></a></span>
+<span id="cb32-23"><a href=""></a><span class="kw">class</span> Storage</span>
+<span id="cb32-24"><a href=""></a><span class="op">{</span></span>
+<span id="cb32-25"><a href=""></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb32-26"><a href=""></a>    <span class="dt">int</span> int_value <span class="op">{};</span></span>
+<span id="cb32-27"><a href=""></a>    <span class="dt">double</span> double_value <span class="op">{};</span></span>
+<span id="cb32-28"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb32-29"><a href=""></a>    Storage<span class="op">(</span><span class="dt">int</span> int_value<span class="op">,</span> <span class="dt">double</span> double_value<span class="op">)</span></span>
+<span id="cb32-30"><a href=""></a>        <span class="op">:</span> int_value <span class="op">{</span> int_value <span class="op">},</span> double_value <span class="op">{</span> double_value <span class="op">}</span></span>
+<span id="cb32-31"><a href=""></a>    <span class="op">{</span></span>
+<span id="cb32-32"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb32-33"><a href=""></a></span>
+<span id="cb32-34"><a href=""></a>    <span class="co">// Make the Display::display_storage member function a friend of the Storage class</span></span>
+<span id="cb32-35"><a href=""></a>    <span class="kw">friend</span> <span class="dt">void</span> Display<span class="op">::</span>display_storage<span class="op">(</span><span class="at">const</span> Storage<span class="op">&amp;</span> storage<span class="op">);</span> <span class="co">// okay now</span></span>
+<span id="cb32-36"><a href=""></a><span class="op">};</span></span>
+<span id="cb32-37"><a href=""></a></span>
+<span id="cb32-38"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb32-39"><a href=""></a><span class="op">{</span></span>
+<span id="cb32-40"><a href=""></a>    Storage storage <span class="op">{</span> <span class="dv">5</span><span class="op">,</span> <span class="fl">6.7</span> <span class="op">};</span></span>
+<span id="cb32-41"><a href=""></a>    Display display <span class="op">{</span> <span class="kw">false</span> <span class="op">};</span></span>
+<span id="cb32-42"><a href=""></a>    display<span class="op">.</span>display_storage<span class="op">(</span>storage<span class="op">);</span></span>
+<span id="cb32-43"><a href=""></a></span>
+<span id="cb32-44"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb32-45"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>➥&nbsp; We now have another problem: Because <code>Display::display_storage()</code> uses <code>Storage</code> as a reference parameter, and we just moved its definition below the definition of <code>Display</code>, the compiler will complain it does not know what a <code>Storage</code> is.</p>
+</section>
+<section id="friend-member-functions-example---part-3" class="slide level2">
+<h2>Friend member functions: Example - Part 3</h2>
+<p>➥&nbsp; We fix all issues by the following steps:</p>
+<ul>
+<li>add <code>class Storage</code> as a forward declaration so the compiler will be OK with a reference to `Storage</li>
+<li>move the definition of <code>Display::display_storage()</code> out of the class, after the full definition of <code>Storage</code> class</li>
+</ul>
+<p>See the fully compilable code next slide</p>
+</section>
+<section id="friend-member-functions-example---part-3-1" class="slide level2">
+<h2>Friend member functions: Example - Part 3</h2>
+<p>➥&nbsp; Fully working code: <code>friend_member_function_03.cpp</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb33-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb33-2"><a href=""></a></span>
+<span id="cb33-3"><a href=""></a><span class="kw">class</span> Storage<span class="op">;</span> <span class="co">// forward declaration for class Storage</span></span>
+<span id="cb33-4"><a href=""></a></span>
+<span id="cb33-5"><a href=""></a><span class="kw">class</span> Display</span>
+<span id="cb33-6"><a href=""></a><span class="op">{</span></span>
+<span id="cb33-7"><a href=""></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb33-8"><a href=""></a>    <span class="dt">bool</span> display_int_first <span class="op">{};</span></span>
+<span id="cb33-9"><a href=""></a></span>
+<span id="cb33-10"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb33-11"><a href=""></a>    Display<span class="op">(</span><span class="dt">bool</span> display_int_first<span class="op">)</span></span>
+<span id="cb33-12"><a href=""></a>        <span class="op">:</span> display_int_first <span class="op">{</span> display_int_first <span class="op">}</span></span>
+<span id="cb33-13"><a href=""></a>    <span class="op">{</span></span>
+<span id="cb33-14"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb33-15"><a href=""></a></span>
+<span id="cb33-16"><a href=""></a>    <span class="dt">void</span> display_storage<span class="op">(</span><span class="at">const</span> Storage<span class="op">&amp;</span> storage<span class="op">);</span> <span class="co">// forward declaration for Storage needed for reference here</span></span>
+<span id="cb33-17"><a href=""></a><span class="op">};</span></span>
+<span id="cb33-18"><a href=""></a></span>
+<span id="cb33-19"><a href=""></a><span class="kw">class</span> Storage <span class="co">// full definition of Storage class</span></span>
+<span id="cb33-20"><a href=""></a><span class="op">{</span></span>
+<span id="cb33-21"><a href=""></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb33-22"><a href=""></a>    <span class="dt">int</span> int_value <span class="op">{};</span></span>
+<span id="cb33-23"><a href=""></a>    <span class="dt">double</span> double_value <span class="op">{};</span></span>
+<span id="cb33-24"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb33-25"><a href=""></a>    Storage<span class="op">(</span><span class="dt">int</span> int_value<span class="op">,</span> <span class="dt">double</span> double_value<span class="op">)</span></span>
+<span id="cb33-26"><a href=""></a>        <span class="op">:</span> int_value <span class="op">{</span> int_value <span class="op">},</span> double_value <span class="op">{</span> double_value <span class="op">}</span></span>
+<span id="cb33-27"><a href=""></a>    <span class="op">{</span></span>
+<span id="cb33-28"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb33-29"><a href=""></a></span>
+<span id="cb33-30"><a href=""></a>    <span class="co">// Make the Display::display_storage member function a friend of the Storage class</span></span>
+<span id="cb33-31"><a href=""></a>    <span class="co">// Requires seeing the full definition of class Display (as display_storage is a member)</span></span>
+<span id="cb33-32"><a href=""></a>    <span class="kw">friend</span> <span class="dt">void</span> Display<span class="op">::</span>display_storage<span class="op">(</span><span class="at">const</span> Storage<span class="op">&amp;</span> storage<span class="op">);</span></span>
+<span id="cb33-33"><a href=""></a><span class="op">};</span></span>
+<span id="cb33-34"><a href=""></a></span>
+<span id="cb33-35"><a href=""></a><span class="co">// Now we can define Display::display_storage</span></span>
+<span id="cb33-36"><a href=""></a><span class="co">// Requires seeing the full definition of class Storage (as we access Storage members)</span></span>
+<span id="cb33-37"><a href=""></a><span class="dt">void</span> Display<span class="op">::</span>display_storage<span class="op">(</span><span class="at">const</span> Storage<span class="op">&amp;</span> storage<span class="op">)</span></span>
+<span id="cb33-38"><a href=""></a><span class="op">{</span></span>
+<span id="cb33-39"><a href=""></a>    <span class="cf">if</span> <span class="op">(</span>display_int_first<span class="op">)</span></span>
+<span id="cb33-40"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> storage<span class="op">.</span>int_value <span class="op">&lt;&lt;</span> <span class="ch">' '</span> <span class="op">&lt;&lt;</span> storage<span class="op">.</span>double_value <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb33-41"><a href=""></a>    <span class="cf">else</span> <span class="co">// display double first</span></span>
+<span id="cb33-42"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> storage<span class="op">.</span>double_value <span class="op">&lt;&lt;</span> <span class="ch">' '</span> <span class="op">&lt;&lt;</span> storage<span class="op">.</span>int_value <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb33-43"><a href=""></a><span class="op">}</span></span>
+<span id="cb33-44"><a href=""></a></span>
+<span id="cb33-45"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb33-46"><a href=""></a><span class="op">{</span></span>
+<span id="cb33-47"><a href=""></a>    Storage storage <span class="op">{</span> <span class="dv">5</span><span class="op">,</span> <span class="fl">6.7</span> <span class="op">};</span></span>
+<span id="cb33-48"><a href=""></a>    Display display <span class="op">{</span> <span class="kw">false</span> <span class="op">};</span></span>
+<span id="cb33-49"><a href=""></a>    display<span class="op">.</span>display_storage<span class="op">(</span>storage<span class="op">);</span></span>
+<span id="cb33-50"><a href=""></a></span>
+<span id="cb33-51"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb33-52"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </section></section>
     </div>

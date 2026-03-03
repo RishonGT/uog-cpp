@@ -77,7 +77,6 @@
 }
 
 
-
 /* 3. Code Block Customization */
 .reveal pre {
     background: #d7e4dd10 !important;
@@ -95,6 +94,16 @@
     font-family: 'Fira Code', 'Cascadia Code', monospace;
     padding: 1.5em;
     font-size: 1.7em !important;
+}
+
+/* Target code elements that are NOT inside a pre tag */
+:not(pre) > code {
+  font-size: 1.0em !important;       /* Adjust this value as needed */
+  font-weight: 500;       /* Optional: makes it slightly bolder */
+  color: #e83e8c;         /* Optional: change color to make it pop */
+  background-color: rgba(0, 0, 0, 0.05); /* Optional: subtle background */
+  padding: 2px 4px;
+  border-radius: 4px;
 }
 
 /* VS Code Syntax Highlighting Overrides */
