@@ -117,7 +117,7 @@ concrete_data.head()
 
 In this dataset, we use $8$ input features are used to make prediction, that is $\mathbf{x}^{(i)} \in \mathbb{R}^{8}$. The label $y^{(i)}$ is a scalar (real) number, i.e. $y^{(i)} \in \mathbb{R}$.
 
-&#10149; **Note**&nbsp; Do not confuse "_regression problem_" with "_linear regression_" model. Linear regression is a mathematical model, while regression problem refers to a class of problems of predicting contiuous outputs.
+&#10149;&nbsp; **Note** Do not confuse "_regression problem_" with "_linear regression_" model. Linear regression is a mathematical model, while regression problem refers to a class of problems of predicting contiuous outputs.
 
 &#9998;&nbsp; [**Logistic regression**]{style="color:crimson"}
 
@@ -245,14 +245,14 @@ from sklearn.preprocessing import PolynomialFeatures
 poly_features = PolynomialFeatures(degree=3)
 X_data = x_data.reshape((-1, 1))
 X_poly = poly_features.fit_transform(X_data)
-print(f"X_poly =\n{X_poly[:4]}") # print the first 3 samples
+print(f"X_poly =\n{X_poly[:4]}") # print the first 4 samples
 print(f"X_poly.shape = {X_poly.shape}")
 ```
 Since we don't need the bias feature $x^{0}$, let us redo this step without this bias feature
 ```{python}
 poly_features = PolynomialFeatures(degree=3, include_bias=False)
 X_poly = poly_features.fit_transform(X_data)
-print(f"X_poly =\n{X_poly[:4]}") # print the first 3 samples
+print(f"X_poly =\n{X_poly[:4]}") # print the first 4 samples
 print(f"X_poly.shape = {X_poly.shape}")
 ```
 
@@ -469,11 +469,12 @@ $$
 
 You need to design a header-only library that is implemented in an Object-oriented Programming fashion so that it mimics the scikit-learn library in Python. Particularly, the following are the must-do:
 
-## The barely minimum you must do {#sec-bare-minimum-task}
+## Basic tasks {#sec-bare-minimum-task}
 
-1. Decide your own OOP design to implement the library. **Note** that a functioning program is not necessary a well-designed programe. You need to make your own decision.
+1. Decide your own OOP design to implement the library and program in general. The design involves how you want to organize classes, inheritence, choices of data types and data storage. **Note** that a functioning program is not necessary a well-designed programe. You need to make your own decision! Try to function as a software engineer 😏😏!!!
 2. Build two classes `LinearRegression` and `LogisticRegression` that mimic their counterparts in Python. These classes must have two important member functions `fit()` and `predict()` with appropriate function parameters.
-3. Add these two classes into the namespace `linear_model`. This `linear_model` is again a namespace inside a bigger namespace `sklearn_cpp`.
+3. Decide on how you want to read the `.csv` file. Using either functions or object-oriented programming is fine. Make sure you give convincing reasons for your choice in the report.
+4. Add these two classes into the namespace `linear_model`. This `linear_model` is again a namespace inside a bigger namespace `sklearn_cpp`.
     This step is to mimic the important statement in Python
 
     ```{python} 
@@ -481,13 +482,23 @@ You need to design a header-only library that is implemented in an Object-orient
     from sklearn.linear_model import LogisticRegression
     ```
     As you can see, the `linear_model` is a submodule of the module `sklearn`.
-4. Write a main program to apply these two classes to solve two problems:
+5. Write a main program to apply these two classes to solve two problems:
     - Predict concrete strength using linear regression -- just like example in Python
     - Predict whether a patient is fine or not given an ECG data -- just like example in Python
 
-## The not-barely minimum you must do
+## Build the **header-only** library
 
 1. Based on the code you have achieved in @sec-bare-minimum-task, build [header-only] library by following my provided example. This is a fantastic [header-only] library that you can look at: [xtensor](https://github.com/xtensor-stack/xtensor). All the header files can be found at [header file source code](https://github.com/xtensor-stack/xtensor/tree/master/include/xtensor).
+2. Write a main program that use the [**header-only**] library you have just built to test whether the library works.
+
+# Marking scheme
+
+- Basic tasks: 70/100
+  - Good OOP program design: 15/100
+  - Build two classes and test them correctly: 40/100
+  - Main program to apply the two built classes to two applications: 15/100
+- Build the header-only library: 10/100
+- Report: 20/100
 
 
 
