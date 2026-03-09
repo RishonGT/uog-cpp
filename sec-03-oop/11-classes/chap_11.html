@@ -1086,31 +1086,31 @@ We now learn constructors in C++.
 Listing&nbsp;9: Constructor must have the same name as class. Filename=<code>basic_constructor_example.cpp</code>
 </figcaption>
 <div aria-describedby="lst-basic-constructor-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode" id="lst-basic-constructor-example"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="lst-basic-constructor-example-1"><a href="#lst-basic-constructor-example-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
-<span id="lst-basic-constructor-example-2"><a href="#lst-basic-constructor-example-2"></a><span class="kw">class</span> Vector2D</span>
-<span id="lst-basic-constructor-example-3"><a href="#lst-basic-constructor-example-3"></a><span class="op">{</span></span>
-<span id="lst-basic-constructor-example-4"><a href="#lst-basic-constructor-example-4"></a><span class="kw">private</span><span class="op">:</span></span>
-<span id="lst-basic-constructor-example-5"><a href="#lst-basic-constructor-example-5"></a>    <span class="dt">double</span> x <span class="op">{</span> <span class="dv">24</span> <span class="op">};</span> <span class="co">// let remove {} to illustrate non-initialized members for students</span></span>
-<span id="lst-basic-constructor-example-6"><a href="#lst-basic-constructor-example-6"></a>    <span class="dt">double</span> y <span class="op">{};</span></span>
-<span id="lst-basic-constructor-example-7"><a href="#lst-basic-constructor-example-7"></a>    </span>
-<span id="lst-basic-constructor-example-8"><a href="#lst-basic-constructor-example-8"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="lst-basic-constructor-example-9"><a href="#lst-basic-constructor-example-9"></a>    Vector2D<span class="op">(</span><span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">)</span> </span>
-<span id="lst-basic-constructor-example-10"><a href="#lst-basic-constructor-example-10"></a>    <span class="op">{</span></span>
-<span id="lst-basic-constructor-example-11"><a href="#lst-basic-constructor-example-11"></a>        <span class="kw">this</span><span class="op">-&gt;</span>x <span class="op">=</span> x<span class="op">;</span></span>
-<span id="lst-basic-constructor-example-12"><a href="#lst-basic-constructor-example-12"></a>        <span class="kw">this</span><span class="op">-&gt;</span>y <span class="op">=</span> y<span class="op">;</span></span>
-<span id="lst-basic-constructor-example-13"><a href="#lst-basic-constructor-example-13"></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Vector2D("</span> <span class="op">&lt;&lt;</span> <span class="kw">this</span><span class="op">-&gt;</span>x <span class="op">&lt;&lt;</span> <span class="st">", "</span> <span class="op">&lt;&lt;</span> <span class="kw">this</span><span class="op">-&gt;</span>y <span class="op">&lt;&lt;</span> <span class="st">") constructed</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
-<span id="lst-basic-constructor-example-14"><a href="#lst-basic-constructor-example-14"></a>    <span class="op">}</span></span>
-<span id="lst-basic-constructor-example-15"><a href="#lst-basic-constructor-example-15"></a>    <span class="dt">void</span> print<span class="op">()</span> <span class="at">const</span> <span class="op">{</span></span>
-<span id="lst-basic-constructor-example-16"><a href="#lst-basic-constructor-example-16"></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Vector2D("</span> <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> <span class="st">", "</span> <span class="op">&lt;&lt;</span> y <span class="op">&lt;&lt;</span> <span class="st">")</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
-<span id="lst-basic-constructor-example-17"><a href="#lst-basic-constructor-example-17"></a>    <span class="op">}</span></span>
-<span id="lst-basic-constructor-example-18"><a href="#lst-basic-constructor-example-18"></a><span class="op">};</span></span>
-<span id="lst-basic-constructor-example-19"><a href="#lst-basic-constructor-example-19"></a></span>
-<span id="lst-basic-constructor-example-20"><a href="#lst-basic-constructor-example-20"></a><span class="dt">int</span> main<span class="op">()</span></span>
-<span id="lst-basic-constructor-example-21"><a href="#lst-basic-constructor-example-21"></a><span class="op">{</span></span>
-<span id="lst-basic-constructor-example-22"><a href="#lst-basic-constructor-example-22"></a>    Vector2D v <span class="op">{</span><span class="dv">42</span><span class="op">,</span> <span class="dv">24</span><span class="op">};</span>    <span class="co">// call Vector2D(double, double)</span></span>
-<span id="lst-basic-constructor-example-23"><a href="#lst-basic-constructor-example-23"></a>    v<span class="op">.</span>print<span class="op">();</span></span>
-<span id="lst-basic-constructor-example-24"><a href="#lst-basic-constructor-example-24"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="lst-basic-constructor-example-25"><a href="#lst-basic-constructor-example-25"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb15-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb15-2"><a href=""></a><span class="kw">class</span> Vector2D</span>
+<span id="cb15-3"><a href=""></a><span class="op">{</span></span>
+<span id="cb15-4"><a href=""></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb15-5"><a href=""></a>    <span class="dt">double</span> x <span class="op">{</span> <span class="dv">24</span> <span class="op">};</span> <span class="co">// let remove {} to illustrate non-initialized members for students</span></span>
+<span id="cb15-6"><a href=""></a>    <span class="dt">double</span> y <span class="op">{};</span></span>
+<span id="cb15-7"><a href=""></a>    </span>
+<span id="cb15-8"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb15-9"><a href=""></a>    Vector2D<span class="op">(</span><span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">)</span> </span>
+<span id="cb15-10"><a href=""></a>    <span class="op">{</span></span>
+<span id="cb15-11"><a href=""></a>        <span class="kw">this</span><span class="op">-&gt;</span>x <span class="op">=</span> x<span class="op">;</span></span>
+<span id="cb15-12"><a href=""></a>        <span class="kw">this</span><span class="op">-&gt;</span>y <span class="op">=</span> y<span class="op">;</span></span>
+<span id="cb15-13"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Vector2D("</span> <span class="op">&lt;&lt;</span> <span class="kw">this</span><span class="op">-&gt;</span>x <span class="op">&lt;&lt;</span> <span class="st">", "</span> <span class="op">&lt;&lt;</span> <span class="kw">this</span><span class="op">-&gt;</span>y <span class="op">&lt;&lt;</span> <span class="st">") constructed</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb15-14"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb15-15"><a href=""></a>    <span class="dt">void</span> print<span class="op">()</span> <span class="at">const</span> <span class="op">{</span></span>
+<span id="cb15-16"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Vector2D("</span> <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> <span class="st">", "</span> <span class="op">&lt;&lt;</span> y <span class="op">&lt;&lt;</span> <span class="st">")</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb15-17"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb15-18"><a href=""></a><span class="op">};</span></span>
+<span id="cb15-19"><a href=""></a></span>
+<span id="cb15-20"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb15-21"><a href=""></a><span class="op">{</span></span>
+<span id="cb15-22"><a href=""></a>    Vector2D v <span class="op">{</span><span class="dv">42</span><span class="op">,</span> <span class="dv">24</span><span class="op">};</span>    <span class="co">// call Vector2D(double, double)</span></span>
+<span id="cb15-23"><a href=""></a>    v<span class="op">.</span>print<span class="op">();</span></span>
+<span id="cb15-24"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb15-25"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
@@ -1361,46 +1361,46 @@ Listing&nbsp;12: An example of member initializer list. Filename=<code>member_in
 Listing&nbsp;13: Different initializers in classes. Filename=<code>different_initializers.cpp</code>
 </figcaption>
 <div aria-describedby="lst-different-initializers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode" id="lst-different-initializers"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="lst-different-initializers-1"><a href="#lst-different-initializers-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
-<span id="lst-different-initializers-2"><a href="#lst-different-initializers-2"></a></span>
-<span id="lst-different-initializers-3"><a href="#lst-different-initializers-3"></a><span class="co">// This function "pollutes" the stack memory with non-zero values</span></span>
-<span id="lst-different-initializers-4"><a href="#lst-different-initializers-4"></a><span class="dt">void</span> do_dirty_stack<span class="op">()</span> <span class="op">{</span></span>
-<span id="lst-different-initializers-5"><a href="#lst-different-initializers-5"></a>    <span class="dt">int</span> a<span class="op">[</span><span class="dv">100</span><span class="op">];</span></span>
-<span id="lst-different-initializers-6"><a href="#lst-different-initializers-6"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">100</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
-<span id="lst-different-initializers-7"><a href="#lst-different-initializers-7"></a>        a<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="bn">0xDEADBEEF</span><span class="op">;</span> <span class="co">// A recognizable "garbage" hex value</span></span>
-<span id="lst-different-initializers-8"><a href="#lst-different-initializers-8"></a>    <span class="op">}</span></span>
-<span id="lst-different-initializers-9"><a href="#lst-different-initializers-9"></a><span class="op">}</span></span>
-<span id="lst-different-initializers-10"><a href="#lst-different-initializers-10"></a></span>
-<span id="lst-different-initializers-11"><a href="#lst-different-initializers-11"></a><span class="kw">class</span> Foo</span>
-<span id="lst-different-initializers-12"><a href="#lst-different-initializers-12"></a><span class="op">{</span></span>
-<span id="lst-different-initializers-13"><a href="#lst-different-initializers-13"></a><span class="kw">private</span><span class="op">:</span></span>
-<span id="lst-different-initializers-14"><a href="#lst-different-initializers-14"></a>    <span class="dt">int</span> x <span class="op">{};</span>       <span class="co">// default member initializer (will be ignored)</span></span>
-<span id="lst-different-initializers-15"><a href="#lst-different-initializers-15"></a>    <span class="dt">int</span> y <span class="op">{</span> <span class="dv">42</span> <span class="op">};</span>    <span class="co">// default member initializer (will be used)</span></span>
-<span id="lst-different-initializers-16"><a href="#lst-different-initializers-16"></a>    <span class="dt">int</span> z<span class="op">;</span>      <span class="co">// no initializer, you see "0" in the output due to Compiler, </span></span>
-<span id="lst-different-initializers-17"><a href="#lst-different-initializers-17"></a>                <span class="co">// not real initialzation value. It may contain garbage value</span></span>
-<span id="lst-different-initializers-18"><a href="#lst-different-initializers-18"></a>                <span class="co">// on other computers/compilers.</span></span>
-<span id="lst-different-initializers-19"><a href="#lst-different-initializers-19"></a></span>
-<span id="lst-different-initializers-20"><a href="#lst-different-initializers-20"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="lst-different-initializers-21"><a href="#lst-different-initializers-21"></a>    Foo<span class="op">(</span><span class="dt">int</span> x<span class="op">)</span> </span>
-<span id="lst-different-initializers-22"><a href="#lst-different-initializers-22"></a>        <span class="op">:</span> x <span class="op">{</span> x <span class="op">}</span> <span class="co">// member initializer list</span></span>
-<span id="lst-different-initializers-23"><a href="#lst-different-initializers-23"></a>    <span class="op">{</span></span>
-<span id="lst-different-initializers-24"><a href="#lst-different-initializers-24"></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Foo constructed</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
-<span id="lst-different-initializers-25"><a href="#lst-different-initializers-25"></a>    <span class="op">}</span></span>
-<span id="lst-different-initializers-26"><a href="#lst-different-initializers-26"></a></span>
-<span id="lst-different-initializers-27"><a href="#lst-different-initializers-27"></a>    <span class="dt">void</span> print<span class="op">()</span> <span class="at">const</span></span>
-<span id="lst-different-initializers-28"><a href="#lst-different-initializers-28"></a>    <span class="op">{</span></span>
-<span id="lst-different-initializers-29"><a href="#lst-different-initializers-29"></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Foo("</span> <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> <span class="st">", "</span> <span class="op">&lt;&lt;</span> y <span class="op">&lt;&lt;</span> <span class="st">", "</span> <span class="op">&lt;&lt;</span> z <span class="op">&lt;&lt;</span> <span class="st">")</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
-<span id="lst-different-initializers-30"><a href="#lst-different-initializers-30"></a>    <span class="op">}</span></span>
-<span id="lst-different-initializers-31"><a href="#lst-different-initializers-31"></a><span class="op">};</span></span>
-<span id="lst-different-initializers-32"><a href="#lst-different-initializers-32"></a></span>
-<span id="lst-different-initializers-33"><a href="#lst-different-initializers-33"></a><span class="dt">int</span> main<span class="op">()</span></span>
-<span id="lst-different-initializers-34"><a href="#lst-different-initializers-34"></a><span class="op">{</span></span>
-<span id="lst-different-initializers-35"><a href="#lst-different-initializers-35"></a>    do_dirty_stack<span class="op">();</span>       <span class="co">// fill the stack with garbage first</span></span>
-<span id="lst-different-initializers-36"><a href="#lst-different-initializers-36"></a>    Foo foo <span class="op">{</span> <span class="dv">6</span> <span class="op">};</span></span>
-<span id="lst-different-initializers-37"><a href="#lst-different-initializers-37"></a>    foo<span class="op">.</span>print<span class="op">();</span></span>
-<span id="lst-different-initializers-38"><a href="#lst-different-initializers-38"></a></span>
-<span id="lst-different-initializers-39"><a href="#lst-different-initializers-39"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="lst-different-initializers-40"><a href="#lst-different-initializers-40"></a><span class="op">}</span> <span class="co">// Compile with warning: g++ -Wall -Wextra -Wuninitialized different_initializers.cpp</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb23-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb23-2"><a href=""></a></span>
+<span id="cb23-3"><a href=""></a><span class="co">// This function "pollutes" the stack memory with non-zero values</span></span>
+<span id="cb23-4"><a href=""></a><span class="dt">void</span> do_dirty_stack<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb23-5"><a href=""></a>    <span class="dt">int</span> a<span class="op">[</span><span class="dv">100</span><span class="op">];</span></span>
+<span id="cb23-6"><a href=""></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">100</span><span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb23-7"><a href=""></a>        a<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="bn">0xDEADBEEF</span><span class="op">;</span> <span class="co">// A recognizable "garbage" hex value</span></span>
+<span id="cb23-8"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb23-9"><a href=""></a><span class="op">}</span></span>
+<span id="cb23-10"><a href=""></a></span>
+<span id="cb23-11"><a href=""></a><span class="kw">class</span> Foo</span>
+<span id="cb23-12"><a href=""></a><span class="op">{</span></span>
+<span id="cb23-13"><a href=""></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb23-14"><a href=""></a>    <span class="dt">int</span> x <span class="op">{};</span>       <span class="co">// default member initializer (will be ignored)</span></span>
+<span id="cb23-15"><a href=""></a>    <span class="dt">int</span> y <span class="op">{</span> <span class="dv">42</span> <span class="op">};</span>    <span class="co">// default member initializer (will be used)</span></span>
+<span id="cb23-16"><a href=""></a>    <span class="dt">int</span> z<span class="op">;</span>      <span class="co">// no initializer, you see "0" in the output due to Compiler, </span></span>
+<span id="cb23-17"><a href=""></a>                <span class="co">// not real initialzation value. It may contain garbage value</span></span>
+<span id="cb23-18"><a href=""></a>                <span class="co">// on other computers/compilers.</span></span>
+<span id="cb23-19"><a href=""></a></span>
+<span id="cb23-20"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb23-21"><a href=""></a>    Foo<span class="op">(</span><span class="dt">int</span> x<span class="op">)</span> </span>
+<span id="cb23-22"><a href=""></a>        <span class="op">:</span> x <span class="op">{</span> x <span class="op">}</span> <span class="co">// member initializer list</span></span>
+<span id="cb23-23"><a href=""></a>    <span class="op">{</span></span>
+<span id="cb23-24"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Foo constructed</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb23-25"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb23-26"><a href=""></a></span>
+<span id="cb23-27"><a href=""></a>    <span class="dt">void</span> print<span class="op">()</span> <span class="at">const</span></span>
+<span id="cb23-28"><a href=""></a>    <span class="op">{</span></span>
+<span id="cb23-29"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Foo("</span> <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> <span class="st">", "</span> <span class="op">&lt;&lt;</span> y <span class="op">&lt;&lt;</span> <span class="st">", "</span> <span class="op">&lt;&lt;</span> z <span class="op">&lt;&lt;</span> <span class="st">")</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb23-30"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb23-31"><a href=""></a><span class="op">};</span></span>
+<span id="cb23-32"><a href=""></a></span>
+<span id="cb23-33"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb23-34"><a href=""></a><span class="op">{</span></span>
+<span id="cb23-35"><a href=""></a>    do_dirty_stack<span class="op">();</span>       <span class="co">// fill the stack with garbage first</span></span>
+<span id="cb23-36"><a href=""></a>    Foo foo <span class="op">{</span> <span class="dv">6</span> <span class="op">};</span></span>
+<span id="cb23-37"><a href=""></a>    foo<span class="op">.</span>print<span class="op">();</span></span>
+<span id="cb23-38"><a href=""></a></span>
+<span id="cb23-39"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb23-40"><a href=""></a><span class="op">}</span> <span class="co">// Compile with warning: g++ -Wall -Wextra -Wuninitialized different_initializers.cpp</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
@@ -1891,56 +1891,59 @@ Listing&nbsp;21: When an object is passed by value, the argument is copied into 
 Listing&nbsp;22: When a function returns by value, a temporary object is initialized by implicitly invoking the copy constructor and is returned to the caller. Filename=<code>copy_constructor_return_by_value.cpp</code>
 </figcaption>
 <div aria-describedby="lst-copy-constructor-pass-by-value-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode" id="lst-copy-constructor-pass-by-value"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="lst-copy-constructor-pass-by-value-1"><a href="#lst-copy-constructor-pass-by-value-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
-<span id="lst-copy-constructor-pass-by-value-2"><a href="#lst-copy-constructor-pass-by-value-2"></a></span>
-<span id="lst-copy-constructor-pass-by-value-3"><a href="#lst-copy-constructor-pass-by-value-3"></a><span class="kw">class</span> Fraction</span>
-<span id="lst-copy-constructor-pass-by-value-4"><a href="#lst-copy-constructor-pass-by-value-4"></a><span class="op">{</span></span>
-<span id="lst-copy-constructor-pass-by-value-5"><a href="#lst-copy-constructor-pass-by-value-5"></a><span class="kw">private</span><span class="op">:</span></span>
-<span id="lst-copy-constructor-pass-by-value-6"><a href="#lst-copy-constructor-pass-by-value-6"></a>    <span class="dt">int</span> numerator<span class="op">{</span> <span class="dv">0</span> <span class="op">};</span></span>
-<span id="lst-copy-constructor-pass-by-value-7"><a href="#lst-copy-constructor-pass-by-value-7"></a>    <span class="dt">int</span> denominator<span class="op">{</span> <span class="dv">1</span> <span class="op">};</span></span>
-<span id="lst-copy-constructor-pass-by-value-8"><a href="#lst-copy-constructor-pass-by-value-8"></a></span>
-<span id="lst-copy-constructor-pass-by-value-9"><a href="#lst-copy-constructor-pass-by-value-9"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="lst-copy-constructor-pass-by-value-10"><a href="#lst-copy-constructor-pass-by-value-10"></a>    <span class="co">// Default constructor</span></span>
-<span id="lst-copy-constructor-pass-by-value-11"><a href="#lst-copy-constructor-pass-by-value-11"></a>    Fraction<span class="op">(</span><span class="dt">int</span> numerator <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">int</span> denominator <span class="op">=</span> <span class="dv">1</span><span class="op">)</span></span>
-<span id="lst-copy-constructor-pass-by-value-12"><a href="#lst-copy-constructor-pass-by-value-12"></a>        <span class="op">:</span> numerator<span class="op">{</span> numerator <span class="op">},</span> denominator<span class="op">{</span> denominator <span class="op">}</span></span>
-<span id="lst-copy-constructor-pass-by-value-13"><a href="#lst-copy-constructor-pass-by-value-13"></a>    <span class="op">{</span></span>
-<span id="lst-copy-constructor-pass-by-value-14"><a href="#lst-copy-constructor-pass-by-value-14"></a>    <span class="op">}</span></span>
-<span id="lst-copy-constructor-pass-by-value-15"><a href="#lst-copy-constructor-pass-by-value-15"></a></span>
-<span id="lst-copy-constructor-pass-by-value-16"><a href="#lst-copy-constructor-pass-by-value-16"></a>    <span class="co">// Copy constructor</span></span>
-<span id="lst-copy-constructor-pass-by-value-17"><a href="#lst-copy-constructor-pass-by-value-17"></a>    Fraction<span class="op">(</span><span class="at">const</span> Fraction<span class="op">&amp;</span> fraction<span class="op">)</span></span>
-<span id="lst-copy-constructor-pass-by-value-18"><a href="#lst-copy-constructor-pass-by-value-18"></a>        <span class="op">:</span> numerator<span class="op">{</span> fraction<span class="op">.</span>numerator <span class="op">}</span></span>
-<span id="lst-copy-constructor-pass-by-value-19"><a href="#lst-copy-constructor-pass-by-value-19"></a>        <span class="op">,</span> denominator<span class="op">{</span> fraction<span class="op">.</span>denominator <span class="op">}</span></span>
-<span id="lst-copy-constructor-pass-by-value-20"><a href="#lst-copy-constructor-pass-by-value-20"></a>    <span class="op">{</span></span>
-<span id="lst-copy-constructor-pass-by-value-21"><a href="#lst-copy-constructor-pass-by-value-21"></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Copy constructor called</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
-<span id="lst-copy-constructor-pass-by-value-22"><a href="#lst-copy-constructor-pass-by-value-22"></a>    <span class="op">}</span></span>
-<span id="lst-copy-constructor-pass-by-value-23"><a href="#lst-copy-constructor-pass-by-value-23"></a></span>
-<span id="lst-copy-constructor-pass-by-value-24"><a href="#lst-copy-constructor-pass-by-value-24"></a>    <span class="dt">void</span> print<span class="op">()</span> <span class="at">const</span></span>
-<span id="lst-copy-constructor-pass-by-value-25"><a href="#lst-copy-constructor-pass-by-value-25"></a>    <span class="op">{</span></span>
-<span id="lst-copy-constructor-pass-by-value-26"><a href="#lst-copy-constructor-pass-by-value-26"></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Fraction("</span> <span class="op">&lt;&lt;</span> numerator <span class="op">&lt;&lt;</span> <span class="st">", "</span> <span class="op">&lt;&lt;</span> denominator <span class="op">&lt;&lt;</span> <span class="st">")</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
-<span id="lst-copy-constructor-pass-by-value-27"><a href="#lst-copy-constructor-pass-by-value-27"></a>    <span class="op">}</span></span>
-<span id="lst-copy-constructor-pass-by-value-28"><a href="#lst-copy-constructor-pass-by-value-28"></a><span class="op">};</span></span>
-<span id="lst-copy-constructor-pass-by-value-29"><a href="#lst-copy-constructor-pass-by-value-29"></a></span>
-<span id="lst-copy-constructor-pass-by-value-30"><a href="#lst-copy-constructor-pass-by-value-30"></a><span class="dt">void</span> print_fraction<span class="op">(</span>Fraction f<span class="op">)</span> <span class="co">// f is pass by value</span></span>
-<span id="lst-copy-constructor-pass-by-value-31"><a href="#lst-copy-constructor-pass-by-value-31"></a><span class="op">{</span></span>
-<span id="lst-copy-constructor-pass-by-value-32"><a href="#lst-copy-constructor-pass-by-value-32"></a>    f<span class="op">.</span>print<span class="op">();</span></span>
-<span id="lst-copy-constructor-pass-by-value-33"><a href="#lst-copy-constructor-pass-by-value-33"></a><span class="op">}</span></span>
-<span id="lst-copy-constructor-pass-by-value-34"><a href="#lst-copy-constructor-pass-by-value-34"></a></span>
-<span id="lst-copy-constructor-pass-by-value-35"><a href="#lst-copy-constructor-pass-by-value-35"></a>Fraction generate_fraction<span class="op">(</span><span class="dt">int</span> n<span class="op">,</span> <span class="dt">int</span> d<span class="op">)</span></span>
-<span id="lst-copy-constructor-pass-by-value-36"><a href="#lst-copy-constructor-pass-by-value-36"></a><span class="op">{</span></span>
-<span id="lst-copy-constructor-pass-by-value-37"><a href="#lst-copy-constructor-pass-by-value-37"></a>    Fraction f<span class="op">{</span> n<span class="op">,</span> d <span class="op">};</span></span>
-<span id="lst-copy-constructor-pass-by-value-38"><a href="#lst-copy-constructor-pass-by-value-38"></a>    <span class="cf">return</span> f<span class="op">;</span>       <span class="co">// one copy constructor invoked</span></span>
-<span id="lst-copy-constructor-pass-by-value-39"><a href="#lst-copy-constructor-pass-by-value-39"></a><span class="op">}</span></span>
-<span id="lst-copy-constructor-pass-by-value-40"><a href="#lst-copy-constructor-pass-by-value-40"></a></span>
-<span id="lst-copy-constructor-pass-by-value-41"><a href="#lst-copy-constructor-pass-by-value-41"></a><span class="dt">int</span> main<span class="op">()</span></span>
-<span id="lst-copy-constructor-pass-by-value-42"><a href="#lst-copy-constructor-pass-by-value-42"></a><span class="op">{</span></span>
-<span id="lst-copy-constructor-pass-by-value-43"><a href="#lst-copy-constructor-pass-by-value-43"></a>    Fraction f1 <span class="op">{};</span></span>
-<span id="lst-copy-constructor-pass-by-value-44"><a href="#lst-copy-constructor-pass-by-value-44"></a>    print_fraction<span class="op">(</span>f1<span class="op">);</span> <span class="co">// one copy constructor invoked</span></span>
-<span id="lst-copy-constructor-pass-by-value-45"><a href="#lst-copy-constructor-pass-by-value-45"></a>    Fraction f2 <span class="op">{</span> generate_fraction<span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">)</span> <span class="op">};</span> <span class="co">// Fraction is returned using copy constructor</span></span>
-<span id="lst-copy-constructor-pass-by-value-46"><a href="#lst-copy-constructor-pass-by-value-46"></a></span>
-<span id="lst-copy-constructor-pass-by-value-47"><a href="#lst-copy-constructor-pass-by-value-47"></a>    print_fraction<span class="op">(</span>f2<span class="op">);</span> <span class="co">// f is copied into the function parameter using copy constructor</span></span>
-<span id="lst-copy-constructor-pass-by-value-48"><a href="#lst-copy-constructor-pass-by-value-48"></a></span>
-<span id="lst-copy-constructor-pass-by-value-49"><a href="#lst-copy-constructor-pass-by-value-49"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="lst-copy-constructor-pass-by-value-50"><a href="#lst-copy-constructor-pass-by-value-50"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb37-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb37-2"><a href=""></a></span>
+<span id="cb37-3"><a href=""></a><span class="kw">class</span> Fraction</span>
+<span id="cb37-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb37-5"><a href=""></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb37-6"><a href=""></a>    <span class="dt">int</span> numerator<span class="op">{</span> <span class="dv">0</span> <span class="op">};</span></span>
+<span id="cb37-7"><a href=""></a>    <span class="dt">int</span> denominator<span class="op">{</span> <span class="dv">1</span> <span class="op">};</span></span>
+<span id="cb37-8"><a href=""></a></span>
+<span id="cb37-9"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb37-10"><a href=""></a>    <span class="co">// Default constructor</span></span>
+<span id="cb37-11"><a href=""></a>    Fraction<span class="op">(</span><span class="dt">int</span> numerator <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">int</span> denominator <span class="op">=</span> <span class="dv">1</span><span class="op">)</span></span>
+<span id="cb37-12"><a href=""></a>        <span class="op">:</span> numerator<span class="op">{</span> numerator <span class="op">},</span> denominator<span class="op">{</span> denominator <span class="op">}</span></span>
+<span id="cb37-13"><a href=""></a>    <span class="op">{</span></span>
+<span id="cb37-14"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb37-15"><a href=""></a></span>
+<span id="cb37-16"><a href=""></a>    <span class="co">// Copy constructor</span></span>
+<span id="cb37-17"><a href=""></a>    Fraction<span class="op">(</span><span class="at">const</span> Fraction<span class="op">&amp;</span> fraction<span class="op">)</span></span>
+<span id="cb37-18"><a href=""></a>        <span class="op">:</span> numerator<span class="op">{</span> fraction<span class="op">.</span>numerator <span class="op">}</span></span>
+<span id="cb37-19"><a href=""></a>        <span class="op">,</span> denominator<span class="op">{</span> fraction<span class="op">.</span>denominator <span class="op">}</span></span>
+<span id="cb37-20"><a href=""></a>    <span class="op">{</span></span>
+<span id="cb37-21"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Copy constructor called</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb37-22"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb37-23"><a href=""></a></span>
+<span id="cb37-24"><a href=""></a>    <span class="dt">void</span> print<span class="op">()</span> <span class="at">const</span></span>
+<span id="cb37-25"><a href=""></a>    <span class="op">{</span></span>
+<span id="cb37-26"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Fraction("</span> <span class="op">&lt;&lt;</span> numerator <span class="op">&lt;&lt;</span> <span class="st">", "</span> <span class="op">&lt;&lt;</span> denominator <span class="op">&lt;&lt;</span> <span class="st">")</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb37-27"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb37-28"><a href=""></a><span class="op">};</span></span>
+<span id="cb37-29"><a href=""></a></span>
+<span id="cb37-30"><a href=""></a><span class="dt">void</span> print_fraction<span class="op">(</span>Fraction f<span class="op">)</span> <span class="co">// f is pass by value</span></span>
+<span id="cb37-31"><a href=""></a><span class="op">{</span></span>
+<span id="cb37-32"><a href=""></a>    f<span class="op">.</span>print<span class="op">();</span></span>
+<span id="cb37-33"><a href=""></a><span class="op">}</span></span>
+<span id="cb37-34"><a href=""></a></span>
+<span id="cb37-35"><a href=""></a>Fraction generate_fraction<span class="op">(</span><span class="dt">int</span> n<span class="op">,</span> <span class="dt">int</span> d<span class="op">)</span></span>
+<span id="cb37-36"><a href=""></a><span class="op">{</span></span>
+<span id="cb37-37"><a href=""></a>    Fraction f<span class="op">{</span> n<span class="op">,</span> d <span class="op">};</span></span>
+<span id="cb37-38"><a href=""></a>    <span class="cf">return</span> f<span class="op">;</span>       <span class="co">// one copy constructor invoked</span></span>
+<span id="cb37-39"><a href=""></a><span class="op">}</span></span>
+<span id="cb37-40"><a href=""></a></span>
+<span id="cb37-41"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb37-42"><a href=""></a><span class="op">{</span></span>
+<span id="cb37-43"><a href=""></a>    Fraction f1 <span class="op">{};</span></span>
+<span id="cb37-44"><a href=""></a>    print_fraction<span class="op">(</span>f1<span class="op">);</span> <span class="co">// one copy constructor invoked</span></span>
+<span id="cb37-45"><a href=""></a>    Fraction f2 <span class="op">{</span> generate_fraction<span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">)</span> <span class="op">};</span> <span class="co">// Fraction is returned using copy constructor</span></span>
+<span id="cb37-46"><a href=""></a></span>
+<span id="cb37-47"><a href=""></a>    print_fraction<span class="op">(</span>f2<span class="op">);</span> <span class="co">// f is copied into the function parameter using copy constructor</span></span>
+<span id="cb37-48"><a href=""></a>    print_fraction<span class="op">(</span>f2<span class="op">);</span></span>
+<span id="cb37-49"><a href=""></a></span>
+<span id="cb37-50"><a href=""></a>    Fraction f3 <span class="op">{</span> generate_fraction<span class="op">(</span><span class="dv">4</span><span class="op">,</span> <span class="dv">2</span><span class="op">)</span> <span class="op">};</span></span>
+<span id="cb37-51"><a href=""></a>    print_fraction<span class="op">(</span>f3<span class="op">);</span></span>
+<span id="cb37-52"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb37-53"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>

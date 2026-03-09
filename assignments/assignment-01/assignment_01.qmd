@@ -342,10 +342,10 @@ The gradient descent method is still carried out as before following the updatin
 $$ -->
 $$
 \begin{aligned}
-\frac{\partial \mathcal{L}}{\partial w_{1}} &= \frac{1}{m} \sum\limits_{i=1}^{m}( \widehat{y}{(i)} - y^{(i)})\, x_{1}^{(i)} = \frac{1}{m} \sum\limits_{i=1}^{m}(\mathbf{w}\cdot \mathbf{x}^{(i)} + b - y^{(i)}) x_{1}^{(i)}, \\[3pt]
-\frac{\partial \mathcal{L}}{\partial w_{2}} &= \frac{1}{m} \sum\limits_{i=1}^{m}( \widehat{y}{(i)} - y^{(i)})\, x_{2}^{(i)} = \frac{1}{m} \sum\limits_{i=1}^{m}(\mathbf{w}\cdot \mathbf{x}^{(i)} + b - y^{(i)}) x_{2}^{(i)}, \\[3pt]
+\frac{\partial \mathcal{L}}{\partial w_{1}} &= \frac{1}{m} \sum\limits_{i=1}^{m}( \widehat{y}^{(i)} - y^{(i)})\, x_{1}^{(i)} = \frac{1}{m} \sum\limits_{i=1}^{m}(\mathbf{w}\cdot \mathbf{x}^{(i)} + b - y^{(i)}) x_{1}^{(i)}, \\[3pt]
+\frac{\partial \mathcal{L}}{\partial w_{2}} &= \frac{1}{m} \sum\limits_{i=1}^{m}( \widehat{y}^{(i)} - y^{(i)})\, x_{2}^{(i)} = \frac{1}{m} \sum\limits_{i=1}^{m}(\mathbf{w}\cdot \mathbf{x}^{(i)} + b - y^{(i)}) x_{2}^{(i)}, \\[3pt]
 \vdots \\[3pt]
-\frac{\partial \mathcal{L}}{\partial w_{n}} &= \frac{1}{m} \sum\limits_{i=1}^{m}( \widehat{y}{(i)} - y^{(i)})\, x_{n}^{(i)} = \frac{1}{m} \sum\limits_{i=1}^{m}(\mathbf{w}\cdot \mathbf{x}^{(i)} + b - y^{(i)}) x_{n}^{(i)}, \\[3pt]
+\frac{\partial \mathcal{L}}{\partial w_{n}} &= \frac{1}{m} \sum\limits_{i=1}^{m}( \widehat{y}^{(i)} - y^{(i)})\, x_{n}^{(i)} = \frac{1}{m} \sum\limits_{i=1}^{m}(\mathbf{w}\cdot \mathbf{x}^{(i)} + b - y^{(i)}) x_{n}^{(i)}, \\[3pt]
 \frac{\partial \mathcal{L}}{\partial b} &= \frac{1}{m} \sum\limits_{i=1}^{m}(\widehat{y}^{(i)} - y^{(i)})\cdot 1 = \frac{1}{m}\sum\limits_{i=1}^{m}(\mathbf{w} \cdot \mathbf{x}^{(i)} + b - y^{(i)}).
 \end{aligned}
 $$

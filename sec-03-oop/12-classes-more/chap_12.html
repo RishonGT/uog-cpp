@@ -531,30 +531,30 @@ Listing&nbsp;1: Keyword <code>this</code> is a const pointer that holds the addr
 Listing&nbsp;2: Return <code>*this</code> to allow method chaining. Filename=<code>method_chaining_example.cpp</code>
 </figcaption>
 <div aria-describedby="lst-hidden-pointer-this-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode" id="lst-hidden-pointer-this"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="lst-hidden-pointer-this-1"><a href="#lst-hidden-pointer-this-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
-<span id="lst-hidden-pointer-this-2"><a href="#lst-hidden-pointer-this-2"></a><span class="kw">class</span> Calc</span>
-<span id="lst-hidden-pointer-this-3"><a href="#lst-hidden-pointer-this-3"></a><span class="op">{</span></span>
-<span id="lst-hidden-pointer-this-4"><a href="#lst-hidden-pointer-this-4"></a><span class="kw">private</span><span class="op">:</span></span>
-<span id="lst-hidden-pointer-this-5"><a href="#lst-hidden-pointer-this-5"></a>    <span class="dt">double</span> value<span class="op">{};</span></span>
-<span id="lst-hidden-pointer-this-6"><a href="#lst-hidden-pointer-this-6"></a></span>
-<span id="lst-hidden-pointer-this-7"><a href="#lst-hidden-pointer-this-7"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="lst-hidden-pointer-this-8"><a href="#lst-hidden-pointer-this-8"></a>    Calc<span class="op">(</span><span class="dt">double</span> value<span class="op">)</span> <span class="op">:</span> value <span class="op">{</span>value<span class="op">}</span> <span class="op">{}</span></span>
-<span id="lst-hidden-pointer-this-9"><a href="#lst-hidden-pointer-this-9"></a>    Calc<span class="op">&amp;</span> add<span class="op">(</span><span class="dt">double</span> value<span class="op">)</span> <span class="op">{</span> <span class="kw">this</span><span class="op">-&gt;</span>value <span class="op">+=</span> value<span class="op">;</span> <span class="cf">return</span> <span class="op">*</span><span class="kw">this</span><span class="op">;</span> <span class="op">}</span></span>
-<span id="lst-hidden-pointer-this-10"><a href="#lst-hidden-pointer-this-10"></a>    Calc<span class="op">&amp;</span> sub<span class="op">(</span><span class="dt">double</span> value<span class="op">)</span> <span class="op">{</span> <span class="kw">this</span><span class="op">-&gt;</span>value <span class="op">-=</span> value<span class="op">;</span> <span class="cf">return</span> <span class="op">*</span><span class="kw">this</span><span class="op">;</span> <span class="op">}</span></span>
-<span id="lst-hidden-pointer-this-11"><a href="#lst-hidden-pointer-this-11"></a>    Calc<span class="op">&amp;</span> mult<span class="op">(</span><span class="dt">double</span> value<span class="op">)</span> <span class="op">{</span> <span class="kw">this</span><span class="op">-&gt;</span>value <span class="op">*=</span> value<span class="op">;</span> <span class="cf">return</span> <span class="op">*</span><span class="kw">this</span><span class="op">;</span> <span class="op">}</span></span>
-<span id="lst-hidden-pointer-this-12"><a href="#lst-hidden-pointer-this-12"></a></span>
-<span id="lst-hidden-pointer-this-13"><a href="#lst-hidden-pointer-this-13"></a>    <span class="dt">int</span> get_value<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> value<span class="op">;</span> <span class="op">}</span></span>
-<span id="lst-hidden-pointer-this-14"><a href="#lst-hidden-pointer-this-14"></a><span class="op">};</span></span>
-<span id="lst-hidden-pointer-this-15"><a href="#lst-hidden-pointer-this-15"></a></span>
-<span id="lst-hidden-pointer-this-16"><a href="#lst-hidden-pointer-this-16"></a><span class="dt">int</span> main<span class="op">()</span></span>
-<span id="lst-hidden-pointer-this-17"><a href="#lst-hidden-pointer-this-17"></a><span class="op">{</span></span>
-<span id="lst-hidden-pointer-this-18"><a href="#lst-hidden-pointer-this-18"></a>    Calc calc <span class="op">{</span><span class="dv">42</span><span class="op">};</span></span>
-<span id="lst-hidden-pointer-this-19"><a href="#lst-hidden-pointer-this-19"></a>    calc<span class="op">.</span>add<span class="op">(</span><span class="dv">5</span><span class="op">).</span>sub<span class="op">(</span><span class="dv">3</span><span class="op">).</span>mult<span class="op">(</span><span class="dv">4</span><span class="op">);</span> <span class="co">// method chaining</span></span>
-<span id="lst-hidden-pointer-this-20"><a href="#lst-hidden-pointer-this-20"></a></span>
-<span id="lst-hidden-pointer-this-21"><a href="#lst-hidden-pointer-this-21"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> calc<span class="op">.</span>get_value<span class="op">()</span> <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
-<span id="lst-hidden-pointer-this-22"><a href="#lst-hidden-pointer-this-22"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="op">((</span><span class="dv">42</span> <span class="op">+</span> <span class="dv">5</span><span class="op">)</span> <span class="op">-</span> <span class="dv">3</span><span class="op">)</span> <span class="op">*</span> <span class="dv">4</span> <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
-<span id="lst-hidden-pointer-this-23"><a href="#lst-hidden-pointer-this-23"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="lst-hidden-pointer-this-24"><a href="#lst-hidden-pointer-this-24"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb9-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb9-2"><a href=""></a><span class="kw">class</span> Calculator</span>
+<span id="cb9-3"><a href=""></a><span class="op">{</span></span>
+<span id="cb9-4"><a href=""></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb9-5"><a href=""></a>    <span class="dt">double</span> value<span class="op">{};</span></span>
+<span id="cb9-6"><a href=""></a></span>
+<span id="cb9-7"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb9-8"><a href=""></a>    Calculator<span class="op">(</span><span class="dt">double</span> value<span class="op">)</span> <span class="op">:</span> value <span class="op">{</span>value<span class="op">}</span> <span class="op">{}</span></span>
+<span id="cb9-9"><a href=""></a>    Calculator<span class="op">&amp;</span> add<span class="op">(</span><span class="dt">double</span> value<span class="op">)</span> <span class="op">{</span> <span class="kw">this</span><span class="op">-&gt;</span>value <span class="op">+=</span> value<span class="op">;</span> <span class="cf">return</span> <span class="op">*</span><span class="kw">this</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb9-10"><a href=""></a>    Calculator<span class="op">&amp;</span> sub<span class="op">(</span><span class="dt">double</span> value<span class="op">)</span> <span class="op">{</span> <span class="kw">this</span><span class="op">-&gt;</span>value <span class="op">-=</span> value<span class="op">;</span> <span class="cf">return</span> <span class="op">*</span><span class="kw">this</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb9-11"><a href=""></a>    Calculator<span class="op">&amp;</span> mult<span class="op">(</span><span class="dt">double</span> value<span class="op">)</span> <span class="op">{</span> <span class="kw">this</span><span class="op">-&gt;</span>value <span class="op">*=</span> value<span class="op">;</span> <span class="cf">return</span> <span class="op">*</span><span class="kw">this</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb9-12"><a href=""></a></span>
+<span id="cb9-13"><a href=""></a>    <span class="dt">int</span> get_value<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> value<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb9-14"><a href=""></a><span class="op">};</span></span>
+<span id="cb9-15"><a href=""></a></span>
+<span id="cb9-16"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb9-17"><a href=""></a><span class="op">{</span></span>
+<span id="cb9-18"><a href=""></a>    Calculator calc <span class="op">{</span><span class="dv">42</span><span class="op">};</span></span>
+<span id="cb9-19"><a href=""></a>    calc<span class="op">.</span>add<span class="op">(</span><span class="dv">5</span><span class="op">).</span>sub<span class="op">(</span><span class="dv">3</span><span class="op">).</span>mult<span class="op">(</span><span class="dv">4</span><span class="op">);</span> <span class="co">// method chaining</span></span>
+<span id="cb9-20"><a href=""></a></span>
+<span id="cb9-21"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> calc<span class="op">.</span>get_value<span class="op">()</span> <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb9-22"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="op">((</span><span class="dv">42</span> <span class="op">+</span> <span class="dv">5</span><span class="op">)</span> <span class="op">-</span> <span class="dv">3</span><span class="op">)</span> <span class="op">*</span> <span class="dv">4</span> <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb9-23"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-24"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
