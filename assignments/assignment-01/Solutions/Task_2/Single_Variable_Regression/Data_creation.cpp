@@ -15,10 +15,10 @@ double noise_function(double x, float noise)
 
 
 int main(){
-    // Equation: y = 2.5x + 57.0, noise is +-25
+    // Equation: y = 2.5x + 57.0, noise is +/- 50
     double k = 2.5;
     double m = 57.0;
-    float noise = 50.0;
+    float noise = 100.0;
     std::vector<double> x;
     std::vector<double> y;
 

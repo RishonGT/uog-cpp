@@ -60,7 +60,6 @@ int main() {
     std_x = sqrt(std_x / x.size());
     std_y = sqrt(std_y / x.size());
 
-    // Normalisation of x and y
     for (int i = 0; i < x.size(); i++) {
         x[i] = (x[i] - mean_x) / std_x;
         y[i] = (y[i] - mean_y) / std_y;
@@ -102,7 +101,7 @@ int main() {
             break;
         }
 
-    } while (current_loss > 0.0001); // Stop when loss is sufficiently low
+    } while (current_loss > 0.0001); // Stop if loss is sufficiently low
 
     // Denormalize the parameters
     double w_original = w * (std_y / std_x);
