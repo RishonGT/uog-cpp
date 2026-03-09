@@ -20,13 +20,22 @@
   background-color: #dbd3d3;
 }
 
+.spacer {
+  height: 3em;
+}
+
+.huge-gap {
+  height: 10em;
+}
+
+
 /* 1. The Output Block (standard print output) */
 .cell-output-display code, .cell-output-stdout {
     background-color: #f8f9fa; /* Light grey background */
     border-left: 4px solid #045214; /* Blue accent line */
     padding: 1em;
     font-family: 'Ubuntu Mono', monospace;
-    font-size: 0.9em;
+    font-size: 1.2em !important;
     color: #000000 !important;
     border-radius: 4px;
 }
@@ -96,9 +105,11 @@
     font-size: 1.7em !important;
 }
 
+
+
 /* Target code elements that are NOT inside a pre tag */
 :not(pre) > code {
-  font-size: 1.2em !important;       /* Adjust this value as needed */
+  font-size: 1.0em !important;       /* Adjust this value as needed */
   font-weight: 500;       /* Optional: makes it slightly bolder */
   color: #e83e8c;         /* Optional: change color to make it pop */
   background-color: rgba(0, 0, 0, 0.05); /* Optional: subtle background */
