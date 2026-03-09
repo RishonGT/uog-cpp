@@ -683,7 +683,7 @@ Listing&nbsp;3: An example of member function. Filename=<code>member_function_ex
 </section>
 <section id="a-comparison-to-oop-in-python" class="slide level2">
 <h2>A comparison to OOP in Python</h2>
-<div id="e1e765ae" class="cell" data-execution_count="1">
+<div id="34dea808" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="kw">class</span> Date:</span>
 <span id="cb12-2"><a href=""></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, year<span class="op">=</span><span class="dv">2026</span>, month<span class="op">=</span><span class="dv">2</span>, date<span class="op">=</span><span class="dv">28</span>): <span class="co"># we learn constructor in C++ soon</span></span>
 <span id="cb12-3"><a href=""></a>    <span class="va">self</span>.year <span class="op">=</span> year        </span>
@@ -723,7 +723,7 @@ Listing&nbsp;3: An example of member function. Filename=<code>member_function_ex
 </section>
 <section id="a-comparison-to-oop-in-python-but-python-is-not-as-serious-as-c" class="slide level2">
 <h2>A comparison to OOP in Python: But Python is not as serious as C++</h2>
-<div id="dd466c35" class="cell" data-execution_count="2">
+<div id="e1e49af5" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a><span class="kw">class</span> Date:</span>
 <span id="cb15-2"><a href=""></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, year<span class="op">=</span><span class="dv">2026</span>, month<span class="op">=</span><span class="dv">2</span>, date<span class="op">=</span><span class="dv">28</span>): <span class="co"># we learn constructor in C++ soon</span></span>
 <span id="cb15-3"><a href=""></a>    <span class="va">self</span>.year <span class="op">=</span> year        </span>
@@ -740,12 +740,12 @@ Listing&nbsp;3: An example of member function. Filename=<code>member_function_ex
 <div class="ansi-escaped-output">
 <pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">AttributeError</span>                            Traceback (most recent call last)
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[11]</span><span class="ansi-green-fg">, line 12</span>
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[2]</span><span class="ansi-green-fg">, line 12</span>
 <span class="ansi-green-fg">     10</span> today = Date(<span class="ansi-green-fg">2026</span>,<span class="ansi-green-fg">2</span>,<span class="ansi-green-fg">26</span>) <span style="font-style:italic;color:rgb(95,135,135)"># when this lecture first took place</span>
 <span class="ansi-green-fg">     11</span> my_name = <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">khiem</span><span class="ansi-yellow-fg">"</span>
 <span class="ansi-green-fg">---&gt; </span><span class="ansi-green-fg">12</span> <span class="ansi-yellow-bg">Date</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">print</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">my_name</span><span class="ansi-yellow-bg">)</span> <span style="font-style:italic;color:rgb(95,135,135)"># SYNTAX Correct, but run time error. my_name.year does not exist</span>
 
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[11]</span><span class="ansi-green-fg">, line 8</span>, in <span class="ansi-cyan-fg">Date.print</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[2]</span><span class="ansi-green-fg">, line 8</span>, in <span class="ansi-cyan-fg">Date.print</span><span class="ansi-blue-fg">(self)</span>
 <span class="ansi-green-fg">      7</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span><span style="color:rgb(188,188,188)"> </span><span class="ansi-blue-fg">print</span>(<span style="color:rgb(0,135,0)">self</span>):
 <span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">8</span>   <span style="color:rgb(0,135,0)">print</span>(<span class="ansi-yellow-fg">f</span><span class="ansi-yellow-fg">"</span><span style="font-weight:bold;color:rgb(175,95,135)">{</span><span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">year</span><span style="font-weight:bold;color:rgb(175,95,135)">}</span><span class="ansi-yellow-fg">/</span><span style="font-weight:bold;color:rgb(175,95,135)">{</span><span style="color:rgb(0,135,0)">self</span>.month<span style="font-weight:bold;color:rgb(175,95,135)">}</span><span class="ansi-yellow-fg">/</span><span style="font-weight:bold;color:rgb(175,95,135)">{</span><span style="color:rgb(0,135,0)">self</span>.date<span style="font-weight:bold;color:rgb(175,95,135)">}</span><span class="ansi-yellow-fg">"</span>)
 
@@ -756,7 +756,7 @@ Listing&nbsp;3: An example of member function. Filename=<code>member_function_ex
 </section>
 <section id="a-comparison-to-oop-in-python-but-python-is-not-as-serious-as-c-1" class="slide level2">
 <h2>A comparison to OOP in Python: But Python is not as serious as C++</h2>
-<div id="95485fca" class="cell" data-execution_count="3">
+<div id="0fec3ce2" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a><span class="kw">class</span> Date:</span>
 <span id="cb16-2"><a href=""></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, year<span class="op">=</span><span class="dv">2026</span>, month<span class="op">=</span><span class="dv">2</span>, date<span class="op">=</span><span class="dv">28</span>): <span class="co"># we learn constructor in C++ soon</span></span>
 <span id="cb16-3"><a href=""></a>    <span class="va">self</span>.year, <span class="va">self</span>.month, <span class="va">self</span>.date <span class="op">=</span> year, month, date</span>
@@ -873,8 +873,8 @@ Listing&nbsp;5: Modifying the data members of const objects is disallowed. Filen
 <span id="cb21-10"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
 <span id="cb21-11"><a href=""></a><span class="op">{</span></span>
 <span id="cb21-12"><a href=""></a>    <span class="at">const</span> Date today <span class="op">{</span> <span class="dv">2020</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">14</span> <span class="op">};</span> <span class="co">// const</span></span>
-<span id="cb21-13"><a href=""></a>    <span class="co">// today.day += 1;        // compile error: can't modify member of const object</span></span>
-<span id="cb21-14"><a href=""></a>    <span class="co">// today.increment_day();  // compile error: can't call member function that modifies member of const object</span></span>
+<span id="cb21-13"><a href=""></a>    today<span class="op">.</span>day <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span>        <span class="co">// compile error: can't modify member of const object</span></span>
+<span id="cb21-14"><a href=""></a>    today<span class="op">.</span>increment_day<span class="op">();</span>  <span class="co">// compile error: can't call member function that modifies member of const object</span></span>
 <span id="cb21-15"><a href=""></a></span>
 <span id="cb21-16"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb21-17"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -930,16 +930,18 @@ Listing&nbsp;7: const member function can be called by const objects. Filename=<
 <span id="cb23-6"><a href=""></a>    <span class="dt">void</span> print<span class="op">()</span> <span class="at">const</span> <span class="co">// now a const member function</span></span>
 <span id="cb23-7"><a href=""></a>    <span class="op">{</span></span>
 <span id="cb23-8"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> year <span class="op">&lt;&lt;</span> <span class="ch">'/'</span> <span class="op">&lt;&lt;</span> month <span class="op">&lt;&lt;</span> <span class="ch">'/'</span> <span class="op">&lt;&lt;</span> day<span class="op">;</span></span>
-<span id="cb23-9"><a href=""></a>    <span class="op">}</span></span>
-<span id="cb23-10"><a href=""></a><span class="op">};</span></span>
-<span id="cb23-11"><a href=""></a></span>
-<span id="cb23-12"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
-<span id="cb23-13"><a href=""></a><span class="op">{</span></span>
-<span id="cb23-14"><a href=""></a>    <span class="at">const</span> Date today <span class="op">{</span> <span class="dv">2020</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">14</span> <span class="op">};</span> <span class="co">// const</span></span>
-<span id="cb23-15"><a href=""></a>    today<span class="op">.</span>print<span class="op">();</span>  <span class="co">// ok: const object can call const member function</span></span>
-<span id="cb23-16"><a href=""></a></span>
-<span id="cb23-17"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb23-18"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb23-9"><a href=""></a>        <span class="dt">double</span> another_year <span class="op">{</span><span class="dv">42</span><span class="op">};</span></span>
+<span id="cb23-10"><a href=""></a>        another_year <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb23-11"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb23-12"><a href=""></a><span class="op">};</span></span>
+<span id="cb23-13"><a href=""></a></span>
+<span id="cb23-14"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb23-15"><a href=""></a><span class="op">{</span></span>
+<span id="cb23-16"><a href=""></a>    <span class="at">const</span> Date today <span class="op">{</span> <span class="dv">2020</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">14</span> <span class="op">};</span> <span class="co">// const</span></span>
+<span id="cb23-17"><a href=""></a>    today<span class="op">.</span>print<span class="op">();</span>  <span class="co">// ok: const object can call const member function</span></span>
+<span id="cb23-18"><a href=""></a></span>
+<span id="cb23-19"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb23-20"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
