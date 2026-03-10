@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Lecturer in Multiscale Materials">
+
+<title>Formative Assessment: Object-oriented Programming</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="formative_files/libs/clipboard/clipboard.min.js"></script>
+<script src="formative_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="formative_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="formative_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="formative_files/libs/quarto-html/popper.min.js"></script>
+<script src="formative_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="formative_files/libs/quarto-html/anchor.min.js"></script>
+<link href="formative_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="formative_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="formative_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="formative_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="formative_files/libs/bootstrap/bootstrap-2b75852ad0f99dc2fa20f8110f52101c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-full">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#foreword" id="toc-foreword" class="nav-link active" data-scroll-target="#foreword"><span class="header-section-number">1</span> Foreword</a></li>
+  <li><a href="#complex-numbers" id="toc-complex-numbers" class="nav-link" data-scroll-target="#complex-numbers"><span class="header-section-number">2</span> Complex numbers</a></li>
+  <li><a href="#fractions" id="toc-fractions" class="nav-link" data-scroll-target="#fractions"><span class="header-section-number">3</span> Fractions</a></li>
+  <li><a href="#matrix" id="toc-matrix" class="nav-link" data-scroll-target="#matrix"><span class="header-section-number">4</span> Matrix</a>
+  <ul class="collapse">
+  <li><a href="#xtensor-library" id="toc-xtensor-library" class="nav-link" data-scroll-target="#xtensor-library"><span class="header-section-number">4.1</span> <code>xtensor</code> library</a></li>
+  <li><a href="#quick-revisit-to-python" id="toc-quick-revisit-to-python" class="nav-link" data-scroll-target="#quick-revisit-to-python"><span class="header-section-number">4.2</span> Quick revisit to Python</a></li>
+  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation"><span class="header-section-number">4.3</span> Implementation</a></li>
+  </ul></li>
+  <li><a href="#one-dimesional-polynomial" id="toc-one-dimesional-polynomial" class="nav-link" data-scroll-target="#one-dimesional-polynomial"><span class="header-section-number">5</span> One-dimesional Polynomial</a>
+  <ul class="collapse">
+  <li><a href="#quick-tour-to-numpy.poly1d" id="toc-quick-tour-to-numpy.poly1d" class="nav-link" data-scroll-target="#quick-tour-to-numpy.poly1d"><span class="header-section-number">5.1</span> Quick tour to <code>numpy.poly1d</code></a></li>
+  <li><a href="#implementation-1" id="toc-implementation-1" class="nav-link" data-scroll-target="#implementation-1"><span class="header-section-number">5.2</span> Implementation</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="formative.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</div>
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Formative Assessment: Object-oriented Programming</h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-page-left">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Khiem Nguyen <br> Lecturer in Multiscale Materials <br> <a href="mailto:khiem.nguyen@glasgow.ac.uk" class="email">khiem.nguyen@glasgow.ac.uk</a> </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="foreword" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Foreword</h1>
+<p>Solving these formative assignments will help you</p>
+<ul>
+<li>build muscle memory that will be useful for the paper exam in May</li>
+<li>enhance your skills and knowledge for assignment 02</li>
+<li>gain some little insight how widely used library such as NumPy is built. Of course, what we are doing here is not entirely done the same way in building such a massive library.</li>
+</ul>
+<p>There will be four assignments and the first two are very similar to each other and the last two are inspired by <code>numpy.ndarray</code> and <code>numpy.Poly1D</code>.</p>
+<ol type="1">
+<li>Build a class representing fraction numbers</li>
+<li>Build a class representing complex numbers</li>
+<li>Build a class representing matrices in linear algebra</li>
+<li>Build a class representing 1-dimenional polynomials</li>
+</ol>
+<p>The first two assignments are taken directly from the mock exam last year and the past exam paper in 2025. The two assignments are so similar that you can practice with only one and move on to the more challengining assignment such as classes for matrices and for polynomials.</p>
+<blockquote class="blockquote">
+<p><strong>Note</strong>&nbsp; Try not to look at the solution from the mock exam and the past exam. Feel free to ask questions in the computer labs if needed. If you get stuck, go back to the lecture slides. In this way, you can build your muscle memory.</p>
+</blockquote>
+</section>
+<section id="complex-numbers" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Complex numbers</h1>
+<p>In mathematics, a complex number is an element of a number system that extends the real numbers with specific element denoted <span class="math inline">\(\mathrm{i}\)</span>, called the imaginary unit and satisfying the equation <span class="math inline">\(\mathrm{i}^2 = -1\)</span> (or equivalently <span class="math inline">\(\mathrm{i} = \sqrt{-1}\)</span>). Every complex number <span class="math inline">\(z\)</span> can be expressed in the form <span class="math inline">\(z = a + b \mathrm{i}\)</span>, where <span class="math inline">\(a \in \mathbb{R}\)</span> and <span class="math inline">\(b \in \mathbb{R}\)</span> are real numbers. Two complex numbers <span class="math inline">\(z_1 = a_1 + b_1 \mathrm{i}\)</span> and <span class="math inline">\(z_2 = a_2 + b_2 \mathrm{i}\)</span> are added according to the rule <span class="math display">\[
+z_1 + z_2 = (a_1 + a_2) + (b_1 + b_2) \mathrm{i},
+\]</span> and multiplied by each other according to the rule <span class="math display">\[
+z_1 \cdot z_2 = (a_1 \cdot a_2 - b_1 \cdot b_2) + (a_1 \cdot b_2 + a_2 \cdot b_1) \mathrm{i}.
+\]</span></p>
+<p><strong>Your task is to write C++ code</strong> to define a class <code>ComplexNumber</code>, its data members, member functions, and non-member functions (if there are) to reflect the above description. You should see (a) – (h) questions.</p>
+<ol type="1">
+<li><p>Write code to define the class <code>ComplexNumber</code> with two private data members, named <code>re</code> and <code>im</code>.</p></li>
+<li><p>Write a constructor receiving two input arguments <code>re</code> and <code>im</code> with default value <span class="math inline">\(0\)</span> to initialize the data members described in (a). Use member initializer list (not the assignment statements) to initialize these data members.</p></li>
+<li><p>Write a function overloading the operator <code>&lt;&lt;</code> of the object <code>std::ostream</code> so that the statement <code>std::cout &lt;&lt; comp_num;</code> works for the <code>ComplexNumber</code> object <code>comp_num</code>. You must decide the print-out format that makes sense to the user. For example, consider the following numbers: <span class="math inline">\(1 + 0\,\mathrm{i} = 1\)</span> and <span class="math inline">\(0 + 2\,\mathrm{i} = 2\,\mathrm{i}\)</span>.</p></li>
+<li><p>Write functions to overload the operator <code>+</code> (plus sign) and the operator <code>*</code> (multiplication sign) to reflect the addition and multiplication of two complex numbers, respectively. Essentially, the following statements should work after overloading the operators <code>&lt;&lt;</code>, <code>+</code> and <code>*</code> for the complex numbers:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> a <span class="op">+</span> b<span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> a <span class="op">*</span> b<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Write a member function with name <code>pow</code> to compute the power <span class="math inline">\(z^{n}\)</span> of the complex number <span class="math inline">\(z\)</span> with <span class="math inline">\(n\)</span> being a non-negative integer. Recall that <span class="math display">\[
+  z^{0} = 1,\quad z^{1} = z, \quad z^{2} = z \cdot z, \quad z^{3} = z\cdot z \cdot z, \quad z^{n} = \underbrace{z \cdot \cdots \cdot z}_{n \text{ terms}}.
+  \]</span></p></li>
+<li><p>Write a function to overload the assignment operator <code>=</code> for a <code>ComplexNumber</code> object so that the following statement works:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a <span class="op">+</span> b<span class="op">;</span>  <span class="co">// a, b, c are all ComplexNumber objects</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Write a class <code>RealNumber</code> derived from the class <code>ComplexNumber</code> you have defined above. The class <code>RealNumber</code> must have a constructor receiving one <code>double</code> number and make sure that the imaginary part derived from the parent class is equal to zero.</p></li>
+<li><p>Write a <code>main</code> function to perform the following tasks:</p></li>
+</ol>
+<ul>
+<li>Create an array of five <code>ComplexNumber</code> elements using dynamic memory allocation with a pointer to <code>ComplexNumber</code>. Remember to clean up the memory when you do not need the array anymore.</li>
+<li>Initialize these five complex numbers using the <code>for</code>-loop to obtain five numbers (note the pattern of the real parts and imaginary parts of these numbers): <span class="math display">\[
+z_{1} = 1 + 2\,\mathrm{i},\quad  z_{2} = 2 + 3\,\mathrm{i}, \quad z_3 = 3 + 4\,\mathrm{i}, \quad z_4 = 4 + 5\,\mathrm{i}, \quad z_5 = 5 + 6\,\mathrm{i}.
+\]</span></li>
+</ul>
+<ol start="4" type="1">
+<li>Compute the sum <span class="math inline">\(\displaystyle s = \sum\limits_{j=1}^{5} z_{j}\)</span> of these five numbers using the <code>for</code>-loop and print the resulted sum <span class="math inline">\(s\)</span> to the console.</li>
+<li>With <span class="math inline">\(z = 1 + 2\,\mathrm{i}\)</span>, compute the expression <span class="math display">\[
+    \Lambda = 1 + z + z^2 + z^3 + z^4 + z^5
+    \]</span> using the <code>for</code>-loop.</li>
+</ol>
+<p>Note that you can write any helper functions that are not defined by answering the above questions to complete the <code>main</code> <em>function and other functions</em>.</p>
+<p><strong>Hint</strong>&nbsp; <code>static_cast&lt;double&gt;(12)</code> will convert the <code>int</code> <span class="math inline">\(12\)</span> into the <code>double</code> <span class="math inline">\(12.0\)</span>.</p>
+</section>
+<section id="fractions" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Fractions</h1>
+<p>Your task is to write C++ code to define a class <code>Fraction</code>, its data members, member functions, and non-member functions (if applicable) to fulfill the following description.</p>
+<ol type="1">
+<li><p>An object of type <code>Fraction</code> has two private data members of integer type, named <code>nom</code> and <code>denom</code>.</p></li>
+<li><p>Write a constructor receiving two input arguments <code>nom</code> and <code>denom</code> with appropriate default values to initialize the data members. Use a member initializer list (not assignment statements). Ensure that the denominator cannot be zero: provide a warning and set the denominator to <span class="math inline">\(1\)</span> if <span class="math inline">\(0\)</span> is provided.</p></li>
+<li><p>Write a member function to perform the addition of two fractions. You need to decide what the inputs and outputs of this function should be.</p></li>
+<li><p>Write a member function to perform the multiplication of two fractions.</p></li>
+<li><p>Overload the operator <code>&lt;&lt;</code> for <code>std::ostream</code> so that <code>std::cout &lt;&lt; f;</code> works for a <code>Fraction</code> object. The function must handle the following formatting:</p>
+<ul>
+<li>If the numerator is <span class="math inline">\(0\)</span>, print <code>0</code>.</li>
+<li>If the denominator is <span class="math inline">\(1\)</span>, print only the numerator (e.g., <span class="math inline">\(42/1\)</span> prints as <code>42</code>).</li>
+<li>If <span class="math inline">\(f &gt; 0\)</span>, print the fraction in the form <code>a/b</code> (e.g., <span class="math inline">\(2/3\)</span> for both <span class="math inline">\(2/3\)</span> and <span class="math inline">\(-2/-3\)</span>).</li>
+<li>If <span class="math inline">\(f &lt; 0\)</span>, print the negative sign in front of the positive fraction (e.g., <span class="math inline">\(2/-3\)</span> prints as <code>-2/3</code>).</li>
+</ul></li>
+<li><p>Overload the operator <code>+</code> (plus) and operator <code>*</code> (multiplication) so that the following statements work for two <code>Fraction</code> objects <code>a</code> and <code>b</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> a <span class="op">+</span> b<span class="op">;</span> <span class="co">// Equivalent to std::cout &lt;&lt; a.add(b)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> a <span class="op">*</span> b<span class="op">;</span> <span class="co">// Equivalent to std::cout &lt;&lt; a.multiply_by(b)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Overload the assignment operator <code>=</code> for a <code>Fraction</code> object so that the following works:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a <span class="op">+</span> b<span class="op">;</span>  <span class="co">// a, b, and c are all Fraction objects</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Write a member function <code>reduce</code> that reduces a fraction to its irreducible form using <code>std::__gcd(int, int)</code> from <code>#include &lt;bits/stdc++.h&gt;</code>. For example, the GCD of <span class="math inline">\(100\)</span> and <span class="math inline">\(40\)</span> is <span class="math inline">\(20\)</span>, so the fraction should be reduced accordingly.</p></li>
+<li><p>Finally, write a <code>main</code> function to perform the following:</p>
+<ul>
+<li>Create a <code>std::vector</code> containing five <code>Fraction</code> objects with the values: <span class="math display">\[f_1 = \frac{1}{2}, \quad f_2 = \frac{1}{3}, \quad f_3 = \frac{1}{4}, \quad f_4 = \frac{1}{5}, \quad f_5 = \frac{1}{6}\]</span> using a <code>for</code>-loop and <code>push_back()</code>.</li>
+<li>Compute the product using a <code>for</code>-loop: <span class="math display">\[p = \prod_{i=1}^{5} f_{i} = f_1 \cdot f_2 \cdot f_3 \cdot f_4 \cdot f_5 = \frac{1}{2 \cdot 3 \cdot 4 \cdot 5 \cdot 6}\]</span></li>
+<li>Print the resulting product to the console.</li>
+</ul></li>
+</ol>
+</section>
+<section id="matrix" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Matrix</h1>
+<p>We know that the library NumPy in Python allows us to create, perform computations on high-dimensional arrays. However, to build such a complex library needs a lot of man power, skills, experience, and definitely beyond our scope in this course. In fact, the lecturer of this course cannot build this library all alone. For this reason, we reduce our ambition and focus on mimicing two-dimensional arrays in NumPy, that is equivalent to Matrices. In this project, you try to decide your own design. Youn can consult Gemini/ChatGPT what is the best to do. Below are some of my suggestions for this project.</p>
+<section id="xtensor-library" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="xtensor-library"><span class="header-section-number">4.1</span> <code>xtensor</code> library</h2>
+<p>There has been some serious effort of building C++ library that mimic NumPy library as much as possible: <a href="https://github.com/xtensor-stack/xtensor">xtensor</a>. <a href="https://github.com/xtensor-stack/xtensor">xtensor</a> is a C++ library meant for numerical analysis with multi-dimensional array expressions. Below are some examples quoted directly from its GitHub’s README.md</p>
+<ul>
+<li><p><strong>Basic usage</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">"xtensor/xarray.hpp"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">"xtensor/xio.hpp"</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">"xtensor/xview.hpp"</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>xt<span class="op">::</span>xarray<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> arr1</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="op">{{</span><span class="fl">1.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">,</span> <span class="fl">3.0</span><span class="op">},</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="op">{</span><span class="fl">2.0</span><span class="op">,</span> <span class="fl">5.0</span><span class="op">,</span> <span class="fl">7.0</span><span class="op">},</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="op">{</span><span class="fl">2.0</span><span class="op">,</span> <span class="fl">5.0</span><span class="op">,</span> <span class="fl">7.0</span><span class="op">}};</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>xt<span class="op">::</span>xarray<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> arr2</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="op">{</span><span class="fl">5.0</span><span class="op">,</span> <span class="fl">6.0</span><span class="op">,</span> <span class="fl">7.0</span><span class="op">};</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>xt<span class="op">::</span>xarray<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> res <span class="op">=</span> xt<span class="op">::</span>view<span class="op">(</span>arr1<span class="op">,</span> <span class="dv">1</span><span class="op">)</span> <span class="op">+</span> arr2<span class="op">;</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> res<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong>Index Access</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">"xtensor/xarray.hpp"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">"xtensor/xio.hpp"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>xt<span class="op">::</span>xarray<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> arr1</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="op">{{</span><span class="fl">1.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">,</span> <span class="fl">3.0</span><span class="op">},</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="op">{</span><span class="fl">2.0</span><span class="op">,</span> <span class="fl">5.0</span><span class="op">,</span> <span class="fl">7.0</span><span class="op">},</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="op">{</span><span class="fl">2.0</span><span class="op">,</span> <span class="fl">5.0</span><span class="op">,</span> <span class="fl">7.0</span><span class="op">}};</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> arr1<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="bu">std::</span>endl<span class="op">;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>xt<span class="op">::</span>xarray<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> arr2</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">6</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">8</span><span class="op">,</span> <span class="dv">9</span><span class="op">};</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> arr2<span class="op">(</span><span class="dv">0</span><span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ul>
+<blockquote class="blockquote">
+<p>The reference to <code>xtensor</code> library is just for your awareness. Building a library like this is definitely beyond the scope of this course; it demands a lot of man power, and thus many contributions (see its GitHub page).</p>
+</blockquote>
+</section>
+<section id="quick-revisit-to-python" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="quick-revisit-to-python"><span class="header-section-number">4.2</span> Quick revisit to Python</h2>
+<p><strong>Import the library</strong></p>
+<div id="f92327c3" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Create matrices</strong></p>
+<p>We can create matrices in NumPy using constructor <code>numpy.array()</code> or using array creation routines such as <code>np.ones()</code>, <code>np.zeros()</code> and so on – See the list <a href="https://numpy.org/doc/stable/reference/routines.array-creation.html">here</a></p>
+<div id="6993bfac" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]], dtype<span class="op">=</span>np.float64)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.ones(shape<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">3</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> np.linspace(<span class="fl">1.5</span>, <span class="fl">7.5</span>, <span class="dv">6</span>).reshape((<span class="dv">2</span>, <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Arithmetic operations</strong></p>
+<p>Then, we can perform arithemtic operations on two-dimensional arrays:</p>
+<div id="0a6d8153" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"a + b =</span><span class="ch">\n</span><span class="ss"> </span><span class="sc">{</span>a <span class="op">+</span> b<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"a - b =</span><span class="ch">\n</span><span class="ss"> </span><span class="sc">{</span>a <span class="op">-</span> b<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"a * c =</span><span class="ch">\n</span><span class="ss"> </span><span class="sc">{</span>a <span class="op">*</span> c<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"a / c =</span><span class="ch">\n</span><span class="ss"> </span><span class="sc">{</span>a <span class="op">/</span> c<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>a + b =
+ [[2. 3. 4.]
+ [5. 6. 7.]]
+a - b =
+ [[0. 1. 2.]
+ [3. 4. 5.]]
+a * c =
+ [[ 1.5  5.4 11.7]
+ [20.4 31.5 45. ]]
+a / c =
+ [[0.66666667 0.74074074 0.76923077]
+ [0.78431373 0.79365079 0.8       ]]</code></pre>
+</div>
+</div>
+<p>We can also perform arithmetic operations between a matrix and an scalar</p>
+<div id="90a0a8ec" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"1 + a =</span><span class="ch">\n</span><span class="ss"> </span><span class="sc">{</span><span class="dv">1</span> <span class="op">+</span> a<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"2.5 * a =</span><span class="ch">\n</span><span class="ss"> </span><span class="sc">{</span><span class="fl">2.5</span> <span class="op">*</span> a<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1 + a =
+ [[2. 3. 4.]
+ [5. 6. 7.]]
+2.5 * a =
+ [[ 2.5  5.   7.5]
+ [10.  12.5 15. ]]</code></pre>
+</div>
+</div>
+<p><strong>Transpose</strong></p>
+<p>We can transpose a matrix</p>
+<div id="b5d1d684" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"a transpose = </span><span class="ch">\n</span><span class="sc">{</span>a<span class="sc">.</span>transpose((<span class="dv">1</span>, <span class="dv">0</span>))<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>a transpose = 
+[[1. 4.]
+ [2. 5.]
+ [3. 6.]]</code></pre>
+</div>
+</div>
+</section>
+<section id="implementation" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="implementation"><span class="header-section-number">4.3</span> Implementation</h2>
+<ul>
+<li><p>Thinking about what you have learned about NumPy array, you can design a class <code>Matrix</code> that mimic the concept of <span class="math inline">\(2\)</span>-dimensional NumPy array. In addition, you should overload arithmetic operators.</p></li>
+<li><p>Since we create matrices by using <code>numpy.array()</code> and call functions such as <code>numpy.ones()</code> and <code>numpy.zeros()</code> by accessing the module <code>numpy</code>, this concept can be mapped to C++ implementation via namespace. To realize this, we can put the entire class <code>Matrix</code> and helper functions, such as <code>zeros()</code> and <code>ones()</code> returning a matrix, in the namespace <code>numpy</code>.</p></li>
+<li><p>To be able to use the statement <code>std::cout &lt;&lt; matrix;</code>, you need to overload the <code>operator&lt;&lt;</code>.</p></li>
+<li><p>In order to create a <code>Matrix</code> object using initialization list as below:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">"Matrix.hpp"</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">namespace</span> np <span class="op">=</span> numpy<span class="op">;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Creating a 2D matrix</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">auto</span> mat2d <span class="op">=</span> np<span class="op">::</span>array<span class="op">({</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span><span class="fl">1.1</span><span class="op">,</span> <span class="fl">2.2</span><span class="op">,</span> <span class="fl">3.3</span><span class="op">},</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span><span class="fl">4.4</span><span class="op">,</span> <span class="fl">5.5</span><span class="op">,</span> <span class="fl">6.6</span><span class="op">}</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">});</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Creating a 1D matrix (row vector)</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">auto</span> mat1d <span class="op">=</span> np<span class="op">::</span>array<span class="op">({</span><span class="fl">10.0</span><span class="op">,</span> <span class="fl">20.0</span><span class="op">,</span> <span class="fl">30.0</span><span class="op">});</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"2D Matrix:"</span> <span class="op">&lt;&lt;</span> <span class="bu">std::</span>endl<span class="op">;</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> mat2d<span class="op">;</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>We must use <code>{.cpp}   std::std::initializer_list</code></p></li>
+<li><p>If you want to generalize your class <code>Matrix</code> so that it can accept different basic data types such as <code>int</code>, <code>float</code>, and <code>double</code>, you need to create a class template.</p></li>
+<li><p>Test your code with the above <code>main</code> function.</p></li>
+</ul>
+</section>
+</section>
+<section id="one-dimesional-polynomial" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> One-dimesional Polynomial</h1>
+<p>NumPy library provides us a powerful and useful class representing one-dimensional polynomial: <a href="https://numpy.org/doc/stable/reference/generated/numpy.poly1d.html"><code>numpy.poly1d</code></a>. In this project, we try to build a prototype of this class and equip it with some basic operations. To build intuition of what to do, let us make a quick tour to <code>numpy.poly1d</code> by following simple examples below.</p>
+<section id="quick-tour-to-numpy.poly1d" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="quick-tour-to-numpy.poly1d"><span class="header-section-number">5.1</span> Quick tour to <code>numpy.poly1d</code></h2>
+<p><strong>Import the library</strong>&nbsp; Class <code>numpy.poly1d</code> is provided in the module <code>numpy</code>. So we import <code>numpy</code> as before.</p>
+<div id="c18f7222" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Create a <span class="math inline">\(1\)</span>-dimensional polynomial</strong></p>
+<div id="9410b84e" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="op">=</span> np.poly1d([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>])</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> np.poly1d([<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>])</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"p1 =</span><span class="ch">\n</span><span class="sc">{</span>p1<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"p2 =</span><span class="ch">\n</span><span class="sc">{</span>p2<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>p1 =
+   4     3     2
+1 x + 2 x + 3 x + 4 x + 5
+p2 =
+   2
+5 x + 4 x + 3</code></pre>
+</div>
+</div>
+<p><strong>Arithmetic operations</strong></p>
+<p>We can perform arithmetic operations on <span class="math inline">\(1\)</span>-dimensional polynomials:</p>
+<div id="81a04eac" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>q1 <span class="op">=</span> p1 <span class="op">+</span> p2</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>q2 <span class="op">=</span> p1 <span class="op">-</span> p2</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> p1 <span class="op">*</span> p2</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"q1 =</span><span class="ch">\n</span><span class="sc">{</span>q1<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"q2 =</span><span class="ch">\n</span><span class="sc">{</span>q2<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"r =</span><span class="ch">\n</span><span class="sc">{</span>r<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>q1 =
+   4     3     2
+1 x + 2 x + 8 x + 8 x + 8
+q2 =
+   4     3     2
+1 x + 2 x - 2 x + 2
+r =
+   6      5      4      3      2
+5 x + 14 x + 26 x + 38 x + 50 x + 32 x + 15</code></pre>
+</div>
+</div>
+<p>Again, we can add a scalar to a polynomial</p>
+<div id="b39662d3" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="dv">1</span> <span class="op">+</span> p1</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"s =</span><span class="ch">\n</span><span class="sc">{</span>s<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>s =
+   4     3     2
+1 x + 2 x + 3 x + 4 x + 6</code></pre>
+</div>
+</div>
+<p><strong>Evaluation at one value <span class="math inline">\(x\)</span></strong></p>
+<p>Of course, we want to evaluate a polynomial at one coordinate <span class="math inline">\(x\)</span></p>
+<div id="3a179dee" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"p1(2) = </span><span class="sc">{</span>p1(<span class="dv">2</span>)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>p1(2) = 57</code></pre>
+</div>
+</div>
+</section>
+<section id="implementation-1" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="implementation-1"><span class="header-section-number">5.2</span> Implementation</h2>
+<ul>
+<li>Thinking about what you have learned about NumPy array, you can design a class <code>Poly1D</code> that mimic the class <code>numpy.poly1d</code>. You should overload arithmetic operators.</li>
+<li>Again, it is clear that the class <code>Poly1D</code> should be put in the namespace <code>numpy</code>.</li>
+<li>To be able to use the statement <code>std::cout &lt;&lt; polynomial;</code>, you need to overload the <code>operator&lt;&lt;</code>.</li>
+<li>You should overload the <code>operator()</code> to realize the function call <code>polynomial(2)</code>.</li>
+</ul>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
