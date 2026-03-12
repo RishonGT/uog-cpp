@@ -23,6 +23,6 @@ int main()
     acc.add(5); // add 5 to the accumulator
 
     print(acc); // call the print() non-member function
-
+    
     return 0;
 }

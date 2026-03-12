@@ -41,7 +41,7 @@ format:
 
 &#10149;&nbsp; Look at this example
 
-```{.python}
+```{python}
 #| error: true
 class ComplexNumber:
     def __init__(self, real=0, imag=0):
@@ -59,7 +59,7 @@ print(a + b)    # of course we want Python understands a + b
 
 &#10149;&nbsp; We have learned these wishes are granted by defining the special functions (sepcial methods)
 
-```{.python}
+```{python}
 class ComplexNumber:
     def __init__(self, real=0, imag=0):
         self.real = real
@@ -161,6 +161,8 @@ std::cout << x + y << '\n';
 {{< include ./cpp/class_cents.cpp >}}
 ```
 :::
+
+## Overloading operators using friend functions
 
 &#10149;&nbsp; We overload the operators plus and minus in the following code snippet.
 
@@ -338,7 +340,7 @@ We will learn to overload the input/output operators, namely `<<` and `>>`.
 ## Overloading the I/O operators: Teaser
 &#9998;&nbsp; In Python, we can write
 
-```{.python}
+```{python}
 class Point:
     def __init__(self, x:float=0, y:float=0, z:float=0):
         self.x, self.y, self.z = x, y, z    # packing tuple and unpacking tuple
