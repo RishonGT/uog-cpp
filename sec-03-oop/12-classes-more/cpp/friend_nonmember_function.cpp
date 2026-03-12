@@ -9,14 +9,17 @@ public:
     void add(double value) { this->value += value; }
     // Here is the friend declaration that makes non-member function 
     // void print(const Accumulator& accumulator) a friend of Accumulator
-    friend void print(const Accumulator& accumulator);
+    // friend void print(const Accumulator& accumulator);
+    double get_value() const 
+    { return value;     }
 };
 
 void print(const Accumulator& accumulator)
 {
     // Because print() is a friend of Accumulator
     // it can access the private members of Accumulator
-    std::cout << accumulator.value;
+    // std::cout << accumulator.value;
+    std::cout << accumulator.get_value();
 }
 
 int main()
