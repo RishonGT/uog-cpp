@@ -210,6 +210,11 @@
 <li><a href="#/split-the-program-into-header-files-and-implementation-files" id="/toc-split-the-program-into-header-files-and-implementation-files">Split the program into header files and implementation files</a></li>
 <li><a href="#/order-of-construction-of-derived-classes" id="/toc-order-of-construction-of-derived-classes">Order of construction of derived classes</a></li>
 <li><a href="#/constructors-and-initialization-of-derived-classes" id="/toc-constructors-and-initialization-of-derived-classes">Constructors and initialization of derived classes</a></li>
+<li><a href="#/inheritance-and-access-specifiers" id="/toc-inheritance-and-access-specifiers">Inheritance and access specifiers</a></li>
+<li><a href="#/adding-new-functionality-to-a-derived-class" id="/toc-adding-new-functionality-to-a-derived-class">Adding new functionality to a derived class</a></li>
+<li><a href="#/calling-inherited-functions-and-overriding-behavior" id="/toc-calling-inherited-functions-and-overriding-behavior">Calling inherited functions and overriding behavior</a></li>
+<li><a href="#/change-an-inherited-members-access-level-and-hide-inherited-functionality" id="/toc-change-an-inherited-members-access-level-and-hide-inherited-functionality">Change an inherited member’s access level and hide inherited functionality</a></li>
+<li><a href="#/multiple-inheritance" id="/toc-multiple-inheritance">Multiple inheritance</a></li>
 </ul>
 </nav>
 </section>
@@ -1252,7 +1257,7 @@ Listing&nbsp;17: Order of construction of derived classes in an inheritance chai
 <h1>Constructors and initialization of derived classes</h1>
 <p>✎&nbsp; In Python, we can use <code>super()</code> to access the parent’s data and member functions.</p>
 <p>✎&nbsp; Thus, we can write <code>super().__init__(self,...)</code> to use the constructor of the parent class.</p>
-<div id="4dde053c" class="cell" data-execution_count="1">
+<div id="f6ec9695" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a><span class="kw">class</span> UniPerson:</span>
 <span id="cb18-2"><a href=""></a>    </span>
 <span id="cb18-3"><a href=""></a>    nextID <span class="op">=</span> <span class="dv">10000</span>  <span class="co"># class variable</span></span>
@@ -1270,7 +1275,7 @@ Listing&nbsp;17: Order of construction of derived classes in an inheritance chai
 </section>
 <section id="revisit-python-example" class="slide level2">
 <h2>Revisit Python example</h2>
-<div id="0ec06221" class="cell" data-execution_count="2">
+<div id="a6f09f28" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href=""></a><span class="kw">class</span> UniPerson:</span>
 <span id="cb19-2"><a href=""></a>    nextID <span class="op">=</span> <span class="dv">10000</span>  <span class="co"># class variable, functioning like static int nextID in C++</span></span>
 <span id="cb19-3"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name<span class="op">=</span><span class="st">""</span>, age<span class="op">=</span><span class="dv">18</span>):</span>
@@ -1523,6 +1528,787 @@ Listing&nbsp;20: Calling base constructor in member initializer list of derived 
 <h2>Destructors</h2>
 <p>✎&nbsp; When a derived class is destroyed, each destructor is called in the reverse order of construction.</p>
 <p>➜&nbsp; In the above example, when <code>c</code> is destroyed, the <code>C</code> destructor is called first, then the <code>B</code> destructor, then the <code>A</code> destructor.</p>
+</section></section>
+<section>
+<section id="inheritance-and-access-specifiers" class="title-slide slide level1 center">
+<h1>Inheritance and access specifiers</h1>
+<p>We have learned two access specifiers:</p>
+<ul>
+<li>private</li>
+<li>public</li>
+</ul>
+<p>We have also seen the access specifier <code>protected</code>.</p>
+<p>𘱉&nbsp; We will learn more about how access specifiers interact with inheritance in this lesson.</p>
+</section>
+<section id="the-protected-access-specifier" class="slide level2">
+<h2>The <code>protected</code> access specifier</h2>
+<p>✎&nbsp; The access specifier <code>protected</code> is only useful in an inheritance context.</p>
+<div class="my-box">
+<ul>
+<li>The <code>protected</code> access specifier allows the class the member belongs to, friends, and derived classes to access the member.</li>
+<li><code>protected</code> members are not accessible from outside the class.</li>
+</ul>
+</div>
+</section>
+<section id="access-specifiers-in-inheritance-code-illustration" class="slide level2">
+<h2>Access specifiers in inheritance: Code illustration</h2>
+<div id="lst-access-specifier" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-access-specifier-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;21: Calling base constructor in member initializer list of derived classes can be done in inheritance chain. Filename=<code>initializing_base_members_inheritance_chain.cpp</code>
+</figcaption>
+<div aria-describedby="lst-access-specifier-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb29-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb29-2"><a href=""></a><span class="kw">class</span> A</span>
+<span id="cb29-3"><a href=""></a><span class="op">{</span></span>
+<span id="cb29-4"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb29-5"><a href=""></a>    A<span class="op">(</span><span class="dt">int</span> a<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb29-6"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"A: "</span> <span class="op">&lt;&lt;</span> a <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb29-7"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb29-8"><a href=""></a><span class="op">};</span></span>
+<span id="cb29-9"><a href=""></a></span>
+<span id="cb29-10"><a href=""></a><span class="kw">class</span> B<span class="op">:</span> <span class="kw">public</span> A</span>
+<span id="cb29-11"><a href=""></a><span class="op">{</span></span>
+<span id="cb29-12"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb29-13"><a href=""></a>    B<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">)</span> <span class="op">:</span> A<span class="op">{</span> a <span class="op">}</span> <span class="op">{</span></span>
+<span id="cb29-14"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"B: "</span> <span class="op">&lt;&lt;</span> b <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb29-15"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb29-16"><a href=""></a><span class="op">};</span></span>
+<span id="cb29-17"><a href=""></a></span>
+<span id="cb29-18"><a href=""></a><span class="kw">class</span> C<span class="op">:</span> <span class="kw">public</span> B</span>
+<span id="cb29-19"><a href=""></a><span class="op">{</span></span>
+<span id="cb29-20"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb29-21"><a href=""></a>    C<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">,</span> <span class="dt">char</span> c<span class="op">)</span> <span class="op">:</span> B<span class="op">{</span> a<span class="op">,</span> b <span class="op">}</span> <span class="op">{</span></span>
+<span id="cb29-22"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"C: "</span> <span class="op">&lt;&lt;</span> c <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb29-23"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb29-24"><a href=""></a><span class="op">};</span></span>
+<span id="cb29-25"><a href=""></a></span>
+<span id="cb29-26"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb29-27"><a href=""></a><span class="op">{</span></span>
+<span id="cb29-28"><a href=""></a>    C c<span class="op">{</span> <span class="dv">5</span><span class="op">,</span> <span class="fl">4.3</span><span class="op">,</span> <span class="ch">'R'</span> <span class="op">};</span></span>
+<span id="cb29-29"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb29-30"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section>
+<section id="when-should-we-use-the-protected-access-specifier" class="slide level2">
+<h2>When should we use the <code>protected</code> access specifier</h2>
+<p><span style="color:crimson"><strong>Discuss briefly in the lecture.</strong></span> ➜&nbsp; <em>Students need to read these points carefully again.</em></p>
+<ul>
+<li><p>With a <code>protected</code> attribute in a base class, derived classes can access that member directly. ➜&nbsp; If we later change anything about the <code>protected</code> attribute (type, value meaning, etc.), we’ll probably <strong>need to change both the base class and all of the derived classes</strong>.</p></li>
+<li><p>Using the <code>protected</code> access specifier is most useful when</p>
+<ul>
+<li>we (and our team) are going to be the ones deriving from our own classes</li>
+<li>number of derived classes is reasonable</li>
+</ul></li>
+<li><p>Making members private is good for insulating the public or derived classes from implementation changes, and for ensuring invariants (fractions must have non-zero denominators) are maintained properly.</p>
+<ul>
+<li><p>Think about the open-source code and you made member protected. Other developers can access the members and spoil them.</p></li>
+<li><p>This implies our class need a larger public (or protected) interface to support all of the functions that public or derived classes need for operation (high cost to build and maintain)</p></li>
+</ul></li>
+<li><p>It’s better to make your members private if we can, and <span style="color:navy"><strong>only use <code>protected</code> when derived classes are planned</strong></span> and the cost to build and maintain an interface to those private members is too high.</p></li>
+</ul>
+</section>
+<section id="when-should-we-use-the-protected-access-specifier-1" class="slide level2">
+<h2>When should we use the <code>protected</code> access specifier</h2>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Important</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Best practice</strong></p>
+<p>Favor private members over protected members.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="different-kinds-of-inheritance-and-their-impact-on-access" class="slide level2">
+<h2>Different kinds of inheritance, and their impact on access</h2>
+<p>✎&nbsp; There are three different ways for classes to inherit from other classes: <code>public</code>, <code>protected</code>, <code>private</code></p>
+<p>✎&nbsp; We have <span class="math inline">\(9\)</span> combinations: <span class="math inline">\(3\)</span> member access specifiers and 3 inheritance types.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb30-1"><a href=""></a><span class="co">// Inherit from Base publicly</span></span>
+<span id="cb30-2"><a href=""></a><span class="kw">class</span> Pub<span class="op">:</span> <span class="kw">public</span> Base <span class="op">{</span></span>
+<span id="cb30-3"><a href=""></a><span class="op">};</span></span>
+<span id="cb30-4"><a href=""></a></span>
+<span id="cb30-5"><a href=""></a><span class="co">// Inherit from Base protectedly</span></span>
+<span id="cb30-6"><a href=""></a><span class="kw">class</span> Pro<span class="op">:</span> <span class="kw">protected</span> Base <span class="op">{</span></span>
+<span id="cb30-7"><a href=""></a><span class="op">};</span></span>
+<span id="cb30-8"><a href=""></a></span>
+<span id="cb30-9"><a href=""></a><span class="co">// Inherit from Base privately</span></span>
+<span id="cb30-10"><a href=""></a><span class="kw">class</span> Pri<span class="op">:</span> <span class="kw">private</span> Base <span class="op">{</span></span>
+<span id="cb30-11"><a href=""></a><span class="op">};</span></span>
+<span id="cb30-12"><a href=""></a></span>
+<span id="cb30-13"><a href=""></a><span class="kw">class</span> Def<span class="op">:</span> Base <span class="op">{</span><span class="co">// Defaults to private inheritance</span></span>
+<span id="cb30-14"><a href=""></a><span class="op">};</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="different-kinds-of-inheritance-and-their-impact-on-access-1" class="slide level2">
+<h2>Different kinds of inheritance, and their impact on access</h2>
+<p>➥&nbsp; <strong>Some remarks</strong></p>
+<ul>
+<li>It is not that I cannot teach this component carefully in the live lecture.</li>
+<li>I think we will get confused and forget most of the explained cases right after leaving the classroom.</li>
+<li>The point is to make you aware of these concepts and give you an opportunity to learn them deeper.</li>
+</ul>
+<p>➥&nbsp; Therefore, I write down some keypoints and skip the slides. <em>Students should read the materials later.</em></p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Key rules to interpret different combinations</strong></p>
+<ul>
+<li>A class can always access its own (non-inherited) members.</li>
+<li>The public accesses the members of a class based on the access specifiers of the class it is accessing.</li>
+<li>A derived class accesses inherited members based on the access specifier inherited from the parent class. This varies depending on the access specifier and type of inheritance used.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="public-inheritance" class="slide level2">
+<h2><code>public</code> inheritance</h2>
+<ul>
+<li><code>public</code> inheritance is by far the most commonly used type of inheritance.</li>
+<li>Very rarely will we see or use the other types of inheritance.</li>
+</ul>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Access specifier in base class</th>
+<th style="text-align: left;">Access specifier when inherited publicly</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Public</td>
+<td style="text-align: left;">Public</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Protected</td>
+<td style="text-align: left;">Protected</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Private</td>
+<td style="text-align: left;">Inaccessible</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="protected-inheritance" class="slide level2">
+<h2><code>protected</code> inheritance</h2>
+<ul>
+<li><code>protected</code> inheritance is the least common method of inheritance.</li>
+<li>It is almost never used, except in very particular cases.</li>
+<li>With <code>protected</code> inheritance, the <code>public</code> and <code>protected</code> members become <code>protected</code>, and <code>private</code> members stay inaccessible.</li>
+</ul>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Access specifier in base class</th>
+<th style="text-align: left;">Access specifier when inherited protectedly</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Public</td>
+<td style="text-align: left;">Protected</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Protected</td>
+<td style="text-align: left;">Protected</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Private</td>
+<td style="text-align: left;">Inaccessible</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="private-inheritance" class="slide level2">
+<h2><code>private</code> inheritance</h2>
+<ul>
+<li>With <code>private</code> inheritance, all members from the base class are inherited as <code>private</code>.</li>
+<li><code>private</code> members are inaccessible, and <code>protected</code> and <code>public</code> members become <code>private</code>.</li>
+</ul>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Access specifier in base class</th>
+<th style="text-align: left;">Access specifier when inherited privately</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Public</td>
+<td style="text-align: left;">Private</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Protected</td>
+<td style="text-align: left;">Private</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Private</td>
+<td style="text-align: left;">Inaccessible</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="access-specifier-in-inheritance-summary" class="slide level2">
+<h2>Access specifier in inheritance: Summary</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Base Class Member</th>
+<th style="text-align: left;">Public Inheritance</th>
+<th style="text-align: left;">Protected Inheritance</th>
+<th style="text-align: left;">Private Inheritance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Public</strong></td>
+<td style="text-align: left;">Public</td>
+<td style="text-align: left;">Protected</td>
+<td style="text-align: left;">Private</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Protected</strong></td>
+<td style="text-align: left;">Protected</td>
+<td style="text-align: left;">Protected</td>
+<td style="text-align: left;">Private</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Private</strong></td>
+<td style="text-align: left;">Inaccessible</td>
+<td style="text-align: left;">Inaccessible</td>
+<td style="text-align: left;">Inaccessible</td>
+</tr>
+</tbody>
+</table>
+</section></section>
+<section>
+<section id="adding-new-functionality-to-a-derived-class" class="title-slide slide level1 center">
+<h1>Adding new functionality to a derived class</h1>
+<p>✎&nbsp; One of the biggest benefits of inheritance is the <span style="color:navy"><strong>ability to reuse written code</strong></span>.</p>
+<p>✎&nbsp; We can <span style="color:navy"><strong>add new functionality, modifying existing functionality, or hide functionality</strong></span> if we don’t want.</p>
+<div class="callout callout-none no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>We have learned these concepts from <strong>Introductory Programming 2</strong> and also in several last examples. ➜&nbsp; No need to go into too much details.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="adding-new-functionality-to-a-derived-class-code-illustration" class="slide level2">
+<h2>Adding new functionality to a derived class: Code illustration</h2>
+<div id="lst-adding-functionality" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-adding-functionality-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;22: Besides inheriting members from the base class, the derived class can add more functionalities. Filename=<code>add_functionality_example.cpp</code>
+</figcaption>
+<div aria-describedby="lst-adding-functionality-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb31-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb31-2"><a href=""></a></span>
+<span id="cb31-3"><a href=""></a><span class="kw">class</span> Base</span>
+<span id="cb31-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb31-5"><a href=""></a><span class="kw">protected</span><span class="op">:</span></span>
+<span id="cb31-6"><a href=""></a>    <span class="dt">int</span> id <span class="op">{};</span></span>
+<span id="cb31-7"><a href=""></a></span>
+<span id="cb31-8"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb31-9"><a href=""></a>    Base<span class="op">()</span> <span class="op">=</span> <span class="cf">default</span><span class="op">;</span> <span class="co">// we need default constructor here, see Derived class</span></span>
+<span id="cb31-10"><a href=""></a></span>
+<span id="cb31-11"><a href=""></a>    Base<span class="op">(</span><span class="dt">int</span> id<span class="op">):</span> id <span class="op">{</span> id <span class="op">}{}</span></span>
+<span id="cb31-12"><a href=""></a></span>
+<span id="cb31-13"><a href=""></a>    <span class="dt">void</span> identify<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"I am a Base. ID = "</span> <span class="op">&lt;&lt;</span> id <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb31-14"><a href=""></a><span class="op">};</span></span>
+<span id="cb31-15"><a href=""></a></span>
+<span id="cb31-16"><a href=""></a><span class="kw">class</span> Derived <span class="op">:</span> <span class="kw">public</span> Base</span>
+<span id="cb31-17"><a href=""></a><span class="op">{</span></span>
+<span id="cb31-18"><a href=""></a>    <span class="dt">double</span> value<span class="op">;</span></span>
+<span id="cb31-19"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb31-20"><a href=""></a>    Derived<span class="op">(</span><span class="dt">double</span> value<span class="op">)</span> <span class="op">:</span> value <span class="op">{</span>value<span class="op">}</span> <span class="op">{}</span>    <span class="co">// no id argument</span></span>
+<span id="cb31-21"><a href=""></a>    Derived<span class="op">(</span><span class="dt">double</span> value<span class="op">,</span> <span class="dt">int</span> id<span class="op">)</span> <span class="op">:</span> Base<span class="op">{</span>id<span class="op">},</span> value <span class="op">{</span>value<span class="op">}</span> <span class="op">{}</span></span>
+<span id="cb31-22"><a href=""></a>    <span class="dt">double</span> get_value<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> value<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb31-23"><a href=""></a>    <span class="dt">void</span> print<span class="op">()</span> <span class="at">const</span> <span class="op">{</span></span>
+<span id="cb31-24"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"ID: "</span> <span class="op">&lt;&lt;</span> id <span class="op">&lt;&lt;</span> <span class="st">", value: "</span> <span class="op">&lt;&lt;</span> value<span class="op">;</span></span>
+<span id="cb31-25"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb31-26"><a href=""></a><span class="op">};</span></span>
+<span id="cb31-27"><a href=""></a></span>
+<span id="cb31-28"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb31-29"><a href=""></a><span class="op">{</span></span>
+<span id="cb31-30"><a href=""></a>    Derived d1 <span class="op">{</span> <span class="fl">42.0</span> <span class="op">};</span></span>
+<span id="cb31-31"><a href=""></a>    Derived d2 <span class="op">{</span> <span class="fl">24.0</span><span class="op">,</span> <span class="dv">42</span> <span class="op">};</span></span>
+<span id="cb31-32"><a href=""></a>    d1<span class="op">.</span>identify<span class="op">();</span></span>
+<span id="cb31-33"><a href=""></a>    d2<span class="op">.</span>identify<span class="op">();</span></span>
+<span id="cb31-34"><a href=""></a>    d1<span class="op">.</span>print<span class="op">();</span> <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb31-35"><a href=""></a>    d2<span class="op">.</span>print<span class="op">();</span> <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb31-36"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb31-37"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<p>➥&nbsp; Let us run it and go through it slowly.</p>
+</section>
+<section id="adding-new-functionality-an-example-using-stdvector" class="slide level2">
+<h2>Adding new functionality: An example using <code>std::vector</code></h2>
+<div id="lst-adding-functionality-vector" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-adding-functionality-vector-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;23: Same as before but a slightly more complex. Filename=<code>add_functionality_example_vector.cpp</code>
+</figcaption>
+<div aria-describedby="lst-adding-functionality-vector-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb32-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb32-2"><a href=""></a><span class="pp">#include </span><span class="im">&lt;vector&gt;</span></span>
+<span id="cb32-3"><a href=""></a><span class="kw">class</span> Base</span>
+<span id="cb32-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb32-5"><a href=""></a><span class="kw">protected</span><span class="op">:</span></span>
+<span id="cb32-6"><a href=""></a>    <span class="dt">int</span> id <span class="op">{};</span></span>
+<span id="cb32-7"><a href=""></a></span>
+<span id="cb32-8"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb32-9"><a href=""></a>    Base<span class="op">()</span> <span class="op">=</span> <span class="cf">default</span><span class="op">;</span> <span class="co">// we need default constructor here, see Derived class</span></span>
+<span id="cb32-10"><a href=""></a></span>
+<span id="cb32-11"><a href=""></a>    Base<span class="op">(</span><span class="dt">int</span> id<span class="op">):</span> id <span class="op">{</span> id <span class="op">}{}</span></span>
+<span id="cb32-12"><a href=""></a></span>
+<span id="cb32-13"><a href=""></a>    <span class="dt">void</span> identify<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"I am a Base. ID = "</span> <span class="op">&lt;&lt;</span> id <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb32-14"><a href=""></a><span class="op">};</span></span>
+<span id="cb32-15"><a href=""></a></span>
+<span id="cb32-16"><a href=""></a><span class="kw">class</span> Derived <span class="op">:</span> <span class="kw">public</span> Base</span>
+<span id="cb32-17"><a href=""></a><span class="op">{</span></span>
+<span id="cb32-18"><a href=""></a>    <span class="dt">double</span> value <span class="op">{};</span></span>
+<span id="cb32-19"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb32-20"><a href=""></a>    Derived<span class="op">()</span> <span class="op">=</span> <span class="cf">default</span><span class="op">;</span></span>
+<span id="cb32-21"><a href=""></a>    Derived<span class="op">(</span><span class="dt">double</span> value<span class="op">)</span> <span class="op">:</span> value <span class="op">{</span>value<span class="op">}</span> <span class="op">{}</span>    <span class="co">// no id argument</span></span>
+<span id="cb32-22"><a href=""></a>    Derived<span class="op">(</span><span class="dt">double</span> value<span class="op">,</span> <span class="dt">int</span> id<span class="op">)</span> <span class="op">:</span> Base<span class="op">{</span>id<span class="op">},</span> value <span class="op">{</span>value<span class="op">}</span> <span class="op">{}</span></span>
+<span id="cb32-23"><a href=""></a>    <span class="dt">double</span> get_value<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> value<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb32-24"><a href=""></a>    <span class="dt">void</span> print<span class="op">()</span> <span class="at">const</span> <span class="op">{</span></span>
+<span id="cb32-25"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"ID: "</span> <span class="op">&lt;&lt;</span> id <span class="op">&lt;&lt;</span> <span class="st">", value: "</span> <span class="op">&lt;&lt;</span> value<span class="op">;</span></span>
+<span id="cb32-26"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb32-27"><a href=""></a><span class="op">};</span></span>
+<span id="cb32-28"><a href=""></a></span>
+<span id="cb32-29"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb32-30"><a href=""></a><span class="op">{</span></span>
+<span id="cb32-31"><a href=""></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span>Derived<span class="op">&gt;</span> list<span class="op">;</span></span>
+<span id="cb32-32"><a href=""></a>    list<span class="op">.</span>push_back<span class="op">(</span>Derived <span class="op">{</span><span class="fl">42.0</span><span class="op">,</span> <span class="dv">24</span><span class="op">});</span></span>
+<span id="cb32-33"><a href=""></a>    list<span class="op">.</span>push_back<span class="op">(</span>Derived <span class="op">{</span><span class="fl">24.0</span><span class="op">,</span> <span class="dv">42</span><span class="op">});</span></span>
+<span id="cb32-34"><a href=""></a>    list<span class="op">.</span>push_back<span class="op">(</span>Derived <span class="op">{});</span></span>
+<span id="cb32-35"><a href=""></a></span>
+<span id="cb32-36"><a href=""></a>    <span class="cf">for</span> <span class="op">(</span><span class="kw">auto</span> element <span class="op">:</span> list<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb32-37"><a href=""></a>        element<span class="op">.</span>print<span class="op">();</span> </span>
+<span id="cb32-38"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb32-39"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb32-40"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb32-41"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<p>➥&nbsp; Let us run it and go through it slowly.</p>
+</section></section>
+<section>
+<section id="calling-inherited-functions-and-overriding-behavior" class="title-slide slide level1 center">
+<h1>Calling inherited functions and overriding behavior</h1>
+<p>✎&nbsp; By default, derived classes inherit all of the behaviors defined in a base class.</p>
+<p>✎&nbsp; We now examine in more detail how member functions are selected, as well as how we can leverage this to change behaviors in a derived class.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Most of us have learned all these concepts in <strong>Introductory Programming 2</strong> and <strong>Mechanical Engineering Skills 3</strong>.</li>
+<li>It does not harm to quickly go through them again. Well, people can forget 😃 😃.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="calling-a-base-class-function" class="slide level2">
+<h2>Calling a base class function</h2>
+<p>✎&nbsp; Since the derived class inherits members of its base class, it can use them (need access specifier <code>public</code> or <code>protected</code> in base class).</p>
+<div id="lst-call-base-class-function" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-call-base-class-function-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;24: Derived classes can call their base class functions. Filename=<code>call_base_class_function.cpp</code>
+</figcaption>
+<div aria-describedby="lst-call-base-class-function-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb33-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb33-2"><a href=""></a></span>
+<span id="cb33-3"><a href=""></a><span class="kw">class</span> Base</span>
+<span id="cb33-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb33-5"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb33-6"><a href=""></a>    Base<span class="op">()</span> <span class="op">{</span> <span class="op">}</span></span>
+<span id="cb33-7"><a href=""></a></span>
+<span id="cb33-8"><a href=""></a>    <span class="dt">void</span> identify<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Base::identify()</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb33-9"><a href=""></a><span class="op">};</span></span>
+<span id="cb33-10"><a href=""></a></span>
+<span id="cb33-11"><a href=""></a><span class="kw">class</span> Derived<span class="op">:</span> <span class="kw">public</span> Base</span>
+<span id="cb33-12"><a href=""></a><span class="op">{</span></span>
+<span id="cb33-13"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb33-14"><a href=""></a>    Derived<span class="op">()</span> <span class="op">{</span> <span class="op">}</span></span>
+<span id="cb33-15"><a href=""></a><span class="op">};</span></span>
+<span id="cb33-16"><a href=""></a></span>
+<span id="cb33-17"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb33-18"><a href=""></a><span class="op">{</span></span>
+<span id="cb33-19"><a href=""></a>    Base base <span class="op">{};</span></span>
+<span id="cb33-20"><a href=""></a>    base<span class="op">.</span>identify<span class="op">();</span></span>
+<span id="cb33-21"><a href=""></a></span>
+<span id="cb33-22"><a href=""></a>    Derived derived <span class="op">{};</span></span>
+<span id="cb33-23"><a href=""></a>    derived<span class="op">.</span>identify<span class="op">();</span></span>
+<span id="cb33-24"><a href=""></a></span>
+<span id="cb33-25"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb33-26"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<p>➥&nbsp; Let us run this code snippet.</p>
+</section>
+<section id="redefining-behaviors" class="slide level2">
+<h2>Redefining behaviors</h2>
+<p>✎&nbsp; However, if we had defined <code>Derived::identify()</code> in the Derived class, it would have been used instead.</p>
+<div id="lst-redefine-behaviors" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-redefine-behaviors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;25: The derived class can override the member function of the base class. It can redefine behaviors of the base class. Filename=<code>call_base_class_function.cpp</code>
+</figcaption>
+<div aria-describedby="lst-redefine-behaviors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb34-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb34-2"><a href=""></a></span>
+<span id="cb34-3"><a href=""></a><span class="kw">class</span> Base</span>
+<span id="cb34-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb34-5"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb34-6"><a href=""></a>    Base<span class="op">()</span> <span class="op">{</span> <span class="op">}</span></span>
+<span id="cb34-7"><a href=""></a></span>
+<span id="cb34-8"><a href=""></a>    <span class="dt">void</span> identify<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Base::identify()</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb34-9"><a href=""></a><span class="op">};</span></span>
+<span id="cb34-10"><a href=""></a></span>
+<span id="cb34-11"><a href=""></a><span class="kw">class</span> Derived<span class="op">:</span> <span class="kw">public</span> Base</span>
+<span id="cb34-12"><a href=""></a><span class="op">{</span></span>
+<span id="cb34-13"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb34-14"><a href=""></a>    Derived<span class="op">()</span> <span class="op">{</span> <span class="op">}</span></span>
+<span id="cb34-15"><a href=""></a></span>
+<span id="cb34-16"><a href=""></a>    <span class="dt">void</span> identify<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Derived::identify()</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb34-17"><a href=""></a><span class="op">};</span></span>
+<span id="cb34-18"><a href=""></a></span>
+<span id="cb34-19"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb34-20"><a href=""></a><span class="op">{</span></span>
+<span id="cb34-21"><a href=""></a>    Base base <span class="op">{};</span></span>
+<span id="cb34-22"><a href=""></a>    base<span class="op">.</span>identify<span class="op">();</span></span>
+<span id="cb34-23"><a href=""></a></span>
+<span id="cb34-24"><a href=""></a>    Derived derived <span class="op">{};</span></span>
+<span id="cb34-25"><a href=""></a>    derived<span class="op">.</span>identify<span class="op">();</span></span>
+<span id="cb34-26"><a href=""></a></span>
+<span id="cb34-27"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb34-28"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section>
+<section id="adding-to-existing-functionality" class="slide level2">
+<h2>Adding to existing functionality</h2>
+<p>✎&nbsp; Sometimes we do not want to completely replace a base class function, but instead want to add additional functionality to it when called with a derived object.</p>
+<div id="lst-redefine-behaviors" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-redefine-behaviors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;26: We can call the base class’s member function and add more to it. Filename=<code>add_to_existing_functionality.cpp</code>
+</figcaption>
+<div aria-describedby="lst-redefine-behaviors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb35-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb35-2"><a href=""></a></span>
+<span id="cb35-3"><a href=""></a><span class="kw">class</span> Base</span>
+<span id="cb35-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb35-5"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb35-6"><a href=""></a>    Base<span class="op">()</span> <span class="op">{</span> <span class="op">}</span></span>
+<span id="cb35-7"><a href=""></a></span>
+<span id="cb35-8"><a href=""></a>    <span class="dt">void</span> identify<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Base::identify()</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb35-9"><a href=""></a><span class="op">};</span></span>
+<span id="cb35-10"><a href=""></a></span>
+<span id="cb35-11"><a href=""></a><span class="kw">class</span> Derived<span class="op">:</span> <span class="kw">public</span> Base</span>
+<span id="cb35-12"><a href=""></a><span class="op">{</span></span>
+<span id="cb35-13"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb35-14"><a href=""></a>    Derived<span class="op">()</span> <span class="op">{</span> <span class="op">}</span></span>
+<span id="cb35-15"><a href=""></a></span>
+<span id="cb35-16"><a href=""></a>    <span class="dt">void</span> identify<span class="op">()</span> <span class="at">const</span></span>
+<span id="cb35-17"><a href=""></a>    <span class="op">{</span></span>
+<span id="cb35-18"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Derived::identify()</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb35-19"><a href=""></a>        Base<span class="op">::</span>identify<span class="op">();</span> <span class="co">// note call to Base::identify() here</span></span>
+<span id="cb35-20"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb35-21"><a href=""></a><span class="op">};</span></span>
+<span id="cb35-22"><a href=""></a></span>
+<span id="cb35-23"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb35-24"><a href=""></a><span class="op">{</span></span>
+<span id="cb35-25"><a href=""></a>    Base base <span class="op">{};</span></span>
+<span id="cb35-26"><a href=""></a>    base<span class="op">.</span>identify<span class="op">();</span></span>
+<span id="cb35-27"><a href=""></a></span>
+<span id="cb35-28"><a href=""></a>    Derived derived <span class="op">{};</span></span>
+<span id="cb35-29"><a href=""></a>    derived<span class="op">.</span>identify<span class="op">();</span></span>
+<span id="cb35-30"><a href=""></a></span>
+<span id="cb35-31"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb35-32"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section></section>
+<section>
+<section id="change-an-inherited-members-access-level-and-hide-inherited-functionality" class="title-slide slide level1 center">
+<h1>Change an inherited member’s access level and hide inherited functionality</h1>
+<p>✎&nbsp; <strong>Change an inherited member’s access</strong></p>
+<p>C++ gives us the ability to change an inherited member’s access specifier in the derived class.</p>
+<p>✎&nbsp; <strong>Hide functionality</strong></p>
+<p>In a derived class, it is possible to hide functionality that exists in the base class, so that it can not be accessed through the derived class.</p>
+<p>We can do both with <code>using</code> declaration.</p>
+<p><span style="color:crimson">We skip this component.</span> <em>The students can learn it at home.</em></p>
+</section>
+<section id="change-an-inherited-members-access-level-make-public" class="slide level2">
+<h2>Change an inherited member’s access level: make <code>public</code></h2>
+<p>✎&nbsp; C++ gives us the ability to change an inherited member’s access specifier in the derived class, by a <span style="color:red"><code>using</code> declaration</span> – Let us run this code snippet:</p>
+<div id="lst-change-access-level-derived" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-change-access-level-derived-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;27: With <code>using</code> declaration we can change the access level of derived class’ members. Filename=<code>change_inherited_member_access_level.cpp</code>
+</figcaption>
+<div aria-describedby="lst-change-access-level-derived-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb36-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb36-2"><a href=""></a></span>
+<span id="cb36-3"><a href=""></a><span class="kw">class</span> Base</span>
+<span id="cb36-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb36-5"><a href=""></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb36-6"><a href=""></a>    <span class="dt">int</span> id <span class="op">{};</span></span>
+<span id="cb36-7"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb36-8"><a href=""></a>    Base<span class="op">(</span><span class="dt">int</span> id<span class="op">)</span> <span class="op">:</span> id <span class="op">{</span>id<span class="op">}</span> <span class="op">{}</span></span>
+<span id="cb36-9"><a href=""></a><span class="kw">protected</span><span class="op">:</span></span>
+<span id="cb36-10"><a href=""></a>    <span class="dt">void</span> print_id<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"ID: "</span> <span class="op">&lt;&lt;</span> id<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb36-11"><a href=""></a><span class="op">};</span></span>
+<span id="cb36-12"><a href=""></a></span>
+<span id="cb36-13"><a href=""></a><span class="kw">class</span> Derived<span class="op">:</span> <span class="kw">public</span> Base</span>
+<span id="cb36-14"><a href=""></a><span class="op">{</span></span>
+<span id="cb36-15"><a href=""></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb36-16"><a href=""></a>    <span class="dt">double</span> value <span class="op">{};</span></span>
+<span id="cb36-17"><a href=""></a></span>
+<span id="cb36-18"><a href=""></a><span class="kw">public</span><span class="op">:</span> <span class="co">// note this public, everything below this is public now</span></span>
+<span id="cb36-19"><a href=""></a>    Derived<span class="op">(</span><span class="dt">double</span> value<span class="op">,</span> <span class="dt">int</span> id<span class="op">)</span> <span class="op">:</span> Base <span class="op">{</span>id<span class="op">},</span> value <span class="op">{</span>value<span class="op">}</span> <span class="op">{}</span></span>
+<span id="cb36-20"><a href=""></a>    <span class="dt">double</span> get_value<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> value<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb36-21"><a href=""></a>    <span class="co">//Base::print_id() was inherited as protected, so the public has no access.</span></span>
+<span id="cb36-22"><a href=""></a>    <span class="co">// But we are changing it to public via a using declaration</span></span>
+<span id="cb36-23"><a href=""></a>    <span class="kw">using</span> Base<span class="op">::</span>print_id<span class="op">;</span>   <span class="co">// note: no parenthesis here</span></span>
+<span id="cb36-24"><a href=""></a><span class="op">};</span></span>
+<span id="cb36-25"><a href=""></a></span>
+<span id="cb36-26"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb36-27"><a href=""></a><span class="op">{</span></span>
+<span id="cb36-28"><a href=""></a>    Derived d <span class="op">{</span><span class="fl">24.42</span><span class="op">,</span> <span class="dv">42</span><span class="op">};</span></span>
+<span id="cb36-29"><a href=""></a>    d<span class="op">.</span>print_id<span class="op">();</span>      <span class="co">// prints 7</span></span>
+<span id="cb36-30"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">", d.value: "</span> <span class="op">&lt;&lt;</span> d<span class="op">.</span>get_value<span class="op">()</span> <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span></span>
+<span id="cb36-31"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section>
+<section id="change-an-inherited-members-access-level-hide-functionality-make-private" class="slide level2">
+<h2>Change an inherited member’s access level: hide functionality (make <code>private</code>)</h2>
+<p>✎&nbsp; In a derived class, it is <span style="color:navy"><strong>possible to hide functionality that exists in the base class</strong></span>, so that it can not be accessed through the derived class – Let us play around this code snippet:</p>
+<div id="lst-hide-functionality" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-hide-functionality-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;28: With <code>using</code> declaration we can also high functionality that exists in the base class. Filename=<code>hide_functionality.cpp</code>
+</figcaption>
+<div aria-describedby="lst-hide-functionality-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb37-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb37-2"><a href=""></a></span>
+<span id="cb37-3"><a href=""></a><span class="kw">class</span> Base</span>
+<span id="cb37-4"><a href=""></a><span class="op">{</span></span>
+<span id="cb37-5"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb37-6"><a href=""></a>    <span class="dt">int</span> id <span class="op">{};</span></span>
+<span id="cb37-7"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb37-8"><a href=""></a>    <span class="dt">double</span> public_mem <span class="op">{};</span>   <span class="co">// this is a public member</span></span>
+<span id="cb37-9"><a href=""></a></span>
+<span id="cb37-10"><a href=""></a>    Base<span class="op">(</span><span class="dt">int</span> id<span class="op">)</span> <span class="op">:</span> id <span class="op">{</span>id<span class="op">}</span> <span class="op">{}</span></span>
+<span id="cb37-11"><a href=""></a><span class="kw">protected</span><span class="op">:</span></span>
+<span id="cb37-12"><a href=""></a>    <span class="dt">void</span> print_id<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"ID: "</span> <span class="op">&lt;&lt;</span> id<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb37-13"><a href=""></a><span class="op">};</span></span>
+<span id="cb37-14"><a href=""></a></span>
+<span id="cb37-15"><a href=""></a><span class="kw">class</span> Derived<span class="op">:</span> <span class="kw">public</span> Base</span>
+<span id="cb37-16"><a href=""></a><span class="op">{</span></span>
+<span id="cb37-17"><a href=""></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb37-18"><a href=""></a>    <span class="dt">double</span> value <span class="op">{};</span></span>
+<span id="cb37-19"><a href=""></a>    <span class="kw">using</span> Base<span class="op">::</span>public_mem<span class="op">;</span> <span class="co">// this is now private in Derived.</span></span>
+<span id="cb37-20"><a href=""></a></span>
+<span id="cb37-21"><a href=""></a><span class="kw">public</span><span class="op">:</span> <span class="co">// note this public, everything below this is public now</span></span>
+<span id="cb37-22"><a href=""></a>    Derived<span class="op">(</span><span class="dt">double</span> value<span class="op">,</span> <span class="dt">int</span> id<span class="op">)</span> <span class="op">:</span> Base <span class="op">{</span>id<span class="op">},</span> value <span class="op">{</span>value<span class="op">}</span> <span class="op">{}</span></span>
+<span id="cb37-23"><a href=""></a>    <span class="dt">double</span> get_value<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> value<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb37-24"><a href=""></a>    <span class="kw">using</span> Base<span class="op">::</span>print_id<span class="op">;</span>   <span class="co">// this is now public to the outside world</span></span>
+<span id="cb37-25"><a href=""></a><span class="op">};</span></span>
+<span id="cb37-26"><a href=""></a></span>
+<span id="cb37-27"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb37-28"><a href=""></a><span class="op">{</span>   Base b <span class="op">{</span> <span class="dv">42</span> <span class="op">};</span></span>
+<span id="cb37-29"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"b.public_mem: "</span> <span class="op">&lt;&lt;</span> b<span class="op">.</span>public_mem <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span> <span class="co">// This is OK </span></span>
+<span id="cb37-30"><a href=""></a>    Derived d <span class="op">{</span><span class="fl">24.42</span><span class="op">,</span> <span class="dv">42</span><span class="op">};</span></span>
+<span id="cb37-31"><a href=""></a>    <span class="co">// std::cout &lt;&lt; d.public_mem;      // ERROR: public_mem is private in Derived</span></span>
+<span id="cb37-32"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section>
+<section id="change-an-inherited-members-access-level-summary" class="slide level2">
+<h2>Change an inherited member’s access level: Summary</h2>
+<p>✎&nbsp; With <code>using</code> declaration, we can change an inherited member’s access level</p>
+<ul>
+<li>make the <code>member</code> in <code>Derived</code> class <code>public</code> by declaring <code>using Base::member;</code> below access specifier <code>public:</code></li>
+<li>hide the <code>member</code> in <code>Based</code> class by declaring <code>using Base::membe;</code> below access specifier <code>private:</code></li>
+</ul>
+</section>
+<section id="deleting-functions-in-derived-class" class="slide level2">
+<h2>Deleting functions in derived class</h2>
+<p>✎&nbsp; We can mark member functions as deleted in the derived class, ensuring they cannot be called at all though a derived object.</p>
+<div id="lst-hide-functionality" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-hide-functionality-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;29: We can <code>delete</code> a function inherited from the base class in the derived class. This function cannot be called at all through a derived object. Filename=<code>delete_functions_in_derived.cpp</code>
+</figcaption>
+<div aria-describedby="lst-hide-functionality-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb38-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb38-2"><a href=""></a><span class="kw">class</span> Base</span>
+<span id="cb38-3"><a href=""></a><span class="op">{</span></span>
+<span id="cb38-4"><a href=""></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb38-5"><a href=""></a>    <span class="dt">int</span> id <span class="op">{};</span></span>
+<span id="cb38-6"><a href=""></a></span>
+<span id="cb38-7"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb38-8"><a href=""></a>    Base<span class="op">(</span><span class="dt">int</span> id<span class="op">)</span> <span class="op">:</span> id <span class="op">{</span> id <span class="op">}</span> <span class="op">{</span> <span class="op">}</span></span>
+<span id="cb38-9"><a href=""></a>    <span class="dt">int</span> get_id<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> id<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb38-10"><a href=""></a>    <span class="dt">void</span> print_base<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> </span>
+<span id="cb38-11"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Base object with id: "</span> <span class="op">&lt;&lt;</span> id<span class="op">;</span> </span>
+<span id="cb38-12"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb38-13"><a href=""></a><span class="op">};</span></span>
+<span id="cb38-14"><a href=""></a></span>
+<span id="cb38-15"><a href=""></a><span class="kw">class</span> Derived <span class="op">:</span> <span class="kw">public</span> Base</span>
+<span id="cb38-16"><a href=""></a><span class="op">{</span></span>
+<span id="cb38-17"><a href=""></a>    <span class="dt">double</span> value <span class="op">{};</span></span>
+<span id="cb38-18"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb38-19"><a href=""></a>    Derived<span class="op">(</span><span class="dt">double</span> value<span class="op">,</span> <span class="dt">int</span> id<span class="op">)</span> <span class="op">:</span> Base <span class="op">{</span>id<span class="op">},</span> value <span class="op">{</span>value<span class="op">}</span> <span class="op">{}</span></span>
+<span id="cb38-20"><a href=""></a>    <span class="dt">double</span> get_value<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> value<span class="op">;</span> <span class="op">};</span></span>
+<span id="cb38-21"><a href=""></a></span>
+<span id="cb38-22"><a href=""></a>    <span class="co">// it does not make sense to print a Derived-type object </span></span>
+<span id="cb38-23"><a href=""></a>    <span class="co">// using the print_base() for a Base-type object</span></span>
+<span id="cb38-24"><a href=""></a>    <span class="dt">void</span> print_base<span class="op">()</span> <span class="at">const</span> <span class="op">=</span> <span class="kw">delete</span><span class="op">;</span> <span class="co">// mark this function as inaccessible</span></span>
+<span id="cb38-25"><a href=""></a><span class="op">};</span></span>
+<span id="cb38-26"><a href=""></a></span>
+<span id="cb38-27"><a href=""></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb38-28"><a href=""></a><span class="op">{</span></span>
+<span id="cb38-29"><a href=""></a>    Derived derived <span class="op">{</span> <span class="fl">42.24</span><span class="op">,</span> <span class="dv">42</span> <span class="op">};</span></span>
+<span id="cb38-30"><a href=""></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> derived<span class="op">.</span>get_id<span class="op">()</span> <span class="op">&lt;&lt;</span> <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">;</span>  <span class="co">// this is fine.</span></span>
+<span id="cb38-31"><a href=""></a></span>
+<span id="cb38-32"><a href=""></a>    <span class="co">// ERROR: This function has been deleted in Derived</span></span>
+<span id="cb38-33"><a href=""></a>    <span class="co">// std::cout &lt;&lt; derived.print_base();  </span></span>
+<span id="cb38-34"><a href=""></a></span>
+<span id="cb38-35"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb38-36"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+</section></section>
+<section>
+<section id="multiple-inheritance" class="title-slide slide level1 center">
+<h1>Multiple inheritance</h1>
+<p>✎&nbsp; <span style="color:red"><strong>Multiple inheritance</strong></span> enables a derived class to inherit members from more than one parent.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Again, I expect that most of us (students) have learned all these concepts in <strong>Introductory Programming 2</strong> and <strong>Mechanical Engineering Skills 3</strong>.</li>
+<li>However, I can acknowledge that maybe many of you have not heard about this.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="multiple-inheritance-smartphone-a-concept-hierarchy" class="slide level2">
+<h2>Multiple inheritance: Smartphone – A Concept hierarchy</h2>
+<p>➥&nbsp; Let us think of this example</p>
+<ul>
+<li><code>Camera</code>: provides the ability to <code>take_photo()</code></li>
+<li><code>Phone</code>: provides the ability to <code>make_call()</code></li>
+<li><code>Smartphone</code>: inherits from both, allowing it to perform both actions.</li>
+</ul>
+</section>
+<section id="multiple-inherintance-smartphone-code" class="slide level2">
+<h2>Multiple inherintance: Smartphone – Code</h2>
+<div id="lst-multiple-inheritance-smartphone" class="listing quarto-float quarto-figure quarto-figure-left">
+<figure class="quarto-float quarto-float-lst">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-multiple-inheritance-smartphone-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;30: <code>SmartPhone</code> inherits both members from <code>Camera</code> and <code>Phone</code>. Filename=<code>multiple_inheritance_smartphone.cpp</code>
+</figcaption>
+<div aria-describedby="lst-multiple-inheritance-smartphone-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb39-1"><a href=""></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb39-2"><a href=""></a></span>
+<span id="cb39-3"><a href=""></a><span class="kw">class</span> Camera <span class="op">{</span></span>
+<span id="cb39-4"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb39-5"><a href=""></a>    <span class="dt">void</span> take_photo<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb39-6"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Taking a photo!"</span> <span class="op">&lt;&lt;</span> <span class="bu">std::</span>endl<span class="op">;</span></span>
+<span id="cb39-7"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb39-8"><a href=""></a><span class="op">};</span></span>
+<span id="cb39-9"><a href=""></a></span>
+<span id="cb39-10"><a href=""></a><span class="kw">class</span> Phone <span class="op">{</span></span>
+<span id="cb39-11"><a href=""></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb39-12"><a href=""></a>    <span class="dt">void</span> make_call<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb39-13"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Making a phone call!"</span> <span class="op">&lt;&lt;</span> <span class="bu">std::</span>endl<span class="op">;</span></span>
+<span id="cb39-14"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb39-15"><a href=""></a><span class="op">};</span></span>
+<span id="cb39-16"><a href=""></a></span>
+<span id="cb39-17"><a href=""></a><span class="co">// Multiple Inheritance</span></span>
+<span id="cb39-18"><a href=""></a><span class="kw">class</span> SmartPhone <span class="op">:</span> <span class="kw">public</span> Camera<span class="op">,</span> <span class="kw">public</span> Phone <span class="op">{</span></span>
+<span id="cb39-19"><a href=""></a>    <span class="co">// Inherits members from both Camera and Phone</span></span>
+<span id="cb39-20"><a href=""></a></span>
+<span id="cb39-21"><a href=""></a>    <span class="co">// add more functionality to phone</span></span>
+<span id="cb39-22"><a href=""></a>    <span class="dt">void</span> use_app<span class="op">(</span><span class="bu">std::</span>string app_name<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb39-23"><a href=""></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> app_name <span class="op">&lt;&lt;</span> <span class="st">"is being used.</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span> </span>
+<span id="cb39-24"><a href=""></a>    <span class="op">}</span></span>
+<span id="cb39-25"><a href=""></a><span class="op">};</span></span>
+<span id="cb39-26"><a href=""></a></span>
+<span id="cb39-27"><a href=""></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb39-28"><a href=""></a>    SmartPhone my_phone<span class="op">;</span></span>
+<span id="cb39-29"><a href=""></a>    </span>
+<span id="cb39-30"><a href=""></a>    my_phone<span class="op">.</span>take_photo<span class="op">();</span></span>
+<span id="cb39-31"><a href=""></a>    my_phone<span class="op">.</span>make_call<span class="op">();</span></span>
+<span id="cb39-32"><a href=""></a>    </span>
+<span id="cb39-33"><a href=""></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb39-34"><a href=""></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
 
 </section></section>
     </div>

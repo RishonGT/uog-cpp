@@ -1,6 +1,6 @@
 ---
-title: "More on classes"
-# subtitle: "More on classes"
+title: "Overloading operators"
+# subtitle: "Overloading operators"
 author: |
     Khiem Nguyen 
     <br>Lecturer in Multiscale Materials
@@ -8,6 +8,7 @@ author: |
 author-meta: "Lecturer in Multiscale Materials"
 format: 
     revealjs:
+        # embed-resources: true
         theme: simple   # other themes: beige, blood, dark, dracula, league, moon, night, serif, simple, sky, solarized
         mouse-wheel: true
         highlight-style: github
