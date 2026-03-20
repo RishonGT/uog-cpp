@@ -93,7 +93,7 @@ int main() {
 
         iteration++; // Increment iteration count
 
-        if (iteration % 500 == 0) { // Print loss every 100 iterations
+        if (iteration % 500 == 0) { // Print loss every 500 iterations
             current_loss = loss_function(x, y, w, b, x.size());
             std::cout << "Iteration: " << iteration << ", Loss: " << current_loss << std::endl;
         }

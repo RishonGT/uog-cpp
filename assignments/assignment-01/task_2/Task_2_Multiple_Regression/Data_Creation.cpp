@@ -4,8 +4,6 @@
 #include <fstream>
 #include <vector>
 
-using namespace std;
-
 // Function to add random noise to a value
 double noise_function(double x, float noise)
 {
@@ -19,8 +17,8 @@ int main(){
     double gradient_2 = 3.7;
     double intercept = 500.0;
     float noise = 200.0;
-    vector<double> x1, x2;
-    vector<double> y;
+    std::vector<double> x1, x2;
+    std::vector<double> y;
 
     // Generate data points with noise
     srand(42); // Set seed for reproducible results
@@ -36,16 +34,16 @@ int main(){
 
     }
     // Write the data to a CSV file
-    ofstream output_file("data.csv");
+    std::ofstream output_file("data.csv");
     if (output_file.is_open()) {
         output_file << "x1,x2,y\n"; // Write the header
         for (int i = 0; i < 1000; i++) {
             output_file << x1[i] << "," << x2[i] << "," << y[i] << "\n";
         }
         output_file.close();
-        cout << "Data has been written to data.csv" << endl;
+        std::cout << "Data has been written to data.csv" << std::endl;
     } else {
-        cerr << "Unable to open file for writing." << endl;
+        std::cerr << "Unable to open file for writing." << std::endl;
     }
 
 

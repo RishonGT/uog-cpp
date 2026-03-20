@@ -3,9 +3,7 @@
 #include <cmath>
 #include <vector>
 
-using namespace std;
-
-double loss_function(const vector<double>& x1, const vector<double>&x2, const vector<double>& y, double w1, double w2, double b, int m) {
+double loss_function(const std::vector<double>& x1, const std::vector<double>&x2, const std::vector<double>& y, double w1, double w2, double b, int m) {
     double total_loss = 0.0;
     for (int i = 0; i < m; i++) {
         total_loss += (w1 * x1[i] + w2 * x2[i]+ b - y[i]) * (w1 * x1[i] + w2 * x2[i]+ b - y[i]); // Squared error
@@ -15,22 +13,22 @@ double loss_function(const vector<double>& x1, const vector<double>&x2, const ve
 
 int main() {
     // Open the CSV file for reading
-    ifstream input_file("data.csv");
+    std::ifstream input_file("data.csv");
     if (!input_file.is_open()) {
-        cerr << "Unable to open file for reading." << endl;
+        std::cerr << "Unable to open file for reading." << std::endl;
         return 1;
     }
 
-    vector<double> x1, x2, y;
+    std::vector<double> x1, x2, y;
 
     // Store the data from the CSV file into vectors
-    string line;
+    std::string line;
     int index = 0;
     getline(input_file, line); // Skip the header line
     while (getline(input_file, line) && index < 1000) {
         size_t first_comma = line.find(',');
         size_t second_comma = line.find(',', first_comma + 1);
-        if (first_comma != string::npos && second_comma != string::npos) {
+        if (first_comma != std::string::npos && second_comma != std::string::npos) {
             x1.push_back(stod(line.substr(0, first_comma)));
             x2.push_back(stod(line.substr(first_comma + 1, second_comma - first_comma - 1)));
             y.push_back(stod(line.substr(second_comma + 1)));
@@ -41,7 +39,7 @@ int main() {
     input_file.close();
 
     if (x1.empty() || x2.empty() || y.empty()) {
-        cerr << "No data points found in the file or x2 is empty." << endl;
+        std::cerr << "No data points found in the file or x2 is empty." << std::endl;
         return 1;
     }
 
@@ -108,13 +106,13 @@ int main() {
         current_loss = loss_function(x1, x2, y, w1, w2, b, x1.size());
         
         if (iter % 500 == 0) { // Print loss every 500 iterations
-            cout << "Iteration: " << iter << ", Loss: " << current_loss << endl;
-            cout << "w1: " << w1 << ", w2: " << w2 << ", b: " << b << endl;
+            std::cout << "Iteration: " << iter << ", Loss: " << current_loss << std::endl;
+            std::cout << "w1: " << w1 << ", w2: " << w2 << ", b: " << b << std::endl;
         }
 
         // Check for convergence
-        if (current_loss < 0.0001 || abs(prev_loss - current_loss) < 1e-9) {
-            cout << "Converged at iteration: " << iter << ", Final Loss: " << current_loss << endl;
+        if (current_loss < 0.0001 || std::abs(prev_loss - current_loss) < 1e-9) {
+            std::cout << "Converged at iteration: " << iter << ", Final Loss: " << current_loss << std::endl;
             break;
         }
         
@@ -128,10 +126,10 @@ int main() {
     double b_original = mean_y - (w1_original * mean_x1) - (w2_original * mean_x2);
 
     // Output the calculated parameters
-    cout << "Calculated parameters after Gradient Descent:" << endl;
-    cout << "x1 (slope): " << w1_original << endl;
-    cout << "x2 (slope): " << w2_original << endl;
-    cout << "b (intercept): " << b_original << endl;
+    std::cout << "Calculated parameters after Gradient Descent:" << std::endl;
+    std::cout << "x1 (slope): " << w1_original << std::endl;
+    std::cout << "x2 (slope): " << w2_original << std::endl;
+    std::cout << "b (intercept): " << b_original << std::endl;
 
     return 0;
 }
