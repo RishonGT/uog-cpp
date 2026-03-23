@@ -6,13 +6,14 @@
     font-size: 22px;
     background-color: #fdfdfd;
 }
-
+/* 
 .reveal .slides {
-  padding-left: 5px !important;
-  padding-right: 5px !important;
-  width: 110% !important; /* Forces the slide to take up most of the screen width */
-  
-}
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  width: 95% !important; 
+  // Forces the slide to take up most of the screen width
+} */
+
 
 .my-box {
   /* This controls the internal spacing */

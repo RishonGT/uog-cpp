@@ -8,6 +8,7 @@ author: |
 author-meta: "Lecturer in Multiscale Materials"
 format: 
     revealjs:
+        # embed-resources: true
         theme: simple   # other themes: beige, blood, dark, dracula, league, moon, night, serif, simple, sky, solarized
         mouse-wheel: true
         highlight-style: github
@@ -23,12 +24,6 @@ format:
         toc-depth: 1
         toc-title: Presentation Outline
         chalkboard: true
-        
-        # mermaid:
-        #     theme: default
-        #     fontFamily: sans-serif
-        #     fontSize: 16
-        #     margin: 100
         css: simple.css
 
     # html:
@@ -730,3 +725,285 @@ Think about rewriting `Student` so that we can call `UniPerson`'s constructor in
 
 &#10140;&nbsp; In the above example, when `c` is destroyed, the `C` destructor is called first, then the `B` destructor, then the `A` destructor.
 
+# Inheritance and access specifiers
+
+We have learned two access specifiers:
+
+- private
+- public
+
+We have also seen the access specifier `protected`.  
+
+&#101449;&nbsp; We will learn more about how access specifiers interact with inheritance in this lesson.
+
+## The `protected` access specifier
+
+&#9998;&nbsp; The access specifier `protected` is only useful in an inheritance context.
+
+:::{.my-box}
+- The `protected` access specifier allows the class the member belongs to, friends, and derived classes to access the member.
+- `protected` members are not accessible from outside the class.
+:::
+
+## Access specifiers in inheritance: Code illustration
+
+::: {#lst-access-specifier lst-cap="Calling base constructor in member initializer list of derived classes can be done in inheritance chain. Filename=`initializing_base_members_inheritance_chain.cpp`"}
+```{.cpp}
+{{< include ./cpp/initializing_base_members_inheritance_chain.cpp >}}
+```
+:::
+
+## When should we use the `protected` access specifier
+
+[**Discuss briefly in the lecture.**]{style="color:crimson"} &#10140;&nbsp; _Students need to read these points carefully again._
+
+- With a `protected` attribute in a base class, derived classes can access that member directly. &#10140;&nbsp; If we later change anything about the `protected` attribute (type, value meaning, etc.), we'll probably **need to change both the base class and all of the derived classes**.
+- Using the `protected` access specifier is most useful when 
+    - we (and our team) are going to be the ones deriving from our own classes
+    - number of derived classes is reasonable
+- Making members private is good for insulating the public or derived classes from implementation changes, and for ensuring invariants (fractions must have non-zero denominators) are maintained properly.
+
+    - Think about the open-source code and you made member protected. Other developers can access the members and spoil them.
+
+    - This implies our class need a larger public (or protected) interface to support all of the functions that public or derived classes need for operation (high cost to build and maintain)
+- It's better to make your members private if we can, and [**only use `protected` when derived classes are planned**]{style="color:navy"} and the cost to build and maintain an interface to those private members is too high.
+
+## When should we use the `protected` access specifier
+
+:::{.callout-important}
+**Best practice**
+
+Favor private members over protected members.
+:::
+
+## Different kinds of inheritance, and their impact on access
+
+&#9998;&nbsp; There are three different ways for classes to inherit from other classes: `public`, `protected`, `private`
+
+&#9998;&nbsp; We have $9$ combinations: $3$ member access specifiers and 3 inheritance types.
+```{.cpp}
+// Inherit from Base publicly
+class Pub: public Base {
+};
+
+// Inherit from Base protectedly
+class Pro: protected Base {
+};
+
+// Inherit from Base privately
+class Pri: private Base {
+};
+
+class Def: Base {// Defaults to private inheritance
+};
+```
+
+## Different kinds of inheritance, and their impact on access
+
+&#10149;&nbsp; **Some remarks** 
+
+- It is not that I cannot teach this component carefully in the live lecture.
+- I think we will get confused and forget most of the explained cases right after leaving the classroom.
+- The point is to make you aware of these concepts and give you an opportunity to learn them deeper.
+
+&#10149;&nbsp; Therefore, I write down some keypoints and skip the slides. _Students should read the materials later._
+
+:::{.callout-tip}
+**Key rules to interpret different combinations**
+
+- A class can always access its own (non-inherited) members.
+- The public accesses the members of a class based on the access specifiers of the class it is accessing.
+- A derived class accesses inherited members based on the access specifier inherited from the parent class. This varies depending on the access specifier and type of inheritance used.
+:::
+
+## `public` inheritance
+
+- `public` inheritance is by far the most commonly used type of inheritance. 
+- Very rarely will we see or use the other types of inheritance.
+
+| Access specifier in base class | Access specifier when inherited publicly |
+| :--- | :--- |
+| Public | Public |
+| Protected | Protected |
+| Private | Inaccessible |
+
+## `protected` inheritance
+
+- `protected` inheritance is the least common method of inheritance. 
+- It is almost never used, except in very particular cases.
+- With `protected` inheritance, the `public` and `protected` members become `protected`, and `private` members stay inaccessible.
+
+| Access specifier in base class | Access specifier when inherited protectedly |
+| :--- | :--- |
+| Public | Protected |
+| Protected | Protected |
+| Private | Inaccessible |
+
+## `private` inheritance
+
+- With `private` inheritance, all members from the base class are inherited as `private`.
+- `private` members are inaccessible, and `protected` and `public` members become `private`.
+
+| Access specifier in base class | Access specifier when inherited privately |
+| :--- | :--- |
+| Public | Private |
+| Protected | Private |
+| Private | Inaccessible |
+
+## Access specifier in inheritance: Summary
+
+| Base Class Member | Public Inheritance | Protected Inheritance | Private Inheritance |
+| :--- | :--- | :--- | :--- |
+| **Public** | Public | Protected | Private |
+| **Protected** | Protected | Protected | Private |
+| **Private** | Inaccessible | Inaccessible | Inaccessible |
+
+# Adding new functionality to a derived class
+
+&#9998;&nbsp; One of the biggest benefits of inheritance is the [**ability to reuse written code**]{style="color:navy"}.
+
+&#9998;&nbsp; We can [**add new functionality, modifying existing functionality, or hide functionality**]{style="color:navy"} if we don't want.
+
+:::{.callout}
+We have learned these concepts from **Introductory Programming 2** and also in several last examples. &#10140;&nbsp; No need to go into too much details.
+:::
+
+## Adding new functionality to a derived class: Code illustration
+
+::: {#lst-adding-functionality lst-cap="Besides inheriting members from the base class, the derived class can add more functionalities. Filename=`add_functionality_example.cpp`"}
+```{.cpp}
+{{< include ./cpp/add_functionality_example.cpp >}}
+```
+:::
+
+&#10149;&nbsp; Let us run it and go through it slowly.
+
+## Adding new functionality: An example using `std::vector`
+
+::: {#lst-adding-functionality-vector lst-cap="Same as before but a slightly more complex. Filename=`add_functionality_example_vector.cpp`"}
+```{.cpp}
+{{< include ./cpp/add_functionality_example_vector.cpp >}}
+```
+:::
+
+&#10149;&nbsp; Let us run it and go through it slowly.
+
+# Calling inherited functions and overriding behavior
+
+&#9998;&nbsp; By default, derived classes inherit all of the behaviors defined in a base class.
+
+&#9998;&nbsp; We now examine in more detail how member functions are selected, as well as how we can leverage this to change behaviors in a derived class.
+
+:::{.callout-note}
+- Most of us have learned all these concepts in **Introductory Programming 2** and **Mechanical Engineering Skills 3**. 
+- It does not harm to quickly go through them again. Well, people can forget 😃 😃.
+:::
+
+## Calling a base class function
+
+&#9998;&nbsp; Since the derived class inherits members of its base class, it can use them (need access specifier `public` or `protected` in base class).
+
+:::{#lst-call-base-class-function lst-cap="Derived classes can call their base class functions. Filename=`call_base_class_function.cpp`"}
+```{.cpp}
+{{< include ./cpp/call_base_class_function.cpp >}}
+```
+:::
+
+&#10149;&nbsp; Let us run this code snippet.
+
+## Redefining behaviors
+
+&#9998;&nbsp; However, if we had defined `Derived::identify()` in the Derived class, it would have been used instead.
+
+:::{#lst-redefine-behaviors lst-cap="The derived class can override the member function of the base class. It can redefine behaviors of the base class. Filename=`call_base_class_function.cpp`"}
+```{.cpp}
+{{< include ./cpp/redefine_behaviors.cpp >}}
+```
+:::
+
+## Adding to existing functionality
+
+&#9998;&nbsp; Sometimes we do not want to completely replace a base class function, but instead want to add additional functionality to it when called with a derived object.
+
+:::{#lst-redefine-behaviors lst-cap="We can call the base class's member function and add more to it. Filename=`add_to_existing_functionality.cpp`"}
+```{.cpp}
+{{< include ./cpp/add_to_existing_functionality.cpp >}}
+```
+:::
+
+# Change an inherited member's access level and hide inherited functionality
+
+&#9998;&nbsp; **Change an inherited member's access**
+
+C++ gives us the ability to change an inherited member’s access specifier in the derived class.
+
+&#9998;&nbsp; **Hide functionality**
+
+In a derived class, it is possible to hide functionality that exists in the base class, so that it can not be accessed through the derived class.
+
+We can do both with `using` declaration.
+
+[We skip this component.]{style="color:crimson"} _The students can learn it at home._
+
+## Change an inherited member's access level: make `public`
+
+&#9998;&nbsp; C++ gives us the ability to change an inherited member’s access specifier in the derived class, by a [`using` declaration]{style="color:red"} -- Let us run this code snippet:
+
+:::{#lst-change-access-level-derived lst-cap="With `using` declaration we can change the access level of derived class' members. Filename=`change_inherited_member_access_level.cpp`"}
+```{.cpp}
+{{< include ./cpp/change_inherited_member_access_level.cpp >}}
+```
+:::
+
+## Change an inherited member's access level: hide functionality (make `private`)
+
+&#9998;&nbsp; In a derived class, it is [**possible to hide functionality that exists in the base class**]{style="color:navy"}, so that it can not be accessed through the derived class -- Let us play around this code snippet:
+
+:::{#lst-hide-functionality lst-cap="With `using` declaration we can also high functionality that exists in the base class. Filename=`hide_functionality.cpp`"}
+```{.cpp}
+{{< include ./cpp/hide_functionality.cpp >}}
+```
+:::
+
+## Change an inherited member's access level: Summary
+
+&#9998;&nbsp; With `using` declaration, we can change an inherited member's access level
+
+- make the `member` in `Derived` class `public` by declaring `using Base::member;` below access specifier `public:`
+- hide the `member` in `Based` class by declaring `using Base::membe;` below access specifier `private:`
+
+## Deleting functions in derived class
+
+&#9998;&nbsp; We can mark member functions as deleted in the derived class, ensuring they cannot be called at all though a derived object.
+
+:::{#lst-hide-functionality lst-cap="We can `delete` a function inherited from the base class in the derived class. This function cannot be called at all through a derived object. Filename=`delete_functions_in_derived.cpp`"}
+```{.cpp}
+{{< include ./cpp/delete_functions_in_derived.cpp >}}
+```
+:::
+
+# Multiple inheritance
+
+&#9998;&nbsp; [**Multiple inheritance**]{style="color:red"} enables a derived class to inherit members from more than one parent.
+
+:::{.callout-note}
+- Again, I expect that most of us (students) have learned all these concepts in **Introductory Programming 2** and **Mechanical Engineering Skills 3**. 
+- However, I can acknowledge that maybe many of you have not heard about this.
+:::
+
+## Multiple inheritance: Smartphone -- A Concept hierarchy
+
+&#10149;&nbsp; Let us think of this example
+
+- `Camera`: provides the ability to `take_photo()`
+- `Phone`: provides the ability to `make_call()`
+- `Smartphone`: inherits from both, allowing it to perform both actions.
+
+## Multiple inherintance: Smartphone -- Code
+
+
+:::{#lst-multiple-inheritance-smartphone lst-cap="`SmartPhone` inherits both members from `Camera` and `Phone`. Filename=`multiple_inheritance_smartphone.cpp`"}
+```{.cpp}
+{{< include ./cpp/multiple_inheritance_smartphone.cpp >}}
+```
+:::
