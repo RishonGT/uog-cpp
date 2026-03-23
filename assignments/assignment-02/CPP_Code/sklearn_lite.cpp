@@ -8,26 +8,35 @@ class LinearRegression {
         std::vector<double> weights;
         double intercept;
 
-        static double loss_function(
-            const std::vector<std::vector<double>>& x, 
-            const std::vector<double>& y, 
-            const std::vector<double>& w, 
+        static double r2_score(
+            const std::vector<std::vector<double>>& x,
+            const std::vector<double>& y,
+            const std::vector<double>& w,
             double b
-        ) {
+        ){
             const int m = y.size(); 
             const int n_features = x.size();
 
-            double total_loss = 0.0;
-            for (int sample = 0; sample < m; sample++) {
-                double prediction = b;
-                for (int  feature = 0; feature < w.size(); feature++) {
-                    prediction += w[feature] * x[feature][sample];
-                }
-                double r = prediction - y[sample];
-                total_loss += r * r; // Squared error
+            double ss_res = 0.0; // Residual sum of squares
+            double ss_tot = 0.0; // Total sum of squares
+            double mean_y = 0.0;
+
+            for (double value : y) {
+                mean_y += value;
             }
-            return total_loss / (2 * m); 
-        };
+            mean_y /= m;
+
+            for (int i=0; i < m; i++) {
+                double prediction = b;
+                for (int feature = 0; feature < w.size(); feature++) {
+                    prediction += w[feature] * x[feature][i];
+                }
+                ss_res += (y[i] - prediction) * (y[i] - prediction);
+                ss_tot += (y[i] - mean_y) * (y[i] - mean_y);
+            }
+            return 1 - (ss_res / ss_tot);
+
+        }
 
         static double mean_func(const std::vector<double>& data) {
             double sum = 0.0;
@@ -100,7 +109,7 @@ class LinearRegression {
             int iteration = 0;
             const double tolerance = 1e-15;
 
-            double prev_loss = loss_function(x_normalised, y_normalised, w, b);
+            double prev_loss = r2_score(x_normalised, y_normalised, w, b);
             
             for (iteration = 0; iteration < max_iterations; iteration++) {
                 std::vector<double> dw(w.size(), 0.0); // Gradient for w
@@ -128,7 +137,7 @@ class LinearRegression {
                 db /= m;
                 b -= learning_rate * db; // Update b
 
-                double current_loss = loss_function(x_normalised, y_normalised, w, b);
+                double current_loss = r2_score(x_normalised, y_normalised, w, b);
 
                 if (iteration % 500 == 0) { // Print loss every 500 iterations
                     std::cout << "Iteration: " << iteration << ", Loss: " << current_loss << std::endl;
@@ -186,13 +195,13 @@ class LinearRegression {
     };
 
 
-class LogisticRegression {
+/* class LogisticRegression {
     private:
         std::vector<double> weights;
         double intercept;
     public:
     
-};
+}; */
 
 
 
