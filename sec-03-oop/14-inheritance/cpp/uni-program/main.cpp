@@ -13,6 +13,7 @@ int main() {
     std::cout << tony_stark.get_name() 
               << " (ID: " << tony_stark.get_id() 
               << ") Tuition: " << tony_stark.get_tuition() << "\n";
+    
     std::cout << black_widow.get_name() 
               << " (ID: " << black_widow.get_id() 
               << ") Tuition: " << black_widow.get_tuition() << "\n";

@@ -6,9 +6,8 @@
 <script src="chap_14_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="chap_14_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="chap_14_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="chap_14_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="chap_14_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.550">
+<link href="chap_14_files/libs/quarto-html/quarto-syntax-highlighting-8b4baf804e461d9b72633f0de59a0cac.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.27">
 
   <meta name="author" content="Lecturer in Multiscale Materials">
   <title>Inheritance</title>
@@ -1455,39 +1454,39 @@ Listing&nbsp;17: Order of construction of derived classes in an inheritance chai
 <h1>Constructors and initialization of derived classes</h1>
 <p>✎&nbsp; In Python, we can use <code>super()</code> to access the parent’s data and member functions.</p>
 <p>✎&nbsp; Thus, we can write <code>super().__init__(self,...)</code> to use the constructor of the parent class.</p>
-<div id="0b1c3c1f" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="kw">class</span> UniPerson:</span>
-<span id="cb1-2"><a href=""></a>    </span>
-<span id="cb1-3"><a href=""></a>    nextID <span class="op">=</span> <span class="dv">10000</span>  <span class="co"># class variable</span></span>
-<span id="cb1-4"><a href=""></a></span>
-<span id="cb1-5"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name<span class="op">=</span><span class="st">""</span>, age<span class="op">=</span><span class="dv">18</span>):</span>
-<span id="cb1-6"><a href=""></a>        <span class="va">self</span>.name, <span class="va">self</span>.age <span class="op">=</span> name, age</span>
-<span id="cb1-7"><a href=""></a>        <span class="va">self</span>.<span class="bu">id</span> <span class="op">=</span> UniPerson.nextID</span>
-<span id="cb1-8"><a href=""></a>        UniPerson.nextID <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb1-9"><a href=""></a><span class="kw">class</span> Lecturer(UniPerson):</span>
-<span id="cb1-10"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name<span class="op">=</span><span class="st">""</span>, age<span class="op">=</span><span class="dv">18</span>):</span>
-<span id="cb1-11"><a href=""></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(name, age)</span>
-<span id="cb1-12"><a href=""></a>        <span class="bu">print</span>(<span class="ss">f"Lecturer </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>name<span class="sc">}</span><span class="ss"> is recruited."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="efd6847d" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a><span class="kw">class</span> UniPerson:</span>
+<span id="cb18-2"><a href=""></a>    </span>
+<span id="cb18-3"><a href=""></a>    nextID <span class="op">=</span> <span class="dv">10000</span>  <span class="co"># class variable</span></span>
+<span id="cb18-4"><a href=""></a></span>
+<span id="cb18-5"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name<span class="op">=</span><span class="st">""</span>, age<span class="op">=</span><span class="dv">18</span>):</span>
+<span id="cb18-6"><a href=""></a>        <span class="va">self</span>.name, <span class="va">self</span>.age <span class="op">=</span> name, age</span>
+<span id="cb18-7"><a href=""></a>        <span class="va">self</span>.<span class="bu">id</span> <span class="op">=</span> UniPerson.nextID</span>
+<span id="cb18-8"><a href=""></a>        UniPerson.nextID <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb18-9"><a href=""></a><span class="kw">class</span> Lecturer(UniPerson):</span>
+<span id="cb18-10"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name<span class="op">=</span><span class="st">""</span>, age<span class="op">=</span><span class="dv">18</span>):</span>
+<span id="cb18-11"><a href=""></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(name, age)</span>
+<span id="cb18-12"><a href=""></a>        <span class="bu">print</span>(<span class="ss">f"Lecturer </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>name<span class="sc">}</span><span class="ss"> is recruited."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>➥&nbsp; This will be the topic of this lesson.</p>
 </section>
 <section id="revisit-python-example" class="slide level2">
 <h2>Revisit Python example</h2>
-<div id="aac63d8a" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="kw">class</span> UniPerson:</span>
-<span id="cb2-2"><a href=""></a>    nextID <span class="op">=</span> <span class="dv">10000</span>  <span class="co"># class variable, functioning like static int nextID in C++</span></span>
-<span id="cb2-3"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name<span class="op">=</span><span class="st">""</span>, age<span class="op">=</span><span class="dv">18</span>):</span>
-<span id="cb2-4"><a href=""></a>        <span class="va">self</span>.name, <span class="va">self</span>.age <span class="op">=</span> name, age</span>
-<span id="cb2-5"><a href=""></a>        <span class="va">self</span>.<span class="bu">id</span> <span class="op">=</span> UniPerson.nextID<span class="op">;</span> UniPerson.nextID <span class="op">+=</span> <span class="dv">1</span>   <span class="co"># fit into the slide</span></span>
-<span id="cb2-6"><a href=""></a><span class="kw">class</span> Lecturer(UniPerson):</span>
-<span id="cb2-7"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name<span class="op">=</span><span class="st">""</span>, age<span class="op">=</span><span class="dv">18</span>):</span>
-<span id="cb2-8"><a href=""></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(name, age)</span>
-<span id="cb2-9"><a href=""></a>        <span class="bu">print</span>(<span class="ss">f"Lecturer </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>name<span class="sc">}</span><span class="ss"> is recruited."</span>)</span>
-<span id="cb2-10"><a href=""></a>    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):      <span class="co"># print out the name of the lecturer</span></span>
-<span id="cb2-11"><a href=""></a>        <span class="cf">return</span> <span class="va">self</span>.name</span>
-<span id="cb2-12"><a href=""></a></span>
-<span id="cb2-13"><a href=""></a>khiem <span class="op">=</span> Lecturer(<span class="st">"Khiem"</span>, <span class="dv">42</span>)</span>
-<span id="cb2-14"><a href=""></a><span class="bu">print</span>(<span class="ss">f"ID assigned for </span><span class="sc">{</span>khiem<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>khiem<span class="sc">.</span><span class="bu">id</span><span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="20bc1b81" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href=""></a><span class="kw">class</span> UniPerson:</span>
+<span id="cb19-2"><a href=""></a>    nextID <span class="op">=</span> <span class="dv">10000</span>  <span class="co"># class variable, functioning like static int nextID in C++</span></span>
+<span id="cb19-3"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name<span class="op">=</span><span class="st">""</span>, age<span class="op">=</span><span class="dv">18</span>):</span>
+<span id="cb19-4"><a href=""></a>        <span class="va">self</span>.name, <span class="va">self</span>.age <span class="op">=</span> name, age</span>
+<span id="cb19-5"><a href=""></a>        <span class="va">self</span>.<span class="bu">id</span> <span class="op">=</span> UniPerson.nextID<span class="op">;</span> UniPerson.nextID <span class="op">+=</span> <span class="dv">1</span>   <span class="co"># fit into the slide</span></span>
+<span id="cb19-6"><a href=""></a><span class="kw">class</span> Lecturer(UniPerson):</span>
+<span id="cb19-7"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name<span class="op">=</span><span class="st">""</span>, age<span class="op">=</span><span class="dv">18</span>):</span>
+<span id="cb19-8"><a href=""></a>        <span class="bu">super</span>().<span class="fu">__init__</span>(name, age)</span>
+<span id="cb19-9"><a href=""></a>        <span class="bu">print</span>(<span class="ss">f"Lecturer </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>name<span class="sc">}</span><span class="ss"> is recruited."</span>)</span>
+<span id="cb19-10"><a href=""></a>    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):      <span class="co"># print out the name of the lecturer</span></span>
+<span id="cb19-11"><a href=""></a>        <span class="cf">return</span> <span class="va">self</span>.name</span>
+<span id="cb19-12"><a href=""></a></span>
+<span id="cb19-13"><a href=""></a>khiem <span class="op">=</span> Lecturer(<span class="st">"Khiem"</span>, <span class="dv">42</span>)</span>
+<span id="cb19-14"><a href=""></a><span class="bu">print</span>(<span class="ss">f"ID assigned for </span><span class="sc">{</span>khiem<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>khiem<span class="sc">.</span><span class="bu">id</span><span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Lecturer Khiem is recruited.
 ID assigned for Khiem: 10000</code></pre>

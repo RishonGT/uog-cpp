@@ -2,7 +2,7 @@
 class Base
 {
 public:
-    int id {};  
+    const int id {};  
 
     Base(int id=0) : id{ id }  {}
 
@@ -18,7 +18,7 @@ public:
     double value {};
 
     Derived(double value=0.0, int id=0) 
-        : Base{ id }, value{ value } {}
+        : Base{id}, value{ value } {}
 
     double get_value() const { return value; }
     void print() const {    // this will override void Base::print()
