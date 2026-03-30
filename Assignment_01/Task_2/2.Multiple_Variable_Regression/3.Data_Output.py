@@ -65,7 +65,7 @@ y_proj_x2_min = m1 * x1.min() + m2 * x2_line + b
 y_proj_x2_max = m1 * x1.max() + m2 * x2_line + b
 ax3.fill_between(x2_line, y_proj_x2_min, y_proj_x2_max, color='orange', alpha=0.15)
 
-output_file = 'data_plots.png'
+output_file = 'Data_Plots.png'
 fig.savefig(output_file, dpi=150)
 print(f'Plots saved to {output_file}')
 print(f'Plane: y = {m1}*x1 + {m2}*x2 + {b}')
