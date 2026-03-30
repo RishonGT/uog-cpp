@@ -1,6 +1,6 @@
 // Include the header file for the linear function
 // This is used to practice implementation of a header file
-#include "linear_function.h"  
+#include "Linear_Function.h"  
 
 #include <iostream>
 #include <cstdlib>  // For rand()
@@ -9,11 +9,10 @@
 
 
 // Function to add random noise to a value
-double noise_function(double x, float noise)
+void noise_function(double &x, float const &noise)
 {
     double random_noise = ((rand() % 100) / 100.0 - 0.5) * noise; // Generate random noise between -noise/2 and noise/2
     x += random_noise;
-    return x;
 }
 
 
@@ -30,11 +29,11 @@ int main(){
     // Generate data points with noise
     for(int i = 0; i < 1000; i++){
         x.push_back(i + 1); // x values from 1 to 1000
-        y.push_back(linear_function(x[i], m, k));
+        y.push_back(linear_function((i+1), m, k));
 
         // Add noise to the x and y values
-        x[i] = noise_function(x[i], noise);
-        y[i] = noise_function(y[i], noise);
+        noise_function(x[i], noise);
+        noise_function(y[i], noise);
 
     }
 
@@ -45,12 +44,14 @@ int main(){
     if (output_file.is_open()) {
         output_file << "x,y\n"; // Write the header
 
-        // Write the data points to the file
+        
         for (int i = 0; i < 1000; i++) {
             output_file << x[i] << "," << y[i] << "\n";
         }
         output_file.close();
+
         std::cout << "Data has been written to data.csv" << std::endl;
+        
     } else {
         std::cerr << "Unable to open file for writing." << std::endl;  
     }
