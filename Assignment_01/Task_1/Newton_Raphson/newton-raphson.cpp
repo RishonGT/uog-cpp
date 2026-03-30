@@ -106,8 +106,10 @@ double newt(double x0)
 // Just initalises the function.
 int main() 
 {
-    double I = 10;
-    std::cout << "Set the value at " << I << " and " << iter(I) << " ,sqrt 5 is " << std::sqrt(5) << std::endl;
+    double I;
+    std::cout << "Enter the initial guess for the fixed point method: ";
+    std::cin >> I;
+    std::cout << "The initial guess is " << I << " and the result is " << iter(I) << " ,sqrt 5 is " << std::sqrt(5) << std::endl;
     /*This loop calls the Newton-Raphson method for different initial guesses, ranging from 0-10
     to display how it runs over different initial values. */
     for (int k = 0; k < 11; k++) 
