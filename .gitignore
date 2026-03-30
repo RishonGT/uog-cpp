@@ -45,6 +45,7 @@ lecture_note/
 test/
 slides/
 .vscode/
+.venv/
 sec-01-cpp-basics/00-intro-to-eng3091/spreadsheets
 
 assignments/solution-01/
