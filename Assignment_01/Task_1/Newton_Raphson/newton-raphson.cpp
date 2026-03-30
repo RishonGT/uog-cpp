@@ -11,7 +11,7 @@
 /////////////////////////////////////////////////////////
 
 
-// This function does the maths step. Called by g(), only return to maximise line efficiency.
+// This function does the maths step. Called by g().
 double g(double y) 
 {
     return 0.5 * (y + 5.0 / y);
@@ -37,7 +37,7 @@ double iter(double x0)
             break;
         }
         // If the loop reaches its max number of iterations set, it breaks and warns of divergence. This is to prevent infinite loops.
-        else if (k == n - 1)
+        if (k == n - 1)
         {
             std::cout << "divergence: No answer available after " << n << " iterations" << " last value: " << xold;
             break;
@@ -56,12 +56,12 @@ double iter(double x0)
 /////////////////////////////////////////////////////////
 
 
-// This function does the maths step. Called by f(), only return to maximise line efficiency.
+// This function does the maths step. Called by f().
 double f(double l) 
 {
     return exp(-0.1 * l) * sin(2 * l);   
 }
-// This function does the maths differential step. Called by df(), only return to maximise line efficiency.
+// This function does the maths differential step. Called by df().
 double df(double l) 
 {
     return exp(-0.1 * l) * (2 * cos(2*l) - (0.1 * sin(2*l)));
@@ -73,8 +73,7 @@ double newt(double x0)
 {   
     /* Defining values and data types at the start for clarity*/
     double tol = 1e-6;
-    int n = 10000;
-    int nc = 0;
+    int n = 10;
     double xold = x0;
     // This loops over the function, checks for conditions and breaks if met.
     for (int k = 0; k < n; k++) 
@@ -86,7 +85,7 @@ double newt(double x0)
         if (std::fabs(dfval) < 1e-15) 
         {
             // If condition met, it breaks and spits out the divergence message.
-            std::cout << "Divergence: Derivative is zero at" << xold << "at iteration" << nc;
+            std::cout << "Divergence: Derivative is zero at" << xold << "at iteration" << k + 1;
             break;
         }
         // Main Newton-Raphson step, calculates the new value.
@@ -95,13 +94,17 @@ double newt(double x0)
         If met, breaks and spits out the result.*/
         if (std::fabs(xnew - xold) < tol) 
         {
-            std::cout << "done at " << nc + 1 << " iterations. Root: " << xnew;
+            std::cout << "done at " << k + 1 << " iterations. Root: " << xnew;
+            break;
+        }
+        // If the loop reaches its max number of iterations set, it breaks and warns of divergence. This is to prevent infinite loops.
+        if (k == n - 1)
+        {
+            std::cout << "divergence: No answer available after " << n << " iterations" << " last value: " << xold;
             break;
         }
         xold = xnew;
         // Resetting value
-        nc++;
-        // Increment
     }
     return 0;
 }
@@ -116,7 +119,9 @@ int main()
     double I;
     std::cout << "Enter the initial guess for the fixed point method: ";
     std::cin >> I;
-    std::cout << "The initial guess is " << I << " and the result is " << iter(I) << " ,sqrt 5 is " << std::sqrt(5) << std::endl;
+    std::cout << "The initial guess is " << I 
+    << " and the result is " << iter(I) << " ,square root 5 is " 
+    << std::sqrt(5) << ".\n";
     /*This loop calls the Newton-Raphson method for different initial guesses, ranging from 0-10
     to display how it runs over different initial values. */
     for (int k = 0; k < 11; k++) 
