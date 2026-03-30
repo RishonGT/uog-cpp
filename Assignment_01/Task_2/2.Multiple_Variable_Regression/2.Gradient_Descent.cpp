@@ -6,7 +6,7 @@
 // Function to calculate the loss (Mean Squared Error)
 double loss_function(const std::vector<double>& x1, const std::vector<double>&x2, 
     const std::vector<double>& y, double const& w1, 
-    double const& w2, double const& b, int m) {
+    double const& w2, double const& b, int const m) {
 
     double total_loss = 0.0;
     for (int i = 0; i < m; i++) {
