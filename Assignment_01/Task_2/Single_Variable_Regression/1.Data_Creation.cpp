@@ -22,12 +22,14 @@ int main(){
     double k = 2.5;
     double m = 57.0;
     float noise = 100.0;
+
+    // Vectors to store the generated data points
     std::vector<double> x;
     std::vector<double> y;
 
     // Generate data points with noise
     for(int i = 0; i < 1000; i++){
-        x.push_back(i + 1); // Start from 1
+        x.push_back(i + 1); // x values from 1 to 1000
         y.push_back(linear_function(x[i], m, k));
 
         // Add noise to the x and y values
@@ -38,6 +40,8 @@ int main(){
 
     // Write the data to a CSV file
     std::ofstream output_file("data.csv");
+
+    // Check if the file is open before writing, and write to data.csv
     if (output_file.is_open()) {
         output_file << "x,y\n"; // Write the header
 
@@ -48,7 +52,7 @@ int main(){
         output_file.close();
         std::cout << "Data has been written to data.csv" << std::endl;
     } else {
-        std::cerr << "Unable to open file for writing." << std::endl;
+        std::cerr << "Unable to open file for writing." << std::endl;  
     }
 
 
