@@ -73,7 +73,7 @@ double newt(double x0)
 {   
     /* Defining values and data types at the start for clarity*/
     double tol = 1e-6;
-    int n = 10;
+    int n = 15;
     double xold = x0;
     // This loops over the function, checks for conditions and breaks if met.
     for (int k = 0; k < n; k++) 
