@@ -106,6 +106,8 @@ double newt(double x0)
 // Just initalises the function.
 int main() 
 {
+    /* User input is taken for initial guess,
+    for user-ease in changing initial values */
     double I;
     std::cout << "Enter the initial guess for the fixed point method: ";
     std::cin >> I;
