@@ -26,21 +26,26 @@ double iter(double x0)
 {
     /* Defining values and data types at the start for clarity*/
      double tol = 1e-6;
-     int n = 100;
-     int nc = 0;
+     int n = 25;
      double xold = x0;
      for (int k = 0; k < n; k++) 
      {    
         // Function call to calculate the new value and checks if the new value is within the tolerance.
         double xnew = g(xold);
         if (std::fabs(xnew - xold) < tol) { // Fabs is used to get the absolute value instead of abs, as its a double.
-            std::cout << "done at " << nc + 1 << " iterations. Root: " << xnew;
+            std::cout << "done at " << k + 1 << " iterations. Root: " << xnew;
             break;
         }
+        // If the loop reaches its max number of iterations set, it breaks and warns of divergence. This is to prevent infinite loops.
+        else if (k == n - 1)
+        {
+            std::cout << "divergence: No answer available after " << n << " iterations" << " last value: " << xold;
+            break;
+        }
+        
         // If loop condition not matched, code repeats.
         xold = xnew;
         // Resetting value
-        nc++;
      }
     return 0;
 }
