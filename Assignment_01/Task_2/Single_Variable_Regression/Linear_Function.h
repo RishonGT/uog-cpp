@@ -1,1 +1,0 @@
-double linear_function( double const &x, double const &intercept, double const &gradient);

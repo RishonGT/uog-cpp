@@ -43,7 +43,6 @@ int main(){
     // Check if the file is open before writing, and write to data.csv
     if (output_file.is_open()) {
         output_file << "x,y\n"; // Write the header
-
         
         for (int i = 0; i < 1000; i++) {
             output_file << x[i] << "," << y[i] << "\n";

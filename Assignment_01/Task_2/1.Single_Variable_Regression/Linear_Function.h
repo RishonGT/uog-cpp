@@ -1,0 +1,2 @@
+// Only the declaration of the linear function is included in the header file, the implementation is in the .cpp file
+double linear_function( double const &x, double const &intercept, double const &gradient);
