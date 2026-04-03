@@ -7,10 +7,11 @@ namespace linear_model
 {
     class LogisticalRegression{
         private:
+        
 
         public:
 
-    }
+    };
 }
 }
 
