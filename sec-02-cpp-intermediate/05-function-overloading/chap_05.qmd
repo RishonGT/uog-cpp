@@ -1,14 +1,65 @@
 ---
-title: "Function overloading"
-# subtitle: "Control Flow"
-author: |
-    Khiem Nguyen 
-    <br>Lecturer in Multiscale Materials
-    <br><khiem.nguyen@glasgow.ac.uk>
+title: "Chapter 05: Function overloading"
+author: Khiem Nguyen -- <khiem.nguyen@glasgow.ac.uk>
+    # <br>Lecturer in Multiscale Materials
+    # <br><khiem.nguyen@glasgow.ac.uk>
 author-meta: "Lecturer in Multiscale Materials"
+
 format: 
+    # other themes: 
+    #   beige, blood, dark, dracula, league, moon, 
+    #   night, serif, simple, sky, solarized
+    # highlight-style: monokai      # good for dark images
+    html:
+        output-file: "chap_05.html"
+        grid:
+            body-width: 1600px
+            margin-width: 300px
+            sidebar-width: 350px
+        embed-resources: true
+        theme: simple
+        highlight-style: github
+        css: doc.css
+        number-sections: true
+        number-depth: 3
+        mouse-wheel: true
+        title-slide-style: pandoc
+        echo: true
+        code-overflow: wrap
+        code-line-numbers: true
+        code-block-bg: true     # <-- remove white background in code blocks
+        code-block-border-left: false
+        toc: true
+        toc-depth: 3
+        toc-title: Contents
+    pdf:
+        output-file: "chap_05.pdf"
+        embed-resources: true
+        theme: simple
+        highlight-style: github      # good for dark images
+        css: doc.css
+        number-sections: true
+        number-depth: 3
+        geometry:
+            - top=24px
+            - bottom=24px
+            - left=36px
+            - right=36px
+        echo: true
+        code-overflow: wrap
+        code-line-numbers: true
+        code-block-bg: true # <-- remove white background in code blocks
+        code-block-border-left: false
+        toc: true
+        toc-depth: 3
+        toc-title: Contents
     revealjs:
-        theme: simple   # other themes: beige, blood, dark, dracula, league, moon, night, serif, simple, sky, solarized
+        output-file: "chap_05_slide.html"
+        embed-resources: true
+        theme: simple
+        css: slide.css
+        number-sections: true
+        number-depth: 3
         mouse-wheel: true
         highlight-style: github
         slide-number: true
@@ -16,14 +67,12 @@ format:
         echo: true
         code-overflow: wrap
         code-line-numbers: true
-        code-block-bg: false          # <-- remove white background in code blocks
-        # code-block-border-left: false # optional: remove left border
-        # highlight-style: monokai      # good for dark images
+        code-block-bg: true   # <-- remove white background in code blocks
+        code-block-border-left: false # optional: remove left border
         toc: true
         toc-depth: 1
-        toc-title: Presentation Outline
-        chalkboard: true
-        css: simple.css
+        toc-title: Contents
+   
 ---
 
 # Introduction to function overloading
@@ -39,7 +88,7 @@ int add(int x, int y)
 :::{.incremental}
 - This trivial function adds two integers and returns an integer result. 
 - What if we also want a function that can add two floating point numbers?
-- his add() function is not suitable, as any floating point parameters would be converted to integers, causing the floating point arguments to lose their fractional values.
+- This `add()` function is not suitable, as any floating point parameters would be converted to integers, causing the floating point arguments to lose their fractional values.
 :::
 
 ## Intro to function overloading: Rationale
@@ -77,13 +126,15 @@ double add(double x, double y) {// floating point version
 
 ## Introduction to function overloading
 
-::: {#lst-func-overloading lst-cap="Overload the function `add` &ndash; Filename: `function_overloading.cpp`"}
+::: {#lst-func-overloading lst-cap="Overload the function `add` &ndash; **Filename**: `function_overloading.cpp`"}
+
 ```{ .cpp}
 {{< include ./cpp/function_overloading.cpp >}}
 ```
 :::
 
 ## Intro to overload resolution
+
 **Overload resolution**. 
 
 When a function call is made to a function that has been overloaded, the compiler will try to match the function call to the appropriate overload based on the arguments used in the function call. This is called **overload reasolution**
@@ -91,7 +142,9 @@ When a function call is made to a function that has been overloaded, the compile
 Let us look at more complicated example.
 
 ## Intro to overload resolution
-::: {#lst-overload-resolution lst-cap="An example on overload resolution &ndash; Filename: `overload_resolution.cpp`"}
+
+::: {#lst-overload-resolution lst-cap="An example on overload resolution &ndash; **Filename**: `overload_resolution.cpp`"}
+
 ```{.cpp}
 {{< include ./cpp/overload_resolution.cpp >}}
 ```
@@ -99,7 +152,7 @@ Let us look at more complicated example.
 
 ## Making it compile
 
-In order for a program using overloaded functions to compile, two things have to be true &mdash; Just common sense:
+In order for a program using overloaded functions to compile, two things have to be true. Just common sense:
 
 1. Each overloaded function has to be differentiated from the others.  
     We discuss how functions can be differentiated next slide.
@@ -129,6 +182,7 @@ A function’s return type is not used to differentiate overloaded functions.
 ## Overloading based on number of parameters
 
 An overloaded function is differentiated so long as each overloaded function has a different number of parameters.
+
 ```{.cpp}
 int add(int x, int y)
 {
@@ -170,6 +224,7 @@ void print(Height value); // not differentiated from print(int)
 A function’s return type is not considered when differentiating overloaded functions.
 
 Consider the following case:
+
 ```{.cpp}
 int get_random_value();
 double get_random_value();
@@ -178,9 +233,11 @@ double get_random_value();
 **Common sense**  
 
 Imagine that you were a compiler, and you saw this statement:
+
 ```{.cpp}
 get_random_value()
 ```
+
 which of the two "seemingly overloaded functions" would you call? It's not clear.
 
 ## Type signature
@@ -238,7 +295,8 @@ Let's ssume we do not think it makes sense to call `print_int()` with a value of
 
 ## Deleting a function using `= delete` specifier
 
-::: {#lst-delete-function lst-cap="Delete a function using `= delete` specifier &mdash Filename: `delete_function.cpp`"}
+::: {#lst-delete-function lst-cap="Delete a function using `= delete` specifier. **Filename**: `delete_function.cpp`"}
+
 ```{.cpp}
 {{< include ./cpp/delete_function.cpp >}}
 ```
@@ -251,7 +309,7 @@ Let's ssume we do not think it makes sense to call `print_int()` with a value of
 - A **default argument** is a default value provided for a function parameter.
 - Default arguments are inserted by the compiler at site of the function call.
 
-::: {#lst-default-argument lst-cap="An example on default argument &mdash Filename: `default_argument.cpp`"}
+::: {#lst-default-argument lst-cap="An example on default argument. **Filename**: `default_argument.cpp`"}
 ```{.cpp}
 {{< include ./cpp/default_argument.cpp >}}
 ```
@@ -259,7 +317,7 @@ Let's ssume we do not think it makes sense to call `print_int()` with a value of
 
 ## Multiple default arguments
 
-::: {#lst-multiple-default-arguments lst-cap="An example on multiple default arguments &mdash Filename: `multiple_default_arguments.cpp`"}
+::: {#lst-multiple-default-arguments lst-cap="An example on multiple default arguments. **Filename**: `multiple_default_arguments.cpp`"}
 ```{.cpp}
 {{< include ./cpp/multiple_default_arguments.cpp >}}
 ```
@@ -267,7 +325,8 @@ Let's ssume we do not think it makes sense to call `print_int()` with a value of
 
 ## Multiple default arguments: More on this
 
-C++ does not (as of C++23) support a function call syntax such as 
+C++ does not (as of C++23) support a function call syntax such as
+
 ```{.cpp}
 print( , , 3)
 ```
@@ -275,7 +334,7 @@ print( , , 3)
 
 **Consequences from this** -- actually common sense if you think about these carefully:
 
-- In a function call, any explicitly provided arguments must be the leftmost arguments &mdash; That is, arguments with defaults cannot be skipped.
+- In a function call, any explicitly provided arguments must be the leftmost arguments. That is, arguments with defaults cannot be skipped.
   
     ```{.cpp}
     void print(std::string_view sv="Hello", double d=10.0);
@@ -286,7 +345,7 @@ print( , , 3)
         return 0;
     }
     ```
-- If a parameter is given a default argument, all subsequent parameters (to the right) must also be given default arguments. &mdash; Recall what you learned in Python.
+- If a parameter is given a default argument, all subsequent parameters (to the right) must also be given default arguments. Recall what you learned in Python.
 
     ```{.cpp}
     void print(int x=10, int y); // not allowed
@@ -298,6 +357,7 @@ print( , , 3)
 For a function with a forward declaration and a function definition, the default argument can be declared in either the forward declaration or the function definition, but not both.
 
 ::: {#lst-cannot-be-redeclared lst-cap="A default argument cannot be redeclared."}
+
 ```{.cpp}
 #include <iostream>
 
@@ -316,6 +376,7 @@ void print(int x, int y=4) // compile error: redefinition of default argument
 The default argument must also be declared in the translation unit before it can be used.
 
 ::: {#lst-must-be-declared-before-use lst-cap="Default argument must be declared before it can be used."}
+
 ```{.cpp}
 #include <iostream>
 
@@ -336,58 +397,60 @@ void print(int x, int y=4)
 ```
 :::
 
-## Default arguments cannot be redeclared; must be declared before
-
+## Default arguments cannot be redeclared. They must be declared before
 
 - Declare the default argument in the forward declaration and not in the function definition.
 - The forward declaration is more likely to be seen by other files and included before use (particularly if it's in a header file).
-- 
+
 ::: {#lst-forward-declaration-default-arguments lst-cap="Declare the default argument in the forward declaration and not in the function definition."}
+
 ```{.cpp}
 {{< include ./cpp/forward_declaration_default_arguments.cpp >}}
 ```
 :::
 
-## Default arguments cannot be redeclared; must be declared before
+## Default arguments cannot be redeclared. They must be declared before
 
-:::{.columns}
-:::{.column width=50%}
-- In the header file `print.h`:
+::::{.columns}
+::: {.column width=45%}
+In the header file `print.h`:
   
-    ```{.cpp}
-    {{< include ./cpp/multiple-files/print.h >}}
-    ```
-
-- In the file `main.cpp`:
-
-    ```{.cpp}
-    #include "print.h"
-    #include <iostream>
-    void print(int x, int y)
-    {
-        std::cout << "x: " << x << '\n';
-        std::cout << "y: " << y << '\n';
-    }
-    int main()
-    {
-        print(5);
-        return 0;
-    }
-    ```
+```{.cpp}
+{{< include ./cpp/multiple-files/print.h >}}
+```
 :::
-::: {.column width=50%}
-**Beest practice** 
+::: {.column width=54%}
+In the file `main.cpp`:
+
+```{.cpp}
+#include "print.h"
+#include <iostream>
+void print(int x, int y)
+{
+    std::cout << "x: " << x << '\n';
+    std::cout << "y: " << y << '\n';
+}
+int main()
+{
+    print(5);
+    return 0;
+}
+```
+:::
+::::
+
+## Default arguments cannot be redeclared: must be declared before
+**Best practice** 
 
 - If the function has a forward declaration (especially one in a header file), put the default argument there. 
 - Otherwise, put the default argument in the function definition.
-:::
-:::
+
 
 ## Default arguments and function overloading
 
 Functions with default arguments may be overloaded.
 
-::: {#lst-default-argument-overloaded lst-cap="Overload a function with default argument &mdash; Filename: `default_argument.overloaded.cpp`"}
+::: {#lst-default-argument-overloaded lst-cap="Overload a function with default argument. **Filename**: `default_argument.overloaded.cpp`"}
 ```{.cpp}
 {{< include ./cpp/default_argument_overloaded.cpp >}}
 ```
@@ -403,8 +466,3 @@ void print(int x, double y = 20.5); // signature print(int, double)
 ```
 
 Default values are not part of a function's signature, so these function declarations are differentiated overloads.
-
-
-
-
-
