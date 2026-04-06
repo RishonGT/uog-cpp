@@ -1,15 +1,65 @@
 ---
-title: "Object relationships"
-subtitle: "Composition, Aggregation, Association and Dependency"
-author: |
-    Khiem Nguyen 
-    <br>Lecturer in Multiscale Materials
-    <br><khiem.nguyen@glasgow.ac.uk>
+title: "Chapter 16: Object Relationships"
+author: Khiem Nguyen -- <khiem.nguyen@glasgow.ac.uk>
+    # <br>Lecturer in Multiscale Materials
+    # <br><khiem.nguyen@glasgow.ac.uk>
 author-meta: "Lecturer in Multiscale Materials"
+
 format: 
+    # other themes: 
+    #   beige, blood, dark, dracula, league, moon, 
+    #   night, serif, simple, sky, solarized
+    # highlight-style: monokai      # good for dark images
+    html:
+        output-file: "chap_16.html"
+        grid:
+            body-width: 1600px
+            margin-width: 300px
+            sidebar-width: 350px
+        embed-resources: true
+        theme: simple
+        highlight-style: github
+        css: doc.css
+        number-sections: true
+        number-depth: 3
+        mouse-wheel: true
+        title-slide-style: pandoc
+        echo: true
+        code-overflow: wrap
+        code-line-numbers: true
+        code-block-bg: true     # <-- remove white background in code blocks
+        code-block-border-left: false
+        toc: true
+        toc-depth: 3
+        toc-title: Contents
+    pdf:
+        output-file: "chap_16.pdf"
+        embed-resources: true
+        theme: simple
+        highlight-style: github      # good for dark images
+        css: doc.css
+        number-sections: true
+        number-depth: 3
+        geometry:
+            - top=24px
+            - bottom=24px
+            - left=36px
+            - right=36px
+        echo: true
+        code-overflow: wrap
+        code-line-numbers: true
+        code-block-bg: true # <-- remove white background in code blocks
+        code-block-border-left: false
+        toc: true
+        toc-depth: 3
+        toc-title: Contents
     revealjs:
-        # embed-resources: true
-        theme: simple   # other themes: beige, blood, dark, dracula, league, moon, night, serif, simple, sky, solarized
+        output-file: "chap_16_slide.html"
+        embed-resources: true
+        theme: simple
+        css: slide.css
+        number-sections: true
+        number-depth: 3
         mouse-wheel: true
         highlight-style: github
         slide-number: true
@@ -17,31 +67,12 @@ format:
         echo: true
         code-overflow: wrap
         code-line-numbers: true
-        code-block-bg: false          # <-- remove white background in code blocks
-        # code-block-border-left: false # optional: remove left border
-        # highlight-style: monokai      # good for dark images
+        code-block-bg: true   # <-- remove white background in code blocks
+        code-block-border-left: false # optional: remove left border
         toc: true
         toc-depth: 1
-        toc-title: Presentation Outline
-        chalkboard: true
-        css: simple.css
+        toc-title: Contents
 
-    # html:
-    #     theme: simple   # other themes: beige, blood, dark, dracula, league, moon, night, serif, simple, sky, solarized
-    #     mouse-wheel: true
-    #     highlight-style: github
-    #     slide-number: true
-    #     title-slide-style: pandoc
-    #     echo: true
-    #     code-overflow: wrap
-    #     code-line-numbers: true
-    #     code-block-bg: false          # <-- remove white background in code blocks
-    #     # code-block-border-left: false # optional: remove left border
-    #     # highlight-style: monokai      # good for dark images
-    #     toc: true
-    #     toc-depth: 1
-    #     toc-title: Presentation Outline
-    #     chalkboard: true
 ---
 
 # Object relationships
@@ -260,7 +291,7 @@ In this lesson, we learn a weaker type of relationship between two otherwise unr
 
 ## Association
 
-To qualify as an association, an object and another object have the following relationship:
+To qualify as an [**association**]{style="color:red"}, an object and another object have the following relationship:
 
 - The associated object (member) is otherwise unrelated to the object (class)
 - The associated object (member) can belong to more than one object (class) at a time
@@ -285,3 +316,25 @@ To qualify as an association, an object and another object have the following re
 - Most often, associations are implemented using pointers, where the object points at the associated object.
 
 &#10149;&nbsp; Have a quick look at `doctor_patient.cpp`
+
+# Dependencies
+
+We have explored 3 types of relationships: composition, aggregation, and association. We’ve saved the simplest one for last: dependencies.
+
+## Dependencies
+
+&#10149;&nbsp; In casual conversation, we use the term dependency to indicate that an object is reliant upon another object for a given task.
+
+&#10149;&nbsp; A [**dependency**]{style="color:red"} occurs when one object invokes another object’s functionality in order to accomplish some specific task.
+
+A good example of a dependency that we have already seen many times is `std::ostream`. Our classes that use `std::ostream` use it in order to accomplish the task of printing something to the console, but not otherwise.
+
+## Dependencies versus Association in C++
+
+&#10149;&nbsp; There’s typically some confusion about what differentiates a dependency from an association.
+
+- Associations are a relationship where one class keeps a direct or indirect "link" to the associated class as a member.
+    - a Doctor class has an array of pointers to its Patients as a member. You can always ask the Doctor who its patients are.
+- Dependencies typically are not members.
+    - the object being depended on is typically instantiated as needed (like opening a file to write data to)
+    - assed into a function as a parameter (like std::ostream in the overloaded `operator<<`)

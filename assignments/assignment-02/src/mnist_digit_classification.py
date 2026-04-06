@@ -1,6 +1,11 @@
 # %%
 import pandas as pd
 import matplotlib.pyplot as plt
+
+# %% Load the dataset
+
+
+# %%
 df = pd.read_csv('./data/mnist_micro.csv', header=None)
 
 # Shuffle the data so that we can visualize various digits
