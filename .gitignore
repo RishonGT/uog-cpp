@@ -45,8 +45,9 @@ lecture_note/
 test/
 slides/
 .vscode/
-.venv/
+
 sec-01-cpp-basics/00-intro-to-eng3091/spreadsheets
+sec-01-cpp-basics/00-intro-to-eng3091/figures/software_engineering_video.mp4
 
 assignments/solution-01/
 assignments/solution-02/
