@@ -1,6 +1,10 @@
-#include "sklearn_cpp.hpp"
+#ifndef READ_CSV_HPP
+#define READ_CSV_HPP
+#include <iostream>
+#include <vector>
 #include <fstream>
 #include <sstream>
+#include <string>
 
 class Read_CSV {
     public:
@@ -10,6 +14,7 @@ class Read_CSV {
                 std::cerr << "Error opening file: " << filename << std::endl;
                 return;
             }
+            
 
             std::string line;
             while (std::getline(file, line)) {
@@ -35,6 +40,10 @@ class Read_CSV {
 
             file.close();
 
+            if (X.empty() || Y.empty()) {
+                std::cerr << "No data read from file: " << filename << std::endl;
+            };
+
             // Transpose X to match the expected format (features as rows, samples as columns)
             std::vector<std::vector<double>> X_transposed(X[0].size(), std::vector<double>(X.size()));
             for (size_t i = 0; i < X.size(); i++) {
@@ -48,31 +57,4 @@ class Read_CSV {
 };
 
 
-int main() {
-    std::vector<std::vector<double>> x;
-    std::vector<double> y;
-
-    Read_CSV::read_csv("../data/concrete.csv", x, y);
-
-    // Print the first 5 rows of the dataset to verify it was read correctly
-    std::cout << "First 5 rows of the dataset:" << std::endl;
-    for (size_t i = 0; i < std::min(x.size(), static_cast<size_t>(5)); i++) {
-        for (size_t j = 0; j < x[i].size(); j++) {
-            std::cout << x[i][j] << " ";
-        }
-        std::cout << "| " << y[i] << std::endl;
-    }
-
-    // Print size of the dataset
-    std::cout << "Dataset size: " << x.size() << " samples, " << x[0].size() << " features" << std::endl;
-    std::cout << "Target size: " << y.size() << std::endl;
-
-    sklearn_cpp::linear_model::LinearRegression model;
-    model.fit(x, y);
-
-    //std::vector<double> input = {4.0, 5.0};
-
-    ///double prediction = model.predict(input);
-    //std::cout << "Prediction: " << prediction << std::endl;
-    return 0;
-}
+#endif
