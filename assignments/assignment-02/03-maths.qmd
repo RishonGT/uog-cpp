@@ -39,6 +39,9 @@ format:
         css: style.css
         number-sections: true
         number-depth: 3
+        toc: true               # table of content
+        toc-location: left      # table of content on the left
+        toc-title: "Table of Content"   # table of content title
         colorlinks: true
 ---
 

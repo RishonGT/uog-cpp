@@ -2481,8 +2481,8 @@ border: 1px solid #e0e0e0;
 <div id="cell-train-linear-regression-concrete" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression()  <span class="co"># define a LinearRegression model</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train) <span class="co"># training happens here -- look for model parameters w, b</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="train-linear-regression-concrete" class="cell-output cell-output-display" data-execution_count="4">
-<style>#sk-container-id-1 {
+<div id="train-linear-regression-concrete" class="cell-output cell-output-display" data-execution_count="120">
+<style>#sk-container-id-17 {
 
 --sklearn-color-text: #000;
 --sklearn-color-text-muted: #666;
@@ -2510,13 +2510,13 @@ border: 1px solid #e0e0e0;
 --sklearn-color-icon: #878787;
 }
 }
-#sk-container-id-1 {
+#sk-container-id-17 {
 color: var(--sklearn-color-text);
 }
-#sk-container-id-1 pre {
+#sk-container-id-17 pre {
 padding: 0;
 }
-#sk-container-id-1 input.sk-hidden--visually {
+#sk-container-id-17 input.sk-hidden--visually {
 border: 0;
 clip: rect(1px 1px 1px 1px);
 clip: rect(1px, 1px, 1px, 1px);
@@ -2527,19 +2527,19 @@ padding: 0;
 position: absolute;
 width: 1px;
 }
-#sk-container-id-1 div.sk-dashed-wrapped {
+#sk-container-id-17 div.sk-dashed-wrapped {
 border: 1px dashed var(--sklearn-color-line);
 margin: 0 0.4em 0.5em 0.4em;
 box-sizing: border-box;
 padding-bottom: 0.4em;
 background-color: var(--sklearn-color-background);
 }
-#sk-container-id-1 div.sk-container {
+#sk-container-id-17 div.sk-container {
 
 display: inline-block !important;
 position: relative;
 }
-#sk-container-id-1 div.sk-text-repr-fallback {
+#sk-container-id-17 div.sk-text-repr-fallback {
 display: none;
 }
 div.sk-parallel-item,
@@ -2552,36 +2552,36 @@ background-repeat: no-repeat;
 background-position: center center;
 }
 
-#sk-container-id-1 div.sk-parallel-item::after {
+#sk-container-id-17 div.sk-parallel-item::after {
 content: "";
 width: 100%;
 border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
 flex-grow: 1;
 }
-#sk-container-id-1 div.sk-parallel {
+#sk-container-id-17 div.sk-parallel {
 display: flex;
 align-items: stretch;
 justify-content: center;
 background-color: var(--sklearn-color-background);
 position: relative;
 }
-#sk-container-id-1 div.sk-parallel-item {
+#sk-container-id-17 div.sk-parallel-item {
 display: flex;
 flex-direction: column;
 }
-#sk-container-id-1 div.sk-parallel-item:first-child::after {
+#sk-container-id-17 div.sk-parallel-item:first-child::after {
 align-self: flex-end;
 width: 50%;
 }
-#sk-container-id-1 div.sk-parallel-item:last-child::after {
+#sk-container-id-17 div.sk-parallel-item:last-child::after {
 align-self: flex-start;
 width: 50%;
 }
-#sk-container-id-1 div.sk-parallel-item:only-child::after {
+#sk-container-id-17 div.sk-parallel-item:only-child::after {
 width: 0;
 }
 
-#sk-container-id-1 div.sk-serial {
+#sk-container-id-17 div.sk-serial {
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -2591,12 +2591,12 @@ padding-left: 1em;
 }
 
 
-#sk-container-id-1 div.sk-toggleable {
+#sk-container-id-17 div.sk-toggleable {
 
 background-color: var(--sklearn-color-background);
 }
 
-#sk-container-id-1 label.sk-toggleable__label {
+#sk-container-id-17 label.sk-toggleable__label {
 cursor: pointer;
 display: flex;
 width: 100%;
@@ -2608,97 +2608,97 @@ align-items: start;
 justify-content: space-between;
 gap: 0.5em;
 }
-#sk-container-id-1 label.sk-toggleable__label .caption {
+#sk-container-id-17 label.sk-toggleable__label .caption {
 font-size: 0.6rem;
 font-weight: lighter;
 color: var(--sklearn-color-text-muted);
 }
-#sk-container-id-1 label.sk-toggleable__label-arrow:before {
+#sk-container-id-17 label.sk-toggleable__label-arrow:before {
 
 content: "▸";
 float: left;
 margin-right: 0.25em;
 color: var(--sklearn-color-icon);
 }
-#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {
+#sk-container-id-17 label.sk-toggleable__label-arrow:hover:before {
 color: var(--sklearn-color-text);
 }
 
-#sk-container-id-1 div.sk-toggleable__content {
+#sk-container-id-17 div.sk-toggleable__content {
 display: none;
 text-align: left;
 
 background-color: var(--sklearn-color-unfitted-level-0);
 }
-#sk-container-id-1 div.sk-toggleable__content.fitted {
+#sk-container-id-17 div.sk-toggleable__content.fitted {
 
 background-color: var(--sklearn-color-fitted-level-0);
 }
-#sk-container-id-1 div.sk-toggleable__content pre {
+#sk-container-id-17 div.sk-toggleable__content pre {
 margin: 0.2em;
 border-radius: 0.25em;
 color: var(--sklearn-color-text);
 
 background-color: var(--sklearn-color-unfitted-level-0);
 }
-#sk-container-id-1 div.sk-toggleable__content.fitted pre {
+#sk-container-id-17 div.sk-toggleable__content.fitted pre {
 
 background-color: var(--sklearn-color-fitted-level-0);
 }
-#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+#sk-container-id-17 input.sk-toggleable__control:checked~div.sk-toggleable__content {
 
 display: block;
 width: 100%;
 overflow: visible;
 }
-#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+#sk-container-id-17 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
 content: "▾";
 }
 
-#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-17 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
 color: var(--sklearn-color-text);
 background-color: var(--sklearn-color-unfitted-level-2);
 }
-#sk-container-id-1 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-17 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
 background-color: var(--sklearn-color-fitted-level-2);
 }
 
 
-#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-17 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
 
 background-color: var(--sklearn-color-unfitted-level-2);
 }
-#sk-container-id-1 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-17 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
 
 background-color: var(--sklearn-color-fitted-level-2);
 }
-#sk-container-id-1 div.sk-label label.sk-toggleable__label,
-#sk-container-id-1 div.sk-label label {
+#sk-container-id-17 div.sk-label label.sk-toggleable__label,
+#sk-container-id-17 div.sk-label label {
 
 color: var(--sklearn-color-text-on-default-background);
 }
 
-#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {
+#sk-container-id-17 div.sk-label:hover label.sk-toggleable__label {
 color: var(--sklearn-color-text);
 background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-1 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+#sk-container-id-17 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
 color: var(--sklearn-color-text);
 background-color: var(--sklearn-color-fitted-level-2);
 }
 
-#sk-container-id-1 div.sk-label label {
+#sk-container-id-17 div.sk-label label {
 font-family: monospace;
 font-weight: bold;
 display: inline-block;
 line-height: 1.2em;
 }
-#sk-container-id-1 div.sk-label-container {
+#sk-container-id-17 div.sk-label-container {
 text-align: center;
 }
 
-#sk-container-id-1 div.sk-estimator {
+#sk-container-id-17 div.sk-estimator {
 font-family: monospace;
 border: 1px dotted var(--sklearn-color-border-box);
 border-radius: 0.25em;
@@ -2707,16 +2707,16 @@ margin-bottom: 0.5em;
 
 background-color: var(--sklearn-color-unfitted-level-0);
 }
-#sk-container-id-1 div.sk-estimator.fitted {
+#sk-container-id-17 div.sk-estimator.fitted {
 
 background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-1 div.sk-estimator:hover {
+#sk-container-id-17 div.sk-estimator:hover {
 
 background-color: var(--sklearn-color-unfitted-level-2);
 }
-#sk-container-id-1 div.sk-estimator.fitted:hover {
+#sk-container-id-17 div.sk-estimator.fitted:hover {
 
 background-color: var(--sklearn-color-fitted-level-2);
 }
@@ -2794,7 +2794,7 @@ display: block;
 }
 /* "?"-specific style due to the `<a>` HTML tag */
 
-#sk-container-id-1 a.estimator_doc_link {
+#sk-container-id-17 a.estimator_doc_link {
   float: right;
   font-size: 1rem;
   line-height: 1em;
@@ -2809,21 +2809,21 @@ display: block;
   border: var(--sklearn-color-unfitted-level-1) 1pt solid;
 }
 
-#sk-container-id-1 a.estimator_doc_link.fitted {
+#sk-container-id-17 a.estimator_doc_link.fitted {
   /* fitted */
   border: var(--sklearn-color-fitted-level-1) 1pt solid;
   color: var(--sklearn-color-fitted-level-1);
 }
 
 /* On hover */
-#sk-container-id-1 a.estimator_doc_link:hover {
+#sk-container-id-17 a.estimator_doc_link:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-3);
   color: var(--sklearn-color-background);
   text-decoration: none;
 }
 
-#sk-container-id-1 a.estimator_doc_link.fitted:hover {
+#sk-container-id-17 a.estimator_doc_link.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
 }
@@ -2891,7 +2891,7 @@ display: block;
     height: 14px;
     cursor: pointer;
 }
-</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LinearRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.7/modules/generated/sklearn.linear_model.LinearRegression.html">?<span>Documentation for LinearRegression</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix>
+</style><div id="sk-container-id-17" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-17" type="checkbox" checked><label for="sk-estimator-id-17" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LinearRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.7/modules/generated/sklearn.linear_model.LinearRegression.html">?<span>Documentation for LinearRegression</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix>
         <div class="estimator-table">
             <details>
                 <summary>Parameters</summary>
@@ -3100,8 +3100,8 @@ X_poly is close to X_poly_np = True</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression()</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>model.fit(X_poly, y_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="train-polynomial-regression-sklearn" class="cell-output cell-output-display" data-execution_count="11">
-<style>#sk-container-id-2 {
+<div id="train-polynomial-regression-sklearn" class="cell-output cell-output-display" data-execution_count="127">
+<style>#sk-container-id-18 {
 
 --sklearn-color-text: #000;
 --sklearn-color-text-muted: #666;
@@ -3129,13 +3129,13 @@ X_poly is close to X_poly_np = True</code></pre>
 --sklearn-color-icon: #878787;
 }
 }
-#sk-container-id-2 {
+#sk-container-id-18 {
 color: var(--sklearn-color-text);
 }
-#sk-container-id-2 pre {
+#sk-container-id-18 pre {
 padding: 0;
 }
-#sk-container-id-2 input.sk-hidden--visually {
+#sk-container-id-18 input.sk-hidden--visually {
 border: 0;
 clip: rect(1px 1px 1px 1px);
 clip: rect(1px, 1px, 1px, 1px);
@@ -3146,19 +3146,19 @@ padding: 0;
 position: absolute;
 width: 1px;
 }
-#sk-container-id-2 div.sk-dashed-wrapped {
+#sk-container-id-18 div.sk-dashed-wrapped {
 border: 1px dashed var(--sklearn-color-line);
 margin: 0 0.4em 0.5em 0.4em;
 box-sizing: border-box;
 padding-bottom: 0.4em;
 background-color: var(--sklearn-color-background);
 }
-#sk-container-id-2 div.sk-container {
+#sk-container-id-18 div.sk-container {
 
 display: inline-block !important;
 position: relative;
 }
-#sk-container-id-2 div.sk-text-repr-fallback {
+#sk-container-id-18 div.sk-text-repr-fallback {
 display: none;
 }
 div.sk-parallel-item,
@@ -3171,36 +3171,36 @@ background-repeat: no-repeat;
 background-position: center center;
 }
 
-#sk-container-id-2 div.sk-parallel-item::after {
+#sk-container-id-18 div.sk-parallel-item::after {
 content: "";
 width: 100%;
 border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
 flex-grow: 1;
 }
-#sk-container-id-2 div.sk-parallel {
+#sk-container-id-18 div.sk-parallel {
 display: flex;
 align-items: stretch;
 justify-content: center;
 background-color: var(--sklearn-color-background);
 position: relative;
 }
-#sk-container-id-2 div.sk-parallel-item {
+#sk-container-id-18 div.sk-parallel-item {
 display: flex;
 flex-direction: column;
 }
-#sk-container-id-2 div.sk-parallel-item:first-child::after {
+#sk-container-id-18 div.sk-parallel-item:first-child::after {
 align-self: flex-end;
 width: 50%;
 }
-#sk-container-id-2 div.sk-parallel-item:last-child::after {
+#sk-container-id-18 div.sk-parallel-item:last-child::after {
 align-self: flex-start;
 width: 50%;
 }
-#sk-container-id-2 div.sk-parallel-item:only-child::after {
+#sk-container-id-18 div.sk-parallel-item:only-child::after {
 width: 0;
 }
 
-#sk-container-id-2 div.sk-serial {
+#sk-container-id-18 div.sk-serial {
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -3210,12 +3210,12 @@ padding-left: 1em;
 }
 
 
-#sk-container-id-2 div.sk-toggleable {
+#sk-container-id-18 div.sk-toggleable {
 
 background-color: var(--sklearn-color-background);
 }
 
-#sk-container-id-2 label.sk-toggleable__label {
+#sk-container-id-18 label.sk-toggleable__label {
 cursor: pointer;
 display: flex;
 width: 100%;
@@ -3227,97 +3227,97 @@ align-items: start;
 justify-content: space-between;
 gap: 0.5em;
 }
-#sk-container-id-2 label.sk-toggleable__label .caption {
+#sk-container-id-18 label.sk-toggleable__label .caption {
 font-size: 0.6rem;
 font-weight: lighter;
 color: var(--sklearn-color-text-muted);
 }
-#sk-container-id-2 label.sk-toggleable__label-arrow:before {
+#sk-container-id-18 label.sk-toggleable__label-arrow:before {
 
 content: "▸";
 float: left;
 margin-right: 0.25em;
 color: var(--sklearn-color-icon);
 }
-#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {
+#sk-container-id-18 label.sk-toggleable__label-arrow:hover:before {
 color: var(--sklearn-color-text);
 }
 
-#sk-container-id-2 div.sk-toggleable__content {
+#sk-container-id-18 div.sk-toggleable__content {
 display: none;
 text-align: left;
 
 background-color: var(--sklearn-color-unfitted-level-0);
 }
-#sk-container-id-2 div.sk-toggleable__content.fitted {
+#sk-container-id-18 div.sk-toggleable__content.fitted {
 
 background-color: var(--sklearn-color-fitted-level-0);
 }
-#sk-container-id-2 div.sk-toggleable__content pre {
+#sk-container-id-18 div.sk-toggleable__content pre {
 margin: 0.2em;
 border-radius: 0.25em;
 color: var(--sklearn-color-text);
 
 background-color: var(--sklearn-color-unfitted-level-0);
 }
-#sk-container-id-2 div.sk-toggleable__content.fitted pre {
+#sk-container-id-18 div.sk-toggleable__content.fitted pre {
 
 background-color: var(--sklearn-color-fitted-level-0);
 }
-#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+#sk-container-id-18 input.sk-toggleable__control:checked~div.sk-toggleable__content {
 
 display: block;
 width: 100%;
 overflow: visible;
 }
-#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+#sk-container-id-18 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
 content: "▾";
 }
 
-#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-18 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
 color: var(--sklearn-color-text);
 background-color: var(--sklearn-color-unfitted-level-2);
 }
-#sk-container-id-2 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-18 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
 background-color: var(--sklearn-color-fitted-level-2);
 }
 
 
-#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-18 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
 
 background-color: var(--sklearn-color-unfitted-level-2);
 }
-#sk-container-id-2 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-18 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
 
 background-color: var(--sklearn-color-fitted-level-2);
 }
-#sk-container-id-2 div.sk-label label.sk-toggleable__label,
-#sk-container-id-2 div.sk-label label {
+#sk-container-id-18 div.sk-label label.sk-toggleable__label,
+#sk-container-id-18 div.sk-label label {
 
 color: var(--sklearn-color-text-on-default-background);
 }
 
-#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {
+#sk-container-id-18 div.sk-label:hover label.sk-toggleable__label {
 color: var(--sklearn-color-text);
 background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-2 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+#sk-container-id-18 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
 color: var(--sklearn-color-text);
 background-color: var(--sklearn-color-fitted-level-2);
 }
 
-#sk-container-id-2 div.sk-label label {
+#sk-container-id-18 div.sk-label label {
 font-family: monospace;
 font-weight: bold;
 display: inline-block;
 line-height: 1.2em;
 }
-#sk-container-id-2 div.sk-label-container {
+#sk-container-id-18 div.sk-label-container {
 text-align: center;
 }
 
-#sk-container-id-2 div.sk-estimator {
+#sk-container-id-18 div.sk-estimator {
 font-family: monospace;
 border: 1px dotted var(--sklearn-color-border-box);
 border-radius: 0.25em;
@@ -3326,16 +3326,16 @@ margin-bottom: 0.5em;
 
 background-color: var(--sklearn-color-unfitted-level-0);
 }
-#sk-container-id-2 div.sk-estimator.fitted {
+#sk-container-id-18 div.sk-estimator.fitted {
 
 background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-2 div.sk-estimator:hover {
+#sk-container-id-18 div.sk-estimator:hover {
 
 background-color: var(--sklearn-color-unfitted-level-2);
 }
-#sk-container-id-2 div.sk-estimator.fitted:hover {
+#sk-container-id-18 div.sk-estimator.fitted:hover {
 
 background-color: var(--sklearn-color-fitted-level-2);
 }
@@ -3413,7 +3413,7 @@ display: block;
 }
 /* "?"-specific style due to the `<a>` HTML tag */
 
-#sk-container-id-2 a.estimator_doc_link {
+#sk-container-id-18 a.estimator_doc_link {
   float: right;
   font-size: 1rem;
   line-height: 1em;
@@ -3428,21 +3428,21 @@ display: block;
   border: var(--sklearn-color-unfitted-level-1) 1pt solid;
 }
 
-#sk-container-id-2 a.estimator_doc_link.fitted {
+#sk-container-id-18 a.estimator_doc_link.fitted {
   /* fitted */
   border: var(--sklearn-color-fitted-level-1) 1pt solid;
   color: var(--sklearn-color-fitted-level-1);
 }
 
 /* On hover */
-#sk-container-id-2 a.estimator_doc_link:hover {
+#sk-container-id-18 a.estimator_doc_link:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-3);
   color: var(--sklearn-color-background);
   text-decoration: none;
 }
 
-#sk-container-id-2 a.estimator_doc_link.fitted:hover {
+#sk-container-id-18 a.estimator_doc_link.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
 }
@@ -3510,7 +3510,7 @@ display: block;
     height: 14px;
     cursor: pointer;
 }
-</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" checked><label for="sk-estimator-id-2" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LinearRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.7/modules/generated/sklearn.linear_model.LinearRegression.html">?<span>Documentation for LinearRegression</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix>
+</style><div id="sk-container-id-18" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-18" type="checkbox" checked><label for="sk-estimator-id-18" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LinearRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.7/modules/generated/sklearn.linear_model.LinearRegression.html">?<span>Documentation for LinearRegression</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix>
         <div class="estimator-table">
             <details>
                 <summary>Parameters</summary>
@@ -3616,7 +3616,20 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <section id="polynomial-regression-model-for-concrete-data." class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="polynomial-regression-model-for-concrete-data."><span class="header-section-number">1.3</span> Polynomial regression model for <code>concrete</code> data.</h2>
 <p>Let us make a <strong>quick revisit</strong> to the regression problem of predicting the concrete strength and the dataset given by <code>/data/concrete.csv</code>. There won’t be a lot of explanation as most of the code is almost identical to what we learned above.</p>
-<p>In this example, we shall build second-degree polynomial regression model. Since we have originally <span class="math inline">\(8\)</span> input features, the second-degree polynomial regression model will involve <span class="math inline">\(44\)</span> features. This number <span class="math inline">\(44\)</span> is explained as follows. - As for first-degree features we have - <span class="math inline">\(8\)</span> first-degree features: <span class="math inline">\(x_1, x_2, x_3, \ldots x_8\)</span> - As for second-degree features we have - <span class="math inline">\(8\)</span> second-degree features: <span class="math inline">\(x_1^2, x_1 x_2, x_1 x_3, \ldots x_1 x_8\)</span> - <span class="math inline">\(7\)</span> second-degree features: <span class="math inline">\(x_2^2, x_2 x_3, \ldots x_2 x_8\)</span> - Similarly, we shave have <span class="math inline">\(6, 5, 4, 3, 2, 1\)</span> second degree features corresponding <span class="math inline">\(x_3^2, x_3 x_4, \ldots\)</span> and so on In total, we have <span class="math display">\[
+<p>In this example, we shall build second-degree polynomial regression model. Since we have originally <span class="math inline">\(8\)</span> input features, the second-degree polynomial regression model will involve <span class="math inline">\(44\)</span> features. This number <span class="math inline">\(44\)</span> is explained as follows.</p>
+<ul>
+<li>As for first-degree features we have
+<ul>
+<li><span class="math inline">\(8\)</span> first-degree features: <span class="math inline">\(x_1, x_2, x_3, \ldots x_8\)</span></li>
+</ul></li>
+<li>As for second-degree features we have
+<ul>
+<li><span class="math inline">\(8\)</span> second-degree features: <span class="math inline">\(x_1^2, x_1 x_2, x_1 x_3, \ldots x_1 x_8\)</span></li>
+<li><span class="math inline">\(7\)</span> second-degree features: <span class="math inline">\(x_2^2, x_2 x_3, \ldots x_2 x_8\)</span></li>
+<li>Similarly, we shave have <span class="math inline">\(6, 5, 4, 3, 2, 1\)</span> second degree features corresponding <span class="math inline">\(x_3^2, x_3 x_4, \ldots\)</span> and so on</li>
+</ul></li>
+</ul>
+<p>In total, we have <span class="math display">\[
 \underbrace{8}_{\text{first-degre}} + \underbrace{8 + 7 + 6 + \ldots + 1}_{\text{second-degree}} = \frac{8 * (8 + 1)}{2} + 8 = 36 + 8= 44
 \]</span></p>
 <p><strong>Generate data with polynomial features</strong></p>
@@ -3641,8 +3654,8 @@ X_poly.shape = (1030, 44)</code></pre>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression()</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="train-polynomial-regression-concrete" class="cell-output cell-output-display" data-execution_count="14">
-<style>#sk-container-id-3 {
+<div id="train-polynomial-regression-concrete" class="cell-output cell-output-display" data-execution_count="130">
+<style>#sk-container-id-19 {
 
 --sklearn-color-text: #000;
 --sklearn-color-text-muted: #666;
@@ -3670,13 +3683,13 @@ X_poly.shape = (1030, 44)</code></pre>
 --sklearn-color-icon: #878787;
 }
 }
-#sk-container-id-3 {
+#sk-container-id-19 {
 color: var(--sklearn-color-text);
 }
-#sk-container-id-3 pre {
+#sk-container-id-19 pre {
 padding: 0;
 }
-#sk-container-id-3 input.sk-hidden--visually {
+#sk-container-id-19 input.sk-hidden--visually {
 border: 0;
 clip: rect(1px 1px 1px 1px);
 clip: rect(1px, 1px, 1px, 1px);
@@ -3687,19 +3700,19 @@ padding: 0;
 position: absolute;
 width: 1px;
 }
-#sk-container-id-3 div.sk-dashed-wrapped {
+#sk-container-id-19 div.sk-dashed-wrapped {
 border: 1px dashed var(--sklearn-color-line);
 margin: 0 0.4em 0.5em 0.4em;
 box-sizing: border-box;
 padding-bottom: 0.4em;
 background-color: var(--sklearn-color-background);
 }
-#sk-container-id-3 div.sk-container {
+#sk-container-id-19 div.sk-container {
 
 display: inline-block !important;
 position: relative;
 }
-#sk-container-id-3 div.sk-text-repr-fallback {
+#sk-container-id-19 div.sk-text-repr-fallback {
 display: none;
 }
 div.sk-parallel-item,
@@ -3712,36 +3725,36 @@ background-repeat: no-repeat;
 background-position: center center;
 }
 
-#sk-container-id-3 div.sk-parallel-item::after {
+#sk-container-id-19 div.sk-parallel-item::after {
 content: "";
 width: 100%;
 border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
 flex-grow: 1;
 }
-#sk-container-id-3 div.sk-parallel {
+#sk-container-id-19 div.sk-parallel {
 display: flex;
 align-items: stretch;
 justify-content: center;
 background-color: var(--sklearn-color-background);
 position: relative;
 }
-#sk-container-id-3 div.sk-parallel-item {
+#sk-container-id-19 div.sk-parallel-item {
 display: flex;
 flex-direction: column;
 }
-#sk-container-id-3 div.sk-parallel-item:first-child::after {
+#sk-container-id-19 div.sk-parallel-item:first-child::after {
 align-self: flex-end;
 width: 50%;
 }
-#sk-container-id-3 div.sk-parallel-item:last-child::after {
+#sk-container-id-19 div.sk-parallel-item:last-child::after {
 align-self: flex-start;
 width: 50%;
 }
-#sk-container-id-3 div.sk-parallel-item:only-child::after {
+#sk-container-id-19 div.sk-parallel-item:only-child::after {
 width: 0;
 }
 
-#sk-container-id-3 div.sk-serial {
+#sk-container-id-19 div.sk-serial {
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -3751,12 +3764,12 @@ padding-left: 1em;
 }
 
 
-#sk-container-id-3 div.sk-toggleable {
+#sk-container-id-19 div.sk-toggleable {
 
 background-color: var(--sklearn-color-background);
 }
 
-#sk-container-id-3 label.sk-toggleable__label {
+#sk-container-id-19 label.sk-toggleable__label {
 cursor: pointer;
 display: flex;
 width: 100%;
@@ -3768,97 +3781,97 @@ align-items: start;
 justify-content: space-between;
 gap: 0.5em;
 }
-#sk-container-id-3 label.sk-toggleable__label .caption {
+#sk-container-id-19 label.sk-toggleable__label .caption {
 font-size: 0.6rem;
 font-weight: lighter;
 color: var(--sklearn-color-text-muted);
 }
-#sk-container-id-3 label.sk-toggleable__label-arrow:before {
+#sk-container-id-19 label.sk-toggleable__label-arrow:before {
 
 content: "▸";
 float: left;
 margin-right: 0.25em;
 color: var(--sklearn-color-icon);
 }
-#sk-container-id-3 label.sk-toggleable__label-arrow:hover:before {
+#sk-container-id-19 label.sk-toggleable__label-arrow:hover:before {
 color: var(--sklearn-color-text);
 }
 
-#sk-container-id-3 div.sk-toggleable__content {
+#sk-container-id-19 div.sk-toggleable__content {
 display: none;
 text-align: left;
 
 background-color: var(--sklearn-color-unfitted-level-0);
 }
-#sk-container-id-3 div.sk-toggleable__content.fitted {
+#sk-container-id-19 div.sk-toggleable__content.fitted {
 
 background-color: var(--sklearn-color-fitted-level-0);
 }
-#sk-container-id-3 div.sk-toggleable__content pre {
+#sk-container-id-19 div.sk-toggleable__content pre {
 margin: 0.2em;
 border-radius: 0.25em;
 color: var(--sklearn-color-text);
 
 background-color: var(--sklearn-color-unfitted-level-0);
 }
-#sk-container-id-3 div.sk-toggleable__content.fitted pre {
+#sk-container-id-19 div.sk-toggleable__content.fitted pre {
 
 background-color: var(--sklearn-color-fitted-level-0);
 }
-#sk-container-id-3 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+#sk-container-id-19 input.sk-toggleable__control:checked~div.sk-toggleable__content {
 
 display: block;
 width: 100%;
 overflow: visible;
 }
-#sk-container-id-3 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+#sk-container-id-19 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
 content: "▾";
 }
 
-#sk-container-id-3 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-19 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
 color: var(--sklearn-color-text);
 background-color: var(--sklearn-color-unfitted-level-2);
 }
-#sk-container-id-3 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-19 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
 background-color: var(--sklearn-color-fitted-level-2);
 }
 
 
-#sk-container-id-3 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-19 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
 
 background-color: var(--sklearn-color-unfitted-level-2);
 }
-#sk-container-id-3 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-19 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
 
 background-color: var(--sklearn-color-fitted-level-2);
 }
-#sk-container-id-3 div.sk-label label.sk-toggleable__label,
-#sk-container-id-3 div.sk-label label {
+#sk-container-id-19 div.sk-label label.sk-toggleable__label,
+#sk-container-id-19 div.sk-label label {
 
 color: var(--sklearn-color-text-on-default-background);
 }
 
-#sk-container-id-3 div.sk-label:hover label.sk-toggleable__label {
+#sk-container-id-19 div.sk-label:hover label.sk-toggleable__label {
 color: var(--sklearn-color-text);
 background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-3 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+#sk-container-id-19 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
 color: var(--sklearn-color-text);
 background-color: var(--sklearn-color-fitted-level-2);
 }
 
-#sk-container-id-3 div.sk-label label {
+#sk-container-id-19 div.sk-label label {
 font-family: monospace;
 font-weight: bold;
 display: inline-block;
 line-height: 1.2em;
 }
-#sk-container-id-3 div.sk-label-container {
+#sk-container-id-19 div.sk-label-container {
 text-align: center;
 }
 
-#sk-container-id-3 div.sk-estimator {
+#sk-container-id-19 div.sk-estimator {
 font-family: monospace;
 border: 1px dotted var(--sklearn-color-border-box);
 border-radius: 0.25em;
@@ -3867,16 +3880,16 @@ margin-bottom: 0.5em;
 
 background-color: var(--sklearn-color-unfitted-level-0);
 }
-#sk-container-id-3 div.sk-estimator.fitted {
+#sk-container-id-19 div.sk-estimator.fitted {
 
 background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-3 div.sk-estimator:hover {
+#sk-container-id-19 div.sk-estimator:hover {
 
 background-color: var(--sklearn-color-unfitted-level-2);
 }
-#sk-container-id-3 div.sk-estimator.fitted:hover {
+#sk-container-id-19 div.sk-estimator.fitted:hover {
 
 background-color: var(--sklearn-color-fitted-level-2);
 }
@@ -3954,7 +3967,7 @@ display: block;
 }
 /* "?"-specific style due to the `<a>` HTML tag */
 
-#sk-container-id-3 a.estimator_doc_link {
+#sk-container-id-19 a.estimator_doc_link {
   float: right;
   font-size: 1rem;
   line-height: 1em;
@@ -3969,21 +3982,21 @@ display: block;
   border: var(--sklearn-color-unfitted-level-1) 1pt solid;
 }
 
-#sk-container-id-3 a.estimator_doc_link.fitted {
+#sk-container-id-19 a.estimator_doc_link.fitted {
   /* fitted */
   border: var(--sklearn-color-fitted-level-1) 1pt solid;
   color: var(--sklearn-color-fitted-level-1);
 }
 
 /* On hover */
-#sk-container-id-3 a.estimator_doc_link:hover {
+#sk-container-id-19 a.estimator_doc_link:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-3);
   color: var(--sklearn-color-background);
   text-decoration: none;
 }
 
-#sk-container-id-3 a.estimator_doc_link.fitted:hover {
+#sk-container-id-19 a.estimator_doc_link.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
 }
@@ -4051,7 +4064,7 @@ display: block;
     height: 14px;
     cursor: pointer;
 }
-</style><div id="sk-container-id-3" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" checked><label for="sk-estimator-id-3" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LinearRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.7/modules/generated/sklearn.linear_model.LinearRegression.html">?<span>Documentation for LinearRegression</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix>
+</style><div id="sk-container-id-19" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-19" type="checkbox" checked><label for="sk-estimator-id-19" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LinearRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.7/modules/generated/sklearn.linear_model.LinearRegression.html">?<span>Documentation for LinearRegression</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix>
         <div class="estimator-table">
             <details>
                 <summary>Parameters</summary>
@@ -4228,8 +4241,8 @@ Split ratio = 0.7999, 0.2001</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>log_reg <span class="op">=</span> LogisticRegression()</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>log_reg.fit(X_train, y_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="train-logistic-regression-ecg-data" class="cell-output cell-output-display" data-execution_count="19">
-<style>#sk-container-id-4 {
+<div id="train-logistic-regression-ecg-data" class="cell-output cell-output-display" data-execution_count="135">
+<style>#sk-container-id-20 {
 
 --sklearn-color-text: #000;
 --sklearn-color-text-muted: #666;
@@ -4257,13 +4270,13 @@ Split ratio = 0.7999, 0.2001</code></pre>
 --sklearn-color-icon: #878787;
 }
 }
-#sk-container-id-4 {
+#sk-container-id-20 {
 color: var(--sklearn-color-text);
 }
-#sk-container-id-4 pre {
+#sk-container-id-20 pre {
 padding: 0;
 }
-#sk-container-id-4 input.sk-hidden--visually {
+#sk-container-id-20 input.sk-hidden--visually {
 border: 0;
 clip: rect(1px 1px 1px 1px);
 clip: rect(1px, 1px, 1px, 1px);
@@ -4274,19 +4287,19 @@ padding: 0;
 position: absolute;
 width: 1px;
 }
-#sk-container-id-4 div.sk-dashed-wrapped {
+#sk-container-id-20 div.sk-dashed-wrapped {
 border: 1px dashed var(--sklearn-color-line);
 margin: 0 0.4em 0.5em 0.4em;
 box-sizing: border-box;
 padding-bottom: 0.4em;
 background-color: var(--sklearn-color-background);
 }
-#sk-container-id-4 div.sk-container {
+#sk-container-id-20 div.sk-container {
 
 display: inline-block !important;
 position: relative;
 }
-#sk-container-id-4 div.sk-text-repr-fallback {
+#sk-container-id-20 div.sk-text-repr-fallback {
 display: none;
 }
 div.sk-parallel-item,
@@ -4299,36 +4312,36 @@ background-repeat: no-repeat;
 background-position: center center;
 }
 
-#sk-container-id-4 div.sk-parallel-item::after {
+#sk-container-id-20 div.sk-parallel-item::after {
 content: "";
 width: 100%;
 border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
 flex-grow: 1;
 }
-#sk-container-id-4 div.sk-parallel {
+#sk-container-id-20 div.sk-parallel {
 display: flex;
 align-items: stretch;
 justify-content: center;
 background-color: var(--sklearn-color-background);
 position: relative;
 }
-#sk-container-id-4 div.sk-parallel-item {
+#sk-container-id-20 div.sk-parallel-item {
 display: flex;
 flex-direction: column;
 }
-#sk-container-id-4 div.sk-parallel-item:first-child::after {
+#sk-container-id-20 div.sk-parallel-item:first-child::after {
 align-self: flex-end;
 width: 50%;
 }
-#sk-container-id-4 div.sk-parallel-item:last-child::after {
+#sk-container-id-20 div.sk-parallel-item:last-child::after {
 align-self: flex-start;
 width: 50%;
 }
-#sk-container-id-4 div.sk-parallel-item:only-child::after {
+#sk-container-id-20 div.sk-parallel-item:only-child::after {
 width: 0;
 }
 
-#sk-container-id-4 div.sk-serial {
+#sk-container-id-20 div.sk-serial {
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -4338,12 +4351,12 @@ padding-left: 1em;
 }
 
 
-#sk-container-id-4 div.sk-toggleable {
+#sk-container-id-20 div.sk-toggleable {
 
 background-color: var(--sklearn-color-background);
 }
 
-#sk-container-id-4 label.sk-toggleable__label {
+#sk-container-id-20 label.sk-toggleable__label {
 cursor: pointer;
 display: flex;
 width: 100%;
@@ -4355,97 +4368,97 @@ align-items: start;
 justify-content: space-between;
 gap: 0.5em;
 }
-#sk-container-id-4 label.sk-toggleable__label .caption {
+#sk-container-id-20 label.sk-toggleable__label .caption {
 font-size: 0.6rem;
 font-weight: lighter;
 color: var(--sklearn-color-text-muted);
 }
-#sk-container-id-4 label.sk-toggleable__label-arrow:before {
+#sk-container-id-20 label.sk-toggleable__label-arrow:before {
 
 content: "▸";
 float: left;
 margin-right: 0.25em;
 color: var(--sklearn-color-icon);
 }
-#sk-container-id-4 label.sk-toggleable__label-arrow:hover:before {
+#sk-container-id-20 label.sk-toggleable__label-arrow:hover:before {
 color: var(--sklearn-color-text);
 }
 
-#sk-container-id-4 div.sk-toggleable__content {
+#sk-container-id-20 div.sk-toggleable__content {
 display: none;
 text-align: left;
 
 background-color: var(--sklearn-color-unfitted-level-0);
 }
-#sk-container-id-4 div.sk-toggleable__content.fitted {
+#sk-container-id-20 div.sk-toggleable__content.fitted {
 
 background-color: var(--sklearn-color-fitted-level-0);
 }
-#sk-container-id-4 div.sk-toggleable__content pre {
+#sk-container-id-20 div.sk-toggleable__content pre {
 margin: 0.2em;
 border-radius: 0.25em;
 color: var(--sklearn-color-text);
 
 background-color: var(--sklearn-color-unfitted-level-0);
 }
-#sk-container-id-4 div.sk-toggleable__content.fitted pre {
+#sk-container-id-20 div.sk-toggleable__content.fitted pre {
 
 background-color: var(--sklearn-color-fitted-level-0);
 }
-#sk-container-id-4 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+#sk-container-id-20 input.sk-toggleable__control:checked~div.sk-toggleable__content {
 
 display: block;
 width: 100%;
 overflow: visible;
 }
-#sk-container-id-4 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+#sk-container-id-20 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
 content: "▾";
 }
 
-#sk-container-id-4 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-20 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
 color: var(--sklearn-color-text);
 background-color: var(--sklearn-color-unfitted-level-2);
 }
-#sk-container-id-4 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-20 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
 background-color: var(--sklearn-color-fitted-level-2);
 }
 
 
-#sk-container-id-4 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-20 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
 
 background-color: var(--sklearn-color-unfitted-level-2);
 }
-#sk-container-id-4 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-20 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
 
 background-color: var(--sklearn-color-fitted-level-2);
 }
-#sk-container-id-4 div.sk-label label.sk-toggleable__label,
-#sk-container-id-4 div.sk-label label {
+#sk-container-id-20 div.sk-label label.sk-toggleable__label,
+#sk-container-id-20 div.sk-label label {
 
 color: var(--sklearn-color-text-on-default-background);
 }
 
-#sk-container-id-4 div.sk-label:hover label.sk-toggleable__label {
+#sk-container-id-20 div.sk-label:hover label.sk-toggleable__label {
 color: var(--sklearn-color-text);
 background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-4 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+#sk-container-id-20 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
 color: var(--sklearn-color-text);
 background-color: var(--sklearn-color-fitted-level-2);
 }
 
-#sk-container-id-4 div.sk-label label {
+#sk-container-id-20 div.sk-label label {
 font-family: monospace;
 font-weight: bold;
 display: inline-block;
 line-height: 1.2em;
 }
-#sk-container-id-4 div.sk-label-container {
+#sk-container-id-20 div.sk-label-container {
 text-align: center;
 }
 
-#sk-container-id-4 div.sk-estimator {
+#sk-container-id-20 div.sk-estimator {
 font-family: monospace;
 border: 1px dotted var(--sklearn-color-border-box);
 border-radius: 0.25em;
@@ -4454,16 +4467,16 @@ margin-bottom: 0.5em;
 
 background-color: var(--sklearn-color-unfitted-level-0);
 }
-#sk-container-id-4 div.sk-estimator.fitted {
+#sk-container-id-20 div.sk-estimator.fitted {
 
 background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-4 div.sk-estimator:hover {
+#sk-container-id-20 div.sk-estimator:hover {
 
 background-color: var(--sklearn-color-unfitted-level-2);
 }
-#sk-container-id-4 div.sk-estimator.fitted:hover {
+#sk-container-id-20 div.sk-estimator.fitted:hover {
 
 background-color: var(--sklearn-color-fitted-level-2);
 }
@@ -4541,7 +4554,7 @@ display: block;
 }
 /* "?"-specific style due to the `<a>` HTML tag */
 
-#sk-container-id-4 a.estimator_doc_link {
+#sk-container-id-20 a.estimator_doc_link {
   float: right;
   font-size: 1rem;
   line-height: 1em;
@@ -4556,21 +4569,21 @@ display: block;
   border: var(--sklearn-color-unfitted-level-1) 1pt solid;
 }
 
-#sk-container-id-4 a.estimator_doc_link.fitted {
+#sk-container-id-20 a.estimator_doc_link.fitted {
   /* fitted */
   border: var(--sklearn-color-fitted-level-1) 1pt solid;
   color: var(--sklearn-color-fitted-level-1);
 }
 
 /* On hover */
-#sk-container-id-4 a.estimator_doc_link:hover {
+#sk-container-id-20 a.estimator_doc_link:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-3);
   color: var(--sklearn-color-background);
   text-decoration: none;
 }
 
-#sk-container-id-4 a.estimator_doc_link.fitted:hover {
+#sk-container-id-20 a.estimator_doc_link.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
 }
@@ -4638,7 +4651,7 @@ display: block;
     height: 14px;
     cursor: pointer;
 }
-</style><div id="sk-container-id-4" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LogisticRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox" checked><label for="sk-estimator-id-4" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LogisticRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.7/modules/generated/sklearn.linear_model.LogisticRegression.html">?<span>Documentation for LogisticRegression</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix>
+</style><div id="sk-container-id-20" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LogisticRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-20" type="checkbox" checked><label for="sk-estimator-id-20" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LogisticRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.7/modules/generated/sklearn.linear_model.LogisticRegression.html">?<span>Documentation for LogisticRegression</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix>
         <div class="estimator-table">
             <details>
                 <summary>Parameters</summary>
@@ -4866,7 +4879,7 @@ Important
 <span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Saving full dataset to &#39;mnist_full.csv&#39;...&quot;</span>)</span>
 <span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    df.to_csv(file_path, index<span class="op">=</span><span class="va">False</span>, header<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Saving full dataset to &#39;mnist_full.csv&#39;...</code></pre>
+<pre><code>File &#39;data/mnist_full.csv&#39; already exists. Skipping saving full dataset.</code></pre>
 </div>
 </div>
 <p>Next, we create two files <code>./data/mnist_mini.csv</code> (<span class="math inline">\(10000\)</span> images) and <code>./data/mnist_micro.csv</code> (<span class="math inline">\(3000\)</span> images).</p>
@@ -4880,7 +4893,7 @@ Important
 <span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If the file does not exist, we proceed to generate the subset</span></span>
 <span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>    subsets <span class="op">=</span> []</span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;--- Sampling </span><span class="sc">{</span>n_per_digit<span class="sc">}</span><span class="ss"> images per digit ---&quot;</span>)</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Sampling </span><span class="sc">{</span>n_per_digit<span class="sc">}</span><span class="ss"> images per digit for &#39;</span><span class="sc">{</span>output_filename<span class="sc">}</span><span class="ss">&#39;...&quot;</span>)</span>
 <span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> digit <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
 <span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Filter for the specific digit</span></span>
 <span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>        digit_df <span class="op">=</span> df[df[<span class="st">&#39;class&#39;</span>].astype(<span class="bu">int</span>) <span class="op">==</span> digit]</span>
@@ -4898,14 +4911,12 @@ Important
 <span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n, output_filename <span class="kw">in</span> <span class="bu">zip</span>(n_per_digit, output_filenames):</span>
 <span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a>    generate_mnist_csv(df, n, output_filename)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>--- Sampling 1000 images per digit ---
-File &#39;./data/mnist_mini.csv&#39; saved with shape: (10000, 785)
---- Sampling 300 images per digit ---
-File &#39;./data/mnist_micro.csv&#39; saved with shape: (3000, 785)</code></pre>
+<pre><code>File &#39;data/mnist_mini.csv&#39; already exists. Skipping generation of subset.
+File &#39;data/mnist_micro.csv&#39; already exists. Skipping generation of subset.</code></pre>
 </div>
 </div>
-<p>All the steps described above are given in one single python file <code>generate_mnist_csv.py</code>.</p>
-<p>✎  [<strong>Visualize data</strong>{style=“color:crimson”}]</p>
+<p>All the steps described above are given in one single python file <code>./src/generate_mnist_csv.py</code>.</p>
+<p>✎  <span style="color:crimson"><strong>Visualize data</strong></span></p>
 <p>Let us read the <code>.csv</code> file and visualize the data by showing a few samples in images. To do this, we need to reshape a <span class="math inline">\(1\)</span>-dimensional vector of size <span class="math inline">\(784\)</span> into a <span class="math inline">\(2\)</span>-dimensional array of size <span class="math inline">\(28 \times 28\)</span>. Then, we shall use <code>.imshow()</code> member function of the <code>axis</code> object to show the images.</p>
 <p>First, we read the <code>.csv</code> file into a <code>DataFrame</code> object, and then convert the data in this dataframe into <code>ndarray</code> objects.</p>
 <div id="read-mnist-csv-and-visualize" class="cell" data-execution_count="26">

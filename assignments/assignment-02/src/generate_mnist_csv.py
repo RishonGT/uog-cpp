@@ -1,3 +1,10 @@
+# This code file generates CSV files from the MNIST dataset and visualizes 
+# a shuffled subset of the data as PNG images. The code is structured 
+# into three main sections: 
+#   - data generation, 
+#   - CSV creation, and 
+#   - visualization.
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -6,10 +13,9 @@ from sklearn.utils import shuffle
 from pathlib import Path  # <--- Step 1: Import Path
 
 def generate_mnist_csv(df, n_per_digit, output_filename):
-    
 
     subsets = []
-    print(f"--- Sampling {n_per_digit} images per digit ---")
+    print(f"Sampling {n_per_digit} images per digit for '{output_filename}'...")
     for digit in range(10):
         # Filter for the specific digit
         digit_df = df[df['class'].astype(int) == digit]
@@ -26,12 +32,13 @@ def visualize_shuffled_png(csv_filename, png_output_name):
     """
     Reads the CSV, shuffles the rows, and saves a grid of images to PNG.
     """
-    print(f"--- Reading and Shuffling {csv_filename} ---")
+    print(f"Reading and Shuffling {csv_filename}")
     # Load the CSV
     data = pd.read_csv(csv_filename, header=None)
     
     # Shuffle the dataframe rows randomly
-    # random_state=None will give you a different shuffle every time you run the script
+    # random_state=None will give you a different shuffle every 
+    # time you run the script
     data_shuffled = shuffle(data, random_state=None).reset_index(drop=True)
     
     # X: First 784 columns | y: The 785th column (index -1)
@@ -63,7 +70,7 @@ def visualize_shuffled_png(csv_filename, png_output_name):
 output_dir = Path("./data")
 output_dir.mkdir(parents=True, exist_ok=True)
 
-print("--- Fetching MNIST dataset ---")
+print(20*"=" + "\nFetching MNIST dataset\n" + 20*"=")
 mnist = fetch_openml('mnist_784', version=1, as_frame=True, parser='auto')
 df = mnist.frame
 

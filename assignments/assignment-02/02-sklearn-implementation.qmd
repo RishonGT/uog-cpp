@@ -41,6 +41,9 @@ format:
         css: style.css
         number-sections: true
         number-depth: 2
+        toc: true               # table of content
+        toc-location: left      # table of content on the left
+        toc-title: "Table of Content"   # table of content title
         colorlinks: true
 ---
 
@@ -262,12 +265,15 @@ Here we go. The polynomial regression model closely fits the true (hidden) manif
 Let us make a **quick revisit** to the regression problem of predicting the concrete strength and the dataset given by `/data/concrete.csv`. There won't be a lot of explanation as most of the code is almost identical to what we learned above.
 
 In this example, we shall build second-degree polynomial regression model. Since we have originally $8$ input features, the second-degree polynomial regression model will involve $44$ features. This number $44$ is explained as follows.
+
 - As for first-degree features we have
     - $8$ first-degree features: $x_1, x_2, x_3, \ldots x_8$
+  
 - As for second-degree features we have
     - $8$ second-degree features: $x_1^2, x_1 x_2, x_1 x_3, \ldots x_1 x_8$
     - $7$ second-degree features: $x_2^2, x_2 x_3, \ldots x_2 x_8$
     - Similarly, we shave have $6, 5, 4, 3, 2, 1$ second degree features corresponding $x_3^2, x_3 x_4, \ldots$ and so on
+  
 In total, we have 
 $$
 \underbrace{8}_{\text{first-degre}} + \underbrace{8 + 7 + 6 + \ldots + 1}_{\text{second-degree}} = \frac{8 * (8 + 1)}{2} + 8 = 36 + 8= 44
@@ -490,7 +496,7 @@ def generate_mnist_csv(df, n_per_digit, output_filename):
 
     # If the file does not exist, we proceed to generate the subset
     subsets = []
-    print(f"--- Sampling {n_per_digit} images per digit ---")
+    print(f"Sampling {n_per_digit} images per digit for '{output_filename}'...")
     for digit in range(10):
         # Filter for the specific digit
         digit_df = df[df['class'].astype(int) == digit]
@@ -509,9 +515,9 @@ for n, output_filename in zip(n_per_digit, output_filenames):
     generate_mnist_csv(df, n, output_filename)
 ```
 
-All the steps described above are given in one single python file `generate_mnist_csv.py`.
+All the steps described above are given in one single python file `./src/generate_mnist_csv.py`.
 
-&#9998;&nbsp; [**Visualize data**{style="color:crimson"}]
+&#9998;&nbsp; [**Visualize data**]{style="color:crimson"}
 
 Let us read the `.csv` file and visualize the data by showing a few samples in images. To do this, we need to reshape a $1$-dimensional vector of size $784$ into a $2$-dimensional array of size $28 \times 28$. Then, we shall use `.imshow()` member function of the `axis` object to show the images.
 

@@ -39,6 +39,9 @@ format:
         css: style.css
         number-sections: true
         number-depth: 2
+        toc: true               # table of content
+        toc-location: left      # table of content on the left
+        toc-title: "Table of Content"   # table of content title
         colorlinks: true
 ---
 
@@ -54,24 +57,35 @@ Earth Tones: sienna, peru, chocolate, goldenrod.
 
 It is a shame that we have only one semester to learn so much new knowledge but we don't have a real opportunity to really develop a meaningful and serious project.
 
-You might feel "What the heck! The assignment is so long." Trust me bro! [_The solution for this project is much much shorter than the description itself. It is also mostly based on what you have done in Assignment 01._]{style="color:red"} The long description is to help you to understand the project better and deeper. A short description will leave you pretty confused.
+:::{.callout-important}
+You might feel "What the heck! The assignment is so long." Trust me bro! [**The solution for this project is much much shorter than the description itself. It is also mostly based on what you have done in Assignment 01.**]{style="color:red"} The long description is to help you to understand the project better and deeper. A short description will leave you pretty confused.
+:::
 
 ## Reading this description
 
-In order to understand the project better, I suggest you to read the description in the following order:
-1. Read the whole description once to get a general idea about the project. Filename `01-description.html` and `01-description.pdf` are provided for this purpose. You don't have to understand everything in the first reading. Just try to get a general idea about the project.
-2. Read the implementation using scikit-learn in Python. This will give you the idea about how to use the two regression models in Python and what are the expected results. The C++ implementation will mimic the Python implementation, so it is important to understand the Python implementation first. Filename `02-sklearn-implementation.html` and `02-sklearn-implementation.pdf` are provided for this purpose.
-3. Read the mathematics behind the scene to understand the mathematical formulation of the two regression models and the gradient descent method. This will help you to understand how to implement the two regression models in C++. Filename `03-maths.html` and `03-maths.pdf` are provided for this purpose.
-4. Then, you should revisit the task description `01-description.qmd` to understand what you need to do for the assignment.
+In order to understand the project better, the students are encouraged to read the description in the following order -- the `pdf` and `html` files are equivalent, and provided for each step:
 
+1. Read the whole description once to get a general idea about the project. You don't have to understand everything in the first reading. Just try to get a general idea about the project. The files `01-description.html` (`.pdf`) are provided for this purpose. 
+2. Read the implementation using **scikit-learn** in Python. This will give you the idea about how to use the two regression models in Python and what are the expected results. The C++ implementation will mimic the [**Python implementation interface**]{style="color:royalblue"}, so it is important to understand the Python implementation first. The files `02-sklearn-implementation.html` (`.pdf`) are provided for this purpose.
+3. Read the mathematics behind the scene to understand the mathematical formulation of the two regression models and the gradient descent method. This will help you to understand how to implement the two regression models in C++. The files `03-maths.html` (`.pdf`) are provided for this purpose.
+4. Read the demonstration of logistic regression in Python. This will give you a concrete example of how to implement the logistic regression model from scratch in Python. You can use this code as a reference for your C++ implementation. The code is not optimized for performance, but it is written in a way that is easy to understand and follow. The files `04-log-reg-demonstrations.html` (`.pdf`) are provided for this purpose.
+5. Read the tutorial on how to build a header-only library to understand the concepts behind header-only library and to know how to implement the header-only library. The files `05-header-only-library.html` (`.pdf`) are provided for this purpose. 
+6. Then, you should revisit the task description `01-description.qmd` to understand what you need to do for the assignment.
 
 
 ## Ultimate goal
 
-In this assignment, we aim to build a mini-library that mimic two important machine learning frameworks in the machine learning world. In fact, they look ridiculously simple, they are one of the backbones of vast number of machine learning frameworks that have been used these days, including of course the genAI frameworks you are deploying. In the end of the assignment, we try to mimic two important classes provided in the celebrated library for machine learning: [**scikit-learn** -- Text contains hyperref](https://scikit-learn.org/stable/). Particularly, we focus on two regression models
+In this assignment, we aim to build a mini-library that mimic two important machine learning frameworks in the machine learning world. In fact, they look ridiculously simple, they are one of the backbones of vast number of machine learning frameworks that have been used these days, including of course the genAI frameworks you are deploying. In the end of the assignment, we try to mimic two important classes provided in the celebrated library for machine learning: [**scikit-learn**](https://scikit-learn.org/stable/) (The text contains hyperlinks). Particularly, we focus on two regression models
 
-- Linear Regression
-- Logistic Regression
+- [**Linear Regression**]{style="color:red"}
+
+  You already know how to implement it in C++ from Assignment 01. You just need to polish it and make it object-oriented.
+
+- [**Logistic Regression**]{style="color:red"}
+  
+  You will learn how to implement it in C++ from scratch by following the Python implementation and the mathematical formulation given in the file `03-maths.html` and `03-maths.pdf`. 
+  
+  You will recognize that the mathematical formulation of the logistic regression model is slightly different from that of linear regression model, but the gradient descent iteration algorithm shares exactly the same formulation. For this reason, a large portion of what you have done for linear regression can easily carried over to logistic regression.
 
 ## Objectives
 The two main objectives of this assignment consists of
@@ -83,27 +97,32 @@ Besides these two main objectives, we take this opportunity to learn some knowle
 
 # Quick tour to the world of machine learning
 
-<!-- ## Intro and examples -->
-As mentioned above, we will develop two classes `LinearRegression` and `LogisticRegression` representing two basic regression models "Linear Regression" and "Logistic Regression", respectively.
+We will develop two classes `LinearRegression` and `LogisticRegression` representing two basic regression models "Linear Regression" and "Logistic Regression", respectively.
 
-&#9998;&nbsp; [**Linear Regression.**]{style="color:royalblue"} is used to make prediction on the continous spectrum of data points.
+&#9998;&nbsp; [**Linear Regression**]{style="color:royalblue"} is used to make prediction on the continous spectrum of data points.
 
 **Examples**
 
 - Predict the house price of a given flat given its features such as total living area, number of bedrooms, distance to the city center, distance to schools, distance to public transporation stations, $\ldots$
 - Predict the age of a person by using their recent photos.
-- Predict the price of a bottle of wine given its information about the wine: number of years, location, type of grapdes, $\ldots$
+- Predict the price of wine given its information: number of years, location, type of grape, $\ldots$
   
 **Linear regression** can be easily extended to **Polynomial Regression** to enhance its power and widen its capability in various complex applications. 
 
-&#9998;&nbsp; [**Logistic Regression**]{style="color:royalblue"} is used to classify data points into finite number of categories, such as $0, 1, 2, \ldots, K$.
+&#9998;&nbsp; [**Logistic Regression**]{style="color:royalblue"} is used to classify data points into finite number of categories, such as $0, 1, 2, \ldots, K - 1$, for $K$-class classification.
 
 **Examples**
 
-- Given an image of one digit written by hand, predict what number it represents. The image represent $1$ out of $10$ digits: $0, 1, 2, \ldots, 9$.
+- Given an image of one digit written by hand, predict which digit it represents. The image represent $1$ out of $10$ digits: $0, 1, 2, \ldots, 9$.
 - Given a patient's record of ECG diagram, predict whether the patient is fine or not, i.e., just $0$ (not sick) or $1$ (sick).
 
 ## Terminologies
+
+::: {.callout-important}
+# Learn the Python interface first
+
+It is important to understand the Python implementation of the two regression models before we can implement them in C++. The Python implementation will give you a clear idea about how to use the two regression models in Python and what are the expected results. The C++ implementation will mimic the Python implementation interface, so it is important to understand the Python implementation first. Please read the file `02-sklearn-implementation.html` to understand the Python implementation of the two regression models. You can also run the code in that file to see how the two regression models work in Python.
+:::
 
 Before going into the mathematics behind these two machine learning models, we need some terminologies. 
 
@@ -173,12 +192,12 @@ for i in range(nrows * ncols):
 plt.tight_layout()
 ```
 
-
 # Mathematics behind the scene
 
-:::{.callout-note}
-# Read 03-maths.html for further details on the mathematics behind the scene.
-It is important to understand the mathematics behind the scene before we can implement the two regression models in C++. The mathematics is not difficult at all. It is just a bit of calculus and linear algebra. You have already learned the mathematics behind linear regression in Assignment 01. We will revisit it and then proceed to logistic regression. You will quickly recognize that although the mathematical formulation behind the logistic regression model is slightly different from that of linear regression model, the gradient descent iteration algorithm shares exactly the same formulation. For this reason, a large portion of what you have done for linear regression can easily carried over to logistic regression.
+::: {.callout-important}
+# Learn the mathematics behind the scene
+
+It is important to understand the mathematics behind the scene before we can implement the two regression models in C++. You have already learned the mathematics behind linear regression in **Assignment 01**. We will revisit it and then proceed to logistic regression. You will quickly recognize that although the mathematical formulation behind the logistic regression model is slightly different from that of linear regression model, the gradient descent iteration algorithm shares exactly the same formulation. For this reason, a large portion of what you have done for linear regression can easily carried over to logistic regression.
 :::
 
 
@@ -190,13 +209,13 @@ You will quickly recognize that although the mathematical formulation behind the
 
 You have heard a lot about the Machine Learning and all the hype about it. In my view^[I have taught "Intro to Machine Learning (ML) \& Artificial Intelligence (AI) 4" (**ENG4200**) and "Advanced ML and AI 5" (**ENG5337**) in the last three academic years], building and training a machine learning model needs $3$ key components:
 
-1. [**Build or define a model**]{style="color:tomato"}
+1. [**Build or define a model**]{style="color:crimson"}
    
-   This step involves how we define a mapping from one space to another space. This mapping depends on a set of parameters which is called **learnable parameters** or **model parameters**.
-2. [**Define how we measure the model**]{style="color:tomato"}
+   This step involves how we define a mapping from one space to another space. This mapping depends on a set of parameters which is called [**learnable parameters**]{style="color:blue"} or [**model parameters**]{style="color:blue"}.
+2. [**Define how we measure the model**]{style="color:crimson"}
 
-    To train the model or to learn the right parameters, we need a way to measure how well the model performs in relative with the given dataset. In this step, we define a loss function which measures how well the model make predictions. We define the loss function so that it serves the following intuiition. The smaller the loss function is, the better the model can make good predictions. The larger the loss function is, the worse the model can make good predictions.
-3. [**Train the model**]{style="color:tomato"} 
+    To train the model or to learn the right parameters, we need a way to measure how well the model performs in relative with the given dataset. In this step, we define a loss function which measures how well the model make predictions. We define the loss function so that it serves the following intuition. [The smaller the loss function is, the better the model can make good predictions. The larger the loss function is, the worse the model can make good predictions. For this reason, we want to minimize the loss function by looking for the right parameters.]{style="color:blue"}
+3. [**Train the model**]{style="color:crimson"} 
    
    To train a model is to look for the model parameters so that the loss function becomes smaller and smaller, leading to a minimization problem. To solve this minimization problem, we need a gradient-based method and there are many such gradient-based methods. 
 
@@ -240,13 +259,15 @@ This is the key algorithm we need to implement for our project assignment.
 
 # Task
 
-You need to design a header-only library that is implemented in an Object-oriented Programming fashion so that it mimics the scikit-learn library in Python. Particularly, the following are the must-do:
+You need to design a header-only library that is implemented in an Object-oriented Programming fashion so that it mimics the **scikit-learn** library in Python. Particularly, the following are the must-do:
 
 ## Basic tasks {#sec-bare-minimum-task}
 
-1. Decide your own OOP design to implement the library and program in general. The design involves how you want to organize classes, inheritence, choices of data types and data storage. **Note** that a functioning program is not necessary a well-designed programe. You need to make your own decision! Try to function as a software engineer 😏😏!!!
+1. Decide your own OOP design to implement the library and program in general. The design involves how you want to organize classes, inheritence, choices of data types and data storage. **Note** that a functioning program is not necessary a well-designed programe. You need to make your own decision. 
+   
+   Try to function as a software engineer 😏😏!!!
 2. Build two classes `LinearRegression` and `LogisticRegression` that mimic their counterparts in Python. These classes must have two important member functions `fit()` and `predict()` with appropriate function parameters.
-3. Decide on how you want to read the `.csv` file. Using either functions or object-oriented programming is fine. Make sure you give convincing reasons for your choice in the report.
+3. Decide on how you want to read the `.csv` file. Using either procedural programming or object-oriented programming is fine. Make sure you explain briefly how you read the `.csv` file in the comments of your code. You can use any library to read the `.csv` file, but you need to explain how you read the `.csv` file in the comments of your code. You can also write your own code to read the `.csv` file if you want to.
 4. Add these two classes into the namespace `linear_model`. This `linear_model` is again a namespace inside a bigger namespace `sklearn_cpp`. This step is to mimic the important   statement in Python. As you can see, the `linear_model` is a submodule of the module `sklearn`.
    
     ```{.python} 
@@ -260,16 +281,42 @@ You need to design a header-only library that is implemented in an Object-orient
 
 ## Build the **header-only** library
 
-1. Based on the code you have achieved in @sec-bare-minimum-task, build [header-only] library by following my provided example. This is a fantastic [header-only] library that you can look at: [xtensor](https://github.com/xtensor-stack/xtensor). All the header files can be found at [header file source code](https://github.com/xtensor-stack/xtensor/tree/master/include/xtensor).
-2. Write a main program that use the [**header-only**] library you have just built to test whether the library works.
+1. Based on the code you have achieved in @sec-bare-minimum-task, build **header-only** library by following my provided example. This is a fantastic **header-only** library that you can look at: [xtensor](https://github.com/xtensor-stack/xtensor). All the header files can be found at [header file source code](https://github.com/xtensor-stack/xtensor/tree/master/include/xtensor).
+2. Write a main program that use the **header-only** library you have just built to test whether the library works.
+
+
+## Applications
+
+You need to use your code to solve three problems in the main function. These three problems are given in the file `02-sklearn-implementation.html` and `02-sklearn-implementation.pdf`. The three problems are as follows:
+
+1. Predict concrete strength using linear regression -- just like example in Python
+2. Predict whether a patient is fine or not given an ECG data -- just like example in Python
+3. Predict the digit written by hand given the image of the digit. This is a more challenging problem. 
+   You can also use the code in `generate_mnist_csv.py` to generate your own `mnist_micro.csv` file if you want to. You can use the dataset `mnist_micro.csv` or `mnist_mini.csv` for this problem. 
+
+:::{.callout-note}
+# Focus on the implementation and reasonable performance
+This is not a Machine Learning course, so the focus is not on the performance of the two regression models. The focus is on how to implement the two regression models in C++ in an Object-oriented Programming fashion. You don't have to beat the accuracy of the two regression models provided in Python code. You just need to make sure that your implementation is correct and can make good predictions on the given datasets. 
+
+The accuracy of the two regression models can be improved by tuning the hyperparameters such as learning rate, number of iterations, regularization strength, etc. However, you don't have to tune these hyperparameters to achieve good performance. You just need to make sure that your implementation is correct and can make good predictions on the same training dataset as the Python code.
+:::
+
+::: {.callout-note}
+# Ask me if you have any questions
+Please feel free to ask me via email or in person if you have any questions about the assignment. Unfortunately, I cannot provide you with the solution code or my opinion on how to implement the code. I can only explain the mathematics behind the scene and the requirements of the assignment.
+:::
 
 # Marking scheme
 
-- Basic tasks: 70/100
-  - Good OOP program design: 15/100
-  - Build two classes and test them correctly: 40/100
-  - Main program to apply the two built classes to two applications: 15/100
-- Build the header-only library: 10/100
-- Report: 0/10
+
+
+1. Basic tasks: 80/100
+   - Good OOP program design: 15/100
+   - Build two classes and test them correctly: 40/100
+   - Main program to apply the two built classes to two applications: 15/100
+2. Build the header-only library: 10/100
+3. Comments and documentation: 20/100
+  
+    There will be no report for this assignment. You just need to write comments in your code to explain how you implement the code and how you read the `.csv` file. The comments should be clear and concise. The code should be well-organized and easy to read. The code should be well-documented with comments explaining the purpose of each function and class, as well as any important details about the implementation.
 
 
