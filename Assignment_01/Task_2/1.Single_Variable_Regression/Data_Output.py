@@ -1,6 +1,6 @@
 import matplotlib
 import matplotlib.pyplot as plt
-matplotlib.use('TkAgg')  # Use a GUI backend
+#matplotlib.use('TkAgg')  # Use a GUI backend
 import numpy as np
 
 # Load data from the file
