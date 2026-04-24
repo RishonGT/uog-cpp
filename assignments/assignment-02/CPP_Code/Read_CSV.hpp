@@ -6,8 +6,22 @@
 #include <sstream>
 #include <string>
 
+/*
+CSV reading strategy (object-oriented, using C++ standard library):
+- A single class method (Read_CSV::read_csv) handles file parsing.
+- The file is opened with std::ifstream, then processed line-by-line via std::getline.
+- Each line is split on commas using std::stringstream.
+- A validation pass tries std::stod on every field; rows with non-numeric data
+    (such as headers) are ignored.
+- For valid rows, values are converted to double, the last value is stored in Y
+    (target), and preceding values are stored in X (features).
+- After reading all rows, X is transposed so each row is one feature and each
+    column is one sample.
+*/
+
 class Read_CSV {
     public:
+    // Static method to read a CSV file and populate feature matrix X and target vector Y
         static void read_csv(const std::string& filename, std::vector<std::vector<double>>& X, std::vector<double>& Y) {
             std::ifstream file(filename);
             if (!file.is_open()) {
@@ -17,6 +31,7 @@ class Read_CSV {
             
 
             std::string line;
+            // Read the file line by line
             while (std::getline(file, line)) {
                 // Skip empty lines or lines containing non-numeric values (e.g., header/string rows)
                 if (line.empty()) {
@@ -31,7 +46,7 @@ class Read_CSV {
                     try {
                         std::stod(check_value);
                     } catch (...) {
-                        has_string_data = true;
+                        has_string_data = true;  // Found non-numeric data, likely a header or string row
                         break;
                     }
                 }
@@ -40,10 +55,12 @@ class Read_CSV {
                     continue;
                 }
 
+                // Process the line to extract features and target
                 std::stringstream ss(line);
                 std::string value;
                 std::vector<double> features;
 
+                // Extract values from the line, converting them to doubles
                 while (std::getline(ss, value, ',')) {
                     features.push_back(std::stod(value));
                 }
@@ -58,6 +75,7 @@ class Read_CSV {
 
             file.close();
 
+            // Check if any data was read
             if (X.empty() || Y.empty()) {
                 std::cerr << "No data read from file: " << filename << std::endl;
             };
