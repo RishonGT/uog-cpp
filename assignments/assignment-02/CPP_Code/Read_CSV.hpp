@@ -18,10 +18,28 @@ class Read_CSV {
 
             std::string line;
             while (std::getline(file, line)) {
-                // skip first line (header)
-                if (line.find("cement") != std::string::npos) {
+                // Skip empty lines or lines containing non-numeric values (e.g., header/string rows)
+                if (line.empty()) {
                     continue;
                 }
+
+                std::stringstream check_ss(line);
+                std::string check_value;
+                bool has_string_data = false;
+
+                while (std::getline(check_ss, check_value, ',')) {
+                    try {
+                        std::stod(check_value);
+                    } catch (...) {
+                        has_string_data = true;
+                        break;
+                    }
+                }
+
+                if (has_string_data) {
+                    continue;
+                }
+
                 std::stringstream ss(line);
                 std::string value;
                 std::vector<double> features;
