@@ -70,5 +70,19 @@ assignments/assignment-02/Python LR/data/mnist_full.csv
 assignments/assignment-02/Python LR/data/mnist_mini.csv
 assignments/assignment-02/Python LR/data/mnist_micro.csv
 
+assignments/assignment-02/CPP_Code/LogicalRegression/Data/D0.csv
+assignments/assignment-02/CPP_Code/LogicalRegression/Data/D1.csv
+assignments/assignment-02/CPP_Code/LogicalRegression/Data/D2.csv
+assignments/assignment-02/CPP_Code/LogicalRegression/Data/D3.csv
+assignments/assignment-02/CPP_Code/LogicalRegression/Data/D4.csv
+assignments/assignment-02/CPP_Code/LogicalRegression/Data/D5.csv
+assignments/assignment-02/CPP_Code/LogicalRegression/Data/D6.csv
+assignments/assignment-02/CPP_Code/LogicalRegression/Data/D7.csv
+assignments/assignment-02/CPP_Code/LogicalRegression/Data/D8.csv
+assignments/assignment-02/CPP_Code/LogicalRegression/Data/D9.csv
+
+assignments/assignment-02/CPP_Code/LogicalRegression/Data/mnist_full.csv
+assignments/assignment-02/CPP_Code/LogicalRegression/Data/mnist_micro.csv
+assignments/assignment-02/CPP_Code/LogicalRegression/Data/mnist_mini.csv
 
 exam/*
