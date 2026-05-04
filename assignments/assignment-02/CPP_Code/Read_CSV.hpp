@@ -7,7 +7,6 @@
 #include <string>
 
 /*
-CSV reading strategy (object-oriented, using C++ standard library):
 - A single class method (Read_CSV::read_csv) handles file parsing.
 - The file is opened with std::ifstream, then processed line-by-line via std::getline.
 - Each line is split on commas using std::stringstream.
