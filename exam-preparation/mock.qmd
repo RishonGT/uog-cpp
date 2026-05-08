@@ -1,0 +1,151 @@
+---
+title: "Assignment 02"
+subtitle: "C++ Object-oriented Programming"
+author:
+    Khiem Nguyen 
+    <br> Lecturer in Multiscale Materials
+    <br> <khiem.nguyen@glasgow.ac.uk>
+author-meta: "Lecturer in Multiscale Materials"
+jupyter: false
+execute: 
+  eval: true
+format: 
+    html:
+        output-file: "mock.html"
+        embed-resources: true
+        grid:
+            body-width: 1600px
+            margin-width: 20px
+            sidebar-width: 200px
+        # page-layout: full
+        # margin-left: 0.5em
+        # margin-right: 0.5em
+       
+        css: style.css
+        number-sections: true
+        number-depth: 3
+        toc: true               # table of content
+        toc-location: left      # table of content on the left
+        toc-title: "Table of Content"   # table of content title
+
+    # pdf:
+    #     output-file: "01-description.pdf"
+    #     embed-resources: true
+    #     geometry:
+    #         - top=24px
+    #         - bottom=24px
+    #         - left=36px
+    #         - right=36px
+    #     css: style.css
+    #     number-sections: true
+    #     number-depth: 2
+    #     toc: true               # table of content
+    #     toc-location: left      # table of content on the left
+    #     toc-title: "Table of Content"   # table of content title
+    #     colorlinks: true
+---
+
+# Foreword
+
+## Structure of the paper exam
+
+The real paper exam contains $3$ questions with the following grade distribution:
+
+| Question    | Grade  |
+|:------------|:-------|
+| Q1: C++ Theory  | 30     |
+| Q2: Writing C++ Code  | 40     |
+| Q3: UML Class diagram  | 30     |
+
+## How to pass the course
+
+Over the the past two years I received two common questions. I believe that it is good to write down my answers so that you understand the course's demand, and my philosophy.
+
+- **Question 1**: Can I pass the entire course with $0$ on the paper exam because I have already achieved $80\%$ on the $50\%$ of the course grade (coursework as continous assessment)
+
+    **Answer**: No, you won't. According to the UoG's guideline, you need to pass any component constituting of more than $30\%$ of the course grade by the minimum **E3** (namely 30 points out of 100 points). In general, I am happy to pass somebody with $28 -- 29$ points with true effort. But if that somebody got $28$ points due to my gentle marking, I still need to fail them. For example, I give $1$ point for every attempt while the answers are all wrong and your grade cannot still cross the threshold $30$ points, you deserve a fail even at the boundary $29$ points. If I pass these students, they will continue to build airplanes, security softwares and then we will all die.
+
+- **Question 2**:  Can I pass the exam by learning everything by heart without understanding the logics or should I understand the logic?
+
+    **Answer**: This question sounds irony but it is completely legitimate. Here is my thought. First, exams are deisnged to test your knowledge, not to test your memory. So, without understanding the logics, I think you will likely fail. Second, I don't believe that that anybody can learn $200$ lines of code by heart and can apply what they memorize to another applications without understanding a single thing. In doing that, you have already understood something. If you believe that you already learned $200$ lines of code by heart but you could not apply what you did to a similar application, then you actually did not learn anything by heart.
+
+## What to review
+
+When I was a student, my professors always answer the question "what to review?" by a single sentence: "Everything we have learned so far". That's all, no further elobration. Personally, I think this should be a standard question for such a question too. What's the point if you can pass an exam by knowing a very specific area. You are educated to work in real-world environment, not to pass the exams.
+
+Saying that, this is my advice. You should at least understand the following important concepts and know how to implement them in C++ code.
+
+- **Basics of C++**: To understand the code and to understand exam's questions, of course you need to know and understand the basics of C++.
+    - [**Iteration statements**]{style="color:red"}: `for` loop`, `while` loop, `do-while` loop
+    - [**Condition statements**]{style="color:red"}: `if` statement, `if-else` statement, `if-else-if` statement
+    - [**Functions**]{style="color:red"}: function definition, parameters versus arguments, return value of a function
+
+- **Intermediate of C++**: The question of C++ theory basically may ask you anything we have learned so far from the lectures. However, these are the concepts you may want to pay good attention on
+    - [**reference**]{style="color:blue"}, [*pass by reference*]{style="color:blue"} versus [*pass by value*]{style="color:blue"} in writing functions
+    - [**pointer**]{style="color:blue"}, [*pass by pointer*]{style="color:blue"} (frequenly called [*pass by address*]{style="color:blue"})
+    - [**template**]{style="color:blue"}: function template, class template
+
+- **Object-oriented programming**: Of course, you should be able to implement very basics of object-oriented programming paradigm.
+    - [**class**]{style="color:brown"}: define a class, write a constructor, write a destructuor, list initializer for constructor, etc.
+    - [**access speficiers**]{style="color:brown"}: `private`, `public` and `protected`. `protected` is rarely used but you may at least need to be aware of this.
+    - [**overriding operators**]{style="color:brown"}: override operator `<<` (output the object), arithmetic operators `+` (addition), `-` (subtraction), `*` (multiplication), etc.
+    - [**inheritance**]{style="color:brown"}: basic concept of inheritance, how to define a child class
+    - [**polymorphism**]{style="color:brown"}: basic concept of polymorphism, how to implement polynomorphism for children classes using `virtual function`.
+    - [**abstract class**]{style="color:brown"}: basic concept of abstract class, how to make a class abstract.
+
+That sounds a lot!?!? **Not really**. If you practice **Question 2:: Writing C++ Code**, you have reviewed most of the important points here.
+
+# Mock exam
+
+The **mock exam** here follows similar structure of the **real exam** with of course different questions in the part asking C++ theories and a different application in the question asking writing C++ code, and in drawing UML class diagram.
+
+:::{.callout-note}
+Note that the **real exam** is **most likely shorter than** the **mock exam** here. The mock exam is longer because I want to provide an opportunity for you to "really learn", not to "remember by heart". 
+
+
+I struggle preparing this mock exam because I don't want it to be so similar to the real paper exam. But I don't want it to be completely different from the real exam. What's the point of a mock exam if it is completely different? [**So you should learn the programming logics behind this mock exam, don't try to learn it by heart.**]{style="color:red"}
+:::
+
+:::{.callout-note}
+The real paper exam is prepared by LaTeX. So you should see the questions like in the past paper exam, namely (a), (b), $\ldots$, (g). However, this mock exam is prepared by using Quarto. [Therefore, the appearance of this mock exam does not look the same as the real exam's. The appearance of the past exam is what you are supposed to see. The content is tremendously helpful for the real paper exam though.]{style="color:blue"}
+:::
+
+## Question 1: C++ Theory
+
+### Question 1A
+    
+You are given the following code snippet:
+
+```{.cpp}
+#include <iostream>
+
+// 1. Increments the value of 'n' by 10 using a pointer.
+void increment_by_pointer(int* ptr) {
+    // Write code here
+}
+
+// 2. Doubles the value of 'n' using a reference.
+void double_by_reference(int& ref) {
+    // Write code here
+}
+
+// 3. Swaps the address held by two pointers (Pointer to Pointer).
+// Note: This should change where the pointers in main point to.
+void swap_pointers(int** ptr1, int** ptr2) {
+    // Write code here
+}
+
+int main() {
+    int a { 5 };
+    int b { 50 };
+    
+    int* pA { &a };
+    int* pB { &b };
+
+    // Task 1: Use incrementByPointer to make 'a' equal to 15.
+    // Task 2: Use doubleByReference to make 'b' equal to 100.
+    // Task 3: Use swapPointers so that pA points to 'b' and pB points to 'a'.
+
+    return 0;
+}
+```
