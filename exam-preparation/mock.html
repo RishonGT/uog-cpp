@@ -2367,10 +2367,7 @@ font-size: 0.90em !important;
   </ul></li>
   <li><a href="#mock-exam" id="toc-mock-exam" class="nav-link" data-scroll-target="#mock-exam"><span class="header-section-number">2</span> Mock exam</a>
   <ul class="collapse">
-  <li><a href="#question-1-c-theory" id="toc-question-1-c-theory" class="nav-link" data-scroll-target="#question-1-c-theory"><span class="header-section-number">2.1</span> Question 1: C++ Theory</a>
-  <ul class="collapse">
-  <li><a href="#question-1a" id="toc-question-1a" class="nav-link" data-scroll-target="#question-1a"><span class="header-section-number">2.1.1</span> Question 1A</a></li>
-  </ul></li>
+  <li><a href="#question-1-c-theory" id="toc-question-1-c-theory" class="nav-link" data-scroll-target="#question-1-c-theory"><span class="header-section-number">2.1</span> Question 1: C++ Theory</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -2476,70 +2473,162 @@ font-size: 0.90em !important;
 <section id="mock-exam" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Mock exam</h1>
 <p>The <strong>mock exam</strong> here follows similar structure of the <strong>real exam</strong> with of course different questions in the part asking C++ theories and a different application in the question asking writing C++ code, and in drawing UML class diagram.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Appearance of the real exam vs the mock exam
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The real paper exam is prepared by LaTeX. So you should see that the questions look like in the past paper exam, namely (a), (b), <span class="math inline">\(\ldots\)</span>, (g). However, this mock exam is prepared by using Quarto. <span style="color:blue">Therefore, the appearance of this mock exam may not look exactly the same as the real one although they are essentially the same. The content is tremendously helpful for the real paper exam though.</span></p>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+<span class="screen-reader-only">Note</span>Learn the logics behind the mock exam
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Note that the <strong>real exam</strong> is <strong>most likely shorter than</strong> the <strong>mock exam</strong> here. The mock exam is longer because I want to provide an opportunity for you to “really learn”, not to “remember by heart”.</p>
-<p>I struggle preparing this mock exam because I don’t want it to be so similar to the real paper exam. But I don’t want it to be completely different from the real exam. What’s the point of a mock exam if it is completely different? <span style="color:red"><strong>So you should learn the programming logics behind this mock exam, don’t try to learn it by heart.</strong></span></p>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The real paper exam is prepared by LaTeX. So you should see the questions like in the past paper exam, namely (a), (b), <span class="math inline">\(\ldots\)</span>, (g). However, this mock exam is prepared by using Quarto. <span style="color:blue">Therefore, the appearance of this mock exam does not look the same as the real exam’s. The appearance of the past exam is what you are supposed to see. The content is tremendously helpful for the real paper exam though.</span></p>
+<ul>
+<li><span style="color:red">Note that the <strong>real exam</strong> is <strong>definitely much shorter than</strong> the <strong>mock exam</strong> here.</span> The mock exam is longer because I want to provide an opportunity for you to “really learn”, not to “remember by heart”.</li>
+<li>I struggle preparing this mock exam because I don’t want it to be so similar to the real paper exam. But I don’t want it to be completely different from the real exam. What’s the point of a mock exam if it is completely different?</li>
+<li><span style="color:red"><strong>So you should learn the programming logics behind this mock exam, don’t try to learn it by heart.</strong></span></li>
+</ul>
 </div>
 </div>
 <section id="question-1-c-theory" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="question-1-c-theory"><span class="header-section-number">2.1</span> Question 1: C++ Theory</h2>
-<section id="question-1a" class="level3" data-number="2.1.1">
-<h3 data-number="2.1.1" class="anchored" data-anchor-id="question-1a"><span class="header-section-number">2.1.1</span> Question 1A</h3>
-<p>You are given the following code snippet:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">// 1. Increments the value of &#39;n&#39; by 10 using a pointer.</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> increment_by_pointer<span class="op">(</span><span class="dt">int</span><span class="op">*</span> ptr<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Write code here</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">// 2. Doubles the value of &#39;n&#39; using a reference.</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> double_by_reference<span class="op">(</span><span class="dt">int</span><span class="op">&amp;</span> ref<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Write code here</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">// 3. Swaps the address held by two pointers (Pointer to Pointer).</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">// Note: This should change where the pointers in main point to.</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> swap_pointers<span class="op">(</span><span class="dt">int</span><span class="op">**</span> ptr1<span class="op">,</span> <span class="dt">int</span><span class="op">**</span> ptr2<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Write code here</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a <span class="op">{</span> <span class="dv">5</span> <span class="op">};</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> b <span class="op">{</span> <span class="dv">50</span> <span class="op">};</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span><span class="op">*</span> pA <span class="op">{</span> <span class="op">&amp;</span>a <span class="op">};</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span><span class="op">*</span> pB <span class="op">{</span> <span class="op">&amp;</span>b <span class="op">};</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Task 1: Use incrementByPointer to make &#39;a&#39; equal to 15.</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Task 2: Use doubleByReference to make &#39;b&#39; equal to 100.</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Task 3: Use swapPointers so that pA points to &#39;b&#39; and pB points to &#39;a&#39;.</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
+<p><strong>(a)</strong>  You are given the following code snippet:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co">// 1. Increments the value of &#39;n&#39; by 10 using a pointer.</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="dt">void</span> increment_by_pointer<span class="op">(</span><span class="dt">int</span><span class="op">*</span> ptr<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>    <span class="co">// Write code here</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="op">}</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co">// 2. Doubles the value of &#39;n&#39; using a reference.</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="dt">void</span> double_by_reference<span class="op">(</span><span class="dt">int</span><span class="op">&amp;</span> ref<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>    <span class="co">// Write code here</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="op">}</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="co">// 3. Swaps the address held by two pointers (Pointer to Pointer).</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="co">// Note: This should change where the pointers in main point to.</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="dt">void</span> swap_pointers<span class="op">(</span><span class="dt">int</span><span class="op">**</span> ptr1<span class="op">,</span> <span class="dt">int</span><span class="op">**</span> ptr2<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>    <span class="co">// Write code here</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="op">}</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a></span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a>    <span class="dt">int</span> a <span class="op">{</span> <span class="dv">5</span> <span class="op">};</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a>    <span class="dt">int</span> b <span class="op">{</span> <span class="dv">50</span> <span class="op">};</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a>    </span>
+<span id="cb1-23"><a href="#cb1-23"></a>    <span class="dt">int</span><span class="op">*</span> pA <span class="op">{</span> <span class="op">&amp;</span>a <span class="op">};</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a>    <span class="dt">int</span><span class="op">*</span> pB <span class="op">{</span> <span class="op">&amp;</span>b <span class="op">};</span></span>
+<span id="cb1-25"><a href="#cb1-25"></a></span>
+<span id="cb1-26"><a href="#cb1-26"></a>    <span class="co">// Task 1: Use increment_by_pointer to make &#39;a&#39; equal to 15.</span></span>
+<span id="cb1-27"><a href="#cb1-27"></a>    <span class="co">// Task 2: Use double_by_reference to make &#39;b&#39; equal to 100.</span></span>
+<span id="cb1-28"><a href="#cb1-28"></a>    <span class="co">// Task 3: Use swap_pointers so that pA points to &#39;b&#39; and pB points to &#39;a&#39;.</span></span>
+<span id="cb1-29"><a href="#cb1-29"></a></span>
+<span id="cb1-30"><a href="#cb1-30"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-31"><a href="#cb1-31"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Question</strong>:</p>
+<ul>
+<li>Write the implementation for <code>increment_by_pointer()</code>, for <code>double_by_reference()</code> and <code>swap_pointers()</code>.</li>
+<li>Write the three lines of code inside <code>main()</code> required to call these functions correctly using the variables provided.</li>
+<li>You only need to missing code – don’t rewrite what have been provided. You may need to write the line number shown on the code for easy navigation.</li>
+</ul>
+<p><strong>(b)</strong>  You are given the following code snippet:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">class</span> Student <span class="op">{</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>    <span class="bu">std::</span>string name<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>    <span class="at">mutable</span> <span class="dt">int</span> access_count <span class="op">{</span> <span class="dv">0</span> <span class="op">};</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>    Student<span class="op">(</span><span class="bu">std::</span>string name<span class="op">)</span> <span class="op">:</span> name <span class="op">{</span>name<span class="op">}</span> <span class="op">{}</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a></span>
+<span id="cb2-12"><a href="#cb2-12"></a>    <span class="co">// A: Returns the name</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>    <span class="bu">std::</span>string get_name<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> </span>
+<span id="cb2-14"><a href="#cb2-14"></a>        access_count<span class="op">++;</span> </span>
+<span id="cb2-15"><a href="#cb2-15"></a>        <span class="cf">return</span> name<span class="op">;</span> </span>
+<span id="cb2-16"><a href="#cb2-16"></a>    <span class="op">}</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a></span>
+<span id="cb2-18"><a href="#cb2-18"></a>    <span class="co">// B: Sets a new name</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a>    <span class="dt">void</span> set_name<span class="op">(</span><span class="bu">std::</span>string n<span class="op">)</span> <span class="op">{</span> </span>
+<span id="cb2-20"><a href="#cb2-20"></a>        name <span class="op">=</span> n<span class="op">;</span> </span>
+<span id="cb2-21"><a href="#cb2-21"></a>    <span class="op">}</span></span>
+<span id="cb2-22"><a href="#cb2-22"></a><span class="op">};</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a></span>
+<span id="cb2-24"><a href="#cb2-24"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-25"><a href="#cb2-25"></a>    Student std_01 <span class="op">{</span><span class="st">&quot;Tony Stark&quot;</span><span class="op">};</span></span>
+<span id="cb2-26"><a href="#cb2-26"></a>    <span class="at">const</span> Student std_02 <span class="op">{</span><span class="st">&quot;Hulk&quot;</span><span class="op">};</span></span>
+<span id="cb2-27"><a href="#cb2-27"></a></span>
+<span id="cb2-28"><a href="#cb2-28"></a>    <span class="co">// Line 1: Pointer to a constant Student</span></span>
+<span id="cb2-29"><a href="#cb2-29"></a>    <span class="at">const</span> Student<span class="op">*</span> ptr <span class="op">=</span> <span class="op">&amp;</span>s1<span class="op">;</span></span>
+<span id="cb2-30"><a href="#cb2-30"></a>    ptr<span class="op">-&gt;</span>set_name<span class="op">(</span><span class="st">&quot;New Name&quot;</span><span class="op">);</span></span>
+<span id="cb2-31"><a href="#cb2-31"></a></span>
+<span id="cb2-32"><a href="#cb2-32"></a>    <span class="co">// Line 2: Constant pointer to a Student</span></span>
+<span id="cb2-33"><a href="#cb2-33"></a>    Student<span class="op">*</span> <span class="at">const</span> cptr <span class="op">=</span> <span class="op">&amp;</span>s2<span class="op">;</span></span>
+<span id="cb2-34"><a href="#cb2-34"></a>    cptr<span class="op">-&gt;</span>set_name<span class="op">(</span><span class="st">&quot;New Name&quot;</span><span class="op">);</span></span>
+<span id="cb2-35"><a href="#cb2-35"></a></span>
+<span id="cb2-36"><a href="#cb2-36"></a>    <span class="co">// Line 3: Method call</span></span>
+<span id="cb2-37"><a href="#cb2-37"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> s2<span class="op">.</span>get_name<span class="op">()</span> <span class="op">&lt;&lt;</span> <span class="st">&quot; accessed &quot;</span> <span class="op">&lt;&lt;</span> <span class="bu">std::</span>endl<span class="op">;</span></span>
+<span id="cb2-38"><a href="#cb2-38"></a></span>
+<span id="cb2-39"><a href="#cb2-39"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-40"><a href="#cb2-40"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Question</strong></p>
+<ul>
+<li><strong>Analyze Line 1 and Line 2</strong>: Both lines will cause a compilation error. Explain the difference between <code>const Student*</code> and <code>Student* const</code> and why each specific line fails.</li>
+<li><strong>Analyze Method A</strong> (<code>get_name</code>): Even though this method is marked <code>const</code>, it modifies <code>access_count</code>. Explain why this code <strong>will</strong> compile and what the <code>mutable</code> keyword achieves in this context. What happens if we remove <code>mutable</code>?</li>
+<li><strong>Analyze Line 3</strong>: If the <code>const</code> qualifier were removed from the declaration of <code>get_name()</code>. Line 3 would fail to compile. Explain why a <code>const</code> object like <code>std_02</code> can only call <code>const</code> member functions.</li>
+</ul>
+<p><strong>(c)</strong>  You are given the following code snippet:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co">// --- Write your Function Template here ---</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a></span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co">// -----------------------------------------</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="kw">struct</span> Box <span class="op">{</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>    <span class="dt">int</span> volume<span class="op">;</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a>    <span class="co">// Overloading the &gt; operator for Box comparison</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>    <span class="dt">bool</span> <span class="kw">operator</span><span class="op">&gt;(</span><span class="at">const</span> Box<span class="op">&amp;</span> other<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>        <span class="cf">return</span> volume <span class="op">&gt;</span> other<span class="op">.</span>volume<span class="op">;</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a>    <span class="op">}</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="op">};</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a>    <span class="co">// Test Case 1: Integers</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a>    <span class="dt">int</span> a <span class="op">{</span> <span class="dv">10</span> <span class="op">},</span> b <span class="op">{</span> <span class="dv">20</span> <span class="op">};</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Max int: &quot;</span> <span class="op">&lt;&lt;</span> find_max<span class="op">(</span>a<span class="op">,</span> b<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="ch">&#39;</span><span class="sc">\n</span><span class="ch">&#39;</span><span class="op">;</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a></span>
+<span id="cb3-22"><a href="#cb3-22"></a>    <span class="co">// Test Case 2: Strings</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a>    <span class="bu">std::</span>string s1 <span class="op">{</span> <span class="st">&quot;Apple&quot;</span> <span class="op">},</span> s2 <span class="op">{</span> <span class="st">&quot;Zebra&quot;</span> <span class="op">};</span></span>
+<span id="cb3-24"><a href="#cb3-24"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Max string: &quot;</span> <span class="op">&lt;&lt;</span> find_max<span class="op">(</span>s1<span class="op">,</span> s2<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="ch">&#39;</span><span class="sc">\n</span><span class="ch">&#39;</span><span class="op">;</span></span>
+<span id="cb3-25"><a href="#cb3-25"></a></span>
+<span id="cb3-26"><a href="#cb3-26"></a>    <span class="co">// Test Case 3: Custom Objects</span></span>
+<span id="cb3-27"><a href="#cb3-27"></a>    Box b1 <span class="op">{</span> <span class="dv">500</span> <span class="op">},</span> b2 <span class="op">{</span> <span class="dv">1000</span> <span class="op">};</span></span>
+<span id="cb3-28"><a href="#cb3-28"></a>    Box biggest <span class="op">=</span> find_max<span class="op">(</span>b1<span class="op">,</span> b2<span class="op">);</span></span>
+<span id="cb3-29"><a href="#cb3-29"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Max Box volume: &quot;</span> <span class="op">&lt;&lt;</span> biggest<span class="op">.</span>volume <span class="op">&lt;&lt;</span> <span class="ch">&#39;</span><span class="sc">\n</span><span class="ch">&#39;</span><span class="op">;</span></span>
+<span id="cb3-30"><a href="#cb3-30"></a></span>
+<span id="cb3-31"><a href="#cb3-31"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-32"><a href="#cb3-32"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Question</strong></p>
+<ul>
+<li>Write the full definition of the function template <code>find_max</code>. It should take two parameters of the same template type by reference to const and return the result by value.</li>
+<li>In <strong>Test Case 3</strong>, the code compiles because the <code>Box</code> structu has overloaded <code>operator&gt;</code>. If this operator was <strong>not</strong> overloaded, what specific error would the compiler generate when trying to instatiate the template?</li>
+<li>If the function was called as <code>find_max(41.3, 3.14)</code>, the compiler would fail to deduce the template argument. Eplain why this happens and provide two ways a developer could fix the call in <code>main()</code> witout changing the template definition.</li>
+</ul>
 </section>
 </section>
 

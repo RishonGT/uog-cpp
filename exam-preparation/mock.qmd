@@ -11,6 +11,7 @@ execute:
   eval: true
 format: 
     html:
+        code-line-numbers: true
         output-file: "mock.html"
         embed-resources: true
         grid:
@@ -99,22 +100,25 @@ That sounds a lot!?!? **Not really**. If you practice **Question 2:: Writing C++
 
 The **mock exam** here follows similar structure of the **real exam** with of course different questions in the part asking C++ theories and a different application in the question asking writing C++ code, and in drawing UML class diagram.
 
-:::{.callout-note}
-Note that the **real exam** is **most likely shorter than** the **mock exam** here. The mock exam is longer because I want to provide an opportunity for you to "really learn", not to "remember by heart". 
+:::{.callout-warning}
+# Appearance of the real exam vs the mock exam
 
-
-I struggle preparing this mock exam because I don't want it to be so similar to the real paper exam. But I don't want it to be completely different from the real exam. What's the point of a mock exam if it is completely different? [**So you should learn the programming logics behind this mock exam, don't try to learn it by heart.**]{style="color:red"}
+The real paper exam is prepared by LaTeX. So you should see that the questions look like in the past paper exam, namely (a), (b), $\ldots$, (g). However, this mock exam is prepared by using Quarto. [Therefore, the appearance of this mock exam may not look exactly the same as the real one although they are essentially the same. The content is tremendously helpful for the real paper exam though.]{style="color:blue"}
 :::
 
 :::{.callout-note}
-The real paper exam is prepared by LaTeX. So you should see the questions like in the past paper exam, namely (a), (b), $\ldots$, (g). However, this mock exam is prepared by using Quarto. [Therefore, the appearance of this mock exam does not look the same as the real exam's. The appearance of the past exam is what you are supposed to see. The content is tremendously helpful for the real paper exam though.]{style="color:blue"}
+# Learn the logics behind the mock exam
+- [Note that the **real exam** is **definitely much shorter than** the **mock exam** here.]{style="color:red"} The mock exam is longer because I want to provide an opportunity for you to "really learn", not to "remember by heart".
+- I struggle preparing this mock exam because I don't want it to be so similar to the real paper exam. But I don't want it to be completely different from the real exam. What's the point of a mock exam if it is completely different? 
+- [**So you should learn the programming logics behind this mock exam, don't try to learn it by heart.**]{style="color:red"}
 :::
 
 ## Question 1: C++ Theory
 
-### Question 1A
-    
-You are given the following code snippet:
+
+### Question A
+
+**(a)**&nbsp; You are given the following code snippet:
 
 ```{.cpp}
 #include <iostream>
@@ -142,10 +146,117 @@ int main() {
     int* pA { &a };
     int* pB { &b };
 
-    // Task 1: Use incrementByPointer to make 'a' equal to 15.
-    // Task 2: Use doubleByReference to make 'b' equal to 100.
-    // Task 3: Use swapPointers so that pA points to 'b' and pB points to 'a'.
+    // Task 1: Use increment_by_pointer to make 'a' equal to 15.
+    // Task 2: Use double_by_reference to make 'b' equal to 100.
+    // Task 3: Use swap_pointers so that pA points to 'b' and pB points to 'a'.
 
     return 0;
 }
 ```
+
+**Question**: 
+
+- Write the implementation for `increment_by_pointer()`, for `double_by_reference()` and `swap_pointers()`. 
+- Write the three lines of code inside `main()` required to call these functions correctly using the variables provided. 
+- You only need to missing code -- don't rewrite what have been provided. You may need to write the line number shown on the code for easy navigation.
+
+
+**(b)**&nbsp; You are given the following code snippet:
+
+```{.cpp}
+#include <iostream>
+#include <string>
+
+class Student {
+private:
+    std::string name;
+    mutable int access_count { 0 };
+
+public:
+    Student(std::string name) : name {name} {}
+
+    // A: Returns the name
+    std::string get_name() const { 
+        access_count++; 
+        return name; 
+    }
+
+    // B: Sets a new name
+    void set_name(std::string n) { 
+        name = n; 
+    }
+};
+
+int main() {
+    Student std_01 {"Tony Stark"};
+    const Student std_02 {"Hulk"};
+
+    // Line 1: Pointer to a constant Student
+    const Student* ptr = &s1;
+    ptr->set_name("New Name");
+
+    // Line 2: Constant pointer to a Student
+    Student* const cptr = &s2;
+    cptr->set_name("New Name");
+
+    // Line 3: Method call
+    std::cout << s2.get_name() << " accessed " << std::endl;
+
+    return 0;
+}
+```
+
+**Question**
+
+- **Analyze Line 1 and Line 2**: Both lines will cause a compilation error. Explain the difference between `const Student*` and `Student* const` and why each specific line fails.
+- **Analyze Method A** (`get_name`): Even though this method is marked `const`, it modifies `access_count`. Explain why this code **will** compile and what the `mutable` keyword achieves in this context. What happens if we remove `mutable`?
+- **Analyze Line 3**: If the `const` qualifier were removed from the declaration of `get_name()`. Line 3 would fail to compile. Explain why a `const` object like `std_02` can only call `const` member functions.
+
+
+### Answer
+
+
+
+
+**(c)**&nbsp; You are given the following code snippet:
+
+```{.cpp}
+#include <iostream>
+#include <string>
+
+// --- Write your Function Template here ---
+
+
+// -----------------------------------------
+
+struct Box {
+    int volume;
+    // Overloading the > operator for Box comparison
+    bool operator>(const Box& other) const {
+        return volume > other.volume;
+    }
+};
+
+int main() {
+    // Test Case 1: Integers
+    int a { 10 }, b { 20 };
+    std::cout << "Max int: " << find_max(a, b) << '\n';
+
+    // Test Case 2: Strings
+    std::string s1 { "Apple" }, s2 { "Zebra" };
+    std::cout << "Max string: " << find_max(s1, s2) << '\n';
+
+    // Test Case 3: Custom Objects
+    Box b1 { 500 }, b2 { 1000 };
+    Box biggest = find_max(b1, b2);
+    std::cout << "Max Box volume: " << biggest.volume << '\n';
+
+    return 0;
+}
+```
+
+**Question**
+
+- Write the full definition of the function template `find_max`. It should take two parameters of the same template type by reference to const and return the result by value.
+- In **Test Case 3**, the code compiles because the `Box` structu has overloaded `operator>`. If this operator was **not** overloaded, what specific error would the compiler generate when trying to instatiate the template?
+- If the function was called as `find_max(41.3, 3.14)`, the compiler would fail to deduce the template argument. Eplain why this happens and provide two ways a developer could fix the call in `main()` witout changing the template definition.
