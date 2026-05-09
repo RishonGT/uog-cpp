@@ -5274,6 +5274,7 @@ font-size: 0.90em !important;
   <li><a href="#question-c" id="toc-question-c" class="nav-link" data-scroll-target="#question-c">Question (c)</a></li>
   <li><a href="#answer-c" id="toc-answer-c" class="nav-link" data-scroll-target="#answer-c">Answer (c)</a></li>
   <li><a href="#question-d" id="toc-question-d" class="nav-link" data-scroll-target="#question-d">Question (d)</a></li>
+  <li><a href="#answer-d" id="toc-answer-d" class="nav-link" data-scroll-target="#answer-d">Answer (d)</a></li>
   </ul></li>
   <li><a href="#question-2-writing-c" id="toc-question-2-writing-c" class="nav-link" data-scroll-target="#question-2-writing-c"><span class="header-section-number">2.2</span> Question 2: Writing C++</a>
   <ul class="collapse">
@@ -5287,7 +5288,7 @@ font-size: 0.90em !important;
   </ul></li>
   </ul></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="../mock.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
 </div>
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
 </div>
@@ -5675,7 +5676,33 @@ font-size: 0.90em !important;
 <ol type="1">
 <li><strong>Predict the output</strong>: Write down the exact console output for the liens marked <code>1</code>, <code>2</code>, and <code>3</code>.</li>
 <li><strong>Explain the difference</strong>: Why does <code>payment_ptr-&gt;identify()</code> produce a different result style compared to <code>payment_ptr-&gt;process()</code>? Explain the role of virtual table in your answer.</li>
-<li></li>
+<li>The <code>override</code> keyword: In the <code>CreditCard</code> class, the <code>process</code> function uses the <code>override</code> keyword. Explain one specific benefit of using this keyword for a developer.</li>
+<li>The Destructor: In the <code>Payment</code> class, the destructor is marked <code>virtual</code>. What would happen if we removed the <code>virtual keyword</code> and executed <code>delete payment_ptr</code>?</li>
+</ol>
+</section>
+<section id="answer-d" class="level3">
+<h3 class="anchored" data-anchor-id="answer-d">Answer (d)</h3>
+<ol type="1">
+<li><p>The output on the console <code>{.cpp}     Standard Payment     Processing credit card via secure gateway...     Credit Card</code></p>
+<p>Explanation:</p>
+<ul>
+<li><code>Standard Payment</code> – static binding uses pointer type</li>
+<li><code>Processing credit card via secure gateway...</code> – Dynamic binding uses the actual object type</li>
+<li><code>Credit Card</code> – static binding on a derived pointer</li>
+</ul></li>
+<li><p>Virtual Table explanation</p>
+<ul>
+<li><code>indentify()</code> is a non-virtual function. The compiler uses <strong>static binding</strong>, meaning it looks at the type of the point (<code>Payment*</code>) at <strong>compile-time</strong>.</li>
+<li><code>process()</code> is a virtual function. The compiler uses <strong>dynamic binding</strong>. At <strong>runtime</strong>, the program follows the object’s internal <strong>vpointer</strong> (<strong>v</strong> stands for virtual) to the <strong>vtable</strong>, which points to the <code>CreditCard</code> implementation.</li>
+</ul></li>
+<li><p>Override benefit</p>
+<ul>
+<li>It provides a compiler check. If the signature in the derived class does not exactly match a virtual function in the base class (e.g., a typo in the name or a missing <code>const</code>), the compiler will trigger an error instead of silently creating a new function.</li>
+</ul></li>
+<li><p>Virtual destructor: We have not learned this in the lectures, so don’t worry! I explain here for your knowledge.</p>
+<ul>
+<li>If the destructor is not virtual, deleting a <code>Derived</code> object through a <code>Base*</code> results in <strong>undefined behavior</strong>. Usually, only the <code>Base</code> part of the object is destroyed, leading to a memory leak if the <code>Derived</code> class allocated its own resources.</li>
+</ul></li>
 </ol>
 </section>
 </section>

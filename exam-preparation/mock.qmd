@@ -29,21 +29,22 @@ format:
         toc-location: left      # table of content on the left
         toc-title: "Table of Content"   # table of content title
 
-    # pdf:
-    #     output-file: "01-description.pdf"
-    #     embed-resources: true
-    #     geometry:
-    #         - top=24px
-    #         - bottom=24px
-    #         - left=36px
-    #         - right=36px
-    #     css: style.css
-    #     number-sections: true
-    #     number-depth: 2
-    #     toc: true               # table of content
-    #     toc-location: left      # table of content on the left
-    #     toc-title: "Table of Content"   # table of content title
-    #     colorlinks: true
+    pdf:
+        code-line-numbers: false
+        output-file: "mock.pdf"
+        embed-resources: true
+        geometry:
+            - top=24px
+            - bottom=24px
+            - left=36px
+            - right=36px
+        css: style.css
+        number-sections: true
+        number-depth: 2
+        toc: true               # table of content
+        toc-location: left      # table of content on the left
+        toc-title: "Table of Content"   # table of content title
+        colorlinks: true
 ---
 
 # Foreword
@@ -398,7 +399,35 @@ int main() {
 
 1. **Predict the output**: Write down the exact console output for the liens marked `1`, `2`, and `3`.
 2. **Explain the difference**: Why does `payment_ptr->identify()` produce a different result style compared to `payment_ptr->process()`? Explain the role of virtual table in your answer.
-3. 
+3. The `override` keyword: In the `CreditCard` class, the `process` function uses the `override` keyword. Explain one specific benefit of using this keyword for a developer.
+4. The Destructor: In the `Payment` class, the destructor is marked `virtual`. What would happen if we removed the `virtual keyword` and executed `delete payment_ptr`?
+
+### Answer (d)
+
+1. The output on the console
+    ```{.cpp}
+    Standard Payment
+    Processing credit card via secure gateway...
+    Credit Card
+    ```
+
+    Explanation:
+    - `Standard Payment` -- static binding uses pointer type
+    - `Processing credit card via secure gateway...` -- Dynamic binding uses the actual object type
+    - `Credit Card` -- static binding on a derived pointer
+
+2. Virtual Table explanation
+
+    - `indentify()` is a non-virtual function. The compiler uses **static binding**, meaning it looks at the type of the point (`Payment*`) at **compile-time**.
+    - `process()` is a virtual function. The compiler uses **dynamic binding**. At **runtime**, the program follows the object's internal **vpointer** (**v** stands for virtual) to the **vtable**, which points to the `CreditCard` implementation.
+
+3. Override benefit
+    
+    - It provides a compiler check. If the signature in the derived class does not exactly match a virtual function in the base class (e.g., a typo in the name or a missing `const`), the compiler will trigger an error instead of silently creating a new function.
+
+4. Virtual destructor: We have not learned this in the lectures, so don't worry! I explain here for your knowledge.
+
+    - If the destructor is not virtual, deleting a `Derived` object through a `Base*` results in **undefined behavior**. Usually, only the `Base` part of the object is destroyed, leading to a memory leak if the `Derived` class allocated its own resources.
 
 ## Question 2: Writing C++ 
 
