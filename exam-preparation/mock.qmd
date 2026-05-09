@@ -265,7 +265,7 @@ int main() {
         - Read right-to-left: `cptr` is a *const pointer* to a Student.
         - Meaning: The pointer itself is stuck. We can change the data of the student it points to, but we can never poit it to someone else (another student). The "Address" is frozen. 
 
-    [Coming back to `*Student* const cptr`]{style="color:brown"}: This is a **constant pointer**. We cannot change where `cptr` points to (after initialization), but the Student object `cptr` points to can (ordinarily) change its data. However, since `std_02` is declared `const`, a non-const pointer cannot point to it.
+    [Coming back to `Student* const cptr`]{style="color:brown"}: This is a **constant pointer**. We cannot change where `cptr` points to (after initialization), but the Student object `cptr` points to can (ordinarily) change its data. However, since `std_02` is declared `const`, a non-const pointer cannot point to it.
 
 2. Task 2 (`mutable`): Coming back to `*Student* const cptr`Since we have not studied `mutable`, this mock question is for your knowlege -- no real question on this keyword.
 
@@ -339,11 +339,13 @@ int main() {
 3. Ambiguous Deduction:
 
     - Why: `10` is an `int` and `3.14` is a `double`. The compiler cannot decide if `T` should be `int` or `double` because the template expects both parameters cannot be the exact same type `T`.
+
     - Fix Option 1 (explicit instantiation):
 
         ```{.cpp}
         find_max<double>(10, 3.14);
         ```
+
     - Fix Option 2 (Casting): 
 
         ```{.cpp}
@@ -405,6 +407,7 @@ int main() {
 ### Answer (d)
 
 1. The output on the console
+
     ```{.cpp}
     Standard Payment
     Processing credit card via secure gateway...
