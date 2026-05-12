@@ -1,30 +1,39 @@
 #include "sklearn_logistical.hpp"
-#include "readCSV.hpp"
+#include "../Read_CSV.hpp"
 
 #include <iostream>
 #include <sstream>
 #include <vector>
 
 
+
 int main()
 {
-    ReadCSV ecgdata("../../data/ecg.csv", ',', 0);
-    //ecgdata.printfilename();
-    auto dataframe {ecgdata.readCSV()};
+    DataFrame ecg_data;
+    Read_CSV::read_csv("../../data/ecg.csv",ecg_data.feature,ecg_data.label);
+    std::cout << "Rows: "<< ecg_data.row() <<" "<< "Cols: "<< ecg_data.col() << '\n';
 
-    size_t x_rows {dataframe.X.size()};
-    size_t x_cols {dataframe.X[0].size()};
-    std::cout << "X Rows: "<< x_rows <<" "<< "Cols: "<< x_cols << "\n";
+    for(size_t i{0}; i <= 2; i++)
+    {
+        for(size_t j{0}; j <= 10; j++)
+        {
+            std::cout << ecg_data.feature[j][i] << ' ';
+        }
+        std::cout << "...\n";
+    }
 
-    size_t y_rows {dataframe.Y.size()};
+    /*Testing*/
+    DataFrame test_data;
+    LogisticalRegression test_class;
+    test_data.feature = {{1.0,2.0,3.0},{1.0,2.0,3.0},{1.0,2.0,3.0}};
+    test_data.weight = {0.2,0.2,0.2};
+    test_data.label = {1, 1, 1};
+    test_data.bias = 0.5;
 
-    std::cout << "Y Rows: " << y_rows << "\n";
-
-    //set weights and learning rate
-    size_t features {x_cols-1};
-    linear_model::LogisticalRegression logistical(features, 0.01);
+    size_t row_index {1};
+    double z {test_class.predict(test_data.feature,test_data.weight,test_data.bias,row_index)};
+    std::cout << "Z: " << z << '\n';
+    test_class.train(test_data.feature,test_data.label,test_data.weight,test_data.bias);
     
-
-
     return 0;
 }
