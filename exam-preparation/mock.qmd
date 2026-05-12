@@ -448,6 +448,72 @@ int main() {
 
     - If the destructor is not virtual, deleting a `Derived` object through a `Base*` results in **undefined behavior**. Usually, only the `Base` part of the object is destroyed, leading to a memory leak if the `Derived` class allocated its own resources.
 
+### Question (e)
+
+You are given the following code snippet:
+
+```{.cpp}
+#include <iostream>
+#include <vector>
+#include <string>
+
+struct Student {
+    std::string name;
+    double grade;
+};
+
+int main() {
+    std::vector<Student> class_list {
+        {"Alice", 75.0},
+        {"Bob", 42.5},
+        {"Charlie", 88.0}
+    };
+
+    // Task 1: Fix this loop
+    // Logic: If a grade is below 50, "curve" it by adding 10 points.
+    for (Student s : class_list) {
+        if (s.grade < 50.0) {
+            s.grade += 10.0;
+        }
+    }
+
+    // Task 2: Fix this loop
+    // Logic: Print all student names and grades.
+    std::cout << "Class List:" << '\n';
+    for (Student s : class_list) {
+        std::cout << s.name << ": " << s.grade << '\n';
+    }
+
+    return 0;
+}
+```
+
+**Question**
+
+1. **Identify the Logic Error in Task 1**: After the first loop finishes, Bob's grade in the `class_list` vector is still `42.5`. Explain why the modification failed and rewrite the loop header (`for (...)`) to fix it.
+2. **Optimize Task 2**: The current loop in Task 2 works, but it is inefficient for a vector of objects. Explain why it is inefficient and rewrite the loop header to follow C++ best practices for read-only access.
+3. **Advanced Scenario**: If you wanted to iterate through `class_list` but ensure that you cannot accidentally modify any student data within the loop body, what specific keywords would you use in the loop declaration?
+
+### Answer (e)
+
+1. **Pass by Value versus Pass by Reference**
+    - **Reasoning**: The loop variable `Student s` is a **copy** of the element in the vector. Modifications are made to the local copy, which is destroyed at the end of each iteration, leaving the original vector unchanged.
+    - **Fix**:
+
+        ```{.cpp}
+        for (Student& s: class_list)    // use a reference
+        ```
+
+2. **Efficiency**
+    - `Student` contains a `std::string`. Passing by value triggers a copy constructor for every iteration, which involves dynamic memory allocation. This is computationally expensive.
+    - **Fix**:
+
+        ```{.cpp}
+        // use const reference, make sure we don't change the values
+        for (const Student& s: class_list)  
+        ```
+
+3. `const` **correctness**: Using keyword `const` and reference ampersand (`&`) is the way to go. By using `const Student&` _we ensure no copies are made_ **and** _the compiler will prevent any code inside the loop from calling non-const methods or modifying member variables_.
 
 ## Question 2: Writing C++ 
 

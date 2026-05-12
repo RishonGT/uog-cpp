@@ -5479,6 +5479,8 @@ font-size: 0.90em !important;
   <li><a href="#answer-c" id="toc-answer-c" class="nav-link" data-scroll-target="#answer-c">Answer (c)</a></li>
   <li><a href="#question-d" id="toc-question-d" class="nav-link" data-scroll-target="#question-d">Question (d)</a></li>
   <li><a href="#answer-d" id="toc-answer-d" class="nav-link" data-scroll-target="#answer-d">Answer (d)</a></li>
+  <li><a href="#question-e" id="toc-question-e" class="nav-link" data-scroll-target="#question-e">Question (e)</a></li>
+  <li><a href="#answer-e" id="toc-answer-e" class="nav-link" data-scroll-target="#answer-e">Answer (e)</a></li>
   </ul></li>
   <li><a href="#question-2-writing-c" id="toc-question-2-writing-c" class="nav-link" data-scroll-target="#question-2-writing-c"><span class="header-section-number">2.2</span> Question 2: Writing C++</a>
   <ul class="collapse">
@@ -5936,6 +5938,67 @@ Note
 </ul></li>
 </ol>
 </section>
+<section id="question-e" class="level3">
+<h3 class="anchored" data-anchor-id="question-e">Question (e)</h3>
+<p>You are given the following code snippet:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;vector&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Student <span class="op">{</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>string name<span class="op">;</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> grade<span class="op">;</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span>Student<span class="op">&gt;</span> class_list <span class="op">{</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span><span class="st">&quot;Alice&quot;</span><span class="op">,</span> <span class="fl">75.0</span><span class="op">},</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span><span class="st">&quot;Bob&quot;</span><span class="op">,</span> <span class="fl">42.5</span><span class="op">},</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span><span class="st">&quot;Charlie&quot;</span><span class="op">,</span> <span class="fl">88.0</span><span class="op">}</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Task 1: Fix this loop</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Logic: If a grade is below 50, &quot;curve&quot; it by adding 10 points.</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>Student s <span class="op">:</span> class_list<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>s<span class="op">.</span>grade <span class="op">&lt;</span> <span class="fl">50.0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>            s<span class="op">.</span>grade <span class="op">+=</span> <span class="fl">10.0</span><span class="op">;</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Task 2: Fix this loop</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Logic: Print all student names and grades.</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Class List:&quot;</span> <span class="op">&lt;&lt;</span> <span class="ch">&#39;</span><span class="sc">\n</span><span class="ch">&#39;</span><span class="op">;</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>Student s <span class="op">:</span> class_list<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> s<span class="op">.</span>name <span class="op">&lt;&lt;</span> <span class="st">&quot;: &quot;</span> <span class="op">&lt;&lt;</span> s<span class="op">.</span>grade <span class="op">&lt;&lt;</span> <span class="ch">&#39;</span><span class="sc">\n</span><span class="ch">&#39;</span><span class="op">;</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Question</strong></p>
+<ol type="1">
+<li><strong>Identify the Logic Error in Task 1</strong>: After the first loop finishes, Bob’s grade in the <code>class_list</code> vector is still <code>42.5</code>. Explain why the modification failed and rewrite the loop header (<code>for (...)</code>) to fix it.</li>
+<li><strong>Optimize Task 2</strong>: The current loop in Task 2 works, but it is inefficient for a vector of objects. Explain why it is inefficient and rewrite the loop header to follow C++ best practices for read-only access.</li>
+<li><strong>Advanced Scenario</strong>: If you wanted to iterate through <code>class_list</code> but ensure that you cannot accidentally modify any student data within the loop body, what specific keywords would you use in the loop declaration?</li>
+</ol>
+</section>
+<section id="answer-e" class="level3">
+<h3 class="anchored" data-anchor-id="answer-e">Answer (e)</h3>
+<ol type="1">
+<li><strong>Pass by Value versus Pass by Reference</strong>
+<ul>
+<li><p><strong>Reasoning</strong>: The loop variable <code>Student s</code> is a <strong>copy</strong> of the element in the vector. Modifications are made to the local copy, which is destroyed at the end of each iteration, leaving the original vector unchanged.</p></li>
+<li><p><strong>Fix</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span>Student<span class="op">&amp;</span> s<span class="op">:</span> class_list<span class="op">)</span>    <span class="co">// use a reference</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ul></li>
+<li><strong>Efficiency</strong>
+<ul>
+<li><p><code>Student</code> contains a <code>std::string</code>. Passing by value triggers a copy constructor for every iteration, which involves dynamic memory allocation. This is computationally expensive.</p></li>
+<li><p><strong>Fix</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="at">const</span> Student<span class="op">&amp;</span> s<span class="op">:</span> class_list<span class="op">)</span>  <span class="co">// use const reference, make sure we don&#39;t change the values</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ul></li>
+<li><code>const</code> <strong>correctness</strong>: Using keyword <code>const</code> and reference ampersand (<code>&amp;</code>) is the way to go. By using <code>const Student&amp;</code> <em>we ensure no copies are made</em> <strong>and</strong> <em>the compiler will prevent any code inside the loop from calling non-const methods or modifying member variables</em>.</li>
+</ol>
+</section>
 </section>
 <section id="question-2-writing-c" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="question-2-writing-c"><span class="header-section-number">2.2</span> Question 2: Writing C++</h2>
@@ -5958,13 +6021,13 @@ z_1 \cdot z_2 = (a_1 \cdot a_2 - b_1 \cdot b_2) + (a_1 \cdot b_2 + a_2 \cdot b_1
 <li><p>Write a constructor receiving two input arguments <strong><code>re</code></strong> and <strong><code>im</code></strong> with default value <span class="math inline">\(0\)</span> to initialize the data members described in (a). Use list initialization (not the assignment statements) to initialize these data members.</p></li>
 <li><p>Write a function overloading the operator <strong><code>&lt;&lt;</code></strong> of the object <strong><code>std::ostream</code></strong> so that the statement “<code>std::cout &lt;&lt; comp_num;</code>” works for the <strong><code>ComplexNumber</code></strong> object <strong><code>comp_num</code></strong>. You must decide the print-out format that makes sense to the user. For example, consider the following numbers: <span class="math inline">\(1 + 0\,\mathrm{i} = 1\)</span> and <span class="math inline">\(0 + 2\,\mathrm{i} = 2\,\mathrm{i}\)</span>.</p></li>
 <li><p>Write functions to overload the operator <strong><code>+</code></strong> (plus sign) and the operator <strong><code>*</code></strong> (multiplication sign) to reflect the addition and multiplication of two complex numbers, respectively. Essentially, the following statements should work after overloading the operators <strong><code>&lt;&lt;</code></strong>, <strong><code>+</code></strong> and <strong><code>*</code></strong> for the complex numbers:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> a <span class="op">+</span> b<span class="op">;</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> a <span class="op">*</span> b<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> a <span class="op">+</span> b<span class="op">;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> a <span class="op">*</span> b<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p>Write a member function with name <code>pow</code> to compute the power <span class="math inline">\(z^{n}\)</span> of the complex number <span class="math inline">\(z\)</span> with <span class="math inline">\(n\)</span> being a non-negative integer. Recall that <span class="math display">\[
 z^{0} = 1,\quad z^{1} = z, \quad z^{2} = z \cdot z, \quad z^{3} = z\cdot z \cdot z, \quad z^{n} = \underbrace{z \cdot \cdots \cdot z}_{n \text{ terms}}.
 \]</span></p></li>
 <li><p>Write a function to overload the assignment operator <code>=</code> for a <code>ComplexNumber</code> object so that the following statement works:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a <span class="op">+</span> b<span class="op">;</span>  <span class="co">// a, b, c are all ComplexNumber objects</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> a <span class="op">+</span> b<span class="op">;</span>  <span class="co">// a, b, c are all ComplexNumber objects</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p>Write a class <strong><code>RealNumber</code></strong> derived from the class <strong><code>ComplexNumber</code></strong> you have defined above. The class <strong><code>RealNumber</code></strong> must have a constructor receiving one <code>double</code> number and make sure that the imaginary part derived from the parent class is equal to zero.</p></li>
 <li><p>Write a <strong>main</strong> function to perform the following tasks:</p>
 <ul>
@@ -5984,100 +6047,100 @@ z_{1} = 1 + 2\,\mathrm{i},\quad  z_{2} = 2 + 3\,\mathrm{i}, \quad z_3 = 3 + 4\,\
 </section>
 <section id="answer-in-code" class="level3">
 <h3 class="anchored" data-anchor-id="answer-in-code">Answer in Code</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a></span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="kw">class</span> ComplexNumber <span class="op">{</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a><span class="kw">private</span><span class="op">:</span></span>
-<span id="cb15-6"><a href="#cb15-6"></a>    <span class="dt">double</span> re<span class="op">;</span></span>
-<span id="cb15-7"><a href="#cb15-7"></a>    <span class="dt">double</span> im<span class="op">;</span></span>
-<span id="cb15-8"><a href="#cb15-8"></a></span>
-<span id="cb15-9"><a href="#cb15-9"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb15-10"><a href="#cb15-10"></a>    <span class="co">// Constructor with list initialization and default values</span></span>
-<span id="cb15-11"><a href="#cb15-11"></a>    ComplexNumber<span class="op">(</span><span class="dt">double</span> re <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">double</span> im <span class="op">=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">:</span> re<span class="op">{</span>re<span class="op">},</span> im <span class="op">{</span>im<span class="op">}</span> <span class="op">{}</span></span>
-<span id="cb15-12"><a href="#cb15-12"></a></span>
-<span id="cb15-13"><a href="#cb15-13"></a>    <span class="co">// Overloading the assignment operator</span></span>
-<span id="cb15-14"><a href="#cb15-14"></a>    ComplexNumber<span class="op">&amp;</span> <span class="kw">operator</span><span class="op">=(</span><span class="at">const</span> ComplexNumber<span class="op">&amp;</span> other<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb15-15"><a href="#cb15-15"></a>        <span class="cf">if</span> <span class="op">(</span><span class="kw">this</span> <span class="op">!=</span> <span class="op">&amp;</span>other<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb15-16"><a href="#cb15-16"></a>            re <span class="op">=</span> other<span class="op">.</span>re<span class="op">;</span></span>
-<span id="cb15-17"><a href="#cb15-17"></a>            im <span class="op">=</span> other<span class="op">.</span>im<span class="op">;</span></span>
-<span id="cb15-18"><a href="#cb15-18"></a>        <span class="op">}</span></span>
-<span id="cb15-19"><a href="#cb15-19"></a>        <span class="cf">return</span> <span class="op">*</span><span class="kw">this</span><span class="op">;</span></span>
-<span id="cb15-20"><a href="#cb15-20"></a>    <span class="op">}</span></span>
-<span id="cb15-21"><a href="#cb15-21"></a></span>
-<span id="cb15-22"><a href="#cb15-22"></a>    <span class="co">// Overloading the + operator</span></span>
-<span id="cb15-23"><a href="#cb15-23"></a>    ComplexNumber <span class="kw">operator</span><span class="op">+(</span><span class="at">const</span> ComplexNumber<span class="op">&amp;</span> other<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
-<span id="cb15-24"><a href="#cb15-24"></a>        <span class="cf">return</span> ComplexNumber<span class="op">(</span>re <span class="op">+</span> other<span class="op">.</span>re<span class="op">,</span> im <span class="op">+</span> other<span class="op">.</span>im<span class="op">);</span></span>
-<span id="cb15-25"><a href="#cb15-25"></a>    <span class="op">}</span></span>
-<span id="cb15-26"><a href="#cb15-26"></a></span>
-<span id="cb15-27"><a href="#cb15-27"></a>    <span class="co">// Overloading the * operator</span></span>
-<span id="cb15-28"><a href="#cb15-28"></a>    ComplexNumber <span class="kw">operator</span><span class="op">*(</span><span class="at">const</span> ComplexNumber<span class="op">&amp;</span> other<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
-<span id="cb15-29"><a href="#cb15-29"></a>        <span class="dt">double</span> new_re <span class="op">=</span> <span class="op">(</span>re <span class="op">*</span> other<span class="op">.</span>re<span class="op">)</span> <span class="op">-</span> <span class="op">(</span>im <span class="op">*</span> other<span class="op">.</span>im<span class="op">);</span></span>
-<span id="cb15-30"><a href="#cb15-30"></a>        <span class="dt">double</span> new_im <span class="op">=</span> <span class="op">(</span>re <span class="op">*</span> other<span class="op">.</span>im<span class="op">)</span> <span class="op">+</span> <span class="op">(</span>im <span class="op">*</span> other<span class="op">.</span>re<span class="op">);</span></span>
-<span id="cb15-31"><a href="#cb15-31"></a>        <span class="cf">return</span> ComplexNumber<span class="op">(</span>new_re<span class="op">,</span> new_im<span class="op">);</span></span>
-<span id="cb15-32"><a href="#cb15-32"></a>    <span class="op">}</span></span>
-<span id="cb15-33"><a href="#cb15-33"></a></span>
-<span id="cb15-34"><a href="#cb15-34"></a>    <span class="co">// Power function z^n</span></span>
-<span id="cb15-35"><a href="#cb15-35"></a>    ComplexNumber pow<span class="op">(</span><span class="dt">int</span> n<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
-<span id="cb15-36"><a href="#cb15-36"></a>        ComplexNumber result<span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span> <span class="co">// z^0 = 1</span></span>
-<span id="cb15-37"><a href="#cb15-37"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb15-38"><a href="#cb15-38"></a>            result <span class="op">=</span> result <span class="op">*</span> <span class="op">(*</span><span class="kw">this</span><span class="op">);</span></span>
-<span id="cb15-39"><a href="#cb15-39"></a>        <span class="op">}</span></span>
-<span id="cb15-40"><a href="#cb15-40"></a>        <span class="cf">return</span> result<span class="op">;</span></span>
-<span id="cb15-41"><a href="#cb15-41"></a>    <span class="op">}</span></span>
-<span id="cb15-42"><a href="#cb15-42"></a></span>
-<span id="cb15-43"><a href="#cb15-43"></a>    <span class="co">// Friend function to overload &lt;&lt; for ostream</span></span>
-<span id="cb15-44"><a href="#cb15-44"></a>    <span class="kw">friend</span> <span class="bu">std::</span>ostream<span class="op">&amp;</span> <span class="kw">operator</span><span class="op">&lt;&lt;(</span><span class="bu">std::</span>ostream<span class="op">&amp;</span> os<span class="op">,</span> <span class="at">const</span> ComplexNumber<span class="op">&amp;</span> cn<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb15-45"><a href="#cb15-45"></a>        <span class="cf">if</span> <span class="op">(</span>cn<span class="op">.</span>re <span class="op">!=</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> cn<span class="op">.</span>im <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb15-46"><a href="#cb15-46"></a>            os <span class="op">&lt;&lt;</span> cn<span class="op">.</span>re <span class="op">&lt;&lt;</span> <span class="st">&quot; + &quot;</span> <span class="op">&lt;&lt;</span> cn<span class="op">.</span>im <span class="op">&lt;&lt;</span> <span class="st">&quot;i&quot;</span><span class="op">;</span></span>
-<span id="cb15-47"><a href="#cb15-47"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>cn<span class="op">.</span>re <span class="op">!=</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> cn<span class="op">.</span>im <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb15-48"><a href="#cb15-48"></a>            os <span class="op">&lt;&lt;</span> cn<span class="op">.</span>re <span class="op">&lt;&lt;</span> <span class="st">&quot; - &quot;</span> <span class="op">&lt;&lt;</span> <span class="bu">std::</span>abs<span class="op">(</span>cn<span class="op">.</span>im<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;i&quot;</span><span class="op">;</span></span>
-<span id="cb15-49"><a href="#cb15-49"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>cn<span class="op">.</span>re <span class="op">==</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> cn<span class="op">.</span>im <span class="op">!=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb15-50"><a href="#cb15-50"></a>            os <span class="op">&lt;&lt;</span> cn<span class="op">.</span>im <span class="op">&lt;&lt;</span> <span class="st">&quot;i&quot;</span><span class="op">;</span></span>
-<span id="cb15-51"><a href="#cb15-51"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb15-52"><a href="#cb15-52"></a>            os <span class="op">&lt;&lt;</span> cn<span class="op">.</span>re<span class="op">;</span></span>
-<span id="cb15-53"><a href="#cb15-53"></a>        <span class="op">}</span></span>
-<span id="cb15-54"><a href="#cb15-54"></a>        <span class="cf">return</span> os<span class="op">;</span></span>
-<span id="cb15-55"><a href="#cb15-55"></a>    <span class="op">}</span></span>
-<span id="cb15-56"><a href="#cb15-56"></a><span class="op">};</span></span>
-<span id="cb15-57"><a href="#cb15-57"></a></span>
-<span id="cb15-58"><a href="#cb15-58"></a><span class="co">// Derived class RealNumber</span></span>
-<span id="cb15-59"><a href="#cb15-59"></a><span class="kw">class</span> RealNumber <span class="op">:</span> <span class="kw">public</span> ComplexNumber <span class="op">{</span></span>
-<span id="cb15-60"><a href="#cb15-60"></a><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb15-61"><a href="#cb15-61"></a>    RealNumber<span class="op">(</span><span class="dt">double</span> value<span class="op">)</span> <span class="op">:</span> ComplexNumber<span class="op">(</span>value<span class="op">,</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{}</span></span>
-<span id="cb15-62"><a href="#cb15-62"></a><span class="op">};</span></span>
-<span id="cb15-63"><a href="#cb15-63"></a></span>
-<span id="cb15-64"><a href="#cb15-64"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb15-65"><a href="#cb15-65"></a>    <span class="co">// Dynamic allocation of an array of 5 ComplexNumber objects</span></span>
-<span id="cb15-66"><a href="#cb15-66"></a>    ComplexNumber<span class="op">*</span> z_array <span class="op">=</span> <span class="kw">new</span> ComplexNumber<span class="op">[</span><span class="dv">5</span><span class="op">];</span></span>
-<span id="cb15-67"><a href="#cb15-67"></a></span>
-<span id="cb15-68"><a href="#cb15-68"></a>    <span class="co">// Initialize using for-loop</span></span>
-<span id="cb15-69"><a href="#cb15-69"></a>    <span class="co">// Pattern: z_j = j + (j+1) \sqrt{-1}</span></span>
-<span id="cb15-70"><a href="#cb15-70"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> <span class="dv">5</span><span class="op">;</span> <span class="op">++</span>j<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb15-71"><a href="#cb15-71"></a>        z_array<span class="op">[</span>j<span class="op">]</span> <span class="op">=</span> ComplexNumber<span class="op">(</span><span class="kw">static_cast</span><span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>j <span class="op">+</span> <span class="dv">1</span><span class="op">),</span> </span>
-<span id="cb15-72"><a href="#cb15-72"></a>                                   <span class="kw">static_cast</span><span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>j <span class="op">+</span> <span class="dv">2</span><span class="op">));</span></span>
-<span id="cb15-73"><a href="#cb15-73"></a>    <span class="op">}</span></span>
-<span id="cb15-74"><a href="#cb15-74"></a></span>
-<span id="cb15-75"><a href="#cb15-75"></a>    <span class="co">// Compute sum s = \sum\limits_{j} z_j</span></span>
-<span id="cb15-76"><a href="#cb15-76"></a>    ComplexNumber sum <span class="op">{</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span> <span class="op">};</span></span>
-<span id="cb15-77"><a href="#cb15-77"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> <span class="dv">5</span><span class="op">;</span> <span class="op">++</span>j<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb15-78"><a href="#cb15-78"></a>        s <span class="op">=</span> s <span class="op">+</span> z_array<span class="op">[</span>j<span class="op">];</span></span>
-<span id="cb15-79"><a href="#cb15-79"></a>    <span class="op">}</span></span>
-<span id="cb15-80"><a href="#cb15-80"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;sum = &quot;</span> <span class="op">&lt;&lt;</span> sum <span class="op">&lt;&lt;</span> <span class="bu">std::</span>endl<span class="op">;</span></span>
-<span id="cb15-81"><a href="#cb15-81"></a></span>
-<span id="cb15-82"><a href="#cb15-82"></a>    <span class="co">// Compute Lambda = 1 + z + z^2 + z^3 + z^4 + z^5 for z = 1 + 2i</span></span>
-<span id="cb15-83"><a href="#cb15-83"></a>    ComplexNumber z <span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">};</span></span>
-<span id="cb15-84"><a href="#cb15-84"></a>    ComplexNumber lambda <span class="op">{</span><span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">};</span></span>
-<span id="cb15-85"><a href="#cb15-85"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> n <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> n <span class="op">&lt;=</span> <span class="dv">5</span><span class="op">;</span> <span class="op">++</span>n<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb15-86"><a href="#cb15-86"></a>        lambda <span class="op">=</span> lambda <span class="op">+</span> z<span class="op">.</span>pow<span class="op">(</span>n<span class="op">);</span></span>
-<span id="cb15-87"><a href="#cb15-87"></a>    <span class="op">}</span></span>
-<span id="cb15-88"><a href="#cb15-88"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Lambda = &quot;</span> <span class="op">&lt;&lt;</span> lambda <span class="op">&lt;&lt;</span> <span class="bu">std::</span>endl<span class="op">;</span></span>
-<span id="cb15-89"><a href="#cb15-89"></a></span>
-<span id="cb15-90"><a href="#cb15-90"></a>    <span class="co">// Clean up dynamic memory</span></span>
-<span id="cb15-91"><a href="#cb15-91"></a>    <span class="kw">delete</span><span class="op">[]</span> z_array<span class="op">;</span></span>
-<span id="cb15-92"><a href="#cb15-92"></a></span>
-<span id="cb15-93"><a href="#cb15-93"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb15-94"><a href="#cb15-94"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="kw">class</span> ComplexNumber <span class="op">{</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a>    <span class="dt">double</span> re<span class="op">;</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a>    <span class="dt">double</span> im<span class="op">;</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a></span>
+<span id="cb18-9"><a href="#cb18-9"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb18-10"><a href="#cb18-10"></a>    <span class="co">// Constructor with list initialization and default values</span></span>
+<span id="cb18-11"><a href="#cb18-11"></a>    ComplexNumber<span class="op">(</span><span class="dt">double</span> re <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">double</span> im <span class="op">=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">:</span> re<span class="op">{</span>re<span class="op">},</span> im <span class="op">{</span>im<span class="op">}</span> <span class="op">{}</span></span>
+<span id="cb18-12"><a href="#cb18-12"></a></span>
+<span id="cb18-13"><a href="#cb18-13"></a>    <span class="co">// Overloading the assignment operator</span></span>
+<span id="cb18-14"><a href="#cb18-14"></a>    ComplexNumber<span class="op">&amp;</span> <span class="kw">operator</span><span class="op">=(</span><span class="at">const</span> ComplexNumber<span class="op">&amp;</span> other<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb18-15"><a href="#cb18-15"></a>        <span class="cf">if</span> <span class="op">(</span><span class="kw">this</span> <span class="op">!=</span> <span class="op">&amp;</span>other<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb18-16"><a href="#cb18-16"></a>            re <span class="op">=</span> other<span class="op">.</span>re<span class="op">;</span></span>
+<span id="cb18-17"><a href="#cb18-17"></a>            im <span class="op">=</span> other<span class="op">.</span>im<span class="op">;</span></span>
+<span id="cb18-18"><a href="#cb18-18"></a>        <span class="op">}</span></span>
+<span id="cb18-19"><a href="#cb18-19"></a>        <span class="cf">return</span> <span class="op">*</span><span class="kw">this</span><span class="op">;</span></span>
+<span id="cb18-20"><a href="#cb18-20"></a>    <span class="op">}</span></span>
+<span id="cb18-21"><a href="#cb18-21"></a></span>
+<span id="cb18-22"><a href="#cb18-22"></a>    <span class="co">// Overloading the + operator</span></span>
+<span id="cb18-23"><a href="#cb18-23"></a>    ComplexNumber <span class="kw">operator</span><span class="op">+(</span><span class="at">const</span> ComplexNumber<span class="op">&amp;</span> other<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
+<span id="cb18-24"><a href="#cb18-24"></a>        <span class="cf">return</span> ComplexNumber<span class="op">(</span>re <span class="op">+</span> other<span class="op">.</span>re<span class="op">,</span> im <span class="op">+</span> other<span class="op">.</span>im<span class="op">);</span></span>
+<span id="cb18-25"><a href="#cb18-25"></a>    <span class="op">}</span></span>
+<span id="cb18-26"><a href="#cb18-26"></a></span>
+<span id="cb18-27"><a href="#cb18-27"></a>    <span class="co">// Overloading the * operator</span></span>
+<span id="cb18-28"><a href="#cb18-28"></a>    ComplexNumber <span class="kw">operator</span><span class="op">*(</span><span class="at">const</span> ComplexNumber<span class="op">&amp;</span> other<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
+<span id="cb18-29"><a href="#cb18-29"></a>        <span class="dt">double</span> new_re <span class="op">=</span> <span class="op">(</span>re <span class="op">*</span> other<span class="op">.</span>re<span class="op">)</span> <span class="op">-</span> <span class="op">(</span>im <span class="op">*</span> other<span class="op">.</span>im<span class="op">);</span></span>
+<span id="cb18-30"><a href="#cb18-30"></a>        <span class="dt">double</span> new_im <span class="op">=</span> <span class="op">(</span>re <span class="op">*</span> other<span class="op">.</span>im<span class="op">)</span> <span class="op">+</span> <span class="op">(</span>im <span class="op">*</span> other<span class="op">.</span>re<span class="op">);</span></span>
+<span id="cb18-31"><a href="#cb18-31"></a>        <span class="cf">return</span> ComplexNumber<span class="op">(</span>new_re<span class="op">,</span> new_im<span class="op">);</span></span>
+<span id="cb18-32"><a href="#cb18-32"></a>    <span class="op">}</span></span>
+<span id="cb18-33"><a href="#cb18-33"></a></span>
+<span id="cb18-34"><a href="#cb18-34"></a>    <span class="co">// Power function z^n</span></span>
+<span id="cb18-35"><a href="#cb18-35"></a>    ComplexNumber pow<span class="op">(</span><span class="dt">int</span> n<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
+<span id="cb18-36"><a href="#cb18-36"></a>        ComplexNumber result<span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span> <span class="co">// z^0 = 1</span></span>
+<span id="cb18-37"><a href="#cb18-37"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> <span class="op">++</span>i<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb18-38"><a href="#cb18-38"></a>            result <span class="op">=</span> result <span class="op">*</span> <span class="op">(*</span><span class="kw">this</span><span class="op">);</span></span>
+<span id="cb18-39"><a href="#cb18-39"></a>        <span class="op">}</span></span>
+<span id="cb18-40"><a href="#cb18-40"></a>        <span class="cf">return</span> result<span class="op">;</span></span>
+<span id="cb18-41"><a href="#cb18-41"></a>    <span class="op">}</span></span>
+<span id="cb18-42"><a href="#cb18-42"></a></span>
+<span id="cb18-43"><a href="#cb18-43"></a>    <span class="co">// Friend function to overload &lt;&lt; for ostream</span></span>
+<span id="cb18-44"><a href="#cb18-44"></a>    <span class="kw">friend</span> <span class="bu">std::</span>ostream<span class="op">&amp;</span> <span class="kw">operator</span><span class="op">&lt;&lt;(</span><span class="bu">std::</span>ostream<span class="op">&amp;</span> os<span class="op">,</span> <span class="at">const</span> ComplexNumber<span class="op">&amp;</span> cn<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb18-45"><a href="#cb18-45"></a>        <span class="cf">if</span> <span class="op">(</span>cn<span class="op">.</span>re <span class="op">!=</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> cn<span class="op">.</span>im <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb18-46"><a href="#cb18-46"></a>            os <span class="op">&lt;&lt;</span> cn<span class="op">.</span>re <span class="op">&lt;&lt;</span> <span class="st">&quot; + &quot;</span> <span class="op">&lt;&lt;</span> cn<span class="op">.</span>im <span class="op">&lt;&lt;</span> <span class="st">&quot;i&quot;</span><span class="op">;</span></span>
+<span id="cb18-47"><a href="#cb18-47"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>cn<span class="op">.</span>re <span class="op">!=</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> cn<span class="op">.</span>im <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb18-48"><a href="#cb18-48"></a>            os <span class="op">&lt;&lt;</span> cn<span class="op">.</span>re <span class="op">&lt;&lt;</span> <span class="st">&quot; - &quot;</span> <span class="op">&lt;&lt;</span> <span class="bu">std::</span>abs<span class="op">(</span>cn<span class="op">.</span>im<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;i&quot;</span><span class="op">;</span></span>
+<span id="cb18-49"><a href="#cb18-49"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>cn<span class="op">.</span>re <span class="op">==</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> cn<span class="op">.</span>im <span class="op">!=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb18-50"><a href="#cb18-50"></a>            os <span class="op">&lt;&lt;</span> cn<span class="op">.</span>im <span class="op">&lt;&lt;</span> <span class="st">&quot;i&quot;</span><span class="op">;</span></span>
+<span id="cb18-51"><a href="#cb18-51"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb18-52"><a href="#cb18-52"></a>            os <span class="op">&lt;&lt;</span> cn<span class="op">.</span>re<span class="op">;</span></span>
+<span id="cb18-53"><a href="#cb18-53"></a>        <span class="op">}</span></span>
+<span id="cb18-54"><a href="#cb18-54"></a>        <span class="cf">return</span> os<span class="op">;</span></span>
+<span id="cb18-55"><a href="#cb18-55"></a>    <span class="op">}</span></span>
+<span id="cb18-56"><a href="#cb18-56"></a><span class="op">};</span></span>
+<span id="cb18-57"><a href="#cb18-57"></a></span>
+<span id="cb18-58"><a href="#cb18-58"></a><span class="co">// Derived class RealNumber</span></span>
+<span id="cb18-59"><a href="#cb18-59"></a><span class="kw">class</span> RealNumber <span class="op">:</span> <span class="kw">public</span> ComplexNumber <span class="op">{</span></span>
+<span id="cb18-60"><a href="#cb18-60"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb18-61"><a href="#cb18-61"></a>    RealNumber<span class="op">(</span><span class="dt">double</span> value<span class="op">)</span> <span class="op">:</span> ComplexNumber<span class="op">(</span>value<span class="op">,</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{}</span></span>
+<span id="cb18-62"><a href="#cb18-62"></a><span class="op">};</span></span>
+<span id="cb18-63"><a href="#cb18-63"></a></span>
+<span id="cb18-64"><a href="#cb18-64"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb18-65"><a href="#cb18-65"></a>    <span class="co">// Dynamic allocation of an array of 5 ComplexNumber objects</span></span>
+<span id="cb18-66"><a href="#cb18-66"></a>    ComplexNumber<span class="op">*</span> z_array <span class="op">=</span> <span class="kw">new</span> ComplexNumber<span class="op">[</span><span class="dv">5</span><span class="op">];</span></span>
+<span id="cb18-67"><a href="#cb18-67"></a></span>
+<span id="cb18-68"><a href="#cb18-68"></a>    <span class="co">// Initialize using for-loop</span></span>
+<span id="cb18-69"><a href="#cb18-69"></a>    <span class="co">// Pattern: z_j = j + (j+1) \sqrt{-1}</span></span>
+<span id="cb18-70"><a href="#cb18-70"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> <span class="dv">5</span><span class="op">;</span> <span class="op">++</span>j<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb18-71"><a href="#cb18-71"></a>        z_array<span class="op">[</span>j<span class="op">]</span> <span class="op">=</span> ComplexNumber<span class="op">(</span><span class="kw">static_cast</span><span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>j <span class="op">+</span> <span class="dv">1</span><span class="op">),</span> </span>
+<span id="cb18-72"><a href="#cb18-72"></a>                                   <span class="kw">static_cast</span><span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;(</span>j <span class="op">+</span> <span class="dv">2</span><span class="op">));</span></span>
+<span id="cb18-73"><a href="#cb18-73"></a>    <span class="op">}</span></span>
+<span id="cb18-74"><a href="#cb18-74"></a></span>
+<span id="cb18-75"><a href="#cb18-75"></a>    <span class="co">// Compute sum s = \sum\limits_{j} z_j</span></span>
+<span id="cb18-76"><a href="#cb18-76"></a>    ComplexNumber sum <span class="op">{</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span> <span class="op">};</span></span>
+<span id="cb18-77"><a href="#cb18-77"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> <span class="dv">5</span><span class="op">;</span> <span class="op">++</span>j<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb18-78"><a href="#cb18-78"></a>        s <span class="op">=</span> s <span class="op">+</span> z_array<span class="op">[</span>j<span class="op">];</span></span>
+<span id="cb18-79"><a href="#cb18-79"></a>    <span class="op">}</span></span>
+<span id="cb18-80"><a href="#cb18-80"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;sum = &quot;</span> <span class="op">&lt;&lt;</span> sum <span class="op">&lt;&lt;</span> <span class="bu">std::</span>endl<span class="op">;</span></span>
+<span id="cb18-81"><a href="#cb18-81"></a></span>
+<span id="cb18-82"><a href="#cb18-82"></a>    <span class="co">// Compute Lambda = 1 + z + z^2 + z^3 + z^4 + z^5 for z = 1 + 2i</span></span>
+<span id="cb18-83"><a href="#cb18-83"></a>    ComplexNumber z <span class="op">{</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">};</span></span>
+<span id="cb18-84"><a href="#cb18-84"></a>    ComplexNumber lambda <span class="op">{</span><span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">};</span></span>
+<span id="cb18-85"><a href="#cb18-85"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> n <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> n <span class="op">&lt;=</span> <span class="dv">5</span><span class="op">;</span> <span class="op">++</span>n<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb18-86"><a href="#cb18-86"></a>        lambda <span class="op">=</span> lambda <span class="op">+</span> z<span class="op">.</span>pow<span class="op">(</span>n<span class="op">);</span></span>
+<span id="cb18-87"><a href="#cb18-87"></a>    <span class="op">}</span></span>
+<span id="cb18-88"><a href="#cb18-88"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">&quot;Lambda = &quot;</span> <span class="op">&lt;&lt;</span> lambda <span class="op">&lt;&lt;</span> <span class="bu">std::</span>endl<span class="op">;</span></span>
+<span id="cb18-89"><a href="#cb18-89"></a></span>
+<span id="cb18-90"><a href="#cb18-90"></a>    <span class="co">// Clean up dynamic memory</span></span>
+<span id="cb18-91"><a href="#cb18-91"></a>    <span class="kw">delete</span><span class="op">[]</span> z_array<span class="op">;</span></span>
+<span id="cb18-92"><a href="#cb18-92"></a></span>
+<span id="cb18-93"><a href="#cb18-93"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb18-94"><a href="#cb18-94"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="question-3-uml-class-diagram" class="level2" data-number="2.3">
