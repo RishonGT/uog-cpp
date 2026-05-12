@@ -6,13 +6,6 @@
 #include <sstream>
 #include <vector>
 
-/* Encapsulates features and label so it can be read through a single function*/
-struct DataFrame
-{
-    std::vector<std::vector<double>> X; //Features
-    std::vector<double> Y; //Label
-};
-
 class ReadCSV
 {
 private:
