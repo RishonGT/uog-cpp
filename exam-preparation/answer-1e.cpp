@@ -16,7 +16,7 @@ int main() {
 
     // Task 1: Fix this loop
     // Logic: If a grade is below 50, "curve" it by adding 10 points.
-    for (Student s : class_list) {
+    for (Student& s : class_list) {
         if (s.grade < 50.0) {
             s.grade += 10.0;
         }
@@ -25,7 +25,8 @@ int main() {
     // Task 2: Fix this loop
     // Logic: Print all student names and grades.
     std::cout << "Class List:" << '\n';
-    for (Student s : class_list) {
+    for (const Student& s : class_list) {
+        s.grade += 5;
         std::cout << s.name << ": " << s.grade << '\n';
     }
 

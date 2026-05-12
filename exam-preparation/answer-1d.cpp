@@ -9,6 +9,9 @@ public:
     virtual void process() { 
         std::cout << "Processing generic payment..." << std::endl; 
     }
+    virtual void process_wrong_name() { 
+        std::cout << "Processing payment with wrong name..." << std::endl; 
+    }
     virtual ~Payment() = default;
 };
 
@@ -17,7 +20,7 @@ public:
     void identify() { 
         std::cout << "Credit Card" << std::endl; 
     }
-    void process() override { 
+    void process_wrong_name() override { 
         std::cout << "Processing credit card via secure gateway..." << std::endl; 
     }
 };

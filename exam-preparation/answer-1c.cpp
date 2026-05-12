@@ -2,15 +2,22 @@
 #include <string>
 
 // --- Write your Function Template here ---
-
+template <typename T, typename S>
+auto find_max(const T& a, const S& b) {
+    return (a < b) ? b : a;
+}
 
 // -----------------------------------------
 
 struct Box {
     int volume;
     // Overloading the > operator for Box comparison
-    bool operator>(const Box& other) const {
-        return volume > other.volume;
+    // bool operator>(const Box& other) const {
+    //     return volume > other.volume;
+    // }
+
+    bool operator<(const Box& other) const {
+        return volume < other.volume;
     }
 };
 
@@ -29,5 +36,6 @@ int main() {
     Box biggest = find_max(box_01, box_02);
     std::cout << "Max Box volume: " << biggest.volume << '\n';
 
+    std::cout << find_max(10, 20.0) << '\n'; // Test Case 4: Mixed Types (int and double)
     return 0;
 }
