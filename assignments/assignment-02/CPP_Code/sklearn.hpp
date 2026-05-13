@@ -26,9 +26,9 @@ namespace sklearn_cpp{
                 ){
                     const int m = y.size(); 
 
-                    double ss_res = 0.0; // Residual sum of squares
-                    double ss_tot = 0.0; // Total sum of squares
-                    double mean_y = 0.0;
+                    double ss_res  {0.0}; // Residual sum of squares
+                    double ss_tot  {0.0}; // Total sum of squares
+                    double mean_y  {0.0};
 
                     mean_y = mean_func(y);
 
@@ -59,23 +59,24 @@ namespace sklearn_cpp{
                     const double& b
                 ) {
                     const int m = y.size(); 
-                    double total_loss = 0.0;
+                    double total_loss {0.0};
 
                     // Calculate predictions and total loss
                     for (int i=0; i < m; i++) {
-                        double prediction = b;
+                        double prediction  {b};
                         for (std::size_t feature = 0; feature < w.size(); ++feature) {
                             prediction += w[feature] * x[feature][i];
                         }
-                        total_loss += (y[i] - prediction) * (y[i] - prediction);
+                        total_loss += (y[i] - prediction) * (y[i] - prediction);  // Squared error for the current sample
                     }
+                    // Return mean squared error
                     return total_loss / m;
                 }
                 
                 // Helper functions for normalization
                 // Function to calculate mean of a vector
                 static double mean_func(const std::vector<double>& data) {
-                    double sum = 0.0;
+                    double sum {0.0};
                     for (double value : data) {
                         sum += value;
                     }
@@ -83,8 +84,8 @@ namespace sklearn_cpp{
                 }
 
                 // Function to calculate standard deviation of a vector
-                static double std_dev_func(const std::vector<double>& data, double mean) {
-                    double std_dev = 0.0;
+                static double std_dev_func(const std::vector<double>& data, const double& mean) {
+                    double std_dev {0.0};
                     for (double value : data) {
                         std_dev += (value - mean) * (value - mean);
                     }
@@ -102,10 +103,12 @@ namespace sklearn_cpp{
 
                     std::vector<double> normalised_data(data.size());
 
+                    // Handle the case where standard deviation is zero to avoid division by zero
                     if (std_dev == 0.0) {
                         return normalised_data;
                     }
 
+                    
                     for (std::size_t i = 0; i < data.size(); ++i) {
                         normalised_data[i] = (data[i] - mean) / std_dev;
                     }
@@ -142,6 +145,7 @@ namespace sklearn_cpp{
                     return r2_score(X, Y, weights, intercept);
                 }
                 
+                // Function to fit the linear regression model to the data
                 bool fit(
                     std::vector<std::vector<double>>& X, 
                     std::vector<double>& Y
@@ -207,7 +211,7 @@ namespace sklearn_cpp{
                     }
 
                     // Normalize target variable Y
-                    double mean_y =0.0, std_dev_y = 1.0;
+                    double mean_y {0.0}, std_dev_y {1.0};
 
                     std::vector<double> y_normalised = normalise(Y, mean_y, std_dev_y);
 
@@ -218,23 +222,24 @@ namespace sklearn_cpp{
                     }
 
                     // Gradient descent to optimize weights and intercept
-                    std::vector<double> w = weights;
-                    double learning_rate = 0.01;
-                    int max_iterations = 10000;
-                    int iteration = 0;
-                    const double tolerance = 1e-13;
+                    std::vector<double> w {weights};
+                    double learning_rate {0.01};
+                    int max_iterations {10000};
+                    int iteration {0};
+                    const double tolerance {1e-13};
 
                     // Calculate initial loss before starting gradient descent
-                    double prev_loss = loss_function(x_normalised, y_normalised, w, b);
-                    
+                    double prev_loss {0.0};
+                    prev_loss = loss_function(x_normalised, y_normalised, w, b);
+
                     // Main loop for gradient descent optimization
                     for (iteration = 0; iteration < max_iterations; iteration++) {
                         std::vector<double> dw(w.size(), 0.0); // Gradient for w
-                        double db = 0.0; // Gradient for b
+                        double db {0.0}; // Gradient for b
 
                         // Calculate gradients
                         for (int sample = 0; sample < m; sample++) {
-                            double pred = b;
+                            double pred {b};
                             for (int feature = 0; feature < variables; feature++) {
                                 pred += w[feature] * x_normalised[feature][sample];
                             }
@@ -275,7 +280,7 @@ namespace sklearn_cpp{
                     
                     // Denormalize coefficients:
                     // w_orig[j] = w_norm[j] * (y_std / x_std[j])
-                    // b_orig = y_mean + y_std * b_norm - sum_j w_orig[j] * x_mean[j]
+                    // b_orig = y_mean + y_std * b_norm - sum(w_orig[j] * x_mean[j])
                     std::vector<double> w_denorm(variables, 0.0);
                     for (int feature = 0; feature < variables; ++feature) {
                         w_denorm[feature] = w[feature] * (std_dev_y / std_devs[feature]);
@@ -318,7 +323,7 @@ namespace sklearn_cpp{
                         throw std::invalid_argument("predict: input feature vector size must match the number of weights");
                     }
 
-                    double result = 0;
+                    double result {0.0};
                     for (std::size_t i = 0; i < weights.size(); ++i) {
                         result += weights[i] * x[i];
                     }
@@ -345,7 +350,7 @@ namespace sklearn_cpp{
                     }
                     // For this implementation, we only support degree 1 (linear) and degree 2 (quadratic) features
                         if (degree > 2) {
-                            throw std::invalid_argument("Only degree 1 and 2 are supported");
+                            throw std::invalid_argument("Only degrees 1 and 2 are supported");
                         }
                 }   
 
