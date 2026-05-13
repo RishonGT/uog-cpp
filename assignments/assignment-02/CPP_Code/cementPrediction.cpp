@@ -14,25 +14,12 @@ int main() {
         return 1;
     }
     
-    // Print the first 5 rows of the dataset to verify it was read correctly
-    std::cout << "First 5 samples of the dataset:" << std::endl;
     const size_t n_features = x.size();  // Number of features
     const size_t n_samples = x[0].size();  // Number of samples (assuming all feature columns have the same number of samples)
 
-    for (size_t sample = 0; sample < std::min(n_samples, static_cast<size_t>(5)); ++sample) {
-
-        for (size_t feature = 0; feature < n_features; ++feature) {
-            std::cout << x[feature][sample] << " ";
-        }
-
-        std::cout << "| " << y[sample] << std::endl;
-
-    }
-    std::cout << "\n\n" << std::endl;
 
     // Print size of the dataset
     std::cout << "Dataset size: " << x[0].size() << " samples, " << x.size() << " features" << std::endl;
-    std::cout << "Target size: " << y.size() << "\n\n" << std::endl;
 
     std::cout << "Splitting dataset into training and testing sets..." << "\n\n" << std::endl;
     const size_t train_size = static_cast<size_t>(0.8 * n_samples);  // 80% for training, 20% for testing
@@ -112,8 +99,8 @@ int main() {
 
 
     // Final comparison of results
-    std::cout << "----------------------------------------------" << std::endl;
-    std::cout << "\n\nFinal Comparison:" << std::endl;
+    std::cout << "\n\n----------------------------------------------" << std::endl;
+    std::cout << "Final Comparison:" << std::endl;
     std::cout << "Linear Regression R-squared (train): " << r2_train << std::endl;
     std::cout << "Linear Regression R-squared (test): " << r2_test << std::endl;
     std::cout << "Polynomial Regression R-squared (train): " << r2_poly_train << std::endl;
