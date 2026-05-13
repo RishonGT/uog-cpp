@@ -32,8 +32,9 @@ private:
 
     double m_learning_rate{0.01};
     double m_lambda{0.01};
+    std::vector<double> y_hat{};
     
-    //dot for dataset aligned vector 
+    //generic dot product 
     double dot(const std::vector<double> &x, const std::vector<double> &weights) const
     {
         double result {0.0};
@@ -68,37 +69,6 @@ private:
         return y_hat;
     }
 
-    //cross entropy loss
-    double xentropyLoss(
-        const std::vector<double> &x,
-        const std::vector<double> &y,
-        const std::vector<double> &weights,
-        const double &bias
-    ) const
-    {
-        double loss {0.0};
-        for(auto i{0}; i < x.size(); ++i)
-        {
-            double y_hat = predict(x,weights,bias);
-            loss += y[i] * log(y_hat) + (1- y[i]) * log(1 - y_hat);
-        }
-        loss = -loss / y.size();
-        
-        //Regularization
-        //Sum of Weights
-        double weight_sum{0.0};
-        for(double w: weights)
-        {
-            weight_sum += w * w;
-        }
-        loss += m_lambda * weight_sum;
-
-        //Bias term
-        loss += m_lambda * bias * bias;
-        
-        return loss;
-    }
-
     double xentropyLoss(
         const std::vector<std::vector<double>> &x,
         const std::vector<double> &y,
@@ -127,36 +97,45 @@ private:
         return loss;
     }
 
-    double gradientLossWeight(
+    void updateWeights(
         const std::vector<std::vector<double>> &x,
         const std::vector<double> &y,
-        const std::vector<double> &weights,
-        const double &bias,
-        const size_t &feature_index 
+        std::vector<double> &weights,
+        const std::vector<double> &y_hat
     ) const
     {
-        double dw {0.0};
-        for(size_t i{0}; i < y.size(); i++)        
+        //outerloop selects feature associated weight j
+        for(size_t j; j < x.size(); j++)
         {
-            double y_hat = predict(x,weights,bias,i);
-            dw += (y_hat - y[i]) * x[feature_index][i];
+            double dw {0.0};
+            for(size_t i; i < x[0].size(); i++)
+            {
+                dw += (y_hat[i]-y[i]) * x[j][i];
+            }
+            dw /= static_cast<double>(x[0].size());
+            dw += 2.0 * m_lambda * weights[j];
+            weights[j] -= m_learning_rate * dw;
         }
-        
-        return dw;
     }
 
-public:
-    //prediction for dataset aligned vector 
-    double predict(
-        const std::vector<double> &x,
-        const std::vector<double> &weights,
-        const double &bias
+    void updateBias(
+        const std::vector<std::vector<double>> &x,
+        const std::vector<double> &y,
+        double bias,
+        const std::vector<double> &y_hat
     ) const
     {
-        double z {dot(x,weights) + bias};
-        return sigmoid(z);
+        double db {0.0};
+        for(size_t i; i< y.size(); i++)
+        {
+            db += (y_hat[i]-y[i]);
+        }
+        db /= static_cast<double>(y.size());
+        db += 2.0 * m_lambda * bias;
+        bias -= m_learning_rate * db;
     }
-
+    
+public:
     //prediction for feature aligned vector
     double predict(
         const std::vector<std::vector<double>> &x,
@@ -169,7 +148,8 @@ public:
         return sigmoid(z);
     }
 
-    void train(
+    //Debugging
+    void printState(
         const std::vector<std::vector<double>> &x,
         const std::vector<double> &y,
         std::vector<double> weights,
@@ -178,8 +158,7 @@ public:
     {
         double loss {xentropyLoss(x,y,weights,bias)};
         std::cout << "Cross Entropy Loss: " << loss << '\n';
-        double dw {gradientLossWeight(x,y,weights,bias,size_t{1})};
-        std::cout << "dW: " << dw << '\n';
+
     }
 };
 

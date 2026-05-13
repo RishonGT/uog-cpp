@@ -11,11 +11,11 @@ int main()
 {
     DataFrame ecg_data;
     Read_CSV::read_csv("../../data/ecg.csv",ecg_data.feature,ecg_data.label);
-    std::cout << "Rows: "<< ecg_data.row() <<" "<< "Cols: "<< ecg_data.col() << '\n';
-
+    std::cout << "Datasets: "<< ecg_data.row() <<" "<< "Features: "<< ecg_data.col() << '\n';
+    
     for(size_t i{0}; i <= 2; i++)
     {
-        for(size_t j{0}; j <= 10; j++)
+        for(size_t j{0}; j <= 4; j++)
         {
             std::cout << ecg_data.feature[j][i] << ' ';
         }
@@ -33,7 +33,7 @@ int main()
     size_t row_index {1};
     double z {test_class.predict(test_data.feature,test_data.weight,test_data.bias,row_index)};
     std::cout << "Z: " << z << '\n';
-    test_class.train(test_data.feature,test_data.label,test_data.weight,test_data.bias);
+    test_class.printState(test_data.feature,test_data.label,test_data.weight,test_data.bias);
     
     return 0;
 }
