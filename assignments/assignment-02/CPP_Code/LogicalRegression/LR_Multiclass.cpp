@@ -1,4 +1,4 @@
-#include "readCSV.hpp"
+#include "Read_CSV.hpp"
 #include "sklearn_logistical.hpp"
 
 #include <iostream>
@@ -8,22 +8,23 @@
 
 int main()
 {
-    
-    // Load data for the current class
-    ReadCSV numbers("/Users/quantumpip-boy/Documents/Code/ML_Multiclass/assignments/assignment-02/CPP_Code/LogicalRegression/Data/mnist_train.csv", ',', 1);
-    auto dataframe {numbers.readCSV()};
-    
-    //std::cout << dataframe.Y[3000] << std::endl;
-    
-    linear_model::LogisticalRegressionMulticlass model(dataframe.X[0].size(), 0.1, 10);
-    std::vector<double> costs = model.train(dataframe.X, dataframe.Y, 20);
+    std::cout << "Reading training data..." << std::endl;
+    std::vector<std::vector<double>> X;
+    std::vector<double> Y;
+    Read_CSV::read_csv("/Users/quantumpip-boy/Documents/Code/ML_Multiclass/assignments/assignment-02/CPP_Code/LogicalRegression/Data/mnist_train.csv", X, Y, true);
+    std::cout << "Data read successfully! Now data will go through preprocessing..." << std::endl;
+    linear_model::DatasetChecker checker;
+    checker.Check_data(X, Y, 10);
+    std::cout << "Data preprocessing completed! Now training will start..." << std::endl;
+    linear_model::LogisticalRegressionMulticlass model(X[0].size(), 0.001, 10);
+    std::vector<double> costs = model.fit(X, Y, 10);
 
     std::cout << "Training completed." << std::endl;
 
-    ReadCSV numbers2("/Users/quantumpip-boy/Documents/Code/ML_Multiclass/assignments/assignment-02/CPP_Code/LogicalRegression/Data/mnist_test.csv", ',', 1);
-    auto dataframe2 {numbers2.readCSV()};
-    std::cout << dataframe2.X.size() << std::endl; 
-    model.predict_picture(dataframe2.X, dataframe2.Y);
+    std::cout << "Reading test data..." << std::endl;
+    Read_CSV::read_csv("/Users/quantumpip-boy/Documents/Code/ML_Multiclass/assignments/assignment-02/CPP_Code/LogicalRegression/Data/mnist_test.csv", X, Y, true);
+    
+    model.predict_picture(X, Y);
     std::cout << "Testing completed." << std::endl;
     return 0;
 
