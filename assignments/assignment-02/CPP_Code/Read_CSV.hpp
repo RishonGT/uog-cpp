@@ -86,7 +86,7 @@ class Read_CSV {
 
             // Transpose X to match the expected format for linear regression (features as rows, samples as columns)
             // For logistic regression, we keep X in its original format (samples as rows, features as columns)
-            if (!LogisticRegression) {
+            if (!LogisticRegression && !X.empty() && !X[0].empty()) {
                 std::vector<std::vector<double>> X_transposed(X[0].size(), std::vector<double>(X.size()));
                 for (size_t i = 0; i < X.size(); i++) {
                     for (size_t j = 0; j < X[i].size(); j++) {
