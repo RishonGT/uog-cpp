@@ -14,7 +14,7 @@
     (such as headers) are ignored.
 - For valid rows, values are converted to double, the last value is stored in Y
     (target), and preceding values are stored in X (features).
-- After reading all rows, X is transposed so each row is one feature and each
+- After reading all rows, X is transposed if required so each row is one feature and each
     column is one sample.
 */
 
