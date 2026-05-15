@@ -4,8 +4,8 @@
 #include <vector>
 #include <cmath>
 #include <iostream>
-#include <algorithm> 
-#include <iterator>  
+#include <algorithm> // Required for std::max_element
+#include <iterator>  // Required for std::distance
 
 namespace linear_model
 {
@@ -135,10 +135,7 @@ namespace linear_model
             {
                 int true_class = Y[img_count];
                 double gradient {0.0};
-                std::vector<std::vector<double>> temp_weights = class_weights;
-                std::vector<double> temp_bias = class_bias;
                 const std::vector<double>& feature = X;
-
 
                 // Where k is classes and i is feature.
                 for (size_t k{0}; k < class_weights.size(); ++k)
@@ -147,17 +144,13 @@ namespace linear_model
                         gradient = probabilities[k] - 1;
                     else
                         gradient = probabilities[k] - 0;
-                    temp_bias[k] -= learningrate * (gradient + 2 * lambda * class_bias[k]); 
+                    class_bias[k] -= learningrate * (gradient + 2 * lambda * class_bias[k]); 
 
-                    for(size_t i{0}; i < temp_weights[k].size(); ++i)
+                    for(size_t i{0}; i < class_weights[k].size(); ++i)
                     {
-                        temp_weights[k][i] -= (learningrate) * (gradient * feature[i] + 2*lambda * class_weights[k][i]); 
+                        class_weights[k][i] -= (learningrate) * (gradient * feature[i] + 2*lambda * class_weights[k][i]); 
                     }
                 }
-                //update class_weights and class_bias as temp_weights and temp_bias
-                class_weights = temp_weights;
-                class_bias = temp_bias;
-                //return gradient;
             }
 
         public:
