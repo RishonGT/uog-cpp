@@ -163,6 +163,15 @@ public:
         return sigmoid(z);
     }
 
+    double predict(
+        const std::vector<std::vector<double>> &x,
+        const size_t &data_index
+    )
+    {
+        double z {dot(x,m_weight,data_index) + m_bias};
+        return sigmoid(z);
+    }
+
     void train(
         const std::vector<std::vector<double>> &x,
         const std::vector<double> &y
