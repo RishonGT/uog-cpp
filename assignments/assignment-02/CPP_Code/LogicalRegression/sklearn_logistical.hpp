@@ -4,8 +4,8 @@
 #include <vector>
 #include <cmath>
 #include <iostream>
-#include <algorithm> // Required for std::max_element
-#include <iterator>  // Required for std::distance
+#include <algorithm> 
+#include <iterator>  
 
 namespace linear_model
 {
@@ -13,93 +13,82 @@ namespace linear_model
     {
         private:
 
-            std::vector<std::vector<double>> m_weights;
-            std::vector<double> costs;
-            std::vector<double> m_bias;
-            std::vector<double> z2;
-            std::vector<double> y_hat;
-            double m_learningrate{0.0};
-            double m_lambda{0.00005}; // Regularization parameter
+            std::vector<std::vector<double>> class_weights;
+            std::vector<double> class_bias;
+            std::vector<double> probabilities;
+            double learningrate{0.0};
+            double lambda{0.00005}; // Regularization parameter
             double correct_predictions = 0;
             double loss = 0.0;
             
+            /*
+            This function checks the highest predicted probability agianst the true class,
+            if correct it updates correct prediction.
+            */
             void accuracy_score(
                 const int image_count,
                 const std::vector<double>& Y
             )
             {
-                auto max_it = std::max_element(y_hat.begin(), y_hat.end());
+                auto max_it = std::max_element(probabilities.begin(), probabilities.end());
                 double max_value = *max_it;
-                int position = std::distance(y_hat.begin(), max_it);
+                int position = std::distance(probabilities.begin(), max_it);
                 if (position == (Y[image_count]))
                 {
                     ++correct_predictions;
                 }
             }
-            
-            
-            double softmax(const double &z) const
-            //prediction of y_hat
-            {
-                double ez {0.0};
-                double y_hat {0.0};
-                for (size_t i{0}; i < z2.size(); ++i)
-                {
-                    ez += exp(z2[i]);
-                }
-                return y_hat = exp(z) / (ez);
-            }
 
-        public:
-            //Constructor
-            LogisticalRegressionMulticlass(int features, double learningrate, int classes)
-            :m_learningrate{learningrate}
-            {
-                m_weights.resize(classes, std::vector<double>(features,0.01));
-                m_bias.resize(classes, 0.0);
-            }
-
-            // Functions
             double dot(const std::vector<double> &X, const int class_idx) const
             {
-                //dot product of x.w
+                // dot product of x.w
                 double result {0.0};
-                //size_t cause .size() returns whatever that is
-                for(size_t i{0}; i<X.size(); ++i)
+                // size_t cause .size() returns maximum size of vector.
+                for(size_t i{0}; i < X.size(); ++i)
                 {
-                    result += X[i] * m_weights[class_idx][i];
+                    result += X[i] * class_weights[class_idx][i];
                 }
                 return result;
             }
-
-            void predict(
+            /*
+            This function performs softmax, producing probabilities of
+            each class being the designated photos true value.
+            e.g {0.05, 0.1, 0.000013, 0.1, 0.3, 0.1, 0.125, 0.05, 0.1, 0.025,}
+            where each index is class 0-9. The one above is predicting
+            class 5 to be the image.
+            */
+            void compute_probabilities(
                 const std::vector<double> &x
             ) 
             {   
-                z2.clear();
-                y_hat.clear();
-                std::vector<double> z = z2;
-                std::vector<double> y_h = y_hat;
-
-
-                for (size_t i{0}; i < m_bias.size(); ++i)
+                probabilities.clear();
+                double sum_linear_exp {0.0};
+                double probability {0.0};
+                std::vector<double> linear_combination;
+                std::vector<double> temp;
+                // linear equation 
+                for (size_t i{0}; i < class_bias.size(); ++i)
                 {
-                    double lin = dot(x, i) + m_bias[i];
-                    z.push_back(lin);
-                    if (i == m_bias.size() - 1)
-                    {
-                        z2 = z;
-                        for (size_t j{0}; j < m_bias.size(); ++j)
-                        {
-                            y_h.push_back(softmax(z[j]));
-                        }
-                    }
+                    linear_combination.push_back(dot(x, i) + class_bias[i]);
                 }
-                y_hat = y_h;
+                // summing to make; Sum e^{z_k} where k = 1, 2, 3 .... K
+                for (size_t i{0}; i < linear_combination.size(); ++i)
+                {
+                    sum_linear_exp += exp(linear_combination[i]);
+                }
+                // perform softmax probability on each class.
+                for (size_t i{0}; i < class_bias.size(); ++i)
+                {
+                    temp.push_back(exp(linear_combination[i]) / (sum_linear_exp));
+                }
+                
+                probabilities = temp;
             }
 
-            //cross entropy loss
-            //cross entropy loss
+            /*
+            Cross entropy loss function. This calculates the loss function for each
+            image. Checking how far away it is from the true class. This includes regularization.
+            */
             void xentropyLoss(
                 const std::vector<double> &X,
                 const std::vector<double> &Y,
@@ -110,28 +99,34 @@ namespace linear_model
                 loss = 0.0;
 
                 int true_class = Y[img_count];
-                const std::vector<double>& feature = X;
-
-
-                loss -= log(y_hat[true_class]);
+                loss -= log(probabilities[true_class]);
 
 
                 double weights_squared{0.0};
                 double biases_squared{0.0};
 
-                for (size_t k{0}; k < m_weights.size(); ++k)
+                for (size_t i{0}; i < class_weights.size(); ++i)
                 {
-                    for(double w: m_weights[k])
+                    for(double temp_w: class_weights[i])
                     {
-                        weights_squared += w * w;
+                        weights_squared += temp_w * temp_w;
                     }
-                    biases_squared += m_bias[k] * m_bias[k];
+                    biases_squared += class_bias[i] * class_bias[i];
                 }
 
-                loss += m_lambda * (weights_squared + biases_squared);
+                loss += lambda * (weights_squared + biases_squared);
                          
             }
-            // Gradient descent method is Stochastic Gradient descent, updating after each image. This makes it reach a lower cost faster
+
+            /* 
+            Gradient descent method is Stochastic Gradient descent, updating after each image.
+            This makes it reach a lower much faster, giving the ability to use much lower epoch amounts.
+            With current parameters making it reach convergence at ~29 epochs, converging at ~92% accuracy, 
+            which from research indicates to be the theoritcal limit for non convolution neural networks.
+
+            The other option is using batch training, which while being slower at training is less demanding of the 
+            pc and not being as slow.
+            */
             void gradientDescent(
                  std::vector<double> &X,
                  std::vector<double> &Y,
@@ -140,105 +135,131 @@ namespace linear_model
             {
                 int true_class = Y[img_count];
                 double gradient {0.0};
-                std::vector<std::vector<double>> m_w = m_weights;
-                std::vector<double> m_b = m_bias;
+                std::vector<std::vector<double>> temp_weights = class_weights;
+                std::vector<double> temp_bias = class_bias;
                 const std::vector<double>& feature = X;
 
 
                 // Where k is classes and i is feature.
-                for (size_t k{0}; k < m_weights.size(); ++k)
+                for (size_t k{0}; k < class_weights.size(); ++k)
                 {
                     if (k == true_class)
-                        gradient = y_hat[k] - 1;
+                        gradient = probabilities[k] - 1;
                     else
-                        gradient = y_hat[k] - 0;
-                    m_b[k] -= m_learningrate * (gradient + 2 * m_lambda * m_bias[k]); 
+                        gradient = probabilities[k] - 0;
+                    temp_bias[k] -= learningrate * (gradient + 2 * lambda * class_bias[k]); 
 
-                    for(size_t i{0}; i < m_w[k].size(); ++i)
+                    for(size_t i{0}; i < temp_weights[k].size(); ++i)
                     {
-                        m_w[k][i] -= (m_learningrate) * (gradient * feature[i] + 2*m_lambda * m_weights[k][i]); 
+                        temp_weights[k][i] -= (learningrate) * (gradient * feature[i] + 2*lambda * class_weights[k][i]); 
                     }
                 }
-                    //update m_weights and m_bias as m_w and m_b
-                m_weights = m_w;
-                m_bias = m_b;
+                //update class_weights and class_bias as temp_weights and temp_bias
+                class_weights = temp_weights;
+                class_bias = temp_bias;
                 //return gradient;
             }
+
+        public:
+            // Constructor
+            LogisticalRegressionMulticlass(int features, double temp_learningrate, int classes)
+            :learningrate{temp_learningrate}
+            {
+                class_weights.resize(classes, std::vector<double>(features, 0.01));
+                class_bias.resize(classes, 0.0);
+            }
+
+            /*
+            This fit function trains the data and updates the weights and biases through running the 
+            gradient descent function. As well as keeping track of costs and showing training stats of accuracy
+            and cost.
+            */
             std::vector<double> fit(
                  std::vector<std::vector<double>> &X,
                  std::vector<double> &Y,
                 const int epochs
             ) 
             {
-                std::vector<double> c = costs;
                 std::vector<double> cost_epoch;
-                for (int j = 0; j < epochs; ++j)
+                for (int epoch = 0; epoch < epochs; ++epoch)
                 {
                     double final_loss {0.0};
                     correct_predictions = 0;
                     
                     for (size_t img_id = 0; img_id < X.size(); ++img_id)  
                     {   
-                        // Calculates probability of each class, calculates loss finally checks accuracy.
-                        predict(X[img_id]);
+                        // calculates probability of each class, calculates loss finally checks accuracy.
+                        compute_probabilities(X[img_id]);
                         xentropyLoss(X[img_id], Y, img_id);
                         accuracy_score(img_id, Y);
                         
-                        c.push_back(loss);
                         std::vector<double>& feature{X[img_id]};
                         gradientDescent(feature, Y, img_id);
                         final_loss += loss;
                     }
-                    std::cout << "Cost at epoch " << j + 1 << ": " << final_loss / X.size() << " Accuracy: " << correct_predictions << "/" << X.size() << " percentage: " << (double)correct_predictions / X.size() * 100 << "% " << std::endl;
-                    //cost_epoch.push_back(final_loss / X.size());
-                            
-                    // imput an early stopping condition here based on the cost function, if the cost function is not decreasing by a certain amount then stop training.
-                            
+                    std::cout << "cost at epoch " << epoch + 1 << ": " << final_loss / X.size() << " Accuracy: " << correct_predictions << "/" << X.size() << " percentage: " << (double)correct_predictions / X.size() * 100 << "% " << std::endl;
+                    cost_epoch.push_back(final_loss / X.size());
+                
+                    /*
+                     Input a converging check based on the cost function,
+                     if the cost function is not decreasing by a certain amount then declare convergence.
+                     This would essentially mean that it has reached a local minimum in the gradient descent.
+                    */
+                    int cost_epoch_len = cost_epoch.size();
+                    if (cost_epoch_len >= 3 )
+                    {
+                        double max_recent_cost_epoch = std::max({cost_epoch[cost_epoch_len-1], cost_epoch[cost_epoch_len-2], cost_epoch[cost_epoch_len-3]});
+                        double min_recent_cost_epoch = std::min({cost_epoch[cost_epoch_len-1], cost_epoch[cost_epoch_len-2], cost_epoch[cost_epoch_len-3]});
+                        double threshold_range_cost_epoch = max_recent_cost_epoch - min_recent_cost_epoch;
 
+                        if ( threshold_range_cost_epoch <= 0.001 )
+                        {
+                            std::cout << "Convergence : Loss function settled" << std::endl;
+                            break;
+                        }
+                    }
                 }
                 return cost_epoch;
             }
-            
-            void predict_picture(
+            /*
+            This function performs a prediction based on the weights it has
+            aggregated over the training.
+            */
+            void predict(
                 const std::vector<std::vector<double>>& x,
                 const std::vector<double>& y)
             { 
                 correct_predictions = 0;
                 for (size_t img_id = 0; img_id < x.size(); ++img_id)  
                 {   
-                    predict(x[img_id]);          
+                    compute_probabilities(x[img_id]);          
                     accuracy_score(img_id, y);      
                 }
                 std::cout << " Accuracy: " << correct_predictions << "/" << x.size() << " percentage: " << (double)correct_predictions / x.size() * 100 << "% " << std::endl;     
-            }
-                
+            }   
     };
-
-    class DatasetChecker 
+    // This is preprocessing for the data thats being input. Checking various errors.
+    class dataset_checker 
     {
         public:
-            void Check_data(const std::vector<std::vector<double>> X, const std::vector<double> Y,  int Num_class)
+            // Checking each value in data for error.
+            void check_data(const std::vector<std::vector<double>> X, const std::vector<double> Y,  int num_class)
             {
-                Check_dimension( X, Y);
+                check_dimension( X, Y);
 
                 for (int i = 0; i < X.size(); ++i)
                 {
                     for (int j = 0; j < X[i].size(); ++j)
                     {
-                        Check_nan_inf( X[i][j]);
-                        Check_normalized( X[i][j]);
+                        check_nan_inf( X[i][j]);
+                        check_normalized( X[i][j]);
+                        
                     }
                 }
-                
-                for (int i = 0; i < Y.size(); ++i )
-                {
-                    Check_labels(Y[i], Num_class);
-                }
-
             }
 
-
-            void Check_dimension(const std::vector<std::vector<double>> X, const std::vector<double> Y) const
+            // Checks that dimensions match up that all features are the same.
+            void check_dimension(const std::vector<std::vector<double>> X, const std::vector<double> Y) const
             {
                 if (X.empty())
                 {
@@ -247,7 +268,7 @@ namespace linear_model
 
                 if (X.size() != Y.size())
                 {
-                    throw std::invalid_argument("File is not Dimensionally correct");
+                    throw std::invalid_argument("File is not dimensionally correct");
                 }
 
                 int start_shape = X[0].size();
@@ -256,43 +277,29 @@ namespace linear_model
                 {
                     if (X[i].size() != start_shape)
                     {
-                        throw std::invalid_argument("File is not Dimensionally correct");
+                        throw std::invalid_argument("File is not dimensionally correct");
                     }
                 }
             }
 
-
-            void Check_nan_inf(double Value) const
+            // Checks for nan's and inf's in data.
+            void check_nan_inf(double value) const
             {
-                if (std::isnan(Value) || std::isinf(Value) )
+                if (std::isnan(value) || std::isinf(value) )
                 {
-                    throw std::invalid_argument("Nan or inf value found in file");
+                    throw std::invalid_argument("NaN or inf value found in file");
                 }
             }
 
-
-            void Check_normalized(double Value) const
+            // Check if data is within boundary for model.
+            void check_normalized(double value) const
             {
-                if (Value < 0 || Value > 1)
+                if (value < 0 || value > 1)
                 {
                     throw std::invalid_argument("Values are not properly normalized");
                 }
             }
-
-
-            void Check_labels(double Value, int N_class) const
-            {
-                Check_nan_inf(Value);
-
-                if (Value < 0 || Value >= N_class || std::fmod(Value, 1.0) != 0.0)
-                {
-                    throw std::invalid_argument("Labels are anomalous");
-                }
-            }
-
     };
 }
-
-
 
 #endif
