@@ -100,4 +100,4 @@ else:
     generate_mnist_csv(df, 300, "./data/mnist_micro.csv")
 
 # Shuffle, visualize, and save to PNG
-visualize_shuffled_png("./data/mnist_micro.csv", "./data/shuffled_digits.png")
+visualize_shuffled_png("./mnist_micro.csv", "./shuffled_digits.png")

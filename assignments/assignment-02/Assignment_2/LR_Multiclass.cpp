@@ -1,5 +1,5 @@
-#include "Read_CSV.hpp"
-#include "sklearn_logistical.hpp"
+#include "header/Read_CSV.hpp"
+#include "header/sklearn_logisticalMulticlass.hpp"
 
 #include <iostream>
 #include <sstream>
@@ -16,7 +16,7 @@ int main()
 
     // Input train data ...
     std::cout << "Reading training data..." << std::endl;
-    Read_CSV::read_csv("/home/jerem/Code/ML_Multiclass/assignments/assignment-02/CPP_Code/LogicalRegression/Data/mnist_train.csv", X, Y, true);
+    Read_CSV::read_csv("/home/jerem/Code/R/uog-cpp/assignments/assignment-02/Assignment_2/data/mnist_train.csv", X, Y, true);
     std::cout << "Data read successfully! Now data will go through preprocessing..." << std::endl;
 
     // Preprocess to make sure data is viable ...
@@ -25,15 +25,15 @@ int main()
     std::cout << "Data preprocessing completed! Now training will start..." << std::endl;
 
     // Construct model ...
-    linear_model::LogisticalRegressionMulticlass model(X[0].size(), 0.001, 10);
+    linear_model::LogisticalRegressionMulticlass model(X[0].size(), 0.001, 10, 40);
 
     // Perform fitting (training) ...
-    std::vector<double> costs = model.fit(X, Y, 40);
+    std::vector<double> costs = model.fit(X, Y);
     std::cout << "Training completed." << std::endl;
 
     // Input test data ...
     std::cout << "Reading test data..." << std::endl;
-    Read_CSV::read_csv("/home/jerem/Code/ML_Multiclass/assignments/assignment-02/CPP_Code/LogicalRegression/Data/mnist_test.csv", X_2, Y_2, true);
+    Read_CSV::read_csv("/home/jerem/Code/R/uog-cpp/assignments/assignment-02/Assignment_2/data/mnist_test.csv", X_2, Y_2, true);
 
     // Perform predicting (testing) ...
     model.predict(X_2, Y_2);

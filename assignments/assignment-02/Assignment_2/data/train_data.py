@@ -1,7 +1,7 @@
 '''
 DISCLAIMER: This is all AI generated as the task is not to make test and 
 train data. This just simply split whatever file you put in
-into a 80% train 20% test.
+into a 80% train 20% test and shuffles it to prevent sequential learning.
 '''
 
 
@@ -40,6 +40,6 @@ def split_mnist_data(filepath):
 
 if __name__ == "__main__":
     # Your specific file path
-    csv_path = "/home/jerem/Code/ML_Multiclass/assignments/assignment-02/CPP_Code/LogicalRegression/Data/mnist_mini.csv"
+    csv_path = "/home/jerem/Code/R/uog-cpp/assignments/assignment-02/Assignment_2/data/mnist_micro.csv"
     
     split_mnist_data(csv_path)

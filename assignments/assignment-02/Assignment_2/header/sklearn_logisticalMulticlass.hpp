@@ -4,8 +4,8 @@
 #include <vector>
 #include <cmath>
 #include <iostream>
-#include <algorithm> // Required for std::max_element
-#include <iterator>  // Required for std::distance
+#include <algorithm> 
+#include <iterator>  
 
 namespace linear_model
 {
@@ -20,6 +20,7 @@ namespace linear_model
             double lambda{0.00005}; // Regularization parameter
             double correct_predictions = 0;
             double loss = 0.0;
+            int epochs = 50;
             
             /*
             This function checks the highest predicted probability agianst the true class,
@@ -155,8 +156,11 @@ namespace linear_model
 
         public:
             // Constructor
-            LogisticalRegressionMulticlass(int features, double temp_learningrate, int classes)
-            :learningrate{temp_learningrate}
+            LogisticalRegressionMulticlass(int features, double temp_learningrate, int classes, int temp_epochs )
+            :
+            learningrate{temp_learningrate},
+            epochs{temp_epochs}
+            
             {
                 class_weights.resize(classes, std::vector<double>(features, 0.01));
                 class_bias.resize(classes, 0.0);
@@ -169,8 +173,7 @@ namespace linear_model
             */
             std::vector<double> fit(
                  std::vector<std::vector<double>> &X,
-                 std::vector<double> &Y,
-                const int epochs
+                 std::vector<double> &Y
             ) 
             {
                 std::vector<double> cost_epoch;
