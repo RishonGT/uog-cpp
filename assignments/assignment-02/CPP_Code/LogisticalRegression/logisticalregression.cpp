@@ -25,7 +25,7 @@ int main()
         std::cout << "...\n";
     }
 
-    //Calculate index to split data
+    //Calculate index to split data at
     const size_t train_size = static_cast<size_t>(0.8 * ecg_data.row());
     //Shuffle Data
     std::vector<size_t> indices(ecg_data.label.size());
@@ -69,11 +69,14 @@ int main()
     LogisticalRegression log_reg;
     log_reg.fit(ecg_train.feature,ecg_train.label);
 
+    //Test the model by pre
     std::vector<double> y_predict (ecg_test.row());
     for(size_t i{0}; i<ecg_test.row();i++)
     {
-        if (log_reg.predict(ecg_test.feature,i) > 0.5){y_predict[i] = 1;}
-        else {y_predict[i] = 0;}
+        if (log_reg.predict(ecg_test.feature,i) > 0.5)
+            {y_predict[i] = 1;}
+        else 
+            {y_predict[i] = 0;}
     }
 
     int correct_predictions{};
