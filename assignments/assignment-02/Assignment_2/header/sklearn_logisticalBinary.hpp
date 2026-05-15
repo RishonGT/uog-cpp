@@ -6,40 +6,7 @@
 #include <cmath>
 #include <numeric>
 
-struct DataFrame
-{
-    std::vector<std::vector<double>> feature{};
-    std::vector<double> label{}; 
-
-
-    size_t row() const
-    {
-        size_t row{this->feature[0].size()};
-        return row;
-    }
-
-    size_t col() const
-    {
-        size_t col{this->feature.size()};
-        return col;
-    }
-
-    void resize(size_t i)
-    {
-        label.resize(i);
-        for (auto& dataset : feature)
-        {
-            dataset.resize(i);
-        }
-    }
-
-    void print() const
-    {
-    std::cout << "Datasets: "<< row() <<" "<< "Features: "<< col() << '\n';
-    }
-};
-
-class LogisticalRegression
+class LogisticalRegressionBinary
 {
 private:
 
