@@ -10,8 +10,7 @@ struct DataFrame
 {
     std::vector<std::vector<double>> feature{};
     std::vector<double> label{}; 
-    std::vector<double> weight{};
-    double bias{};
+
 
     size_t row() const
     {
@@ -24,15 +23,32 @@ struct DataFrame
         size_t col{this->feature.size()};
         return col;
     }
+
+    void resize(size_t i)
+    {
+        label.resize(i);
+        for (auto& dataset : feature)
+        {
+            dataset.resize(i);
+        }
+    }
+
+    void print() const
+    {
+    std::cout << "Datasets: "<< row() <<" "<< "Features: "<< col() << '\n';
+    }
 };
 
 class LogisticalRegression
 {
 private:
 
-    double m_learning_rate{0.01};
-    double m_lambda{0.01};
-    std::vector<double> y_hat{};
+    double m_learning_rate{0.001};
+    double m_lambda{0.001};
+    std::vector<double> m_weight{};
+    double m_bias{0.01};
+    int m_max_iteration{10000};
+    double m_tolerance{0.0001};
     
     //generic dot product 
     double dot(const std::vector<double> &x, const std::vector<double> &weights) const
@@ -56,7 +72,7 @@ private:
     ) const
     {
         double result {0.0};
-        for(auto i{0}; i<x[data_index].size(); ++i)
+        for(auto i{0}; i<weights.size(); ++i)
         {
             result += x[i][data_index] * weights[i];
         }
@@ -71,68 +87,67 @@ private:
 
     double xentropyLoss(
         const std::vector<std::vector<double>> &x,
-        const std::vector<double> &y,
-        const std::vector<double> &weights,
-        const double &bias
+        const std::vector<double> &y
     ) const
     {
         //Cross Entropy
         double loss {0.0};
-        for(size_t i{0}; i < x[0].size(); i++)
+        double y_hat{};
+        for(size_t i{0}; i < y.size(); i++)
         {
-            double y_hat = predict(x,weights,bias,i);
-            loss += y[i] * log(y_hat) + (1 - y[i]) * log(1 - y_hat);
+            y_hat = predict(x,m_weight,m_bias,i);
+            loss += y[i] * log(y_hat+1e-9);
+            loss += (1.0 - y[i]) * (log(1.0-y_hat+1e-9));
+
         }
-        loss = -loss / x[0].size();
+        loss = (-1.0 * loss) / static_cast<double>(y.size());
         
         //Regularized Loss
         double weight_sum {0.0};
-        for(auto& n:weights)
+        for(auto& n:m_weight)
         {
             weight_sum += n*n;
         }
         loss += m_lambda * weight_sum;
-
-        loss += m_lambda * bias * bias;
+        loss += m_lambda * m_bias * m_bias;
         return loss;
     }
 
     void updateWeights(
         const std::vector<std::vector<double>> &x,
         const std::vector<double> &y,
-        std::vector<double> &weights,
         const std::vector<double> &y_hat
-    ) const
+    ) 
     {
         //outerloop selects feature associated weight j
-        for(size_t j; j < x.size(); j++)
+        double dw {0.0};
+        for(size_t j{0}; j < x.size(); j++)
         {
-            double dw {0.0};
-            for(size_t i; i < x[0].size(); i++)
+            dw = 0.0;
+            for(size_t i{0}; i < x[0].size(); i++)
             {
                 dw += (y_hat[i]-y[i]) * x[j][i];
             }
             dw /= static_cast<double>(x[0].size());
-            dw += 2.0 * m_lambda * weights[j];
-            weights[j] -= m_learning_rate * dw;
+            dw += 2.0 * m_lambda * m_weight[j];
+            m_weight[j] -= m_learning_rate * dw;
         }
     }
 
     void updateBias(
         const std::vector<std::vector<double>> &x,
         const std::vector<double> &y,
-        double bias,
         const std::vector<double> &y_hat
-    ) const
+    ) 
     {
         double db {0.0};
-        for(size_t i; i< y.size(); i++)
+        for(size_t i{0}; i< y.size(); i++)
         {
             db += (y_hat[i]-y[i]);
         }
         db /= static_cast<double>(y.size());
-        db += 2.0 * m_lambda * bias;
-        bias -= m_learning_rate * db;
+        db += 2.0 * m_lambda * m_bias;
+        m_bias -= m_learning_rate * db;
     }
     
 public:
@@ -148,17 +163,40 @@ public:
         return sigmoid(z);
     }
 
-    //Debugging
-    void printState(
+    void train(
         const std::vector<std::vector<double>> &x,
-        const std::vector<double> &y,
-        std::vector<double> weights,
-        double bias
+        const std::vector<double> &y
     )
     {
-        double loss {xentropyLoss(x,y,weights,bias)};
-        std::cout << "Cross Entropy Loss: " << loss << '\n';
+        m_weight.resize(x.size()); //initialize weights to match features
+        std::vector<double> y_hat(y.size());
+        double previous_loss{INFINITY};
+        for(size_t iteration{0}; iteration <= m_max_iteration; iteration++)
+        {
+            /*Prediction
+            We use y_hat twice in weights and bias updates. Probably better to do it once and store the values
+            Attempting to predict in place drastically increases time per epoch, probably vector<vector<double>> is not
+            a flat vector*/
+            for(size_t i{0}; i < y.size(); i++)
+            {
+                y_hat[i]=predict(x,m_weight,m_bias,i);
+            }
 
+            updateWeights(x,y,y_hat);
+            updateBias(x,y,y_hat);
+
+            //Record Cost and Decision if tolerances are met.
+            double current_loss {xentropyLoss(x,y)};
+            if(iteration % 100 == 0){std::cout <<"Epoch :" << iteration << " Cost: " << current_loss <<'\n';}
+
+            if(std::abs(previous_loss - current_loss) < m_tolerance)
+            {
+                std::cout << "Convergence reached at iteration: " << iteration << ", Loss: " << current_loss << '\n';
+                break;
+            }
+            previous_loss = current_loss;
+        }
+        std::cout << "Training Complete" << '\n';
     }
 };
 
