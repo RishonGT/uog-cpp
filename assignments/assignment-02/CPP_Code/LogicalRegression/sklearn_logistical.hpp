@@ -236,7 +236,7 @@ namespace linear_model
     {
         public:
             // Checking each value in data for error.
-            void check_data(const std::vector<std::vector<double>> X, const std::vector<double> Y,  int num_class)
+            void check_data(const std::vector<std::vector<double>>& X, const std::vector<double>& Y,  int num_class)
             {
                 check_dimension( X, Y);
 
@@ -252,7 +252,7 @@ namespace linear_model
             }
 
             // Checks that dimensions match up that all features are the same.
-            void check_dimension(const std::vector<std::vector<double>> X, const std::vector<double> Y) const
+            void check_dimension(const std::vector<std::vector<double>>& X, const std::vector<double>& Y) const
             {
                 if (X.empty())
                 {
