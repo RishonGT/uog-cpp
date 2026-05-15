@@ -69,6 +69,21 @@ int main()
     LogisticalRegression log_reg;
     log_reg.train(ecg_train.feature,ecg_train.label);
 
+    std::vector<double> y_predict (ecg_test.row());
+    for(size_t i{0}; i<ecg_test.row();i++)
+    {
+        if (log_reg.predict(ecg_test.feature,i) > 0.5){y_predict[i] = 1;}
+        else {y_predict[i] = 0;}
+    }
+
+    int correct_predictions{};
+    for(size_t i{0}; i<ecg_test.row();i++)
+    {
+        if(y_predict[i]==ecg_test.label[i]){correct_predictions++;}
+    }
+    double accuracy {static_cast<double>(correct_predictions)/ecg_test.row()};
+    std::cout << "Model accuracy: " << accuracy << '\n';
+
    
     return 0;
 }
