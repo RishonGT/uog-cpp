@@ -172,7 +172,7 @@ public:
         return sigmoid(z);
     }
 
-    void train(
+    void fit(
         const std::vector<std::vector<double>> &x,
         const std::vector<double> &y
     )

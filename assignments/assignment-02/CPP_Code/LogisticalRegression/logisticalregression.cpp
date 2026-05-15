@@ -67,7 +67,7 @@ int main()
 
 
     LogisticalRegression log_reg;
-    log_reg.train(ecg_train.feature,ecg_train.label);
+    log_reg.fit(ecg_train.feature,ecg_train.label);
 
     std::vector<double> y_predict (ecg_test.row());
     for(size_t i{0}; i<ecg_test.row();i++)
