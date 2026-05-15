@@ -62,4 +62,24 @@ int main()
     LogisticalRegression log_reg;
     log_reg.fit(ecg_x_train,ecg_y_train);
 
+    //Test the model by prediciting all the x_test cases with our model and assigning true or false
+    std::vector<double> y_predict (ecg_x_test[0].size());
+    for(size_t i{0}; i<ecg_y_test.size();i++)
+    {
+        if (log_reg.predict(ecg_x_test,i) > 0.5)
+            {y_predict[i] = 1;}
+        else 
+            {y_predict[i] = 0;}
+    }
+
+    int correct_predictions{};
+    for(size_t i{0}; i<ecg_y_test.size();i++)
+    {
+        if(y_predict[i]==ecg_y_test[i]){correct_predictions++;}
+    }
+    double accuracy {static_cast<double>(correct_predictions)/ecg_y_test.size()};
+    std::cout << "Model accuracy: " << accuracy << '\n';
+
+   
+    return 0;
 }
