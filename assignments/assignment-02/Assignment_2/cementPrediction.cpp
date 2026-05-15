@@ -1,5 +1,5 @@
-#include "sklearn.hpp"  // For LinearRegression and PolynomialFeatures
-#include "Read_CSV.hpp"  // For reading the dataset
+#include "header/sklearn.hpp"  // For LinearRegression and PolynomialFeatures
+#include "header/Read_CSV.hpp"  // For reading the dataset
 #include <algorithm>
 #include <random>
 
@@ -7,7 +7,7 @@ int main() {
     std::vector<std::vector<double>> x;
     std::vector<double> y;
 
-    Read_CSV::read_csv("../data/concrete.csv", x, y);
+    Read_CSV::read_csv("data/concrete.csv", x, y);
 
     if (x.empty() || y.empty() || x[0].size() != y.size()) {
         std::cerr << "Failed to read dataset. Exiting." << std::endl;
