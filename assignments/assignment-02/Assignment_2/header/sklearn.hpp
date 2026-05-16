@@ -803,73 +803,13 @@ namespace sklearn_cpp{
                     }
 
         };
-         // This is preprocessing for the data thats being input. Checking various errors.
-        class dataset_checker 
-        {
-            public:
-                // Checking each value in data for error.
-                void check_data(const std::vector<std::vector<double>>& X, const std::vector<double>& Y,  int num_class)
-                {
-                    check_dimension( X, Y);
-
-                    for (int i = 0; i < X.size(); ++i)
-                    {
-                        for (int j = 0; j < X[i].size(); ++j)
-                        {
-                            check_nan_inf( X[i][j]);
-                            check_normalized( X[i][j]);
-                            
-                        }
-                    }
-                }
-
-                // Checks that dimensions match up that all features are the same.
-                void check_dimension(const std::vector<std::vector<double>>& X, const std::vector<double>& Y) const
-                {
-                    if (X.empty())
-                    {
-                        throw std::invalid_argument("The dataset is empty");
-                    }
-
-                    if (X.size() != Y.size())
-                    {
-                        throw std::invalid_argument("File is not dimensionally correct");
-                    }
-
-                    int start_shape = X[0].size();
-
-                    for (int i = 0 ; i < X.size(); ++i )
-                    {
-                        if (X[i].size() != start_shape)
-                        {
-                            throw std::invalid_argument("File is not dimensionally correct");
-                        }
-                    }
-                }
-
-                // Checks for nan's and inf's in data.
-                void check_nan_inf(double value) const
-                {
-                    if (std::isnan(value) || std::isinf(value) )
-                    {
-                        throw std::invalid_argument("NaN or inf value found in file");
-                    }
-                }
-
-                // Check if data is within boundary for model.
-                void check_normalized(double value) const
-                {
-                    if (value < 0 || value > 1)
-                    {
-                        throw std::invalid_argument("Values are not properly normalized");
-                    }
-                }
-        };
+        
 
     }
 
 
     namespace preprocessing {
+        // This class generates polynomial features from the input data based on the specified degree and bias inclusion.
         class PolynomialFeatures {
             private:
             // Parameters for polynomial feature generation
@@ -935,7 +875,73 @@ namespace sklearn_cpp{
                     return X_poly;
                 }
         };
+
+
+        // This is preprocessing for the data thats being input. Checking various errors for multiple logistic regression.
+        class dataset_checker 
+        {
+            public:
+                // Checking each value in data for error.
+                void check_data(const std::vector<std::vector<double>>& X, const std::vector<double>& Y,  int num_class)
+                {
+                    check_dimension( X, Y);
+
+                    for (int i = 0; i < X.size(); ++i)
+                    {
+                        for (int j = 0; j < X[i].size(); ++j)
+                        {
+                            check_nan_inf( X[i][j]);
+                            check_normalized( X[i][j]);
+                            
+                        }
+                    }
+                }
+
+                // Checks that dimensions match up that all features are the same.
+                void check_dimension(const std::vector<std::vector<double>>& X, const std::vector<double>& Y) const
+                {
+                    if (X.empty())
+                    {
+                        throw std::invalid_argument("The dataset is empty");
+                    }
+
+                    if (X.size() != Y.size())
+                    {
+                        throw std::invalid_argument("File is not dimensionally correct");
+                    }
+
+                    int start_shape = X[0].size();
+
+                    for (int i = 0 ; i < X.size(); ++i )
+                    {
+                        if (X[i].size() != start_shape)
+                        {
+                            throw std::invalid_argument("File is not dimensionally correct");
+                        }
+                    }
+                }
+
+                // Checks for nan's and inf's in data.
+                void check_nan_inf(double value) const
+                {
+                    if (std::isnan(value) || std::isinf(value) )
+                    {
+                        throw std::invalid_argument("NaN or inf value found in file");
+                    }
+                }
+
+                // Check if data is within boundary for model.
+                void check_normalized(double value) const
+                {
+                    if (value < 0 || value > 1)
+                    {
+                        throw std::invalid_argument("Values are not properly normalized");
+                    }
+                }
+        };
     }
+
+        
 
 }
 #endif

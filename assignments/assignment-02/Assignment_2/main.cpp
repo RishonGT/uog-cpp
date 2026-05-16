@@ -12,8 +12,51 @@ void print_banner(const std::string& message) {
     std::cout << std::string(width, '=') << std::endl;
 }
 
+// Function to split dataset into training and testing sets (not used in main, but can be implemented for modularity)
+void split_train_test(const std::vector<std::vector<double>>& features, const std::vector<double>& targets,
+                      std::vector<std::vector<double>>& x_train, std::vector<double>& y_train,
+                      std::vector<std::vector<double>>& x_test, std::vector<double>& y_test,
+                      double train_ratio = 0.8) {
+
+    const size_t n_samples = features[0].size();
+    const size_t n_features = features.size();
+    const size_t train_size = static_cast<size_t>(train_ratio * n_samples);
+
+    // Create indices and shuffle them for random splitting
+    std::vector<size_t> indices(n_samples);
+    for (size_t i = 0; i < n_samples; ++i) {
+        indices[i] = i;
+    }
+    std::mt19937 rng(42); // Fixed seed for reproducibility
+    std::shuffle(indices.begin(), indices.end(), rng);
+
+    // Prepare training and testing datasets
+    x_train.resize(n_features, std::vector<double>(train_size));
+    y_train.resize(train_size);
+    x_test.resize(n_features, std::vector<double>(n_samples - train_size));
+    y_test.resize(n_samples - train_size);
+
+    // Distribute samples into training and testing sets based on shuffled indices
+    for (size_t feature = 0; feature < n_features; ++feature) {
+        for (size_t sample = 0; sample < train_size; ++sample) {
+            x_train[feature][sample] = features[feature][indices[sample]];
+        }
+        for (size_t sample = train_size; sample < n_samples; ++sample) {
+            x_test[feature][sample - train_size] = features[feature][indices[sample]];
+        }
+    }
+
+    for (size_t sample = 0; sample < train_size; ++sample) {
+        y_train[sample] = targets[indices[sample]];
+    }
+    for (size_t sample = train_size; sample < n_samples; ++sample) {
+        y_test[sample - train_size] = targets[indices[sample]];
+    }
+
+}
 
 int main() {
+    //=== Cement Strength Prediction using Linear Regression ===//
     print_banner("Cement Strength Prediction using Linear Regression");
 
     std::vector<std::vector<double>> concrete_features;
@@ -32,47 +75,13 @@ int main() {
     // Print size of the dataset
     std::cout << "Dataset size: " << n_samples << " samples, " << n_features << " features" << std::endl;
 
+
     print_banner("Splitting dataset into training and testing sets");
 
-    const size_t train_size = static_cast<size_t>(0.8 * n_samples);  // 80% for training, 20% for testing
+    std::vector<std::vector<double>> x_train, x_test;
+    std::vector<double> y_train, y_test;
 
-    // Prepare training and testing datasets
-    std::vector<std::vector<double>> x_train(n_features, std::vector<double>(train_size));
-    std::vector<double> y_train(train_size);
-
-    // Prepare testing dataset
-    std::vector<std::vector<double>> x_test(n_features, std::vector<double>(n_samples - train_size));
-    std::vector<double> y_test(n_samples - train_size);
-
-    // Index Shuffling to ensure random distribution of samples in train and test sets
-    std::vector<size_t> indices(n_samples);
-    for (size_t i = 0; i < n_samples; ++i) {
-        indices[i] = i;
-    }
-
-    // Use a fixed seed for reproducibility
-    std::mt19937 rng(42);
-    std::shuffle(indices.begin(), indices.end(), rng);
-
-    // Distribute samples into training and testing sets based on shuffled indices
-    for (size_t feature = 0; feature < n_features; ++feature) {
-        for (size_t sample = 0; sample < train_size; ++sample) {
-            x_train[feature][sample] = concrete_features[feature][indices[sample]];
-        }
-
-        for (size_t sample = train_size; sample < n_samples; ++sample) {
-            x_test[feature][sample - train_size] = concrete_features[feature][indices[sample]];
-        }
-    }
-
-    // Distribute target values into training and testing sets based on shuffled indices
-    for (size_t sample = 0; sample < train_size; ++sample) {
-        y_train[sample] = concrete_targets[indices[sample]];
-    }
-
-    for (size_t sample = train_size; sample < n_samples; ++sample) {
-        y_test[sample - train_size] = concrete_targets[indices[sample]];
-    }
+    split_train_test(concrete_features, concrete_targets, x_train, y_train, x_test, y_test);
 
     print_banner("Training Linear Regression Model");
     sklearn_cpp::linear_model::LinearRegression model;
@@ -88,7 +97,7 @@ int main() {
 
     // Polynomial feature transformation and fitting a new model
     print_banner("Training Polynomial Regression Model (degree 2)");
-    sklearn_cpp::preprocessing::PolynomialFeatures poly_transformer(2, false);
+    sklearn_cpp::preprocessing::PolynomialFeatures poly_transformer(2, false); // Degree 2 polynomial features without bias term (intercept))
 
     std::vector<std::vector<double>> x_train_poly = poly_transformer.transform(x_train);
     std::vector<std::vector<double>> x_test_poly = poly_transformer.transform(x_test);
@@ -110,7 +119,9 @@ int main() {
     std::cout << "Polynomial Regression R² score: " << r2_poly << std::endl;
     print_banner("End of Cement Strength Prediction");
 
-    // Binary Logistic Regression on ECG dataset
+
+
+    // === Binary Logistic Regression on ECG Dataset ===
     print_banner("Binary Logistic Regression on ECG Dataset");
     std::vector<std::vector<double>> ecg_x;
     std::vector<double> ecg_y;
@@ -126,38 +137,69 @@ int main() {
     std::cout << "ECG Dataset size: " << ecg_samples << " samples, " << ecg_features << " features" << std::endl;
 
     // Split ECG dataset into training and testing sets
-    const size_t ecg_train_size = static_cast<size_t>(0.8 * ecg_samples);
+    std::vector<std::vector<double>> ecg_x_train, ecg_x_test;
+    std::vector<double> ecg_y_train, ecg_y_test;
 
-    std::vector<size_t> ecg_indices(ecg_samples);
-    std::iota(ecg_indices.begin(), ecg_indices.end(), 0);
-    std::shuffle(ecg_indices.begin(), ecg_indices.end(), std::mt19937{42});
+    split_train_test(ecg_x, ecg_y, ecg_x_train, ecg_y_train, ecg_x_test, ecg_y_test);
 
-    // Prepare training and testing datasets for ECG
-    std::vector<std::vector<double>> ecg_x_train(ecg_features, std::vector<double>(ecg_train_size));
-    std::vector<double> ecg_y_train(ecg_train_size);  
+    // Train logistic regression model on ECG dataset
+    sklearn_cpp::linear_model::LogisticRegression log_reg;
+    log_reg.fit(ecg_x_train, ecg_y_train);
 
-    std::vector<std::vector<double>> ecg_x_test(ecg_features, std::vector<double>(ecg_samples - ecg_train_size));
-    std::vector<double> ecg_y_test(ecg_samples - ecg_train_size);
-
-    // Distribute ECG samples into training and testing sets based on shuffled indices
-    for (size_t feature = 0; feature < ecg_features; ++feature) {
-        for (size_t sample = 0; sample < ecg_train_size; ++sample) {
-            ecg_x_train[feature][sample] = ecg_x[feature][ecg_indices[sample]];
-        }
-        for (size_t sample = ecg_train_size; sample < ecg_samples; ++sample) {
-            ecg_x_test[feature][sample - ecg_train_size] = ecg_x[feature][ecg_indices[sample]];
+    // Evaluate logistic regression model on ECG test set
+    size_t correct_predictions = 0;
+    for (size_t i = 0; i < ecg_y_test.size(); ++i) {
+        double prediction = log_reg.predict(ecg_x_test, i);
+        if ((prediction > 0.5 && ecg_y_test[i] == 1) || (prediction <= 0.5 && ecg_y_test[i] == 0)) {
+            ++correct_predictions;
         }
     }
 
-    for (size_t sample = 0; sample < ecg_train_size; ++sample) {
-        ecg_y_train[sample] = ecg_y[ecg_indices[sample]];
-    }
-    for (size_t sample = ecg_train_size; sample < ecg_samples; ++sample) {
-        ecg_y_test[sample - ecg_train_size] = ecg_y[ecg_indices[sample]];
+    double accuracy = static_cast<double>(correct_predictions) / ecg_y_test.size() * 100.0;
+    std::cout << "Logistic Regression Accuracy on ECG test set: " << accuracy << "% (" << correct_predictions << "/" << ecg_y_test.size() << " correct predictions)" << std::endl;
+    print_banner("End of Binary Logistic Regression on ECG Dataset");
+
+
+    // === Multiclass Logistic Regression on MNIST Dataset ===
+    print_banner("Multiclass Logistic Regression on MNIST Dataset");
+    std::vector<std::vector<double>> mnist_x_train;
+    std::vector<double> mnist_y_train;
+    std::vector<std::vector<double>> mnist_x_test;
+    std::vector<double> mnist_y_test;
+
+    Read_CSV::read_csv("data/mnist_train.csv", mnist_x_train, mnist_y_train, true);  // Logistic regression flag set to true to prevent transposition
+
+    if (mnist_x_train.empty() || mnist_y_train.empty() || mnist_x_train[0].size() != mnist_y_train.size()) {
+        std::cerr << "Failed to read MNIST training dataset. Exiting." << std::endl;
+        return 1;
     }
 
+    Read_CSV::read_csv("data/mnist_test.csv", mnist_x_test, mnist_y_test, true);  // Logistic regression flag set to true to prevent transposition
     
+    if (mnist_x_test.empty() || mnist_y_test.empty() || mnist_x_test[0].size() != mnist_y_test.size()) {
+        std::cerr << "Failed to read MNIST test dataset. Exiting." << std::endl;
+        return 1;
+    }
 
+    // Ensure Data is viable
+    sklearn_cpp::preprocessing::dataset_checker checker;
+    checker.check_data(mnist_x_train, mnist_y_train, 10);  // Assuming 10 classes for MNIST (digits 0-9)
+    checker.check_data(mnist_x_test, mnist_y_test, 10);
 
+    // Train logistic regression model on MNIST dataset
+    sklearn_cpp::linear_model::LogisticRegression multiclass_log_reg;
+    multiclass_log_reg.fit(mnist_x_train, mnist_y_train);
 
+    // Evaluate logistic regression model on MNIST test set
+    size_t mnist_correct_predictions = 0;
+    for (size_t i = 0; i < mnist_y_test.size(); ++i) {
+        double prediction = multiclass_log_reg.predict(mnist_x_test, i);
+        if (static_cast<int>(prediction) == static_cast<int>(mnist_y_test[i])) {
+            ++mnist_correct_predictions;
+        }
+    }
+
+    double mnist_accuracy = static_cast<double>(mnist_correct_predictions) / mnist_y_test.size() * 100.0;
+    std::cout << "Multiclass Logistic Regression Accuracy on MNIST test set: " << mnist_accuracy << "% (" << mnist_correct_predictions << "/" << mnist_y_test.size() << " correct predictions)" << std::endl;
+    print_banner("End of Multiclass Logistic Regression on MNIST Dataset");
 }
