@@ -181,6 +181,7 @@ int main() {
     std::vector<std::vector<double>> mnist_x_test;
     std::vector<double> mnist_y_test;
 
+    // Change the file paths to the MNIST dataset as needed. 
     Read_CSV::read_csv("data/mnist_train.csv", mnist_x_train, mnist_y_train);  
 
     if (mnist_x_train.empty() || mnist_y_train.empty() || mnist_x_train[0].size() != mnist_y_train.size()) {
