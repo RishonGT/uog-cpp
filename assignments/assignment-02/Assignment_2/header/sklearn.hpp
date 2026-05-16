@@ -8,6 +8,9 @@
 #include <string>
 #include <set>
 #include <memory>
+#include <algorithm> 
+#include <iterator>  
+
 
 
 namespace sklearn_cpp{
@@ -338,26 +341,32 @@ namespace sklearn_cpp{
         We do not know what the user wants apart from something in the LogisticalRegression library, we provide
         a user forward facing class which they interact with.
 
-        The logic of the Interface is handled in ILogisticalInterface which has virtual functions which 
+        LogisticalRegression, main purpose is to initially create a nullpointer to a potential
+        LogisticalRegression by using an Interface (ILogisticalInterface).
+
+        Using the fit() function will resolve which is the correct LogsticalRegression to use
         */    
-        class LogisticalRegression {
-            private:
-                
-                std::unique_ptr<ILogisticalInterface> impl;
-            
-            public:
-                LogisticalRegression() = default;
-
-
-        };
-        
+       
         class ILogisticalInterface {
             public:
                 virtual ~ILogisticalInterface() = default;
-                //
+                //Virtual functions for multiclassification
+/*
                 virtual std::vector<double> fit(
                     std::vector<std::vector<double>> &X,
                     std::vector<double> &Y) = 0;
+                virtual void predict(
+                    const std::vector<std::vector<double>> &x,
+                    const std::vector<double> &y) = 0;
+*/
+                //Virutal function for binary
+                virtual void fit(
+                    const std::vector<std::vector<double>> &x,
+                    const std::vector<double> &y) = 0;
+
+                virtual double predict(
+                    const std::vector<std::vector<double>> &x,
+                    const size_t &data_index)const = 0;
                 
 
         };
@@ -417,7 +426,7 @@ namespace sklearn_cpp{
                 double y_hat{};
                 for(size_t i{0}; i < y.size(); i++)
                 {
-                    y_hat = predict(x,m_weight,m_bias,i);
+                    y_hat = predict(x,i);
                     loss += y[i] * log(y_hat+1e-9);
                     loss += (1.0 - y[i]) * (log(1.0-y_hat+1e-9));
 
@@ -473,22 +482,12 @@ namespace sklearn_cpp{
             }
             
         public:
-            //prediction for feature aligned vector
-            double predict(
-                const std::vector<std::vector<double>> &x,
-                const std::vector<double> &weights,
-                const double &bias,
-                const size_t &data_index
-            ) const
-            {
-                double z {dot(x,weights,data_index) + bias};
-                return sigmoid(z);
-            }
+
 
             double predict(
                 const std::vector<std::vector<double>> &x,
                 const size_t &data_index
-            )
+            ) const override
             {
                 double z {dot(x,m_weight,data_index) + m_bias};
                 return sigmoid(z);
@@ -510,7 +509,7 @@ namespace sklearn_cpp{
                     a flat vector*/
                     for(size_t i{0}; i < y.size(); i++)
                     {
-                        y_hat[i]=predict(x,m_weight,m_bias,i);
+                        y_hat[i]=predict(x,i);
                     }
 
                     updateWeights(x,y,y_hat);
@@ -531,7 +530,7 @@ namespace sklearn_cpp{
             }
         };
     
-        class LogisticalRegressionMulticlass: public ILogisticalInterface
+        class LogisticalRegressionMulticlass
         {
             private:
 
@@ -756,7 +755,53 @@ namespace sklearn_cpp{
                     std::cout << " Accuracy: " << correct_predictions << "/" << x.size() << " percentage: " << (double)correct_predictions / x.size() * 100 << "% " << std::endl;     
                 }   
         };
-        // This is preprocessing for the data thats being input. Checking various errors.
+
+        class LogisticalRegression {
+            private:
+                //
+                std::unique_ptr<ILogisticalInterface> impl;
+
+                //This function selects a logistical regression type if it has not been assigned one yet
+                void selectLogisticalType(const std::vector<double>& y){
+                    if (!impl) {
+                        //Counts number of unique elements.
+                        size_t unique_labels{std::set<double>(y.begin(), y.end()).size()};
+
+                        //Label Decision
+                        if(unique_labels == 2){
+                            impl = std::make_unique<LogisticalRegressionBinary>();
+                        } else if (unique_labels > 2){
+                            //impl = std::make_unique<LogisticalRegressionMulticlass>();
+                        } else {
+                            throw std::invalid_argument("Insufficent Y labels");
+                        }
+                    }
+
+                }
+            
+            public:
+                //We assume the user initalizes LogisticalRegression with a default constructor
+                LogisticalRegression() = default;
+
+                //Forward the functions to the pointed class
+                void fit(
+                    const std::vector<std::vector<double>> &x,
+                    const std::vector<double> &y){
+                        selectLogisticalType(y);
+                        impl->fit(x,y);
+                    }
+
+                double predict(
+                    const std::vector<std::vector<double>> &x,
+                    const size_t &data_index){
+                        if(!impl){
+                            std::cout << "Training not performed yet.";
+                        }
+                        return impl->predict(x,data_index);
+                    }
+
+        };
+         // This is preprocessing for the data thats being input. Checking various errors.
         class dataset_checker 
         {
             public:

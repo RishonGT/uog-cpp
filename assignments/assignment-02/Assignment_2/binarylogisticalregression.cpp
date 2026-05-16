@@ -1,4 +1,4 @@
-#include "./header/sklearn_logistical.hpp"
+#include "./header/sklearn.hpp"
 #include "./header/Read_CSV.hpp"
 
 #include <iostream>
@@ -59,7 +59,7 @@ int main()
         ecg_y_test[i-train_size] = std::move(ecg_y[indices[i]]);
     }
 
-    LogisticalRegression log_reg;
+    sklearn_cpp::linear_model::LogisticalRegression log_reg;
     log_reg.fit(ecg_x_train,ecg_y_train);
 
     //Test the model by prediciting all the x_test cases with our model and assigning true or false
