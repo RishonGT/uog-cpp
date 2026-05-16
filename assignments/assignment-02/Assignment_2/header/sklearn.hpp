@@ -336,8 +336,9 @@ namespace sklearn_cpp{
                 }
             };
         
+        /*This solution was proposed by Gemini but implemented by us once we understood how it works.
         
-        /* ILogistical class is the parent virtual class, it ensurse two things that fit and predict functions are avaliable
+        ILogistical class is the parent virtual class, it ensurse two things that fit and predict functions are avaliable
         fromt the child classes. This is needed because the pointer can not be pointed towards either a binary or multiclass,
         it would mean it only works as binary or multiclass.
 
@@ -851,7 +852,7 @@ namespace sklearn_cpp{
                         if (unique_labels == 2) {
                             impl = std::make_unique<LogisticalRegressionBinary>();
                         } else if (unique_labels > 2) {
-                            // Infer features and classes if not provided, otherwise use provided values
+                            // My original solution simply was too basic (only using y), Gemini included X to ensure this function will always work with checks
                             const int inferred_features = features > 0
                                 ? features
                                 : (x_transposed.empty() ? 0 : static_cast<int>(x_transposed[0].size()));
@@ -890,6 +891,8 @@ namespace sklearn_cpp{
                 void fit(
                     std::vector<std::vector<double>> &x,
                     std::vector<double> &y){
+                        /*There was issues trying to get fit to recognize which fit function to send to as each class has
+                        the same function overload by way of Virutal Pure functions, it changed x and y to a const which meant the first fit() is used */
                         const size_t unique_labels = selectLogisticalType(x, y);
                         if (unique_labels == 2) {
                             const auto& x_const = x;
