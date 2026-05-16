@@ -558,8 +558,11 @@ namespace sklearn_cpp{
                 {
                     auto max_it {std::max_element(probabilities.begin(), probabilities.end())};
                     double max_value {*max_it};
-                    int position {std::distance(probabilities.begin(), max_it)};
-                    if (position == (Y[image_count]))
+                    const int position = static_cast<int>(
+                        std::distance(probabilities.begin(), max_it)
+                    );
+                    const int true_class = static_cast<int>(Y[image_count]);
+                    if (position == true_class)
                     {
                         ++correct_predictions;
                     }
@@ -628,7 +631,7 @@ namespace sklearn_cpp{
 
                     loss = 0.0;
 
-                    int true_class {Y[img_count]};
+                    int true_class = static_cast<int>(Y[img_count]);
                     loss -= log(probabilities[true_class]);
 
 
@@ -679,7 +682,7 @@ namespace sklearn_cpp{
                     int img_count
                 ) 
                 {
-                    int true_class {Y[img_count]};
+                    int true_class = static_cast<int>(Y[img_count]);
                     double gradient {0.0};
                     const std::vector<double>& feature = X;
 
