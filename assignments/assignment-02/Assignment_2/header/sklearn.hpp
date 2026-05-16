@@ -587,7 +587,6 @@ namespace sklearn_cpp{
                 {   
                     probabilities.clear();
                     double sum_linear_exp {0.0};
-                    double probability {0.0};
                     std::vector<double> linear_combination;
                     std::vector<double> temp;
                     // linear equation 
@@ -595,15 +594,20 @@ namespace sklearn_cpp{
                     {
                         linear_combination.push_back(dot(x, i) + class_bias[i]);
                     }
+                    // Stabilize softmax by shifting with max logit to avoid overflow.
+                    const double max_logit = *std::max_element(
+                        linear_combination.begin(),
+                        linear_combination.end()
+                    );
                     // summing to make; Sum e^{z_k} where k = 1, 2, 3 .... K
                     for (size_t i{0}; i < linear_combination.size(); ++i)
                     {
-                        sum_linear_exp += exp(linear_combination[i]);
+                        sum_linear_exp += exp(linear_combination[i] - max_logit);
                     }
                     // perform softmax probability on each class.
                     for (size_t i{0}; i < class_bias.size(); ++i)
                     {
-                        temp.push_back(exp(linear_combination[i]) / (sum_linear_exp));
+                        temp.push_back(exp(linear_combination[i] - max_logit) / (sum_linear_exp));
                     }
                     
                     probabilities = temp;
@@ -774,7 +778,7 @@ namespace sklearn_cpp{
                         compute_probabilities(x_transposed[img_id]);          
                         accuracy_score(img_id, y);      
                     }
-                    std::cout << " Accuracy: " << correct_predictions << "/" << x.size() << " percentage: " << (double)correct_predictions / x.size() * 100 << "% " << std::endl;     
+                    std::cout << " Accuracy: " << correct_predictions << "/" << x_transposed.size() << " percentage: " << (double)correct_predictions / x_transposed.size() * 100 << "% " << std::endl;     
                 }
                 
                 //Functions required for Virtual Pure
@@ -817,6 +821,23 @@ namespace sklearn_cpp{
                 int classes{0};
                 double learningrate{0.001};
                 int epochs{50};
+                
+                // Transpose function for matrix, used as the data is stored as features major, but we need to access it as sample major for the dot product.
+                void transpose(std::vector<std::vector<double>>& matrix) {
+                    if (matrix.empty() || matrix[0].empty()) {
+                        return; // Handle empty matrix case
+                    }
+                    const size_t rows = matrix.size();
+                    const size_t cols = matrix[0].size();
+                    std::vector<std::vector<double>> transposed(cols, std::vector<double>(rows));
+                    for (size_t i = 0; i < rows; ++i) {
+                        for (size_t j = 0; j < cols; ++j) {
+                            transposed[j][i] = matrix[i][j];
+                        }
+                    }
+                    matrix = std::move(transposed);
+                }
+
 
                 //This function selects the correct type to use by the difference of x and y vectors and making assumptions
                 size_t selectLogisticalType(
@@ -824,6 +845,8 @@ namespace sklearn_cpp{
                     const std::vector<double>& y
                 ) {
                     const size_t unique_labels{std::set<double>(y.begin(), y.end()).size()};
+                    std::vector<std::vector<double>> x_transposed = x;
+                    transpose(x_transposed); // Transpose the feature matrix to access samples as rows
                     if (!impl) {
                         if (unique_labels == 2) {
                             impl = std::make_unique<LogisticalRegressionBinary>();
@@ -831,7 +854,7 @@ namespace sklearn_cpp{
                             // Infer features and classes if not provided, otherwise use provided values
                             const int inferred_features = features > 0
                                 ? features
-                                : (x.empty() ? 0 : static_cast<int>(x[0].size()));
+                                : (x_transposed.empty() ? 0 : static_cast<int>(x_transposed[0].size()));
                             const int inferred_classes = classes > 0
                                 ? classes
                                 : static_cast<int>(unique_labels);
