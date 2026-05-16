@@ -21,13 +21,11 @@
 class Read_CSV {
     public:
     // Static method to read a CSV file and populate feature matrix X and target vector Y
-    // The method takes the filename, references to X and Y, and an optional flag for logistic regression
-    // Logistic regression flag ensures X is not transposed.
+    // The method takes the filename, references to X and Y
         static void read_csv(
             const std::string& filename, 
             std::vector<std::vector<double>>& X, 
-            std::vector<double>& Y,
-            const bool& LogisticRegression = false) {
+            std::vector<double>& Y) {
             std::ifstream file(filename);
             if (!file.is_open()) {
                 std::cerr << "Error opening file: " << filename << std::endl;
@@ -85,9 +83,9 @@ class Read_CSV {
                 std::cerr << "No data read from file: " << filename << std::endl;
             };
 
-            // Transpose X to match the expected format for linear regression (features as rows, samples as columns)
-            // For logistic regression, we keep X in its original format (samples as rows, features as columns)
-            if (!LogisticRegression && !X.empty() && !X[0].empty()) {
+            // Transpose X to match the expected format (features as rows, samples as columns)
+            
+            if (!X.empty() && !X[0].empty()) {
                 std::vector<std::vector<double>> X_transposed(X[0].size(), std::vector<double>(X.size()));
                 for (size_t i = 0; i < X.size(); i++) {
                     for (size_t j = 0; j < X[i].size(); j++) {
