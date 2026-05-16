@@ -542,11 +542,12 @@ namespace sklearn_cpp{
                 double lambda{0.00005}; // Regularization parameter
                 double correct_predictions = 0;
                 double loss = 0.0;
-                int epochs = 50;
+                int epochs;
                 
                 /*
                 This function checks the highest predicted probability agianst the true class,
-                if correct it updates correct prediction.
+                if correct it updates correct prediction. I could have added this to be existing in 
+                fit and predict seperately, it is done like this to prevent repetition of code.
                 */
                 void accuracy_score(
                     const int image_count,
@@ -645,7 +646,10 @@ namespace sklearn_cpp{
                             
                 }
 
-                // Transpose function for matrix, used as the data is stored as features major, but we need to access it as sample major for the dot product.
+                /*
+                 Transpose function for matrix, used as the data is stored as features major,
+                 but we need to access it as sample major for the dot product.
+                */
                 void transpose(std::vector<std::vector<double>>& matrix) {
                     if (matrix.empty() || matrix[0].empty()) {
                         return; // Handle empty matrix case
@@ -664,8 +668,6 @@ namespace sklearn_cpp{
                 /* 
                 Gradient descent method is Stochastic Gradient descent, updating after each image.
                 This makes it reach a lower much faster, giving the ability to use much lower epoch amounts.
-                With current parameters making it reach convergence at ~29 epochs, converging at ~92% accuracy, 
-                which from research indicates to be the theoritcal limit for non convolution neural networks.
 
                 The other option is using batch training, which while being slower at training is less demanding of the 
                 pc and not being as slow.
