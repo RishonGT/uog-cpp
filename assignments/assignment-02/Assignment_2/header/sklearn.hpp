@@ -780,85 +780,86 @@ namespace sklearn_cpp{
 
         class LogisticRegression {
             private:
-                //This magic pointer allows us to be dynamic with which Logistic Regression we're going to use
                 std::unique_ptr<ILogisticalInterface> impl;
+                int features{0};
+                int classes{0};
+                double learningrate{0.001};
+                int epochs{50};
 
-                //Parameters for Multiclassification
-                int features;
-                int classes;
-                std::vector<std::vector<double>> class_weights;
-                std::vector<double> class_bias;
-                double learningrate;
-                int epochs;
-
-                //This function selects a logistical regression type if it has not been assigned one yet
-                void selectLogisticalType(const std::vector<double>& y){
+                size_t selectLogisticalType(
+                    const std::vector<std::vector<double>>& x,
+                    const std::vector<double>& y
+                ) {
+                    const size_t unique_labels{std::set<double>(y.begin(), y.end()).size()};
                     if (!impl) {
-                        //Counts number of unique elements.
-                        size_t unique_labels{std::set<double>(y.begin(), y.end()).size()};
-
-                        //Label Decision
-                        if(unique_labels == 2){
+                        if (unique_labels == 2) {
                             impl = std::make_unique<LogisticalRegressionBinary>();
-                        } else if (unique_labels > 2){
-                            impl = std::make_unique<LogisticalRegressionMulticlass>(features, learningrate, classes, epochs);
+                        } else if (unique_labels > 2) {
+                            // Infer features and classes if not provided, otherwise use provided values
+                            const int inferred_features = features > 0
+                                ? features
+                                : (x.empty() ? 0 : static_cast<int>(x[0].size()));
+                            const int inferred_classes = classes > 0
+                                ? classes
+                                : static_cast<int>(unique_labels);
+                            if (inferred_features <= 0) {
+                                throw std::invalid_argument("Invalid feature count for multiclass");
+                            }
+                            impl = std::make_unique<LogisticalRegressionMulticlass>(
+                                inferred_features,
+                                learningrate,
+                                inferred_classes,
+                                epochs
+                            );
                         } else {
                             throw std::invalid_argument("Insufficent Y labels");
                         }
                     }
-
+                    return unique_labels;
                 }
-            
+
             public:
-                //We assume the user initalizes LogisticalRegression with a default constructor
                 LogisticRegression() = default;
 
-                
                 LogisticRegression(int features, double temp_learningrate, int classes, int temp_epochs)
                 :
                 features{features},
-                learningrate{temp_learningrate},
                 classes{classes},
+                learningrate{temp_learningrate},
                 epochs{temp_epochs}
                 {
-                    class_weights.resize(classes, std::vector<double>(features, 0.01));
-                    class_bias.resize(classes, 0.0);
                 }
 
-
-                //Forward the functions to the pointed class
                 void fit(
-                    const std::vector<std::vector<double>> &x,
-                    const std::vector<double> &y){
-                        selectLogisticalType(y);
-                        impl->fit(x,y);
+                    std::vector<std::vector<double>> &x,
+                    std::vector<double> &y){
+                        const size_t unique_labels = selectLogisticalType(x, y);
+                        if (unique_labels == 2) {
+                            const auto& x_const = x;
+                            const auto& y_const = y;
+                            impl->fit(x_const, y_const);
+                        } else {
+                            (void)impl->fit(x, y);
+                        }
                     }
 
                 double predict(
                     const std::vector<std::vector<double>> &x,
                     const size_t &data_index){
                         if(!impl){
-                            std::cout << "Training not performed yet.";
+                            throw std::logic_error("predict: model is not fitted yet");
                         }
                         return impl->predict(x,data_index);
                     }
-
-                std::vector<double> fit(
-                    std::vector<std::vector<double>> &X,
-                    std::vector<double> &Y){
-                        selectLogisticalType(Y);
-                        return impl->fit(X,Y);
-                }
 
                 void predict(
                     const std::vector<std::vector<double>> &x,
                     const std::vector<double> &y){
                         if (!impl){
-                            std::cout << "Training not performed yet.";
+                            throw std::logic_error("predict: model is not fitted yet");
                         }
-                        return impl->predict(x,y);
+                        impl->predict(x,y);
                     }
-                
         };
         
 
