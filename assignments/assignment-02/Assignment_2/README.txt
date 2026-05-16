@@ -14,3 +14,19 @@ With current parameters making it reach convergence at ~29 epochs, converging at
 which from research indicates to be the theoritcal limit for non convolution neural networks for mnist_full dataset.
 
 We loved this project.
+
+
+///////////////////Logistic Regression Binary///////////////////
+
+This solution generates prediction for the fit function in one block which means weights do not update based on new weights until
+another iteration passes and the predict function generates a new block of predictions to be fed in to Weight and Bias updates.
+
+Doing it this way is called batch because weights only respond to the new set of predictions after every weight is updated and 
+not immediately after the last updateWeight is called. I am unsure if this is a good or bad thing other than it takes a small amount
+of memory and it's slower to converge. However given the relatively small dataset it's and the 95% accuracy, it's more than adqeuete.
+
+An improvement that would be beneficial would be removial of Vector of vectors to store dataset. While each vector<double> holds
+the data within a continous block, the vector of vectors is not. Perhaps if everything was stored in a Vector<double> where we manually
+handle the start and ends of the row outside of the function with operator[] overloads.
+Class at the moment lacks any way to change any parameters as well. So those are baked into the class and must be modified by editing the class.
+
