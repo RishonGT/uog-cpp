@@ -350,15 +350,16 @@ namespace sklearn_cpp{
         class ILogisticalInterface {
             public:
                 virtual ~ILogisticalInterface() = default;
+
                 //Virtual functions for multiclassification
-/*
                 virtual std::vector<double> fit(
                     std::vector<std::vector<double>> &X,
                     std::vector<double> &Y) = 0;
+
                 virtual void predict(
                     const std::vector<std::vector<double>> &x,
                     const std::vector<double> &y) = 0;
-*/
+
                 //Virutal function for binary
                 virtual void fit(
                     const std::vector<std::vector<double>> &x,
@@ -380,17 +381,6 @@ namespace sklearn_cpp{
             double m_bias{0.01};
             int m_max_iteration{10000};
             double m_tolerance{0.0001};
-            
-            //generic dot product 
-            double dot(const std::vector<double> &x, const std::vector<double> &weights) const
-            {
-                double result {0.0};
-                for(auto i{0}; i<x.size(); ++i)
-                {
-                    result += x[i] * weights[i];
-                }
-                return result;
-            }
 
             /*
             Dot product for transposed where each double vector stores features.
@@ -483,7 +473,6 @@ namespace sklearn_cpp{
             
         public:
 
-
             double predict(
                 const std::vector<std::vector<double>> &x,
                 const size_t &data_index
@@ -528,6 +517,19 @@ namespace sklearn_cpp{
                 }
                 std::cout << "Training Complete" << '\n';
             }
+
+            //Requires functions because we're using Pure Virtual Functions
+            std::vector<double> fit(
+                std::vector<std::vector<double>> &X,
+                std::vector<double> &Y)override{
+                    throw std::logic_error("Called the wrong function. Incorrect model used.");
+                }
+
+            void predict(
+                const std::vector<std::vector<double>> &x,
+                const std::vector<double> &y)override{
+                    throw std::logic_error("Called the wrong function. Incorrect model used.");
+                }
         };
     
         class LogisticalRegressionMulticlass
@@ -756,7 +758,7 @@ namespace sklearn_cpp{
                 }   
         };
 
-        class LogisticalRegression {
+        class LogisticRegression {
             private:
                 //
                 std::unique_ptr<ILogisticalInterface> impl;
@@ -781,7 +783,7 @@ namespace sklearn_cpp{
             
             public:
                 //We assume the user initalizes LogisticalRegression with a default constructor
-                LogisticalRegression() = default;
+                LogisticRegression() = default;
 
                 //Forward the functions to the pointed class
                 void fit(
