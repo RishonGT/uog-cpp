@@ -532,7 +532,7 @@ namespace sklearn_cpp{
                 }
         };
     
-        class LogisticalRegressionMulticlass
+        class LogisticalRegressionMulticlass: public ILogisticalInterface
         {
             private:
 
@@ -697,7 +697,7 @@ namespace sklearn_cpp{
                 std::vector<double> fit(
                     std::vector<std::vector<double>> &X,
                     std::vector<double> &Y
-                ) 
+                ) override
                 {
                     std::vector<double> cost_epoch;
                     for (int epoch = 0; epoch < epochs; ++epoch)
@@ -746,7 +746,7 @@ namespace sklearn_cpp{
                 */
                 void predict(
                     const std::vector<std::vector<double>>& x,
-                    const std::vector<double>& y)
+                    const std::vector<double>& y) override
                 { 
                     correct_predictions = 0;
                     for (size_t img_id = 0; img_id < x.size(); ++img_id)  
@@ -755,13 +755,41 @@ namespace sklearn_cpp{
                         accuracy_score(img_id, y);      
                     }
                     std::cout << " Accuracy: " << correct_predictions << "/" << x.size() << " percentage: " << (double)correct_predictions / x.size() * 100 << "% " << std::endl;     
-                }   
+                }
+                
+                //Functions required for Virtual Pure
+                void fit(
+                    const std::vector<std::vector<double>> &x,
+                    const std::vector<double> &y
+                ) override{
+                    throw std::logic_error("Incorrect Fit Function used");
+                }
+                    
+                double predict(
+                    const std::vector<std::vector<double>> &x,
+                    const size_t &data_index
+                )const override{
+                    throw std::logic_error("Incorrect Predict Function used");
+                }
+
+                
+
+
+
         };
 
         class LogisticRegression {
             private:
-                //
+                //This magic pointer allows us to be dynamic with which Logistic Regression we're going to use
                 std::unique_ptr<ILogisticalInterface> impl;
+
+                //Parameters for Multiclassification
+                int features;
+                int classes;
+                std::vector<std::vector<double>> class_weights;
+                std::vector<double> class_bias;
+                double learningrate;
+                int epochs;
 
                 //This function selects a logistical regression type if it has not been assigned one yet
                 void selectLogisticalType(const std::vector<double>& y){
@@ -773,7 +801,7 @@ namespace sklearn_cpp{
                         if(unique_labels == 2){
                             impl = std::make_unique<LogisticalRegressionBinary>();
                         } else if (unique_labels > 2){
-                            //impl = std::make_unique<LogisticalRegressionMulticlass>();
+                            impl = std::make_unique<LogisticalRegressionMulticlass>(features, learningrate, classes, epochs);
                         } else {
                             throw std::invalid_argument("Insufficent Y labels");
                         }
@@ -784,6 +812,19 @@ namespace sklearn_cpp{
             public:
                 //We assume the user initalizes LogisticalRegression with a default constructor
                 LogisticRegression() = default;
+
+                
+                LogisticRegression(int features, double temp_learningrate, int classes, int temp_epochs)
+                :
+                features{features},
+                learningrate{temp_learningrate},
+                classes{classes},
+                epochs{temp_epochs}
+                {
+                    class_weights.resize(classes, std::vector<double>(features, 0.01));
+                    class_bias.resize(classes, 0.0);
+                }
+
 
                 //Forward the functions to the pointed class
                 void fit(
@@ -802,6 +843,22 @@ namespace sklearn_cpp{
                         return impl->predict(x,data_index);
                     }
 
+                std::vector<double> fit(
+                    std::vector<std::vector<double>> &X,
+                    std::vector<double> &Y){
+                        selectLogisticalType(Y);
+                        return impl->fit(X,Y);
+                }
+
+                void predict(
+                    const std::vector<std::vector<double>> &x,
+                    const std::vector<double> &y){
+                        if (!impl){
+                            std::cout << "Training not performed yet.";
+                        }
+                        return impl->predict(x,y);
+                    }
+                
         };
          // This is preprocessing for the data thats being input. Checking various errors.
         class dataset_checker 
