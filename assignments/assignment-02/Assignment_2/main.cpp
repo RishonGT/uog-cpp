@@ -56,20 +56,7 @@ void split_train_test(const std::vector<std::vector<double>>& features, const st
 
 }
 
-void transpose(std::vector<std::vector<double>>& matrix) {
-    if (matrix.empty() || matrix[0].empty()) {
-        return; // Handle empty matrix case
-    }
-    const size_t rows = matrix.size();
-    const size_t cols = matrix[0].size();
-    std::vector<std::vector<double>> transposed(cols, std::vector<double>(rows));
-    for (size_t i = 0; i < rows; ++i) {
-        for (size_t j = 0; j < cols; ++j) {
-            transposed[j][i] = matrix[i][j];
-        }
-    }
-    matrix = std::move(transposed);
-}
+
 
 int main() {
     //=== Cement Strength Prediction using Linear Regression ===//
@@ -196,10 +183,6 @@ int main() {
         std::cerr << "Failed to read MNIST test dataset. Exiting." << std::endl;
         return 1;
     }
-
-    // Transpose MNIST datasets to match expected format for multiclass logistic regression (features as rows, samples as columns)
-    transpose(mnist_x_train);
-    transpose(mnist_x_test);
 
     // Ensure Data is viable
     sklearn_cpp::preprocessing::dataset_checker checker;

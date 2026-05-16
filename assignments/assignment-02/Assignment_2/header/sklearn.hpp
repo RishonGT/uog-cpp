@@ -642,6 +642,22 @@ namespace sklearn_cpp{
                             
                 }
 
+                // Transpose function for matrix, used as the data is stored as features major, but we need to access it as sample major for the dot product.
+                void transpose(std::vector<std::vector<double>>& matrix) {
+                    if (matrix.empty() || matrix[0].empty()) {
+                        return; // Handle empty matrix case
+                    }
+                    const size_t rows = matrix.size();
+                    const size_t cols = matrix[0].size();
+                    std::vector<std::vector<double>> transposed(cols, std::vector<double>(rows));
+                    for (size_t i = 0; i < rows; ++i) {
+                        for (size_t j = 0; j < cols; ++j) {
+                            transposed[j][i] = matrix[i][j];
+                        }
+                    }
+                    matrix = std::move(transposed);
+                }
+
                 /* 
                 Gradient descent method is Stochastic Gradient descent, updating after each image.
                 This makes it reach a lower much faster, giving the ability to use much lower epoch amounts.
@@ -699,6 +715,7 @@ namespace sklearn_cpp{
                     std::vector<double> &Y
                 ) override
                 {
+                    transpose(X); // Transpose the feature matrix to access samples as rows
                     std::vector<double> cost_epoch;
                     for (int epoch = 0; epoch < epochs; ++epoch)
                     {
@@ -748,10 +765,13 @@ namespace sklearn_cpp{
                     const std::vector<std::vector<double>>& x,
                     const std::vector<double>& y) override
                 { 
+                    std::vector<std::vector<double>> x_transposed = x;
+                    
+                    transpose(x_transposed); // Transpose the feature matrix to access samples as rows
                     correct_predictions = 0;
-                    for (size_t img_id = 0; img_id < x.size(); ++img_id)  
+                    for (size_t img_id = 0; img_id < x_transposed.size(); ++img_id)  
                     {   
-                        compute_probabilities(x[img_id]);          
+                        compute_probabilities(x_transposed[img_id]);          
                         accuracy_score(img_id, y);      
                     }
                     std::cout << " Accuracy: " << correct_predictions << "/" << x.size() << " percentage: " << (double)correct_predictions / x.size() * 100 << "% " << std::endl;     
@@ -938,18 +958,38 @@ namespace sklearn_cpp{
         // This is preprocessing for the data thats being input. Checking various errors for multiple logistic regression.
         class dataset_checker 
         {
+            private:
+            // Transpose function for matrix, used as the data is stored as features major, but we need to access it as sample major for the dot product.
+                void transpose(std::vector<std::vector<double>>& matrix) {
+                    if (matrix.empty() || matrix[0].empty()) {
+                        return; // Handle empty matrix case
+                    }
+                    const size_t rows = matrix.size();
+                    const size_t cols = matrix[0].size();
+                    std::vector<std::vector<double>> transposed(cols, std::vector<double>(rows));
+                    for (size_t i = 0; i < rows; ++i) {
+                        for (size_t j = 0; j < cols; ++j) {
+                            transposed[j][i] = matrix[i][j];
+                        }
+                    }
+                    matrix = std::move(transposed);
+                }
+
             public:
                 // Checking each value in data for error.
                 void check_data(const std::vector<std::vector<double>>& X, const std::vector<double>& Y,  int num_class)
                 {
-                    check_dimension( X, Y);
+                    std::vector<std::vector<double>> transposed_X = X; // Create a copy of the feature matrix
+                    transpose(transposed_X); // Transpose the feature matrix to access samples as rows
 
-                    for (int i = 0; i < X.size(); ++i)
+                    check_dimension(transposed_X, Y);
+
+                    for (int i = 0; i < transposed_X.size(); ++i)
                     {
-                        for (int j = 0; j < X[i].size(); ++j)
+                        for (int j = 0; j < transposed_X[i].size(); ++j)
                         {
-                            check_nan_inf( X[i][j]);
-                            check_normalized( X[i][j]);
+                            check_nan_inf( transposed_X[i][j]);
+                            check_normalized( transposed_X[i][j]);
                             
                         }
                     }
