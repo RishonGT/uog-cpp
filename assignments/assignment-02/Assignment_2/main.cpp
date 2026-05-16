@@ -197,8 +197,8 @@ int main() {
 
     // Ensure Data is viable
     sklearn_cpp::preprocessing::dataset_checker checker;
-    checker.check_data(mnist_x_train, mnist_y_train, 10);  // Assuming 10 classes for MNIST (digits 0-9)
-    checker.check_data(mnist_x_test, mnist_y_test, 10);
+    checker.check_data(mnist_x_train, mnist_y_train, mnist_y_test.size());  // Assuming 10 classes for MNIST (digits 0-9)
+    checker.check_data(mnist_x_test, mnist_y_test, mnist_y_test.size());
 
     // Train logistic regression model on MNIST dataset
     sklearn_cpp::linear_model::LogisticRegression multiclass_log_reg;

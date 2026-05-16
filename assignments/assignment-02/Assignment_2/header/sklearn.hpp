@@ -29,7 +29,7 @@ namespace sklearn_cpp{
                     const std::vector<double>& w,
                     const double& b
                 ){
-                    const int m = y.size(); 
+                    const int m {static_cast<int>(y.size())};
 
                     double ss_res  {0.0}; // Residual sum of squares
                     double ss_tot  {0.0}; // Total sum of squares
@@ -39,7 +39,7 @@ namespace sklearn_cpp{
 
                     // Calculate predictions and sums for R² score
                     for (int i=0; i < m; i++) {
-                        double prediction = b;
+                        double prediction {b};
                         for (std::size_t feature = 0; feature < w.size(); ++feature) {
                             prediction += w[feature] * x[feature][i];
                         }
@@ -63,7 +63,7 @@ namespace sklearn_cpp{
                     const std::vector<double>& w,
                     const double& b
                 ) {
-                    const int m = y.size(); 
+                    const int m {static_cast<int>(y.size())};
                     double total_loss {0.0};
 
                     // Calculate predictions and total loss
@@ -172,7 +172,7 @@ namespace sklearn_cpp{
                         return false;
                     }
 
-                    double Y_std = std_dev_func(Y, mean_func(Y));
+                    double Y_std {std_dev_func(Y, mean_func(Y))};
                     // Check for zero variance in the target variable
                     if (Y_std == 0.0) {
                         std::cerr << "All target values are the same. The model cannot be fitted." << std::endl;
@@ -181,7 +181,7 @@ namespace sklearn_cpp{
 
                     // Check for zero variance in each feature
                     for (const std::vector<double>& feature_column : X) {
-                        double feature_std = std_dev_func(feature_column, mean_func(feature_column));
+                        double feature_std {std_dev_func(feature_column, mean_func(feature_column))};
                         if (feature_std == 0.0) {
                             std::cerr << "One of the features has zero variance. The model cannot be fitted." << std::endl;
                             return false;
@@ -189,8 +189,8 @@ namespace sklearn_cpp{
                     }
 
                     // Validate that each feature column in X has the same number of samples as Y
-                    const int variables = X.size();
-                    const int m = Y.size(); // Number of data points
+                    const int variables {static_cast<int>(X.size())};
+                    const int m {static_cast<int>(Y.size())}; // Number of data points
 
                     for (int feature = 0; feature < variables; ++feature) {
                         if (static_cast<int>(X[feature].size()) != m) {
@@ -200,7 +200,7 @@ namespace sklearn_cpp{
 
 
                     weights.assign(variables, 0.0); // Initialize weights to zero
-                    double b = 0.0; // Initialize intercept to zero
+                    double b {0.0}; // Initialize intercept to zero
 
                     // Normalize features and target variable
                     std::vector<double> means(variables), std_devs(variables);
@@ -218,7 +218,7 @@ namespace sklearn_cpp{
                     // Normalize target variable Y
                     double mean_y {0.0}, std_dev_y {1.0};
 
-                    std::vector<double> y_normalised = normalise(Y, mean_y, std_dev_y);
+                    std::vector<double> y_normalised {normalise(Y, mean_y, std_dev_y)};
 
                     // Check for zero variance in the normalized target variable
                     if (std_dev_y == 0.0) {
@@ -234,8 +234,7 @@ namespace sklearn_cpp{
                     const double tolerance {1e-13};
 
                     // Calculate initial loss before starting gradient descent
-                    double prev_loss {0.0};
-                    prev_loss = loss_function(x_normalised, y_normalised, w, b);
+                    double prev_loss {loss_function(x_normalised, y_normalised, w, b)};
 
                     // Main loop for gradient descent optimization
                     for (iteration = 0; iteration < max_iterations; iteration++) {
@@ -249,7 +248,7 @@ namespace sklearn_cpp{
                                 pred += w[feature] * x_normalised[feature][sample];
                             }
                             
-                            double residual = pred - y_normalised[sample];
+                            double residual {pred - y_normalised[sample]}; // Residual for the current sample
                             for (int feature = 0; feature < variables; feature++) {
                                 dw[feature] += residual * x_normalised[feature][sample]; // Derivative with respect to w[feature]
                             }
@@ -544,11 +543,12 @@ namespace sklearn_cpp{
                 double lambda{0.00005}; // Regularization parameter
                 double correct_predictions = 0;
                 double loss = 0.0;
-                int epochs = 50;
+                int epochs;
                 
                 /*
                 This function checks the highest predicted probability agianst the true class,
-                if correct it updates correct prediction.
+                if correct it updates correct prediction. I could have added this to be existing in 
+                fit and predict seperately, it is done like this to prevent repetition of code.
                 */
                 void accuracy_score(
                     const int image_count,
@@ -647,7 +647,10 @@ namespace sklearn_cpp{
                             
                 }
 
-                // Transpose function for matrix, used as the data is stored as features major, but we need to access it as sample major for the dot product.
+                /*
+                 Transpose function for matrix, used as the data is stored as features major,
+                 but we need to access it as sample major for the dot product.
+                */
                 void transpose(std::vector<std::vector<double>>& matrix) {
                     if (matrix.empty() || matrix[0].empty()) {
                         return; // Handle empty matrix case
@@ -666,8 +669,6 @@ namespace sklearn_cpp{
                 /* 
                 Gradient descent method is Stochastic Gradient descent, updating after each image.
                 This makes it reach a lower much faster, giving the ability to use much lower epoch amounts.
-                With current parameters making it reach convergence at ~29 epochs, converging at ~92% accuracy, 
-                which from research indicates to be the theoritcal limit for non convolution neural networks.
 
                 The other option is using batch training, which while being slower at training is less demanding of the 
                 pc and not being as slow.
