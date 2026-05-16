@@ -169,14 +169,14 @@ int main() {
 
     Read_CSV::read_csv("data/mnist_train.csv", mnist_x_train, mnist_y_train, true);  // Logistic regression flag set to true to prevent transposition
 
-    if (mnist_x_train.empty() || mnist_y_train.empty() || mnist_x_train[0].size() != mnist_y_train.size()) {
+    if (mnist_x_train.size() == mnist_y_train.size() && mnist_x_train.empty() && mnist_y_train.empty()) {
         std::cerr << "Failed to read MNIST training dataset. Exiting." << std::endl;
         return 1;
     }
 
     Read_CSV::read_csv("data/mnist_test.csv", mnist_x_test, mnist_y_test, true);  // Logistic regression flag set to true to prevent transposition
     
-    if (mnist_x_test.empty() || mnist_y_test.empty() || mnist_x_test[0].size() != mnist_y_test.size()) {
+    if (mnist_x_test.size() == mnist_y_test.size() && mnist_x_test.empty() && mnist_y_test.empty()) {
         std::cerr << "Failed to read MNIST test dataset. Exiting." << std::endl;
         return 1;
     }
