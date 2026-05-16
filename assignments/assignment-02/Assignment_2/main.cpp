@@ -3,6 +3,7 @@
 
 #include <algorithm> // For std::shuffle
 #include <random> // For std::mt19937
+#include <string> 
 
 // Helper function to print a banner message
 void print_banner(const std::string& message) {
@@ -12,7 +13,7 @@ void print_banner(const std::string& message) {
     std::cout << std::string(width, '=') << std::endl;
 }
 
-// Function to split dataset into training and testing sets (not used in main, but can be implemented for modularity)
+// Function to split dataset into training and testing sets
 void split_train_test(const std::vector<std::vector<double>>& features, const std::vector<double>& targets,
                       std::vector<std::vector<double>>& x_train, std::vector<double>& y_train,
                       std::vector<std::vector<double>>& x_test, std::vector<double>& y_test,
@@ -169,14 +170,14 @@ int main() {
 
     Read_CSV::read_csv("data/mnist_train.csv", mnist_x_train, mnist_y_train, true);  // Logistic regression flag set to true to prevent transposition
 
-    if (mnist_x_train.size() == mnist_y_train.size() && mnist_x_train.empty() && mnist_y_train.empty()) {
+    if (mnist_x_train.empty() || mnist_y_train.empty() || mnist_x_train.size() != mnist_y_train.size()) {
         std::cerr << "Failed to read MNIST training dataset. Exiting." << std::endl;
         return 1;
     }
 
     Read_CSV::read_csv("data/mnist_test.csv", mnist_x_test, mnist_y_test, true);  // Logistic regression flag set to true to prevent transposition
     
-    if (mnist_x_test.size() == mnist_y_test.size() && mnist_x_test.empty() && mnist_y_test.empty()) {
+    if (mnist_x_test.empty() || mnist_y_test.empty() || mnist_x_test.size() != mnist_y_test.size()) {
         std::cerr << "Failed to read MNIST test dataset. Exiting." << std::endl;
         return 1;
     }
@@ -202,4 +203,6 @@ int main() {
     double mnist_accuracy = static_cast<double>(mnist_correct_predictions) / mnist_y_test.size() * 100.0;
     std::cout << "Multiclass Logistic Regression Accuracy on MNIST test set: " << mnist_accuracy << "% (" << mnist_correct_predictions << "/" << mnist_y_test.size() << " correct predictions)" << std::endl;
     print_banner("End of Multiclass Logistic Regression on MNIST Dataset");
+
+    return 0;
 }
