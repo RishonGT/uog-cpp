@@ -336,19 +336,19 @@ namespace sklearn_cpp{
                 }
             };
         
-        /*This class calls the correct binary or multiclassification class depending on label sizes.
-        There are two stages, the public facing side of the class LogisticalRegression and ILogisticalInterface
-        We do not know what the user wants apart from something in the LogisticalRegression library, we provide
-        a user forward facing class which they interact with.
+        
+        /* ILogistical class is the parent virtual class, it ensurse two things that fit and predict functions are avaliable
+        fromt the child classes. This is needed because the pointer can not be pointed towards either a binary or multiclass,
+        it would mean it only works as binary or multiclass.
 
-        LogisticalRegression, main purpose is to initially create a nullpointer to a potential
-        LogisticalRegression by using an Interface (ILogisticalInterface).
+        This interface being a parent, allows us to point to both because both classes are a child ILogisticalInterface
 
-        Using the fit() function will resolve which is the correct LogsticalRegression to use
-        */    
-       
+        The actual path and correct child is selected in the LogisticRegression class all the way at the bottom.
+        Classes must ALSO be declared in order, so the class handler must be the last thing that is created.
+        */
         class ILogisticalInterface {
             public:
+                //
                 virtual ~ILogisticalInterface() = default;
 
                 //Virtual functions for multiclassification
@@ -797,15 +797,28 @@ namespace sklearn_cpp{
 
 
         };
+        /*This class calls the correct binary or multiclassification class depending on label sizes.
+        There are two stages, the public facing side of the class LogisticalRegression and ILogisticalInterface
+        We do not know what the user wants apart from something in the LogisticalRegression library, we provide
+        a user forward facing class which they interact with.
 
+        LogisticalRegression, main purpose is to initially create a nullpointer to a potential
+        LogisticalRegression by using an Interface (ILogisticalInterface).
+
+        Using the fit() function will resolve which is the correct LogsticalRegression to use
+        */   
         class LogisticRegression {
             private:
+                //unique_ptr is how this magic works
                 std::unique_ptr<ILogisticalInterface> impl;
+
+                //Any variables that get passed into LogisticRegression must be declared here to be stored.
                 int features{0};
                 int classes{0};
                 double learningrate{0.001};
                 int epochs{50};
 
+                //This function selects the correct type to use by the difference of x and y vectors and making assumptions
                 size_t selectLogisticalType(
                     const std::vector<std::vector<double>>& x,
                     const std::vector<double>& y
@@ -839,6 +852,7 @@ namespace sklearn_cpp{
                 }
 
             public:
+            //Functions that are called from main go through here initially and tested to see which child class to use.
                 LogisticRegression() = default;
 
                 LogisticRegression(int features, double temp_learningrate, int classes, int temp_epochs)
@@ -849,7 +863,7 @@ namespace sklearn_cpp{
                 epochs{temp_epochs}
                 {
                 }
-
+                //In this case, we use the fit function as the discriminate. Binary and Multiclassification different amount of labels.
                 void fit(
                     std::vector<std::vector<double>> &x,
                     std::vector<double> &y){
