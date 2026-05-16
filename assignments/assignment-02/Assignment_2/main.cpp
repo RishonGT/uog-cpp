@@ -7,7 +7,7 @@
 
 // Helper function to print a banner message
 void print_banner(const std::string& message) {
-    const int width = 50;
+    const int width {60};
     std::cout << "\n\n" << std::string(width, '=') << std::endl;
     std::cout << message << std::endl;
     std::cout << std::string(width, '=') << std::endl;

@@ -783,7 +783,7 @@ namespace sklearn_cpp{
                         compute_probabilities(x_transposed[img_id]);          
                         accuracy_score(img_id, y);      
                     }
-                    std::cout << " Accuracy: " << correct_predictions << "/" << x_transposed.size() << " percentage: " << (double)correct_predictions / x_transposed.size() * 100 << "% " << std::endl;     
+                    std::cout << "\n\nFinal Accuracy of Logistic Regression on Test Set: " << correct_predictions << "/" << x_transposed.size() << " percentage: " << (double)correct_predictions / x_transposed.size() * 100 << "% " << std::endl;     
                 }
                 
                 //Functions required for Virtual Pure
