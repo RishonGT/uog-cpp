@@ -56,6 +56,21 @@ void split_train_test(const std::vector<std::vector<double>>& features, const st
 
 }
 
+void transpose(std::vector<std::vector<double>>& matrix) {
+    if (matrix.empty() || matrix[0].empty()) {
+        return; // Handle empty matrix case
+    }
+    const size_t rows = matrix.size();
+    const size_t cols = matrix[0].size();
+    std::vector<std::vector<double>> transposed(cols, std::vector<double>(rows));
+    for (size_t i = 0; i < rows; ++i) {
+        for (size_t j = 0; j < cols; ++j) {
+            transposed[j][i] = matrix[i][j];
+        }
+    }
+    matrix = std::move(transposed);
+}
+
 int main() {
     //=== Cement Strength Prediction using Linear Regression ===//
     print_banner("Cement Strength Prediction using Linear Regression");
@@ -168,19 +183,23 @@ int main() {
     std::vector<std::vector<double>> mnist_x_test;
     std::vector<double> mnist_y_test;
 
-    Read_CSV::read_csv("data/mnist_train.csv", mnist_x_train, mnist_y_train, true);  // Logistic regression flag set to true to prevent transposition
+    Read_CSV::read_csv("data/mnist_train.csv", mnist_x_train, mnist_y_train);  
 
-    if (mnist_x_train.empty() || mnist_y_train.empty() || mnist_x_train.size() != mnist_y_train.size()) {
+    if (mnist_x_train.empty() || mnist_y_train.empty() || mnist_x_train[0].size() != mnist_y_train.size()) {
         std::cerr << "Failed to read MNIST training dataset. Exiting." << std::endl;
         return 1;
     }
 
-    Read_CSV::read_csv("data/mnist_test.csv", mnist_x_test, mnist_y_test, true);  // Logistic regression flag set to true to prevent transposition
+    Read_CSV::read_csv("data/mnist_test.csv", mnist_x_test, mnist_y_test);  
     
-    if (mnist_x_test.empty() || mnist_y_test.empty() || mnist_x_test.size() != mnist_y_test.size()) {
+    if (mnist_x_test.empty() || mnist_y_test.empty() || mnist_x_test[0].size() != mnist_y_test.size()) {
         std::cerr << "Failed to read MNIST test dataset. Exiting." << std::endl;
         return 1;
     }
+
+    // Transpose MNIST datasets to match expected format for multiclass logistic regression (features as rows, samples as columns)
+    transpose(mnist_x_train);
+    transpose(mnist_x_test);
 
     // Ensure Data is viable
     sklearn_cpp::preprocessing::dataset_checker checker;
@@ -192,16 +211,8 @@ int main() {
     multiclass_log_reg.fit(mnist_x_train, mnist_y_train);
 
     // Evaluate logistic regression model on MNIST test set
-    size_t mnist_correct_predictions = 0;
-    for (size_t i = 0; i < mnist_y_test.size(); ++i) {
-        double prediction = multiclass_log_reg.predict(mnist_x_test, i);
-        if (static_cast<int>(prediction) == static_cast<int>(mnist_y_test[i])) {
-            ++mnist_correct_predictions;
-        }
-    }
+    multiclass_log_reg.predict(mnist_x_test, mnist_y_test);
 
-    double mnist_accuracy = static_cast<double>(mnist_correct_predictions) / mnist_y_test.size() * 100.0;
-    std::cout << "Multiclass Logistic Regression Accuracy on MNIST test set: " << mnist_accuracy << "% (" << mnist_correct_predictions << "/" << mnist_y_test.size() << " correct predictions)" << std::endl;
     print_banner("End of Multiclass Logistic Regression on MNIST Dataset");
 
     return 0;
