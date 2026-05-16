@@ -56,12 +56,23 @@ void split_train_test(const std::vector<std::vector<double>>& features, const st
 
 }
 
-
+/*The main function performs the following tasks:
+  Cement Strength Prediction using Linear Regression 
+  ECG Dataset Analysis with (Binary) Logistic Regression
+  Digit Recognition with (Multi-class) Logistic Regression
+  
+  For each task, the following steps are performed:
+  - Load the dataset
+  - Preprocess the data
+  - Split the data into training and testing sets
+  - Train the model
+  - Evaluate the model*/
 
 int main() {
     //=== Cement Strength Prediction using Linear Regression ===//
     print_banner("Cement Strength Prediction using Linear Regression");
 
+    // Read the concrete dataset from CSV file into feature matrix and target vector
     std::vector<std::vector<double>> concrete_features;
     std::vector<double> concrete_targets;
 
@@ -73,7 +84,7 @@ int main() {
     }
     
     const size_t n_features = concrete_features.size();  // Number of features
-    const size_t n_samples = concrete_features[0].size();  // Number of samples (assuming all feature columns have the same number of samples)
+    const size_t n_samples = concrete_features[0].size();  // Number of samples 
 
     // Print size of the dataset
     std::cout << "Dataset size: " << n_samples << " samples, " << n_features << " features" << std::endl;
