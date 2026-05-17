@@ -4,7 +4,7 @@
 #   - data generation, 
 #   - CSV creation, and 
 #   - visualization.
-
+# %%
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -12,6 +12,7 @@ from sklearn.datasets import fetch_openml
 from sklearn.utils import shuffle
 from pathlib import Path  # <--- Step 1: Import Path
 
+# %%
 def generate_mnist_csv(df, n_per_digit, output_filename):
 
     subsets = []
@@ -67,6 +68,7 @@ def visualize_shuffled_png(csv_filename, png_output_name):
     plt.close() # Close plot to free up memory on the cluster
     print(f"Shuffled visualization saved to '{png_output_name}'")
 
+# %%
 output_dir = Path("./data")
 output_dir.mkdir(parents=True, exist_ok=True)
 
