@@ -721,7 +721,7 @@ classDiagram
 
     %% Task 1, 2, 3: Classes, Data types, and Access Modifiers
     class Shape {
-        <<abstract>>
+        <<interface>>
         +draw()* void
     }
 
